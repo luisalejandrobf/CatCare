@@ -1,9 +1,8 @@
-# PatitasFelices - Sitio Web de Clínica Veterinaria
+# PatitasFelices, Sitio Web de Clínica Veterinaria
 
 ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=luisalejandrobf&repo=PatitasFelices&label=Welcome%20to%20the%20repository!%20You're%20visitor%20number&style=flat-square&color=%233864CF&contentType=svg)
 
-[English](#patitasfelices--veterinary-clinic-website) | [Español](#patitasfelices--sitio-web-de-clinica-veterinaria)
-[PatitasFelices - Sitio Web de Clínica Veterinaria](#patitasfelices-sitio-web-de-clínica-veterinaria) | [PatitasFelices - Veterinary Clinic Website](#patitasfelices-veterinary-clinic-website)
+[English](#patitasfelices-veterinary-clinic-website) | [Español](#patitasfelices-sitio-web-de-clinica-veterinaria)
 
 Este repositorio contiene el código fuente y los recursos relacionados con nuestro proyecto de sitio web para una clínica veterinaria, desarrollado como parte de la clase de desarrollo web en la Pontificia Universidad Javeriana.
 
@@ -26,7 +25,7 @@ El objetivo de este proyecto es crear un sitio web para una clínica veterinaria
 
 ---
 
-# PatitasFelices - Veterinary Clinic Website
+# PatitasFelices, Veterinary Clinic Website
 
 [English](#patitasfelices--veterinary-clinic-website) | [Español](#patitasfelices--sitio-web-de-clinica-veterinaria)
 
