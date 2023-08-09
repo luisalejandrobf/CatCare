@@ -27,9 +27,6 @@ El objetivo de este proyecto es crear un sitio web para una clínica veterinaria
 
 # PatitasFelices - Veterinary Clinic Website
 
-![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=luisalejandrobf&repo=PatitasFelices&label=¡Bienvenido al repositorio! Eres el visitante número&style=flat-square&color=%233864CF&contentType=svg)
-[English](#best-firsta-algorithm-breadth-first-search) | [Español](#algoritmo-best-firsta-búsqueda-en-anchura)
-
 Este repositorio contiene el código fuente y los recursos relacionados con nuestro proyecto de sitio web para una clínica veterinaria, desarrollado como parte de la clase de desarrollo web en la Pontificia Universidad Javeriana.
 
 ## Contributors
