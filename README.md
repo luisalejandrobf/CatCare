@@ -27,7 +27,7 @@ El objetivo de este proyecto es crear un sitio web para una clínica veterinaria
 
 # PatitasFelices, Veterinary Clinic Website
 
-[English](#patitasfelices--veterinary-clinic-website) | [Español](#patitasfelices--sitio-web-de-clinica-veterinaria)
+[English](#patitasfelices-veterinary-clinic-website) | [Español](#patitasfelices-sitio-web-de-clinica-veterinaria)
 
 Este repositorio contiene el código fuente y los recursos relacionados con nuestro proyecto de sitio web para una clínica veterinaria, desarrollado como parte de la clase de desarrollo web en la Pontificia Universidad Javeriana.
 
