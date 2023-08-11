@@ -1,0 +1,520 @@
+/*---------------------------------------------variables css--------------------------------------------- */
+:root {
+
+    --text-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1);
+    --box-shadow: 0px 5px 25px rgba(0 0 0/ 20%);
+
+}
+
+/*---------------------------------------------css principal---------------------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+}
+
+/*---------------------------------------------barra vertical scroll--------------------------------------------------*/
+::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(235, 255, 235, 0.76);
+}
+
+::-webkit-scrollbar-thumb {
+    width: 100%;
+    background: rgba(35, 89, 28, 0.82);
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5ca656;
+}
+
+
+/*---------------------------------------------Header y barra de navegacion-------------------------------------------*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(5rem + 1rem);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    transition: 0.5s ease;
+    transition-property: height, background;
+}
+
+header.sticky {
+    height: calc(3.5rem + 1rem);
+    background-color: rgba(50, 124, 51, 0.44);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(50, 124, 51, 0.44);
+
+}
+
+header .navegacion {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2%;
+    transition: 0.5s ease;
+}
+
+.navegacion .logo {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #67b207;
+    text-decoration: none;
+    text-shadow: var(--text-shadow);
+    margin-left: 90px;
+}
+
+header .navegacion-indice {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    text-decoration: none;
+    margin: 1rem 1rem 0 0;
+}
+
+.navegacion-indice a {
+    font-size: 1rem;
+    color: #000000;
+    text-decoration: none;
+    text-shadow: var(--text-shadow);
+    padding: 0 15px 0 15px;
+    transition: 0.5s ease;
+}
+
+.navegacion-indice a:hover {
+    font-weight: bold;
+    color: #1a3d01;
+    transition: 0.5s ease;
+}
+
+/*---------------------------------------------Primera Seccion-------------------------------------------*/
+
+.inicio {
+    min-height: 100vh;
+}
+
+.bg-slider {
+    z-index: 777;
+    position: relative;
+    width: 100%;
+    max-height: 100vh;
+    padding: 0 2%;
+    box-sizing: border-box;
+}
+
+.bg-slider .swiper-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-slider .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.swiper-slide .text-content {
+    box-sizing: border-box;
+    padding: 0 2%;
+    max-width: 1000px;
+    width: 100%;
+    color: #FFFFFFFF;
+    position: absolute;
+    transition: 0.5s ease;
+    margin: 0 auto;
+    top: 25%;
+}
+
+.swiper-slide .text-content .title {
+    font-size: 4em;
+    font-weight: 700;
+    text-shadow: var(--text-shadow);
+    margin-bottom: 20px;
+    margin-left: 10%;
+    opacity: 0;
+}
+
+.swiper-slide-active .text-content .title {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.5s ease;
+    transition-delay: 0.5s;
+    transition-property: trasnform, opacity;
+}
+
+.swiper-slide .text-content p {
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.1);
+    text-shadow: var(--text-shadow);
+    padding: 20px;
+    border-radius: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--box-shadow);
+    margin-left: 10%;
+}
+
+.swiper-slide .text-content .read-btn {
+    border: none;
+    outline: none;
+    background: #5D9B15D1;
+    font-size: 1em;
+    font-weight: 500;
+    padding: 8px 25px;
+    display: inline-block;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-left: 10%;
+}
+
+.swiper-slide .text-content .read-btn:hover {
+    background: #67b207;
+}
+
+.text-content {
+    margin-left: 15%;
+}
+
+/*---------------------------------------------seguda  Seccion-------------------------------------------*/
+
+.seccion-general {
+    background-color: #f7f7f7;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.seccion-titulo {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.seccion-subtitulo {
+    font-size: 24px;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.seccion-subtitulo span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5D9B15D1;
+    margin-bottom: 40px;
+}
+
+.seccion-texto {
+    font-size: 18px;
+    color: #888;
+}
+
+.contenedor-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sub-contenedor {
+    flex: 0 0 calc(33.3333% - 20px);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 20px 0;
+}
+
+.sub-contenedor:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-sub-contenedor {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.texto-sub-contenedor {
+    font-size: 16px;
+    color: #666;
+}
+
+.titulo-sub-contenedor-link {
+    color: #67b207;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.titulo-sub-contenedor-link:hover {
+    color: #4a8908;
+}
+
+@media (max-width: 767px) {
+    .contenedor-principal {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sub-contenedor {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/*---------------------------------------------Tercera  Seccion-------------------------------------------*/
+section.equipo {
+    background-color: #f7f7f7;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.equipo-titulo {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.equipo-caracteristicas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.perfil-caracteristica {
+    flex: 0 0 calc(33.3333% - 20px);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 20px 0;
+    position: relative;
+}
+
+.perfil-caracteristica:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-equipo-foto img {
+    max-width: 100%;
+    height: auto;
+}
+
+.caracteristica-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 10px;
+}
+
+.perfil-caracteristica:hover .caracteristica-hover {
+    opacity: 1;
+    border-radius: 10px;
+
+}
+
+.equipo-texto {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+
+
+/*---------------------------------------------footer-------------------------------------------*/
+
+.footer-seccion {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.seccion-vertical {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer {
+    background-color: rgba(35, 89, 28, 0.82);
+    padding: 70px 0;
+}
+
+.footer-subsecciones {
+    width: 25%;
+    padding: 0 15px;
+}
+
+.footer-subsecciones h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-subsecciones h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #b8d7aa;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-subsecciones ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-subsecciones ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-subsecciones ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.footer-subsecciones .redes-sociales a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.footer-subsecciones .redes-sociales a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+
+@media (max-width: 767px) {
+    .footer-subsecciones {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 574px) {
+    .footer-subsecciones {
+        width: 100%;
+    }
+}
+
+
+/*--------------------------------------------- Barra Desplazable --------------------------------------------- */
+
+.nav-link {
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    opacity: 0.80;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+.nav-link::before {
+    transition: 400ms;
+    height: 5px;
+    content: "";
+    position: absolute;
+    background-color: #00aa39;
+    width: 0px;
+    left: 50%; /* Center the line */
+    transform: translateX(-50%); /* Move the line to the left by half its width to center it */
+    bottom: -5px;
+}
+
+.nav-link:hover::before {
+    width: 80%;
+}
+
+.nav-link-fade-up::before {
+    width: 80%;
+    bottom: 5px;
+    opacity: 0;
+}
+
+.nav-link-fade-up:hover::before {
+    bottom: 5px;
+    opacity: 1;
+}
+
+.nav-link-grow-up::before {
+    height: 0%;
+    width: 80%;
+    bottom: 5px;
+}
+
+.nav-link-grow-up:hover::before {
+    height: 5px;
+}
+
+
+/*--------------------------------------------- Bordes de las imágenes  --------------------------------------------- */
+
+.rounded-image {
+    border-radius: 30px;
+    border: 2px solid #ccc; /* Border width and color */
+    margin-top: 10px;
+  }
