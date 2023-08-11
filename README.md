@@ -1,10 +1,10 @@
-# PatitasFelices, Sitio Web de Clínica Veterinaria
+# CatCare, Sitio Web de Clínica Veterinaria
 
 ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=luisalejandrobf&repo=PatitasFelices&label=Welcome%20to%20the%20repository!%20You're%20visitor%20number&style=flat-square&color=%233864CF&contentType=svg)
 
-[English](#patitasfelices-veterinary-clinic-website) | [Español](#patitasfelices-sitio-web-de-clínica-veterinaria)
+[English](#catcare-veterinary-clinic-website) | [Español](#catcare-sitio-web-de-clínica-veterinaria)
 
-Este repositorio contiene el código fuente y los recursos relacionados con nuestro proyecto de sitio web para una clínica veterinaria, desarrollado como parte de la clase de desarrollo web en la Pontificia Universidad Javeriana.
+Este repositorio contiene el código fuente y los recursos relacionados con un proyecto de sitio web para una clínica veterinaria, desarrollado como parte de la clase de desarrollo web en la Pontificia Universidad Javeriana.
 
 ## Colaboradores
 
@@ -25,11 +25,11 @@ El objetivo de este proyecto es crear un sitio web para una clínica veterinaria
 
 ---
 
-# PatitasFelices, Veterinary Clinic Website
+# CatCare, Veterinary Clinic Website
 
-[English](#patitasfelices-veterinary-clinic-website) | [Español](#patitasfelices-sitio-web-de-clínica-veterinaria)
+[English](#catcare-veterinary-clinic-website) | [Español](#catcare-sitio-web-de-clínica-veterinaria)
 
-Este repositorio contiene el código fuente y los recursos relacionados con nuestro proyecto de sitio web para una clínica veterinaria, desarrollado como parte de la clase de desarrollo web en la Pontificia Universidad Javeriana.
+This repository contains the source code and resources related to a website project for a veterinary clinic, developed as part of the web development class at the Pontificia Universidad Javeriana.
 
 ## Contributors
 
