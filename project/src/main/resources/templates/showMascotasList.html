@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CatCare</title>
+
+    <!-- Css principal  -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- Scroll principal  -->
+    <link href="/css/swiper-bundle.min.css" rel="stylesheet">
+
+
+    <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Iconos  -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
+
+
+</head>
+
+<!-- Barra de navegacion  -->
+
+<body>
+    <header class="static-header">
+        <nav class="navegacion">
+            <a href="#" class="logo">CATCARE</a>
+            <ul class="navegacion-indice">
+                <li><a class="nav-link nav-link-ltr" href="#Inicio" style="color: #ffffff">INICIO</a></li>
+                <li><a class="nav-link nav-link-ltr" href="#Servicios" style="color: #ffffff">SERVICIOS</a></li>
+                <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #ffffff">NOSOTROS</a></li>
+                <li><a class="nav-link nav-link-ltr" href="#AcercaDe" style="color: #ffffff">ACERCA DE</a></li>
+                <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">LOG IN </a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Tabla de mascotas -->
+
+    <div class="wrapper_footerStuckToBottom">
+        <div class="content_footerStuckToBottom">
+
+            <div class="center-container mascota-basicInfo">
+                <h1 class="pet-title">Mascotas</h1>
+                <table class="styled-table" border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Raza</th>
+                            <th>Edad</th>
+                            <th>Peso</th>
+                            <th>Enfermedad</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="mascota : ${mascotas}">
+                            <td class="styled-table_pet-name" th:text="${mascota.nombre}"></td>
+                            <td th:text="${mascota.raza}"></td>
+                            <td th:text="${mascota.edad}"></td>
+                            <td th:text="${mascota.peso}"></td>
+                            <td th:text="${mascota.enfermedad}"></td>
+                            <td th:text="${mascota.estado}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Ultima seccion -- Pie de Pagina(footer)  -->
+
+        <footer class="footer">
+            <div class="footer-seccion">
+                <div class="seccion-vertical">
+                    <div class="footer-subsecciones">
+                        <h4>Compañía</h4>
+                        <ul>
+                            <li><a href="#">Acerca de Nosotros</a></li>
+                            <li><a href="#">Nuestros Servicios</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Programa de Susciptores</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-subsecciones">
+                        <h4>Obtener ayuda</h4>
+                        <ul>
+                            <li><a href="#">Preguntas frecuentes</a></li>
+                            <li><a href="#">PQR's</a></li>
+                            <li><a href="#">Contáctenos</a></li>
+                            <li><a href="#">Proteccion de Datos</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-subsecciones">
+                        <h4>Productos</h4>
+                        <ul>
+                            <li><a href="#">Miembros plus</a></li>
+                            <li><a href="#">Cobertura</a></li>
+                            <li><a href="#">Opciones de pago</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-subsecciones">
+                        <h4>Síguenos</h4>
+                        <div class="redes-sociales">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

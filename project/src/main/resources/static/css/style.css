@@ -160,7 +160,7 @@ li {
     opacity: 1;
     transition: 0.5s ease;
     transition-delay: 0.5s;
-    transition-property: trasnform, opacity;
+    transition-property: transform, opacity;
 }
 
 .swiper-slide .text-content p {
@@ -518,3 +518,86 @@ ul {
     border: 2px solid #ccc; /* Border width and color */
     margin-top: 10px;
   }
+
+
+
+
+
+/*--------------------------------------------- Contenido de mascotas (Tablas)  --------------------------------------------- */
+
+.center-container {
+    text-align: center;
+}
+
+.mascota-basicInfo {
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+.styled-table td {
+    border-top: 1px solid #f0f0f0;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.styled-table tr:hover {
+    background-color: #e0e0e0;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.styled-table_pet-name {
+    color: rgba(35, 89, 28, 0.82);
+}
+
+.pet-title {
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 35px;
+}
+
+.pet-name {
+    font-size: 32px;
+    color: rgba(35, 89, 28, 0.82);
+}
+
+
+/*--------------------------------------------- Modificaciones del cuerpo para paginas pequeñas donde el footer debe de pegarse al fondo asi no haya contenido, y el header es estatico.  --------------------------------------------- */
+
+.wrapper_footerStuckToBottom {
+    display: flex;
+    flex-direction: column;
+    min-height: 110vh;
+}
+
+.content_footerStuckToBottom {
+    flex: 1;
+}
+
+.static-header{
+    height: calc(3.5rem + 1rem);
+    background-color: rgba(50, 124, 51, 0.44);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(50, 124, 51, 0.44);
+}

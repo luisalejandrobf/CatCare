@@ -8,7 +8,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("")
-public class CatCareBaseController {
+public class BaseController {
     
     // Redirect from http://localhost:8090/ to http://localhost:8090/catcare/landing
     @RequestMapping("")
