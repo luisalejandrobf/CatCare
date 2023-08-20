@@ -21,7 +21,7 @@ public class MascotaController {
 
     // http://localhost:8090/catcare/mascotas/all
     @GetMapping("/all")
-    public String mostrarEstudiantes(Model model) {
+    public String mostrarMascotas(Model model) {
 
         // Sends mascotas from MascotaService to thymeleaf for the HTML to fetch
         model.addAttribute("mascotas", mascotaService.SearchAll());
@@ -31,7 +31,7 @@ public class MascotaController {
 
     // http://localhost:8090/catcare/mascotas/find?id=1
     @GetMapping("/find")
-    public String mostrarInfoEstudiante(Model model, @RequestParam("id") int id) {
+    public String mostrarInfoMascotas(Model model, @RequestParam("id") int id) {
 
         Mascota mascota = mascotaService.SearchById(id);
         if (mascota != null) {
