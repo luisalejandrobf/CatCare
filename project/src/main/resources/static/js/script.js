@@ -1,4 +1,4 @@
-// slide principal de fotos
+// slide principal de fotos del landing
 
 var swiper = new Swiper(".bg-slider", {
     slidesPerView: 1,
@@ -14,7 +14,10 @@ var swiper = new Swiper(".bg-slider", {
     },
 });
 
+
 window.addEventListener("scroll", function(){
     const header = document.querySelector("header");
     header.classList.toggle("sticky", window.scrollY > 0);
 });
+
+

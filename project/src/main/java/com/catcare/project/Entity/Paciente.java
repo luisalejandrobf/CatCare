@@ -1,7 +1,8 @@
 package com.catcare.project.Entity;
 
-public class Mascota {
+public class Paciente {
     // Atributos
+    private int id; // Nuevo atributo de ID
     private String nombre;
     private String raza;
     private int edad;
@@ -10,7 +11,8 @@ public class Mascota {
     private String estado;
 
     // Constructor
-    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String estado) {
+    public Paciente(int id, String nombre, String raza, int edad, double peso, String enfermedad, String estado) {
+        this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -18,7 +20,7 @@ public class Mascota {
         this.enfermedad = enfermedad;
 
         // Enfermedad vacia por defecto
-        if (enfermedad.isEmpty()){
+        if (enfermedad.isEmpty()) {
             this.enfermedad = "Sin enfermedad registrada";
         }
 
@@ -26,6 +28,11 @@ public class Mascota {
     }
 
     // Métodos getters y setters
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
+
     public String getNombre() {
         return nombre;
     }

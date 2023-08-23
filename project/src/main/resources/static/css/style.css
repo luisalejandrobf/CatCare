@@ -54,7 +54,6 @@ header.sticky {
     background-color: rgba(50, 124, 51, 0.44);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(50, 124, 51, 0.44);
-
 }
 
 header .navegacion {
@@ -358,7 +357,6 @@ section.equipo {
 }
 
 
-
 /*---------------------------------------------footer-------------------------------------------*/
 
 .footer-seccion {
@@ -378,6 +376,7 @@ ul {
 .footer {
     background-color: rgba(35, 89, 28, 0.82);
     padding: 70px 0;
+
 }
 
 .footer-subsecciones {
@@ -515,12 +514,9 @@ ul {
 
 .rounded-image {
     border-radius: 30px;
-    border: 2px solid #ccc; /* Border width and color */
+    border: 1px solid #ccc; /* Border width and color */
     margin-top: 10px;
-  }
-
-
-
+}
 
 
 /*--------------------------------------------- Contenido de mascotas (Tablas)  --------------------------------------------- */
@@ -529,8 +525,13 @@ ul {
     text-align: center;
 }
 
-.mascota-basicInfo {
-    margin-top: 150px;
+.black-link {
+    color: black;
+    text-decoration: none;
+}
+
+.paciente-basicInfo {
+    margin-top: 30px;
     margin-bottom: 100px;
 }
 
@@ -595,9 +596,209 @@ ul {
     flex: 1;
 }
 
-.static-header{
+.static-header {
     height: calc(3.5rem + 1rem);
     background-color: rgba(50, 124, 51, 0.44);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(50, 124, 51, 0.44);
+}
+
+
+
+/*--------------------------------------------- Barra Lateral Paginas Futuras----------------- */
+
+#body-barra-lateral {
+    margin-left: 80px;
+    margin-top: 80px;
+    transition: margin-left 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+
+.header-barra-lateral {
+    width: 100%;
+    height: 80px;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: right; /* Alinea los elementos a los extremos */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+}
+
+
+.icon__menu {
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(10px);
+}
+
+
+.menu__side {
+    width: 80px;
+    height: 100%;
+    background: rgba(35, 89, 28, 0.82);
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+    font-size: 18px;
+    z-index: 300;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-right: 20px solid rgba(35, 89, 28, 0);
+    transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+/*Ocultar scroll para chrome, safari y opera*/
+.menu__side::-webkit-scrollbar {
+    display: none;
+}
+
+/*Ocultar scroll para IE, Edge y Firefox*/
+.menu__side {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+.name__page {
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.name__page i {
+    width: 20px;
+    margin-right: 20px;
+}
+
+.options__menu {
+    padding: 20px 30px;
+    position: absolute;
+    top: 80px;
+}
+
+.options__menu a {
+    color: #ffffffb2;
+    cursor: default;
+    display: block;
+    position: relative;
+    transition: color 300ms;
+    text-decoration: none;
+}
+
+.options__menu a:hover {
+    color: white;
+}
+
+.options__menu .option {
+    padding: 20px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.options__menu .option i {
+    width: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.options__menu .option h4 {
+    font-weight: 300;
+    cursor: pointer;
+}
+
+a.selected {
+    color: #fff;
+}
+
+.selected:before {
+    content: '';
+    width: 3px;
+    height: 80%;
+    background: white;
+    position: absolute;
+    top: 10%;
+    left: -30px;
+}
+
+/*Clases para usar en JavaScript*/
+
+.body_move {
+    margin-left: 250px;
+}
+
+.menu__side_move {
+    width: 250px;
+}
+
+
+@media screen and (max-width: 760px) {
+    .body_move {
+        margin-left: 0px;
+    }
+
+    .menu__side_move {
+        width: 80px;
+        left: -80px;
+    }
+}
+
+
+
+
+
+/*---------------------------------------------  Estilos para el formulario de crear ---------------------------------- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    color: #555;
+    font-size: 16px;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #67b207;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Estilos para el botón */
+.btn-primary {
+    background-color: #67b207;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #4a8908;
 }
