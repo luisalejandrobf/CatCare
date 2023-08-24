@@ -51,6 +51,7 @@ public class PacienteController {
         return "crearPaciente";
     }
 
+    // Post para agregar Paciente
     @PostMapping("/agregar")
     public String agregarPaciente(@ModelAttribute("paciente") Paciente paciente) {
         
@@ -58,14 +59,14 @@ public class PacienteController {
         return "redirect:/catcare/pacientes/all";
     }
 
-    //delete
+    // http://localhost:8090/catcare/pacientes/delete/1
     @GetMapping("/delete/{id}")
     public String eliminarPaciente(@PathVariable("id") int id) {
         pacienteService.deleteById(id);
         return "redirect:/catcare/pacientes/all";
     }
 
-    //update
+    // http://localhost:8090/catcare/pacientes/update/1
     @GetMapping("/update/{id}")
     public String actualizarPaciente(@PathVariable("id") int id, Model model) {
         Paciente paciente = pacienteService.SearchById(id);
@@ -73,6 +74,7 @@ public class PacienteController {
         return "actualizarPaciente";
     }
 
+    // Post para Update del cliente. Se accede con el ID del Paciente.
     @PostMapping("/update/{id}")
     public String actualizarPaciente(@PathVariable("id") int id, @ModelAttribute("paciente") Paciente paciente) {
         pacienteService.update(paciente);
