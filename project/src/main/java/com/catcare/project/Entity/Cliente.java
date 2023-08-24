@@ -1,13 +1,13 @@
 package com.catcare.project.Entity;
 
 public class Cliente {
-    private int id;
+    private Integer id;
     private String cedula;
     private String nombre;
     private String correo;
     private String celular;
 
-    public Cliente(int id, String cedula, String nombre, String correo, String celular) {
+    public Cliente(Integer id, String cedula, String nombre, String correo, String celular) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -15,11 +15,11 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -49,4 +49,8 @@ public class ClienteRepository {
         data.put(lastId + 1, cliente);
     }
 
+    public int size() {
+        return data.size();
+    }
+
 }

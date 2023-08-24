@@ -108,7 +108,7 @@
     <div class="content_footerStuckToBottom">
         <div class="center-container paciente-basicInfo">
             <h1> Registrar Cliente</h1>
-            <form th:object="${cliente}" th:action="@{/clientes/agregar}" th:method="post" class="center-container">
+            <form th:object="${cliente}" th:action="@{/catcare/clientes/agregar}" th:method="post" class="center-container">
                 <div class="form-group">
                     <label for="nombre" >Nombre</label>
                     <input th:field="${cliente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre">

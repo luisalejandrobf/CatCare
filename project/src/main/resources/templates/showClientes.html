@@ -62,35 +62,35 @@
         <a href="#" class="selected">
             <div class="option">
                 <i class="fas fa-home" title="Inicio clientes"></i>
-                <h4>Inicio clientes</h4>
+                <h4>Inicio Clientes</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
                 <i class="far fa-sticky-note" title="Informacion cliente"></i>
-                <h4>Informacion cliente</h4>
+                <h4>Informacion Cliente</h4>
             </div>
         </a>
 
         <a href="http://localhost:8090/catcare/clientes/add">
             <div class="option">
                 <i class="far fa-file" title="Registrar cliente"></i>
-                <h4>Registrar cliente</h4>
+                <h4>Registrar Cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
                 <i class="far fa-address-card" title="Actualizar cliente"></i>
-                <h4>Actualizar cliente</h4>
+                <h4>Actualizar Cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
                 <i class="far fa-id-badge" title="Eliminar cliente"></i>
-                <h4>Eliminar cliente</h4>
+                <h4>Eliminar Cliente</h4>
             </div>
         </a>
 
@@ -108,6 +108,7 @@
             <table class="styled-table" border="1">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Cedula</th>
                     <th>Correo</th>
@@ -117,6 +118,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.id}"></td>
                     <td class="styled-table_pet-name">
                         <a class="green-link" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
                     </td>

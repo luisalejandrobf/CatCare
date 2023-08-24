@@ -43,6 +43,13 @@ public class ClienteController {
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
         Cliente cliente = new Cliente(0, "", "", "", "");
+
+        // Se puede asignar un ID calculado
+        // cliente.setId(clienteService.size()+1);
+
+        // Recordar añadir <input th:field="${cliente.id}" type="hidden"> para evitar tener un ID nulo.
+
+
         model.addAttribute("cliente", cliente);
         return "crearCliente";
     }

@@ -42,4 +42,9 @@ public class PacienteServiceImpl implements PacienteService {
         pacienteRepository.add(paciente);
     }
 
+    @Override
+    public int size() {
+        return pacienteRepository.size();
+    }
+
 }

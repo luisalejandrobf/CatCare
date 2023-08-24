@@ -44,4 +44,9 @@ public class ClienteServiceImpl implements ClienteService {
         clienteRepository.add(cliente);
     }
 
+    @Override
+    public int size() {
+        return clienteRepository.size();
+    }
+
 }

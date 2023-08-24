@@ -132,6 +132,7 @@
                 <div class="form-group">
                     <label for="estado">Estado</label>
                     <input th:field="*{estado}" type="text" class="form-control" id="estado" placeholder="Estado">
+                    <input th:field="${paciente.id}" type="hidden">
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>

@@ -41,12 +41,19 @@ public class PacienteController {
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
         Paciente paciente = new Paciente(0, "", "", 0, 0, "", "");
+
+        // Se puede asignar un ID calculado
+        // paciente.setId(pacienteService.size()+1);
+
+        // Recordar añadir <input th:field="${paciente.id}" type="hidden"> para evitar tener un ID nulo.
+
         model.addAttribute("paciente", paciente);
         return "crearPaciente";
     }
 
     @PostMapping("/agregar")
     public String agregarPaciente(@ModelAttribute("paciente") Paciente paciente) {
+        
         pacienteService.add(paciente);
         return "redirect:/catcare/pacientes/all";
     }

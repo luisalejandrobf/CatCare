@@ -138,4 +138,8 @@ public class PacienteRepository {
         data.put(lastId+1, paciente);
     }
 
+    public int size() {
+        return data.size();
+    }
+
 }

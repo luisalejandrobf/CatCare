@@ -16,4 +16,6 @@ public interface PacienteService {
 
     public void add(Paciente paciente);
     
+    public int size();
+
 }

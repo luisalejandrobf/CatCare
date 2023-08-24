@@ -2,7 +2,7 @@ package com.catcare.project.Entity;
 
 public class Paciente {
     // Atributos
-    private int id; // Nuevo atributo de ID
+    private Integer id; 
     private String nombre;
     private String raza;
     private int edad;
@@ -11,7 +11,7 @@ public class Paciente {
     private String estado;
 
     // Constructor
-    public Paciente(int id, String nombre, String raza, int edad, double peso, String enfermedad, String estado) {
+    public Paciente(Integer id, String nombre, String raza, int edad, double peso, String enfermedad, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
@@ -29,9 +29,9 @@ public class Paciente {
 
     // Métodos getters y setters
 
-    public int getId() {return id;}
+    public Integer getId() {return id;}
 
-    public void setId(int id) {this.id = id;}
+    public void setId(Integer id) {this.id = id;}
 
     public String getNombre() {
         return nombre;
