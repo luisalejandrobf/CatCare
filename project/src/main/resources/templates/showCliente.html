@@ -101,10 +101,12 @@
 
 <!-- Tabla de clientes -->
 
-<div class="wrapper_footerStuckToBottom">
+
+<div class="wrapper_footerStuckToBottom" >
     <div class="content_footerStuckToBottom">
+
         <div class="center-container paciente-basicInfo">
-            <h1 class="pet-title">Clientes</h1>
+            <h1 class="pet-title">Client: <span th:text="${cliente.nombre}" class="pet-name"></span></h1>
             <table class="styled-table" border="1">
                 <thead>
                 <tr>
@@ -115,10 +117,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="cliente : ${clientes}">
-                    <td class="styled-table_pet-name">
-                        <a class="green-link" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
-                    </td>
+                <tr>
+                    <td class="styled-table_pet-name" th:text="${cliente.nombre}"></td>
                     <td th:text="${cliente.cedula}"></td>
                     <td th:text="${cliente.correo}"></td>
                     <td th:text="${cliente.celular}"></td>
@@ -127,8 +127,6 @@
             </table>
         </div>
     </div>
-</div>
-
 
 
 <!-- Ultima seccion -- Pie de Pagina(footer)  -->
