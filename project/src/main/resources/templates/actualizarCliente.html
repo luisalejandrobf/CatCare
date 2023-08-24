@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CatCare</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Css principal  -->
     <link href="/css/style.css" rel="stylesheet">
@@ -32,7 +32,10 @@
     <link rel="icon" type="image/png" href="/images/CatCareIcon.png">
 
 
+
+
 </head>
+
 
 <!-- Barra de navegacion  -->
 
@@ -53,43 +56,43 @@
 <div class="menu__side" id="menu_side">
 
     <div class="name__page" id="logo">
-        <i> <img src="/images/UserIcon.png" alt="UserPNG" height="30rem" style="cursor: pointer"> </i>
-        <h4> <img src="/images/CatCareLogo.png" height="30rem"></h4>
+        <i> <img src="/images/CatCareIcon.png" height="30rem" style="cursor: pointer"> </i>
+        <h4><img src="/images/CatCareLogo.png" height="30rem"></h4>
     </div>
 
     <div class="options__menu">
 
-        <a href="#" class="selected">
+        <a href="http://localhost:8090/catcare/clientes/all" >
             <div class="option">
                 <i class="fas fa-home" title="Inicio clientes"></i>
                 <h4>Inicio Clientes</h4>
             </div>
         </a>
 
-        <a href="#">
+        <a href="#" >
             <div class="option">
-                <i class="far fa-sticky-note" title="Informacion cliente"></i>
+                <i class="far fa-sticky-note" title="Informacion Cliente"></i>
                 <h4>Informacion Cliente</h4>
             </div>
         </a>
 
-        <a href="http://localhost:8090/catcare/clientes/add">
+        <a href="#" class="selected">
             <div class="option">
-                <i class="far fa-file" title="Registrar cliente"></i>
+                <i class="far fa-file" title="Registrar Cliente"></i>
                 <h4>Registrar Cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
-                <i class="far fa-address-card" title="Actualizar cliente"></i>
+                <i class="far fa-address-card" title="Actualizar Cliente"></i>
                 <h4>Actualizar Cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
-                <i class="far fa-id-badge" title="Eliminar cliente"></i>
+                <i class="far fa-id-badge" title="Eliminar Cliente"></i>
                 <h4>Eliminar Cliente</h4>
             </div>
         </a>
@@ -99,50 +102,38 @@
 
 </div>
 
-<!-- Tabla de clientes -->
+<!-- formulario de clientes -->
 
-<div class="wrapper_footerStuckToBottom">
+<div class="wrapper_footerStuckToBottom" >
     <div class="content_footerStuckToBottom">
         <div class="center-container paciente-basicInfo">
-            <h1 class="pet-title">Clientes</h1>
-            <table class="styled-table" border="1">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Cedula</th>
-                    <th>Correo</th>
-                    <th>Celular</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="cliente : ${clientes}">
-                    <td th:text="${cliente.id}"></td>
-                    <td class="styled-table_pet-name">
-                        <a class="green-link" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
-                    </td>
-                    <td th:text="${cliente.cedula}"></td>
-                    <td th:text="${cliente.correo}"></td>
-                    <td th:text="${cliente.celular}"></td>
-                    <td class="btnHorizontal">
-                        <div class="button-container">
-                        <!-- Uso de bootstrap -->
-                        <a class="btn btn-info btnMargin" th:href="@{/catcare/clientes/update/{id}(id=${cliente.id})}">Modificar</a>
-                        <a class="btn btn-danger btnMargin" th:href="@{/catcare/clientes/delete/{id}(id=${cliente.id})}">Eliminar</a>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <h1>Registrar Cliente</h1>
+            <form th:object="${cliente}" th:action="@{/catcare/clientes/update/{id}(id=${cliente.id})}" th:method="post" class="center-container">
+                <div class="form-group">
+                    <label for="nombre" >Nombre</label>
+                    <input th:field="${cliente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="cedula">Cedula</label>
+                    <input th:field="*{cedula}" type="number" class="form-control" id="cedula" placeholder="Cedula">
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input th:field="*{correo}" type="text" class="form-control" id="correo" placeholder="Correo">
+                </div>
+                <div class="form-group">
+                    <label for="celular">Celular</label>
+                    <input th:field="*{celular}" type="number" class="form-control" id="celular" placeholder="Celular">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar Información</button>
+            </form>
+
         </div>
     </div>
-</div>
 
 
+    <!-- Ultima seccion -- Pie de Pagina(footer)  -->
 
-<!-- Ultima seccion -- Pie de Pagina(footer)  -->
-<div>
     <footer class="footer">
         <div class="footer-seccion">
             <div class="seccion-vertical">
@@ -185,7 +176,6 @@
         </div>
     </footer>
 </div>
-
 
 
 <script>
@@ -235,6 +225,5 @@
 
 
 </body>
-
 
 </html>

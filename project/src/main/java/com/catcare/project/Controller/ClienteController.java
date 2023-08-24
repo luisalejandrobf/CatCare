@@ -49,7 +49,6 @@ public class ClienteController {
 
         // Recordar añadir <input th:field="${cliente.id}" type="hidden"> para evitar tener un ID nulo.
 
-
         model.addAttribute("cliente", cliente);
         return "crearCliente";
     }

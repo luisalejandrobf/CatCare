@@ -81,5 +81,4 @@ public class PacienteController {
         return "redirect:/catcare/pacientes/all";
     }
 
-
 }
