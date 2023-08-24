@@ -1,5 +1,6 @@
 package com.catcare.project.Controller;
 
+import com.catcare.project.Controller.Error.PacienteNotFoundException;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class PacienteController {
         Paciente paciente = pacienteService.SearchById(id);
         if (paciente != null) {
             model.addAttribute("paciente", paciente);
+        } else {
+            // Throw error
+            throw new PacienteNotFoundException(id);
         }
 
         return "showPaciente";

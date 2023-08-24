@@ -809,7 +809,7 @@ a.selected {
 }
 
 
-/*---------------------------------------------  Estilos para el formulario de crear ---------------------------------- */
+/*---------------------------------------------  Estilos adicionales para el formulario de crear y actualizar ---------------------------------- */
 
 .button-container {
     display: flex;
@@ -821,4 +821,3 @@ a.selected {
     padding: 8px 12px;
     cursor: pointer;
 }
-

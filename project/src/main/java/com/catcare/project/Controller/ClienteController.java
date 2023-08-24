@@ -1,5 +1,7 @@
 package com.catcare.project.Controller;
 
+import com.catcare.project.Controller.Error.ClienteNotFoundException;
+import com.catcare.project.Controller.Error.PacienteNotFoundException;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Service.ClienteService;
@@ -33,6 +35,9 @@ public class ClienteController {
         Cliente cliente = clienteService.SearchById(id);
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
+        } else {
+            // Throw error
+            throw new ClienteNotFoundException(id);
         }
 
         return "showCliente";
