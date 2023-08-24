@@ -42,7 +42,7 @@
     <div>
         <ul class="navegacion-indice">
             <li><a class="nav-link nav-link-ltr" href="#Inicio" style="color: #000000">CLIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="http://localhost:8090/catcare/pacientes/all" style="color: #000000">PACIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" href="http://localhost:8090/catcare/clientes/all" style="color: #000000">clientes</a></li>
             <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
             <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
         </ul>
@@ -61,36 +61,36 @@
 
         <a href="#" class="selected">
             <div class="option">
-                <i class="fas fa-home" title="Inicio Pacientes"></i>
-                <h4>Inicio Pacientes</h4>
+                <i class="fas fa-home" title="Inicio clientes"></i>
+                <h4>Inicio clientes</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
-                <i class="far fa-sticky-note" title="Informacion Paciente"></i>
-                <h4>Informacion Paciente</h4>
+                <i class="far fa-sticky-note" title="Informacion cliente"></i>
+                <h4>Informacion cliente</h4>
             </div>
         </a>
 
-        <a href="http://localhost:8090/catcare/pacientes/add">
+        <a href="http://localhost:8090/catcare/clientes/add">
             <div class="option">
-                <i class="far fa-file" title="Registrar Paciente"></i>
-                <h4>Registrar Paciente</h4>
-            </div>
-        </a>
-
-        <a href="#">
-            <div class="option">
-                <i class="far fa-address-card" title="Actualizar Paciente"></i>
-                <h4>Actualizar Paciente</h4>
+                <i class="far fa-file" title="Registrar cliente"></i>
+                <h4>Registrar cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
-                <i class="far fa-id-badge" title="Eliminar Paciente"></i>
-                <h4>Eliminar Paciente</h4>
+                <i class="far fa-address-card" title="Actualizar cliente"></i>
+                <h4>Actualizar cliente</h4>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="option">
+                <i class="far fa-id-badge" title="Eliminar cliente"></i>
+                <h4>Eliminar cliente</h4>
             </div>
         </a>
 
@@ -99,41 +99,29 @@
 
 </div>
 
-<!-- Tabla de pacientes -->
+<!-- Tabla de clientes -->
 
 <div class="wrapper_footerStuckToBottom">
     <div class="content_footerStuckToBottom">
-        <div class="center-container paciente-basicInfo">
-            <h1 class="pet-title">Pacientes</h1>
+        <div class="center-container cliente-basicInfo">
+            <h1 class="pet-title">Clientes</h1>
             <table class="styled-table" border="1">
                 <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Raza</th>
-                    <th>Edad</th>
-                    <th>Peso</th>
-                    <th>Enfermedad</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>Cedula</th>
+                    <th>Correo</th>
+                    <th>Celular</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="paciente : ${pacientes}">
+                <tr th:each="cliente : ${clientes}">
                     <td class="styled-table_pet-name">
-                        <a class="green-link" th:href="@{/catcare/pacientes/find(id=${paciente.id})}" th:text="${paciente.nombre}"></a>
+                        <a class="green-link" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
                     </td>
-                    <td th:text="${paciente.raza}"></td>
-                    <td th:text="${paciente.edad}"></td>
-                    <td th:text="${paciente.peso}"></td>
-                    <td th:text="${paciente.enfermedad}"></td>
-                    <td th:text="${paciente.estado}"></td>
-                    <td class="btnHorizontal">
-                        <div class="button-container">
-                        <!-- Uso de bootstrap -->
-                        <a class="btn btn-info btnMargin">Modificar</a>
-                        <a class="btn btn-danger btnMargin">Eliminar</a>
-                        </div>
-                    </td>
+                    <td th:text="${cliente.cedula}"></td>
+                    <td th:text="${cliente.correo}"></td>
+                    <td th:text="${cliente.celular}"></td>
                 </tr>
                 </tbody>
             </table>

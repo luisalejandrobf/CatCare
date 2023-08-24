@@ -479,8 +479,10 @@ ul {
     position: absolute;
     background-color: #00aa39;
     width: 0px;
-    left: 50%; /* Center the line */
-    transform: translateX(-50%); /* Move the line to the left by half its width to center it */
+    left: 50%;
+    /* Center the line */
+    transform: translateX(-50%);
+    /* Move the line to the left by half its width to center it */
     bottom: -5px;
 }
 
@@ -514,7 +516,8 @@ ul {
 
 .rounded-image {
     border-radius: 30px;
-    border: 1px solid #ccc; /* Border width and color */
+    border: 1px solid #ccc;
+    /* Border width and color */
     margin-top: 10px;
 }
 
@@ -525,8 +528,8 @@ ul {
     text-align: center;
 }
 
-.black-link {
-    color: black;
+.green-link {
+    color: rgba(35, 89, 28, 0.82);
     text-decoration: none;
 }
 
@@ -546,7 +549,8 @@ ul {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.styled-table th, .styled-table td {
+.styled-table th,
+.styled-table td {
     padding: 12px 15px;
 }
 
@@ -619,7 +623,8 @@ ul {
     height: 80px;
     background: #f5f5f5;
     display: flex;
-    justify-content: right; /* Alinea los elementos a los extremos */
+    justify-content: right;
+    /* Alinea los elementos a los extremos */
     align-items: center;
     position: fixed;
     top: 0;
@@ -753,8 +758,8 @@ a.selected {
 
 
 
-
 /*---------------------------------------------  Estilos para el formulario de crear ---------------------------------- */
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -802,3 +807,18 @@ a.selected {
 .btn-primary:hover {
     background-color: #4a8908;
 }
+
+
+/*---------------------------------------------  Estilos para el formulario de crear ---------------------------------- */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.btnMargin {
+    margin: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
