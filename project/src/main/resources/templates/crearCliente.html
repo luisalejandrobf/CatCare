@@ -45,7 +45,7 @@
     <div>
         <ul class="navegacion-indice">
             <li><a class="nav-link nav-link-ltr" href="#Inicio" style="color: #000000">CLIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="http://localhost:8090/catcare/pacientes/all" style="color: #000000">PACIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" href="http://localhost:8090/catcare/clientes/all" style="color: #000000">PACIENTES</a></li>
             <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
             <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
         </ul>
@@ -62,38 +62,38 @@
 
     <div class="options__menu">
 
-        <a href="http://localhost:8090/catcare/pacientes/all" >
+        <a href="http://localhost:8090/catcare/clientes/all" >
             <div class="option">
-                <i class="fas fa-home" title="Inicio Pacientes"></i>
-                <h4>Inicio Pacientes</h4>
+                <i class="fas fa-home" title="Inicio clientes"></i>
+                <h4>Inicio Clientes</h4>
             </div>
         </a>
 
         <a href="#" >
             <div class="option">
-                <i class="far fa-sticky-note" title="Informacion Paciente"></i>
-                <h4>Informacion Paciente</h4>
+                <i class="far fa-sticky-note" title="Informacion Cliente"></i>
+                <h4>Informacion Cliente</h4>
             </div>
         </a>
 
         <a href="#" class="selected">
             <div class="option">
-                <i class="far fa-file" title="Registrar Paciente"></i>
-                <h4>Registrar Paciente</h4>
+                <i class="far fa-file" title="Registrar Cliente"></i>
+                <h4>Registrar Cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
-                <i class="far fa-address-card" title="Actualizar Paciente"></i>
-                <h4>Actualizar Paciente</h4>
+                <i class="far fa-address-card" title="Actualizar Cliente"></i>
+                <h4>Actualizar Cliente</h4>
             </div>
         </a>
 
         <a href="#">
             <div class="option">
-                <i class="far fa-id-badge" title="Eliminar Paciente"></i>
-                <h4>Eliminar Paciente</h4>
+                <i class="far fa-id-badge" title="Eliminar Cliente"></i>
+                <h4>Eliminar Cliente</h4>
             </div>
         </a>
 
@@ -102,36 +102,28 @@
 
 </div>
 
-<!-- formulario de pacientes -->
+<!-- formulario de clientes -->
 
 <div class="wrapper_footerStuckToBottom" >
     <div class="content_footerStuckToBottom">
         <div class="center-container paciente-basicInfo">
-            <h1> Registrar Paciente</h1>
-            <form th:object="${paciente}" th:action="@{/catcare/pacientes/agregar}" th:method="post" class="center-container">
+            <h1> Registrar Cliente</h1>
+            <form th:object="${cliente}" th:action="@{/clientes/agregar}" th:method="post" class="center-container">
                 <div class="form-group">
                     <label for="nombre" >Nombre</label>
-                    <input th:field="${paciente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre">
+                    <input th:field="${cliente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre">
                 </div>
                 <div class="form-group">
-                    <label for="raza">Raza</label>
-                    <input th:field="*{raza}" type="text" class="form-control" id="raza" placeholder="Raza">
+                    <label for="cedula">Cedula</label>
+                    <input th:field="*{cedula}" type="number" class="form-control" id="cedula" placeholder="Cedula">
                 </div>
                 <div class="form-group">
-                    <label for="edad">Edad</label>
-                    <input th:field="*{edad}" type="number" class="form-control" id="edad" placeholder="Edad">
+                    <label for="correo">Correo</label>
+                    <input th:field="*{correo}" type="text" class="form-control" id="correo" placeholder="Correo">
                 </div>
                 <div class="form-group">
-                    <label for="peso">Peso</label>
-                    <input th:field="*{peso}" type="number" class="form-control" id="peso" placeholder="Peso">
-                </div>
-                <div class="form-group">
-                    <label for="enfermedad">Enfermedad</label>
-                    <input th:field="*{enfermedad}" type="text" class="form-control" id="enfermedad" placeholder="Enfermedad">
-                </div>
-                <div class="form-group">
-                    <label for="estado">Estado</label>
-                    <input th:field="*{estado}" type="text" class="form-control" id="estado" placeholder="Estado">
+                    <label for="celular">Celular</label>
+                    <input th:field="*{celular}" type="number" class="form-control" id="celular" placeholder="Celular">
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>

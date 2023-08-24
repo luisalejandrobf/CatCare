@@ -48,30 +48,30 @@ public class ClienteController {
     }
 
     @PostMapping("/agregar")
-    public String agregarEstudiante(@ModelAttribute("estudiante") Cliente cliente) {
+    public String agregarCliente(@ModelAttribute("cliente") Cliente cliente) {
         clienteService.add(cliente);
-        return "redirect:/clientes/all";
+        return "redirect:/catcare/clientes/all";
     }
 
     //delete
     @GetMapping("/delete/{id}")
-    public String eliminarEstudiante(@PathVariable("id") int id) {
+    public String eliminarCliente(@PathVariable("id") int id) {
         clienteService.deleteById(id);
-        return "redirect:/clientes/all";
+        return "redirect:/catcare/clientes/all";
     }
 
     //update
     @GetMapping("/update/{id}")
-    public String actualizarEstudiante(@PathVariable("id") int id, Model model) {
+    public String actualizarCliente(@PathVariable("id") int id, Model model) {
         Cliente cliente = clienteService.SearchById(id);
         model.addAttribute("cliente", cliente);
         return "actualizarCliente";
     }
 
     @PostMapping("/update/{id}")
-    public String actualizarEstudiante(@PathVariable("id") int id, @ModelAttribute("estudiante") Cliente cliente) {
+    public String actualizarCliente(@PathVariable("id") int id, @ModelAttribute("cliente") Cliente cliente) {
         clienteService.update(cliente);
-        return "redirect:/clientes/all";
+        return "redirect:/catcare/clientes/all";
     }
 
 

@@ -42,7 +42,7 @@
     <div>
         <ul class="navegacion-indice">
             <li><a class="nav-link nav-link-ltr" href="#Inicio" style="color: #000000">CLIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="http://localhost:8090/catcare/clientes/all" style="color: #000000">clientes</a></li>
+            <li><a class="nav-link nav-link-ltr" href="http://localhost:8090/catcare/clientes/all" style="color: #000000">PACIENTES</a></li>
             <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
             <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
         </ul>
@@ -112,6 +112,7 @@
                     <th>Cedula</th>
                     <th>Correo</th>
                     <th>Celular</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -122,6 +123,13 @@
                     <td th:text="${cliente.cedula}"></td>
                     <td th:text="${cliente.correo}"></td>
                     <td th:text="${cliente.celular}"></td>
+                    <td class="btnHorizontal">
+                        <div class="button-container">
+                        <!-- Uso de bootstrap -->
+                        <a class="btn btn-info btnMargin">Modificar</a>
+                        <a class="btn btn-danger btnMargin" th:href="@{/catcare/clientes/delete/{id}(id=${cliente.id})}">Eliminar</a>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>

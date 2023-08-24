@@ -131,7 +131,7 @@
                         <div class="button-container">
                         <!-- Uso de bootstrap -->
                         <a class="btn btn-info btnMargin">Modificar</a>
-                        <a class="btn btn-danger btnMargin">Eliminar</a>
+                        <a class="btn btn-danger btnMargin" th:href="@{/catcare/pacientes/delete/{id}(id=${paciente.id})}">Eliminar</a>
                         </div>
                     </td>
                 </tr>

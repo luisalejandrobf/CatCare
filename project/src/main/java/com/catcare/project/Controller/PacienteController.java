@@ -46,30 +46,30 @@ public class PacienteController {
     }
 
     @PostMapping("/agregar")
-    public String agregarEstudiante(@ModelAttribute("estudiante") Paciente paciente) {
+    public String agregarPaciente(@ModelAttribute("paciente") Paciente paciente) {
         pacienteService.add(paciente);
-        return "redirect:/pacientes/all";
+        return "redirect:/catcare/pacientes/all";
     }
 
     //delete
     @GetMapping("/delete/{id}")
-    public String eliminarEstudiante(@PathVariable("id") int id) {
+    public String eliminarPaciente(@PathVariable("id") int id) {
         pacienteService.deleteById(id);
-        return "redirect:/pacientes/all";
+        return "redirect:/catcare/pacientes/all";
     }
 
     //update
     @GetMapping("/update/{id}")
-    public String actualizarEstudiante(@PathVariable("id") int id, Model model) {
+    public String actualizarPaciente(@PathVariable("id") int id, Model model) {
         Paciente paciente = pacienteService.SearchById(id);
         model.addAttribute("paciente", paciente);
         return "actualizarPaciente";
     }
 
     @PostMapping("/update/{id}")
-    public String actualizarEstudiante(@PathVariable("id") int id, @ModelAttribute("estudiante") Paciente paciente) {
+    public String actualizarPaciente(@PathVariable("id") int id, @ModelAttribute("paciente") Paciente paciente) {
         pacienteService.update(paciente);
-        return "redirect:/pacientes/all";
+        return "redirect:/catcare/pacientes/all";
     }
 
 
