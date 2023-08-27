@@ -30,6 +30,15 @@ public class ClienteRepository {
         return data.get(id);
     }
 
+    public Cliente findByCedula(String cedula) {
+        for (Cliente cliente : data.values()) {
+            if (cliente.getCedula().equals(cedula)) {
+                return cliente;
+            }
+        }
+        return null; // Return null if cedula is not found
+    }
+    
     public Collection<Cliente> findAll() {
         return data.values();
     }

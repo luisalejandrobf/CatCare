@@ -8,6 +8,8 @@ public interface ClienteService {
     
     public Cliente SearchById(int id);
 
+    public Cliente SearchByCedula(String cedula);
+
     public Collection<Cliente> SearchAll();
 
     public void deleteById(int id);
