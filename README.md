@@ -1,3 +1,4 @@
+![CatCareLogo](https://github.com/luisalejandrobf/CatCare/assets/95001823/7f04c088-f08a-45da-99ca-dc67a38f45dc)
 # CatCare, Sitio Web de Clínica Veterinaria
 
 ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=luisalejandrobf&repo=PatitasFelices&label=Welcome%20to%20the%20repository!%20You're%20visitor%20number&style=flat-square&color=%233864CF&contentType=svg)
