@@ -10,7 +10,7 @@ Este repositorio contiene el código fuente y los recursos relacionados con un p
 ## Colaboradores
 
 - Luis Alejandro Bravo Ferreira
-- Ana María Ortega Sepúlveda
+- Ana María Ortegón Sepúlveda
 - Felipe García Castiblanco
 
 ## Descripción del Proyecto
@@ -35,7 +35,7 @@ This repository contains the source code and resources related to a website proj
 ## Contributors
 
 - Luis Alejandro Bravo Ferreira
-- Ana María Ortega Sepúlveda
+- Ana María Ortegón Sepúlveda
 - Felipe García Castiblanco
 
 ## Project Description
