@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+  // TRANSLUCENT PART
   // Login
   const loginLink = document.querySelector(".login");
 
