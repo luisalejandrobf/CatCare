@@ -108,7 +108,7 @@
             <table class="styled-table" border="1">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <!-- <th>ID</th> -->
                     <th>Nombre</th>
                     <th>Raza</th>
                     <th>Edad</th>
@@ -120,7 +120,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="paciente : ${pacientes}">
-                    <td th:text="${paciente.id}"></td>
+                    <!-- <td th:text="${paciente.id}"></td>  -->
                     <td class="styled-table_pet-name">
                         <a class="green-link" th:href="@{/catcare/pacientes/find(id=${paciente.id})}" th:text="${paciente.nombre}"></a>
                     </td>

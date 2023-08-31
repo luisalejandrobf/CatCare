@@ -47,7 +47,7 @@ public class ClienteController {
     // http://localhost:8090/catcare/clientes/add
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
-        Cliente cliente = new Cliente(0, "", "", "", "");
+        Cliente cliente = new Cliente(0, "", "", "", "", "");
 
         // Se puede asignar un ID calculado
         // cliente.setId(clienteService.size()+1);

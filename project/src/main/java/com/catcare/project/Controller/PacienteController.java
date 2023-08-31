@@ -44,7 +44,7 @@ public class PacienteController {
     // http://localhost:8090/catcare/pacientes/add
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
-        Paciente paciente = new Paciente(0, "", "", 0, 0, "", "");
+        Paciente paciente = new Paciente(0, "", "", 0, 0, "", "", "");
 
         // Se puede asignar un ID calculado
         // paciente.setId(pacienteService.size()+1);

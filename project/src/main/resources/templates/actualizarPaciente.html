@@ -111,28 +111,31 @@
             <form th:object="${paciente}" th:action="@{/catcare/pacientes/update/{id}(id=${paciente.id})}" th:method="post" class="center-container">
                 <div class="form-group">
                     <label for="nombre" >Nombre</label>
-                    <input th:field="${paciente.nombre}" type="text" class="form-control" id="nombre" placeholder="${paciente.nombre}">
+                    <input th:field="${paciente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre del gato">
                 </div>
                 <div class="form-group">
                     <label for="raza">Raza</label>
-                    <input th:field="*{raza}" type="text" class="form-control" id="raza" placeholder=*{raza}>
+                    <input th:field="*{raza}" type="text" class="form-control" id="raza" placeholder="Raza">
                 </div>
                 <div class="form-group">
                     <label for="edad">Edad</label>
-                    <input th:field="*{edad}" type="number" class="form-control" id="edad" placeholder=*{edad}>
+                    <input th:field="*{edad}" type="number" class="form-control" id="edad" placeholder="Edad">
                 </div>
                 <div class="form-group">
                     <label for="peso">Peso</label>
-                    <input th:field="*{peso}" type="number" class="form-control" id="peso" placeholder=*{peso}>
+                    <input th:field="*{peso}" type="text" class="form-control" id="peso" placeholder="Peso En KG">
                 </div>
                 <div class="form-group">
                     <label for="enfermedad">Enfermedad</label>
-                    <input th:field="*{enfermedad}" type="text" class="form-control" id="enfermedad" placeholder=*{enfermedad}>
+                    <input th:field="*{enfermedad}" type="text" class="form-control" id="enfermedad" placeholder="Sin Enfermedad">
                 </div>
                 <div class="form-group">
                     <label for="estado">Estado</label>
-                    <input th:field="*{estado}" type="text" class="form-control" id="estado" placeholder=*{estado}>
-                    <input th:field="${paciente.id}" type="hidden">
+                    <input th:field="*{estado}" type="text" class="form-control" id="estado" placeholder="Estado">
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto (URL)</label>
+                    <input th:field="*{foto}" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg">
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar Información</button>
             </form>
