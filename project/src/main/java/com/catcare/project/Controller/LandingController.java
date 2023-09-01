@@ -1,6 +1,9 @@
 package com.catcare.project.Controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,18 +33,17 @@ public class LandingController {
 
     // http://localhost:8090/catcare/signin/3434
     @GetMapping("/signin/{cedula}")
-    public String mostrarClientes(@PathVariable("cedula") String cedula,Model model) {
-        
-        String resp = "login";
+    public String searchByCedula(@PathVariable String cedula) {
         Cliente cliente = clienteService.SearchByCedula(cedula);
+        Long clientId = cliente.getId();
+        String resp;
+    
         if (cliente != null) {
-            // System.out.println("SIGNIN IF NOMBRE "+cliente.getNombre());
-            resp = "redirect:/catcare/pacientes/all";
-            // System.out.println("SIGNIN IF : "+cedula);
+            return "redirect:/catcare/clientes/mascotas/" + clientId; // Lleva a ver las mascotas del cliente con su ID.
         } else {
-             // System.out.println("SIGNIN ELSE :"+cedula);
-             resp  = "pagina_error_login";
-        }        
+            resp = "pagina_error_login";
+        }
+    
         return resp;
     }
 

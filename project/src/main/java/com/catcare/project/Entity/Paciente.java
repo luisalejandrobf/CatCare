@@ -1,8 +1,19 @@
 package com.catcare.project.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Paciente {
 
-    private Integer id; 
+    @Id
+    @GeneratedValue
+    private Long id; 
+
     private String nombre;
     private String raza;
     private int edad;
@@ -11,9 +22,26 @@ public class Paciente {
     private String estado;
     private String foto;
 
-    public Paciente(Integer id, String nombre, String raza, int edad, double peso, String enfermedad, String estado,
+
+    
+    // Relacion con Cliente
+    @ManyToOne
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+
+
+
+
+    public Paciente(String nombre, String raza, int edad, double peso, String enfermedad, String estado,
             String foto) {
-        this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -22,11 +50,15 @@ public class Paciente {
         this.estado = estado;
         this.foto = foto;
     }
+
+    public Paciente(){
+
+    }
     
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNombre() {

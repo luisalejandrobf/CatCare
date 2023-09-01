@@ -13,38 +13,33 @@ public class PacienteServiceImpl implements PacienteService {
     // Autowires from mascota repo
 
     @Autowired
-    PacienteRepository pacienteRepository;
+    PacienteRepository repo;
 
     // Uses the methods declared in PacienteRepository
 
     @Override
-    public Paciente SearchById(int id) {
-       return  pacienteRepository.findById(id);
+    public Paciente SearchById(Long id) {
+       return  repo.findById(id).get();
     }
 
     @Override
     public Collection<Paciente> SearchAll() {
-        return pacienteRepository.findAll();
+        return repo.findAll();
     }
 
     @Override
-    public void deleteById(int id) {
-        pacienteRepository.deleteById(id);
+    public void deleteById(Long id) {
+        repo.deleteById(id);
     }
 
     @Override
     public void update(Paciente paciente) {
-        pacienteRepository.updateById(paciente);
+        repo.save(paciente);
     }
 
     @Override
     public void add(Paciente paciente) {
-        pacienteRepository.add(paciente);
-    }
-
-    @Override
-    public int size() {
-        return pacienteRepository.size();
+        repo.save(paciente);
     }
 
 }

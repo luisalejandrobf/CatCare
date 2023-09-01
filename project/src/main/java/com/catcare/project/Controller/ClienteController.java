@@ -6,6 +6,9 @@ import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Service.ClienteService;
 import com.catcare.project.Service.PacienteService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,16 +31,31 @@ public class ClienteController {
         return "showClientes";
     }
 
+    // http://localhost:8090/catcare/clientes/mascotas/1
+    @GetMapping("/mascotas/{clienteId}")
+    public String mostrarPacientesDeCliente(@PathVariable Long clienteId, Model model) {
+        Cliente cliente = clienteService.SearchById(clienteId);
+    
+        if (cliente != null) {
+            List<Paciente> mascotas = cliente.getPacientes();
+            model.addAttribute("cliente", cliente);
+            model.addAttribute("pacientes", mascotas);
+            return "showPacientesDeUnCliente";
+        } else {
+            return "error"; // TO-DO Pagina de error.
+        }
+    }
+
     // http://localhost:8090/catcare/clientes/find?id=1
     @GetMapping("/find")
-    public String mostrarInfoClientes(Model model, @RequestParam("id") int id) {
+    public String mostrarInfoClientes(Model model, @RequestParam("id") Long id) {
 
         Cliente cliente = clienteService.SearchById(id);
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
         } else {
-            // Throw error
-            throw new ClienteNotFoundException(id);
+            // Throw errorthrow new ClienteNotFoundException(id);
+            
         }
 
         return "showCliente";
@@ -47,7 +65,7 @@ public class ClienteController {
     // http://localhost:8090/catcare/clientes/add
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
-        Cliente cliente = new Cliente(0, "", "", "", "", "");
+        Cliente cliente = new Cliente("", "", "", "", "");
 
         // Se puede asignar un ID calculado
         // cliente.setId(clienteService.size()+1);
@@ -67,14 +85,14 @@ public class ClienteController {
 
     // http://localhost:8090/catcare/clientes/delete/1
     @GetMapping("/delete/{id}")
-    public String eliminarCliente(@PathVariable("id") int id) {
+    public String eliminarCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
         return "redirect:/catcare/clientes/all";
     }
 
     // http://localhost:8090/catcare/clientes/update/1
     @GetMapping("/update/{id}")
-    public String actualizarCliente(@PathVariable("id") int id, Model model) {
+    public String actualizarCliente(@PathVariable("id") Long id, Model model) {
         Cliente cliente = clienteService.SearchById(id);
         model.addAttribute("cliente", cliente);
         return "actualizarCliente";
@@ -82,7 +100,7 @@ public class ClienteController {
 
     // Post para Update del cliente. Se accede con el ID del Cliente.
     @PostMapping("/update/{id}")
-    public String actualizarCliente(@PathVariable("id") int id, @ModelAttribute("cliente") Cliente cliente) {
+    public String actualizarCliente(@PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
         clienteService.update(cliente);
         return "redirect:/catcare/clientes/all";
     }

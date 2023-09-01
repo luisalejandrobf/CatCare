@@ -27,14 +27,11 @@ public class PacienteController {
 
     // http://localhost:8090/catcare/pacientes/find?id=1
     @GetMapping("/find")
-    public String mostrarInfoPacientes(Model model, @RequestParam("id") int id) {
+    public String mostrarInfoPacientes(Model model, @RequestParam("id") Long id) {
 
         Paciente paciente = pacienteService.SearchById(id);
         if (paciente != null) {
             model.addAttribute("paciente", paciente);
-        } else {
-            // Throw error
-            throw new PacienteNotFoundException(id);
         }
 
         return "showPaciente";
@@ -44,7 +41,7 @@ public class PacienteController {
     // http://localhost:8090/catcare/pacientes/add
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
-        Paciente paciente = new Paciente(0, "", "", 0, 0, "", "", "");
+        Paciente paciente = new Paciente("", "", 0, 0, "", "", "");
 
         // Se puede asignar un ID calculado
         // paciente.setId(pacienteService.size()+1);
@@ -65,14 +62,14 @@ public class PacienteController {
 
     // http://localhost:8090/catcare/pacientes/delete/1
     @GetMapping("/delete/{id}")
-    public String eliminarPaciente(@PathVariable("id") int id) {
+    public String eliminarPaciente(@PathVariable("id") Long id) {
         pacienteService.deleteById(id);
         return "redirect:/catcare/pacientes/all";
     }
 
     // http://localhost:8090/catcare/pacientes/update/1
     @GetMapping("/update/{id}")
-    public String actualizarPaciente(@PathVariable("id") int id, Model model) {
+    public String actualizarPaciente(@PathVariable("id") Long id, Model model) {
         Paciente paciente = pacienteService.SearchById(id);
         model.addAttribute("paciente", paciente);
         return "actualizarPaciente";
@@ -80,7 +77,7 @@ public class PacienteController {
 
     // Post para Update del cliente. Se accede con el ID del Paciente.
     @PostMapping("/update/{id}")
-    public String actualizarPaciente(@PathVariable("id") int id, @ModelAttribute("paciente") Paciente paciente) {
+    public String actualizarPaciente(@PathVariable("id") Long id, @ModelAttribute("paciente") Paciente paciente) {
         pacienteService.update(paciente);
         return "redirect:/catcare/pacientes/all";
     }

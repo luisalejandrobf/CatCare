@@ -6,53 +6,57 @@ import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Repository.ClienteRepository;
 import com.catcare.project.Repository.PacienteRepository;
+
+import org.hibernate.cache.spi.entry.CollectionCacheEntry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
     
-    // Autowires from mascota repo
-
     @Autowired
-    ClienteRepository clienteRepository;
+    ClienteRepository repo;
 
     // Uses the methods declared in ClienteRepository
 
     @Override
-    public Cliente SearchById(int id) {
-       return  clienteRepository.findById(id);
+    public Cliente SearchById(Long id) {
+       return  repo.findById(id).get();
     }
 
 
     @Override
-    public Cliente SearchByCedula(String cedula) {
-       return  clienteRepository.findByCedula(cedula);
+     public Cliente SearchByCedula(String cedula) {
+        
+        Logger log = LoggerFactory.getLogger(getClass());
+
+        log.info(cedula);
+
+        return  repo.findByCedula(cedula);
+
     }
+    
 
     @Override
     public Collection<Cliente> SearchAll() {
-        return clienteRepository.findAll();
+        return repo.findAll();
     }
 
     @Override
-    public void deleteById(int id) {
-        clienteRepository.deleteById(id);
+    public void deleteById(Long id) {
+        repo.deleteById(id);
     }
 
     @Override
     public void update(Cliente cliente) {
-        clienteRepository.updateById(cliente);
+        repo.save(cliente);
     }
 
     @Override
     public void add(Cliente cliente) {
-        clienteRepository.add(cliente);
-    }
-
-    @Override
-    public int size() {
-        return clienteRepository.size();
+        repo.save(cliente);
     }
 
 }

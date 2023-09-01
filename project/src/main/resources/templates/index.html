@@ -337,6 +337,7 @@
       }
       return true;
     }
+
     const btnCliSignin = document.getElementById("btnCliSignin");
 
     const clienteBtn = document.getElementById("clienteBtn");
@@ -366,7 +367,7 @@
 
     btnCliSignin.addEventListener("click", () => {
       const cedula = document.getElementById("CliCedula").value;
-      const contraseña = "1111";
+      const contraseña = "1111"; // Contraseña por defecto. Se usa para que el método no falle.
       console.warn("cedula : " + cedula);
       if (validarCampos(cedula, contraseña)) {
         const url = `/catcare/signin/${cedula}`;
