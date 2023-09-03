@@ -1,7 +1,9 @@
 package com.catcare.project.Controller;
 
 import com.catcare.project.Controller.Error.PacienteNotFoundException;
+import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
+import com.catcare.project.Service.ClienteService;
 import com.catcare.project.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,12 +65,15 @@ public class PacienteController {
         return "redirect:/catcare/pacientes/all";
     }
 
+    // Delete GENERAL
     // http://localhost:8090/catcare/pacientes/delete/1
     @GetMapping("/delete/{id}")
     public String eliminarPaciente(@PathVariable("id") Long id) {
         pacienteService.deleteById(id);
         return "redirect:/catcare/pacientes/all";
     }
+
+    // UPDATE GENERAL
 
     // http://localhost:8090/catcare/pacientes/update/1
     @GetMapping("/update/{id}")
@@ -81,8 +86,43 @@ public class PacienteController {
     // Post para Update del cliente. Se accede con el ID del Paciente.
     @PostMapping("/update/{id}")
     public String actualizarPaciente(@PathVariable("id") Long id, @ModelAttribute("paciente") Paciente paciente) {
+            
         pacienteService.update(paciente);
+    
         return "redirect:/catcare/pacientes/all";
     }
+    
+    
+
+    // ESTANDO EN UN PACIENTE (Regresa a la URL de visualizacion de las mascotas del cliente)
+    
+    // UPDATE
+    // http://localhost:8090/catcare/pacientes/update/1
+    @GetMapping("/update/{clienteid}/{id}")
+    public String actualizarPacienteDeUnCliente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid, Model model) {
+        Paciente paciente = pacienteService.SearchById(id);
+        model.addAttribute("paciente", paciente);
+        model.addAttribute("clienteid", clienteid);
+
+        return "/Cliente/actualizarPacienteDeUnCliente";
+    }
+
+    // Post para Update del cliente. Se accede con el ID del Paciente.
+    @PostMapping("/update/{clienteid}/{id}")
+    public String actualizarPacienteDeUnCliente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid, @ModelAttribute("paciente") Paciente paciente) {
+            
+        pacienteService.update(paciente);
+    
+        return "redirect:/catcare/clientes/mascotas/{clienteid}";
+    }
+
+    // DELETE
+    // http://localhost:8090/catcare/pacientes/delete/1
+    @GetMapping("/delete/{clienteid}/{id}")
+    public String eliminarPaciente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid) {
+        pacienteService.deleteById(id);
+        return "redirect:/catcare/clientes/mascotas/{clienteid}";
+    }
+
 
 }

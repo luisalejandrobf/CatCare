@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CatCare {
+public class CatCare { 
 
     // Luis Bravo, Felipe Garcia, Ana Ortegon.
     // Used: Devtools, Spring Web, Thymeleaf.

@@ -108,7 +108,7 @@
     <div class="content_footerStuckToBottom">
         <div class="center-container paciente-basicInfo">
             <h1>Actualizar Paciente</h1>
-            <form th:object="${paciente}" th:action="@{/catcare/pacientes/update/{id}(id=${paciente.id})}" th:method="post" class="center-container">
+            <form th:object="${paciente}" th:action="@{/catcare/pacientes/update/{clienteid}/{id}(clienteid=${clienteid},id=${paciente.id})}" th:method="post" class="center-container">
                 <div class="form-group">
                     <label for="nombre" >Nombre</label>
                     <input th:field="${paciente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre del gato">

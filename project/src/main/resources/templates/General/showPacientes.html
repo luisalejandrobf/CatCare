@@ -115,6 +115,7 @@
                     <th>Peso</th>
                     <th>Enfermedad</th>
                     <th>Estado</th>
+                    <th>Dueño (ID)</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -129,6 +130,7 @@
                     <td th:text="${paciente.peso}"></td>
                     <td th:text="${paciente.enfermedad}"></td>
                     <td th:text="${paciente.estado}"></td>
+                    <td th:text="${paciente != null and paciente.cliente != null ? paciente.cliente.id : 'Sin dueño registrado'}"></td>
                     <td class="btnHorizontal">
                         <div class="button-container">
                         <!-- Uso de bootstrap -->

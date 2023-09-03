@@ -243,10 +243,10 @@ public class DatabaseInit implements ApplicationRunner {
                 Paciente paciente = pacientes.get(i * 4 + j);
                 paciente.setCliente(cliente); // Al paciente se le asigna el cliente
                 pacienteRepository.save(paciente);
-                cliente.getPacientes().add(paciente); // Al cliente se le asigna el paciente
+                // cliente.getPacientes().add(paciente); // Al cliente se le asigna el paciente
             }
         
-            clienteRepository.save(cliente);
+            // clienteRepository.save(cliente);
         }
 
     }
