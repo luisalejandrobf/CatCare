@@ -1,6 +1,7 @@
 package com.catcare.project.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Repository.PacienteRepository;
@@ -19,7 +20,10 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente SearchById(Long id) {
-       return  repo.findById(id).get();
+        // Se tuvo que utilizar optional para que JPA no retorne java.util.NoSuchElementException: No value present.
+        // Si es vacio, retorna nulo y el controlador gestiona el error.
+       Optional<Paciente> optionalPaciente = repo.findById(id);
+       return optionalPaciente.orElse(null);
     }
 
     @Override

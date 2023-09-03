@@ -22,7 +22,7 @@ public class PacienteController {
         // Sends mascotas from PacienteService to thymeleaf for the HTML to fetch
         model.addAttribute("pacientes", pacienteService.SearchAll());
 
-        return "showPacientes";
+        return "/General/showPacientes";
     }
 
     // http://localhost:8090/catcare/pacientes/find?id=1
@@ -32,9 +32,12 @@ public class PacienteController {
         Paciente paciente = pacienteService.SearchById(id);
         if (paciente != null) {
             model.addAttribute("paciente", paciente);
+        } else {
+            // Throw error
+            throw new PacienteNotFoundException(id);
         }
 
-        return "showPaciente";
+        return "/General/showPaciente";
     }
 
 
@@ -49,7 +52,7 @@ public class PacienteController {
         // Recordar añadir <input th:field="${paciente.id}" type="hidden"> para evitar tener un ID nulo.
 
         model.addAttribute("paciente", paciente);
-        return "crearPaciente";
+        return "/General/crearPaciente";
     }
 
     // Post para agregar Paciente
@@ -72,7 +75,7 @@ public class PacienteController {
     public String actualizarPaciente(@PathVariable("id") Long id, Model model) {
         Paciente paciente = pacienteService.SearchById(id);
         model.addAttribute("paciente", paciente);
-        return "actualizarPaciente";
+        return "/General/actualizarPaciente";
     }
 
     // Post para Update del cliente. Se accede con el ID del Paciente.

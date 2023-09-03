@@ -35,13 +35,13 @@ public class LandingController {
     @GetMapping("/signin/{cedula}")
     public String searchByCedula(@PathVariable String cedula) {
         Cliente cliente = clienteService.SearchByCedula(cedula);
-        Long clientId = cliente.getId();
         String resp;
     
         if (cliente != null) {
+            Long clientId = cliente.getId();
             return "redirect:/catcare/clientes/mascotas/" + clientId; // Lleva a ver las mascotas del cliente con su ID.
         } else {
-            resp = "pagina_error_login";
+            resp = "/Error/pagina_error_login";
         }
     
         return resp;

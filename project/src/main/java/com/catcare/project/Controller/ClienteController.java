@@ -28,7 +28,7 @@ public class ClienteController {
         // Sends clientes from ClienteService to thymeleaf for the HTML to fetch
         model.addAttribute("clientes", clienteService.SearchAll());
 
-        return "showClientes";
+        return "/General/showClientes";
     }
 
     // http://localhost:8090/catcare/clientes/mascotas/1
@@ -40,9 +40,9 @@ public class ClienteController {
             List<Paciente> mascotas = cliente.getPacientes();
             model.addAttribute("cliente", cliente);
             model.addAttribute("pacientes", mascotas);
-            return "showPacientesDeUnCliente";
+            return "/Cliente/showPacientesDeUnCliente";
         } else {
-            return "error"; // TO-DO Pagina de error.
+            return "/Error/errorPage"; // TO-DO Pagina de error.
         }
     }
 
@@ -54,11 +54,11 @@ public class ClienteController {
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
         } else {
-            // Throw errorthrow new ClienteNotFoundException(id);
-            
+            // Throw error
+            throw new ClienteNotFoundException(id);
         }
 
-        return "showCliente";
+        return "/General/showCliente";
     }
 
 
@@ -73,7 +73,7 @@ public class ClienteController {
         // Recordar añadir <input th:field="${cliente.id}" type="hidden"> para evitar tener un ID nulo.
 
         model.addAttribute("cliente", cliente);
-        return "crearCliente";
+        return "/General/crearCliente";
     }
 
     // Post para agregar Cliente
@@ -95,7 +95,7 @@ public class ClienteController {
     public String actualizarCliente(@PathVariable("id") Long id, Model model) {
         Cliente cliente = clienteService.SearchById(id);
         model.addAttribute("cliente", cliente);
-        return "actualizarCliente";
+        return "/General/actualizarCliente";
     }
 
     // Post para Update del cliente. Se accede con el ID del Cliente.

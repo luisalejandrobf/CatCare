@@ -1,17 +1,17 @@
 package com.catcare.project.Controller.Error;
 
 public class PacienteNotFoundException extends RuntimeException {
-    private int id;
+    private Long id;
 
-    public PacienteNotFoundException(int id) {
+    public PacienteNotFoundException(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
