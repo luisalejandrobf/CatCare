@@ -142,7 +142,7 @@ li {
     position: absolute;
     transition: 0.5s ease;
     margin: 0 auto;
-    top: 20%;
+    top: 10%;
 }
 
 .swiper-slide .text-content .title {
@@ -516,6 +516,7 @@ ul {
 }
 
 
+
 /*--------------------------------------------- Bordes de las imágenes  --------------------------------------------- */
 
 .rounded-image {
@@ -589,6 +590,10 @@ ul {
 .pet-name {
     font-size: 32px;
     color: rgba(35, 89, 28, 0.82);
+}
+
+.action-link {
+    margin-right: 10px; /* Puedes ajustar el valor del margen según tus preferencias */
 }
 
 

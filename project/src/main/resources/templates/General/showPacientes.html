@@ -8,7 +8,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CatCare</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Css principal  -->
     <link href="/css/style.css" rel="stylesheet">
@@ -41,8 +42,8 @@
 
     <div>
         <ul class="navegacion-indice">
-            <li><a class="nav-link nav-link-ltr" href="/catcare/clientes/all" style="color: #000000">CLIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="/catcare/pacientes/all" style="color: #00aa39">PACIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/clientes/all}" style="color: #000000">CLIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/pacientes/all}" style="color: #00aa39">PACIENTES</a></li>
             <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
             <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
         </ul>
@@ -54,7 +55,7 @@
 
     <div class="name__page" id="logo">
         <i> <img src="/images/CatCareIcon.png" height="30rem" style="cursor: pointer"> </i>
-        <h4> <img src="/images/CatCareLogo.png" height="30rem"></h4>
+        <h4><img src="/images/CatCareLogo.png" height="30rem"></h4>
     </div>
 
     <div class="options__menu">
@@ -79,8 +80,6 @@
                 <h4>Registrar Paciente</h4>
             </div>
         </a>
-
-
 
 
     </div>
@@ -110,8 +109,8 @@
                 <tbody>
                 <tr th:each="paciente : ${pacientes}">
                     <!-- <td th:text="${paciente.id}"></td>  -->
-                    <td class="styled-table_pet-name">
-                        <a class="btn btn-success btnMargin" th:href="@{/catcare/pacientes/find(id=${paciente.id})}" th:text="${paciente.nombre}"></a>
+                    <td class="styled-table_pet-name"
+                        th:text="${paciente.nombre}">
                     </td>
                     <td th:text="${paciente.raza}"></td>
                     <td th:text="${paciente.edad}"></td>
@@ -121,9 +120,15 @@
                     <td th:text="${paciente != null and paciente.cliente != null ? paciente.cliente.id : 'Sin dueño registrado'}"></td>
                     <td class="btnHorizontal">
                         <div class="button-container">
-                        <!-- Uso de bootstrap -->
-                        <a class="btn btn-info btnMargin" th:href="@{/catcare/pacientes/update/{id}(id=${paciente.id})}">Modificar</a>
-                        <a class="btn btn-danger btnMargin" th:href="@{/catcare/pacientes/delete/{id}(id=${paciente.id})}">Eliminar</a>
+                            <!-- Uso de bootstrap -->
+                            <a class="action-link text-success" th:href="@{/catcare/pacientes/find(id=${paciente.id})}"><i
+                                    class="fas fa-eye"></i> Visualizar</a>
+                            <a class="action-link"
+                               th:href="@{/catcare/pacientes/update/{id}(id=${paciente.id})}"><i
+                                    class="fas fa-edit"></i> Modificar</a>
+                            <a class="action-link text-danger"
+                               th:href="@{/catcare/pacientes/delete/{id}(id=${paciente.id})}"><i
+                                    class="fas fa-trash-alt"></i> Eliminar</a>
                         </div>
                     </td>
                 </tr>
@@ -132,7 +137,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- Ultima seccion -- Pie de Pagina(footer)  -->
@@ -179,7 +183,6 @@
         </div>
     </footer>
 </div>
-
 
 
 <script>

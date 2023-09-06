@@ -41,8 +41,8 @@
 
     <div>
         <ul class="navegacion-indice">
-            <li><a class="nav-link nav-link-ltr" href="/catcare/clientes/all" style="color: #00aa39">CLIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="/catcare/pacientes/all" style="color: #000000">PACIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/clientes/all}" style="color: #00aa39">CLIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/pacientes/all}" style="color: #000000">PACIENTES</a></li>
             <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
             <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
         </ul>
@@ -53,7 +53,7 @@
 <div class="menu__side" id="menu_side">
 
     <div class="name__page" id="logo">
-        <i> <img src="/images/UserIcon.png" alt="UserPNG" height="30rem" style="cursor: pointer"> </i>
+        <i> <img src="/images/CatCareIcon.png" height="30rem" style="cursor: pointer"> </i>
         <h4> <img src="/images/CatCareLogo.png" height="30rem"></h4>
     </div>
 
@@ -107,17 +107,22 @@
                 <tbody>
                 <tr th:each="cliente : ${clientes}">
                     <!-- <td th:text="${cliente.id}"></td>  -->
-                    <td class="styled-table_pet-name">
-                        <a class="btn btn-success btnMargin" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
-                    </td>
+                    <td class="styled-table_pet-name" th:text="${cliente.nombre}"></td>
                     <td th:text="${cliente.cedula}"></td>
                     <td th:text="${cliente.correo}"></td>
                     <td th:text="${cliente.celular}"></td>
                     <td class="btnHorizontal">
                         <div class="button-container">
                         <!-- Uso de bootstrap -->
-                        <a class="btn btn-info btnMargin" th:href="@{/catcare/clientes/update/{id}(id=${cliente.id})}">Modificar</a>
-                        <a class="btn btn-danger btnMargin" th:href="@{/catcare/clientes/delete/{id}(id=${cliente.id})}">Eliminar</a>
+                            <a class="action-link text-success" th:href="@{/catcare/clientes/find(id=${cliente.id})}">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </a>
+                            <a class="action-link" th:href="@{/catcare/clientes/update/{id}(id=${cliente.id})}">
+                                <i class="fas fa-edit"></i> Modificar
+                            </a>
+                            <a class="action-link text-danger" th:href="@{/catcare/clientes/delete/{id}(id=${cliente.id})}">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
                         </div>
                     </td>
                 </tr>

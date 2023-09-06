@@ -344,7 +344,9 @@
         return true;
     }
 
-    const btnCliSignin = document.getElementById("btnCliSignin");
+    const btnCliSignin = document.getElementById("btnCliSignin")
+    const btnVetSignin = document.getElementById("btnVetSignin");
+    const btnAdmSignin = document.getElementById("btnAdmSignin");
 
     const clienteBtn = document.getElementById("clienteBtn");
     const veterinarioBtn = document.getElementById("veterinarioBtn");
@@ -387,7 +389,7 @@
         const contraseña = document.getElementById("VetPassword").value;
         console.warn("cedula : " + cedula);
         if (validarCampos(cedula, contraseña)) {
-            const url = `/catcare/signin`;
+            const url = `/catcare/clientes/all`;
             // Redirecciona a la URL del cliente
             window.location.href = url;
         }
@@ -398,7 +400,7 @@
         const contraseña = document.getElementById("AdmPassword").value;
         console.warn("cedula : " + cedula);
         if (validarCampos(cedula, contraseña)) {
-            const url = `/catcare/signin`;
+            const url = `/catcare/clientes/all`;
             // Redirecciona a la URL del cliente
             window.location.href = url;
         }
