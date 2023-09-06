@@ -42,10 +42,21 @@
 
     <div>
         <ul class="navegacion-indice">
-            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/clientes/all}" style="color: #000000">CLIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/pacientes/all}" style="color: #00aa39">PACIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
-            <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/clientes/all}" style="color: #000000">CLIENTES</a>
+            </li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/pacientes/all}"
+                   style="color: #00aa39">PACIENTES</a></li>
+            <li class="dropdown">
+                <a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL</a>
+                <div class="dropdown-content">
+                    <a th:href="@{/catcare/landing}">
+                        <i class="fas fa-sign-out-alt" ></i>Cerrar Sesión
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-cog" ></i> Configuración
+                    </a>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -74,9 +85,9 @@
             </div>
         </a>
 
-        <a href="http://localhost:8090/catcare/pacientes/add">
+        <a th:href="@{/catcare/pacientes/add}">
             <div class="option">
-                <i class="far fa-file" title="Registrar Paciente"></i>
+                <i class="fas fa-user-plus" title="Registrar Paciente"></i>
                 <h4>Registrar Paciente</h4>
             </div>
         </a>
@@ -236,26 +247,26 @@
 
 
     function filterTable() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("nameFilter");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("patientTable");
-    tr = table.getElementsByTagName("tr");
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("nameFilter");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("patientTable");
+        tr = table.getElementsByTagName("tr");
 
-    for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header row
-        td = tr[i].getElementsByTagName("td")[0]; // Assuming the name is in the first column
+        for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header row
+            td = tr[i].getElementsByTagName("td")[0]; // Assuming the name is in the first column
 
-        if (td) {
-            txtValue = td.textContent || td.innerText;
+            if (td) {
+                txtValue = td.textContent || td.innerText;
 
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
         }
     }
-}
 
 
 </script>

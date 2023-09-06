@@ -43,8 +43,17 @@
         <ul class="navegacion-indice">
             <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/clientes/all}" style="color: #00aa39">CLIENTES</a></li>
             <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/pacientes/all}" style="color: #000000">PACIENTES</a></li>
-            <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
-            <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL </a></li>
+            <li class="dropdown">
+                <a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL</a>
+                <div class="dropdown-content">
+                    <a th:href="@{/catcare/landing}">
+                        <i class="fas fa-sign-out-alt" ></i>Cerrar Sesión
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-cog" ></i> Configuración
+                    </a>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -73,9 +82,9 @@
             </div>
         </a>
 
-        <a href="http://localhost:8090/catcare/clientes/add">
+        <a th:href="@{/catcare/clientes/add}">
             <div class="option">
-                <i class="far fa-file" title="Registrar cliente"></i>
+                <i class="fas fa-user-plus" title="Registrar Cliente"></i>
                 <h4>Registrar Cliente</h4>
             </div>
         </a>

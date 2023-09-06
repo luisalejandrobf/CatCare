@@ -42,8 +42,18 @@
 
     <div>
         <ul class="navegacion-indice">
-            <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #000000">INICIO</a></li>
-            <li><a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">Hola Cliente! </a></li>
+            <li><a class="nav-link nav-link-ltr" href="" style="color: #000000">Mis Mascotas</a></li>
+            <li class="dropdown">
+                <a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">Hola Cliente!</a>
+                <div class="dropdown-content">
+                    <a th:href="@{/catcare/landing}">
+                        <i class="fas fa-sign-out-alt" ></i>Cerrar Sesión
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-cog" ></i> Configuración
+                    </a>
+                </div>
+            </li>
         </ul>
     </div>
 
