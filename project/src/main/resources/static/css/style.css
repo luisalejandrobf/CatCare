@@ -768,9 +768,8 @@ a.selected {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px; /* Aumenta el espacio entre grupos */
-    margin-top: 30px; /* Aumenta el espacio entre grupos */
-    padding: 20px; /* Aumenta el espacio interior */
+    margin-bottom: 20px; /* Aumenta el espacio entre grupos */
+    margin-top: 20px; /* Aumenta el espacio entre grupos */
 }
 
 .form-group label {
