@@ -111,7 +111,7 @@
                 <tr th:each="paciente : ${pacientes}">
                     <!-- <td th:text="${paciente.id}"></td>  -->
                     <td class="styled-table_pet-name">
-                        <a class="green-link" th:href="@{/catcare/pacientes/find(id=${paciente.id})}" th:text="${paciente.nombre}"></a>
+                        <a class="btn btn-success btnMargin" th:href="@{/catcare/pacientes/find(id=${paciente.id})}" th:text="${paciente.nombre}"></a>
                     </td>
                     <td th:text="${paciente.raza}"></td>
                     <td th:text="${paciente.edad}"></td>

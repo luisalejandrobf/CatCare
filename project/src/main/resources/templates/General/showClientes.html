@@ -108,7 +108,7 @@
                 <tr th:each="cliente : ${clientes}">
                     <!-- <td th:text="${cliente.id}"></td>  -->
                     <td class="styled-table_pet-name">
-                        <a class="green-link" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
+                        <a class="btn btn-success btnMargin" th:href="@{/catcare/clientes/find(id=${cliente.id})}" th:text="${cliente.nombre}"></a>
                     </td>
                     <td th:text="${cliente.cedula}"></td>
                     <td th:text="${cliente.correo}"></td>
