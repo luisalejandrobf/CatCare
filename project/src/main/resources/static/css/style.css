@@ -377,7 +377,7 @@ ul {
 }
 
 .footer {
-    background-color: rgba(35, 89, 28, 0.82);
+    background-color: rgb(35, 89, 28);
     padding: 70px 0;
 
 }
@@ -654,7 +654,7 @@ ul {
 .menu__side {
     width: 80px;
     height: 100%;
-    background: rgba(35, 89, 28, 0.82);
+    background: rgb(35, 89, 28);
     position: fixed;
     top: 0;
     left: 0;
@@ -933,9 +933,9 @@ a.selected {
 .search-bar {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 50%;
     max-width: 800px;
-    margin: 0 auto 20px;
+    margin: 0 auto 40px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -947,7 +947,7 @@ a.selected {
 #nameFilter {
     flex-grow: 1;
     padding: 10px;
-    border: 2px solid green;
+    border: 2px  green;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
