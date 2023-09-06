@@ -172,7 +172,7 @@ li {
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--box-shadow);
     margin-left: 10%;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .swiper-slide .text-content .read-btn {
@@ -929,3 +929,34 @@ a.selected {
   }
 
 /*---------------------------------------------  Nuevas correciones del css ------------------------------------*/
+
+/* Estilo para el contenedor de la barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+}
+
+/* Estilo para el campo de búsqueda */
+#nameFilter {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid green;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Estilo para el icono de la lupa */
+.search-icon {
+    color: green;
+    font-size: 20px;
+    margin-right: 10px;
+}

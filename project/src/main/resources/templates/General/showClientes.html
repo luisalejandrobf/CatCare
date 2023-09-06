@@ -93,7 +93,13 @@
     <div class="content_footerStuckToBottom">
         <div class="center-container paciente-basicInfo">
             <h1 class="pet-title">Clientes</h1>
-            <table class="styled-table" border="1">
+
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="nameFilter" placeholder="Filtrar por nombre" onkeyup="filterTable()">
+            </div>
+
+            <table id="clientTable" class="styled-table" border="1">
                 <thead>
                 <tr>
                     <!-- <th>ID</th> -->
@@ -223,6 +229,28 @@
         }
 
     });
+
+    function filterTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("nameFilter");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("clientTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header row
+        td = tr[i].getElementsByTagName("td")[0]; // Assuming the name is in the first column
+
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
 
 </script>
 

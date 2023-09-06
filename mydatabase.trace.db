@@ -1,0 +1,3 @@
+2023-09-06 15:03:26 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]TRATAMIENTO"; expected "TRUNCATE"; SQL statement:
+TRATAMIENTO [42001-214]
