@@ -142,7 +142,7 @@ li {
     position: absolute;
     transition: 0.5s ease;
     margin: 0 auto;
-    top: 25%;
+    top: 20%;
 }
 
 .swiper-slide .text-content .title {
@@ -163,7 +163,7 @@ li {
 }
 
 .swiper-slide .text-content p {
-    max-width: 700px;
+    max-width: 100%;
     background: rgba(255, 255, 255, 0.1);
     text-shadow: var(--text-shadow);
     padding: 20px;
@@ -172,13 +172,14 @@ li {
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--box-shadow);
     margin-left: 10%;
+    font-size: 1.5em;
 }
 
 .swiper-slide .text-content .read-btn {
     border: none;
     outline: none;
     background: #5D9B15D1;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: 500;
     padding: 8px 25px;
     display: inline-block;
@@ -196,7 +197,7 @@ li {
     margin-left: 15%;
 }
 
-/*---------------------------------------------seguda  Seccion-------------------------------------------*/
+/*---------------------------------------------segunda  Seccion-------------------------------------------*/
 
 .seccion-general {
     background-color: #f7f7f7;
@@ -271,7 +272,9 @@ li {
 }
 
 .titulo-sub-contenedor-link:hover {
-    color: #4a8908;
+    color: #67b207;
+    text-decoration: none;
+    cursor: default;
 }
 
 @media (max-width: 767px) {
@@ -485,6 +488,7 @@ ul {
     /* Move the line to the left by half its width to center it */
     bottom: -5px;
 }
+
 
 .nav-link:hover::before {
     width: 80%;
@@ -764,14 +768,15 @@ a.selected {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 30px; /* Aumenta el espacio entre grupos */
+    margin-top: 30px; /* Aumenta el espacio entre grupos */
+    padding: 20px; /* Aumenta el espacio interior */
 }
 
 .form-group label {
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
+    margin: 15px;
 }
 
 .form-control {
@@ -851,7 +856,7 @@ a.selected {
     left: 50%;
     transform: translate(-50%, -50%);
     background: #ffffff;
-    padding: 20px;
+    padding: 50px 75px 50px 75px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     display: none;
@@ -862,6 +867,7 @@ a.selected {
     /* Add visibility transition */
     border-radius: 10px;
     /* Add rounded borders */
+
 }
 
 /* Estilos para la pagina de error siempre activo */
@@ -898,6 +904,7 @@ a.selected {
 
 
 
+
 /*---------------------------------------------  Estilos Imagenes de gatos ---------------------------------- */
 
 .centered-image {
@@ -916,3 +923,6 @@ a.selected {
     border: 5px solid green;
     box-sizing: border-box;
   }
+
+/*---------------------------------------------  Nuevas correciones del css ------------------------------------*/
+
