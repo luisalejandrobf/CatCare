@@ -1,5 +1,9 @@
 package com.catcare.project.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -37,7 +41,17 @@ public class Paciente {
     }
 
 
+    // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE)
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
 
 
     public Paciente(String nombre, String raza, int edad, double peso, String enfermedad, String estado,
