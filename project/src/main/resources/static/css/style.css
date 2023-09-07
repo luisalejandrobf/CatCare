@@ -377,9 +377,8 @@ ul {
 }
 
 .footer {
-    background-color: rgba(35, 89, 28, 0.82);
+    background-color: rgb(35, 89, 28);
     padding: 70px 0;
-
 }
 
 .footer-subsecciones {
@@ -654,7 +653,7 @@ ul {
 .menu__side {
     width: 80px;
     height: 100%;
-    background: rgba(35, 89, 28, 0.82);
+    background: rgb(35, 89, 28);
     position: fixed;
     top: 0;
     left: 0;

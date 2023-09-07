@@ -134,7 +134,15 @@
                     <td th:text="${paciente.peso}"></td>
                     <td th:text="${paciente.enfermedad}"></td>
                     <td th:text="${paciente.estado}"></td>
-                    <td th:text="${paciente != null and paciente.cliente != null ? paciente.cliente.id : 'Sin dueño registrado'}"></td>
+                    <td>
+                        <th:block th:if="${paciente != null and paciente.cliente != null}">
+                          <a th:href="@{'http://localhost:8090/catcare/clientes/find?id=' + ${paciente.cliente.id}}"
+                             class="btn btn-success">
+                            <span th:text="${paciente.cliente.nombre}"></span>
+                          </a>
+                        </th:block>
+                        <span th:unless="${paciente != null and paciente.cliente != null}">Sin dueño registrado</span>
+                    </td>  
                     <td class="btnHorizontal">
                         <div class="button-container">
                             <!-- Uso de bootstrap -->
