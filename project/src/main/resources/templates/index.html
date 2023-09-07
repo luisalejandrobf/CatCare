@@ -390,7 +390,7 @@
         const contraseña = document.getElementById("VetPassword").value;
         console.warn("cedula : " + cedula);
         if (validarCampos(cedula, contraseña)) {
-            const url = `/catcare/clientes/all`;
+            const url = `/catcare/pacientes/all`;
             // Redirecciona a la URL del cliente
             window.location.href = url;
         }

@@ -105,7 +105,7 @@
 
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" id="nameFilter" placeholder="Filtrar por nombre" onkeyup="filterTable()">
+                <input type="text" id="nameFilter" placeholder="Filtrar por cédula" onkeyup="filterTable()">
             </div>
 
             <table id="clientTable" class="styled-table" border="1">
@@ -247,7 +247,7 @@
     tr = table.getElementsByTagName("tr");
 
     for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header row
-        td = tr[i].getElementsByTagName("td")[0]; // Assuming the name is in the first column
+        td = tr[i].getElementsByTagName("td")[1]; // Assuming the name is in the first column
 
         if (td) {
             txtValue = td.textContent || td.innerText;

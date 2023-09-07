@@ -379,7 +379,6 @@ ul {
 .footer {
     background-color: rgb(35, 89, 28);
     padding: 70px 0;
-
 }
 
 .footer-subsecciones {
@@ -928,14 +927,14 @@ a.selected {
     box-sizing: border-box;
   }
 
-/*---------------------------------------------  Nuevas correciones del css ------------------------------------*/
-/* Estilo para el contenedor de la barra de búsqueda */
+/*---------------------------------------------  Barra de busqueda ------------------------------------*/
+
 .search-bar {
     display: flex;
     align-items: center;
     width: 50%;
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto 20px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -943,17 +942,15 @@ a.selected {
     padding: 10px;
 }
 
-/* Estilo para el campo de búsqueda */
 #nameFilter {
     flex-grow: 1;
     padding: 10px;
-    border: 2px  green;
+    border: 2px green;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
 }
 
-/* Estilo para el icono de la lupa */
 .search-icon {
     color: green;
     font-size: 20px;
@@ -986,7 +983,6 @@ a.selected {
     margin-right: 5px;
 }
 
-
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -998,8 +994,12 @@ a.selected {
     display: block;
 }
 
-
-
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
+
+
+
+/*---------------------------------------------  Correciones Nuevas ------------------------------------*/
+
+
