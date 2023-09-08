@@ -4,12 +4,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Droga {
@@ -22,10 +24,18 @@ public class Droga {
     private float precio;
 
 
-    // Relacion con Tratamientos
-    @ManyToMany
-    @JoinTable(name="Tratamiento_Droga", joinColumns = @JoinColumn(name="droga_id"), inverseJoinColumns = @JoinColumn(name="tratamiento_id"))
+    // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
+    @OneToMany(mappedBy = "droga", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
 
     public Droga(String nombre, float precio) {
         this.nombre = nombre;

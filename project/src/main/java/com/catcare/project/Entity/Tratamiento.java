@@ -36,18 +36,32 @@ public class Tratamiento {
     }
 
 
-    // Relacion con Drogas
-    @ManyToMany
-    @JoinTable(name="Tratamiento_Droga", joinColumns = @JoinColumn(name="tratamiento_id"), inverseJoinColumns = @JoinColumn(name="droga_id"))
-    private List<Droga> drogas = new ArrayList<>();
+    // Relacion con Droga
+    @ManyToOne
+    private Droga droga;
 
-    // Relacion con Veterinarios
-    @ManyToMany
-    @JoinTable(name="Tratamiento_Veterinario", joinColumns = @JoinColumn(name="tratamiento_id"), inverseJoinColumns = @JoinColumn(name="veterinario_id"))
-    private List<Veterinario> veterinarios = new ArrayList<>();
+    public Droga getDroga() {
+        return droga;
+    }
+
+    public void setDroga(Droga droga) {
+        this.droga = droga;
+    }
 
 
+    // Relacion con Veterinario
+    @ManyToOne
+    private Veterinario veterinario;
 
+    public Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
+    }
+
+    
     
     public Tratamiento(Date fechaDeInicio, String plazo) {
         this.fechaDeInicio = fechaDeInicio;
@@ -75,8 +89,5 @@ public class Tratamiento {
     public void setPlazo(String plazo) {
         Plazo = plazo;
     }
-
-    
-
 
 }
