@@ -3,12 +3,14 @@ package com.catcare.project.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Veterinario {
@@ -18,15 +20,24 @@ public class Veterinario {
     private Long id;
     
     private String cedula;
+    private String nombre;
     private String contrasena;
     private String especialidad;
     private String foto;
     private int numeroAtencionesMedicas;
 
-    // Relacion con Veterinarios
-    @ManyToMany
-    @JoinTable(name="Tratamiento_Veterinario", joinColumns = @JoinColumn(name="veterinario_id"), inverseJoinColumns = @JoinColumn(name="tratamiento_id"))
+    // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
+    @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
 
 
     public Veterinario(String cedula, String contrasena, String especialidad, String foto,
@@ -76,6 +87,14 @@ public class Veterinario {
     }
     public void setNumeroAtencionesMedicas(int numeroAtencionesMedicas) {
         this.numeroAtencionesMedicas = numeroAtencionesMedicas;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     
