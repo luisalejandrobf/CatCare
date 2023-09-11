@@ -129,7 +129,7 @@ public class PacienteController {
         return "redirect:/catcare/clientes/mascotas/{clienteid}";
     }
 
-    // metodo para encontrar mascota de cliente
+    // Metodo para encontrar mascota de cliente
     @GetMapping("/mostrar/{clienteid}/{id}")
     public String mostrarInfoPacienteDeUnCliente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid, Model model) {
         Paciente paciente = pacienteService.SearchById(id);
