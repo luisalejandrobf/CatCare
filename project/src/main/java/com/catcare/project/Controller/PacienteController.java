@@ -69,7 +69,16 @@ public class PacienteController {
     // http://localhost:8090/catcare/pacientes/delete/1
     @GetMapping("/delete/{id}")
     public String eliminarPaciente(@PathVariable("id") Long id) {
-        pacienteService.deleteById(id);
+
+        // Borrado total
+        // pacienteService.deleteById(id);
+
+        // Cambia el estado por Inactivo
+        Paciente paciente = pacienteService.SearchById(id);
+        paciente.setEstado("Inactivo");
+        pacienteService.update(paciente);
+
+
         return "redirect:/catcare/pacientes/all";
     }
 
