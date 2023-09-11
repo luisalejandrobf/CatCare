@@ -20,7 +20,6 @@ public class Tratamiento {
     private Long id;
     
     private Date fechaDeInicio;
-    private String Plazo;
 
 
     // Relacion con Paciente
@@ -61,16 +60,10 @@ public class Tratamiento {
         this.veterinario = veterinario;
     }
 
-    
-    
-    public Tratamiento(Date fechaDeInicio, String plazo) {
-        this.fechaDeInicio = fechaDeInicio;
-        Plazo = plazo;
-    }
+
 
     public Tratamiento() {
     }
-
     public Long getId() {
         return id;
     }
@@ -82,12 +75,6 @@ public class Tratamiento {
     }
     public void setFechaDeInicio(Date fechaDeInicio) {
         this.fechaDeInicio = fechaDeInicio;
-    }
-    public String getPlazo() {
-        return Plazo;
-    }
-    public void setPlazo(String plazo) {
-        Plazo = plazo;
     }
 
 }
