@@ -137,8 +137,8 @@
                 <div class="form-group">
                     <label for="cliente.id">Dueño Actual (ID)</label>
                     <input th:field="*{cliente.id}" th:value="${paciente != null and paciente.cliente != null ? paciente.cliente.id : 'Sin dueño registrado'}" type="text" class="form-control" id="clienteid" placeholder="Sin dueño registrado">
-                    <input th:field="*{cliente}" type="hidden" id="cliente" /> <!-- Se oculta el cliente para volverlo a sacar en el POST -->
-                </div>                
+                    <!-- SOLO PARA PRUEBAS. Si se retira, no funciona el editar cliente. <input th:field="*{cliente}" type="hidden" id="cliente" /> -->  <!-- Se oculta el cliente para volverlo a sacar en el POST -->
+                </div>
                 <button type="submit" class="btn btn-primary">Actualizar Información</button>
             </form>
 
