@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PacienteServiceImpl implements PacienteService {
-    
-    // Autowires from mascota repo
 
     @Autowired
     PacienteRepository repo;
@@ -28,21 +26,25 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Collection<Paciente> SearchAll() {
+        // Obtiene una colección de todos los pacientes.
         return repo.findAll();
     }
 
     @Override
     public void deleteById(Long id) {
+        // Elimina un paciente por su ID.
         repo.deleteById(id);
     }
 
     @Override
     public void update(Paciente paciente) {
+        // Actualiza la información de un paciente en el repositorio.
         repo.save(paciente);
     }
 
     @Override
     public void add(Paciente paciente) {
+        // Agrega un nuevo paciente al repositorio.
         repo.save(paciente);
     }
 

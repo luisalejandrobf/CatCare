@@ -15,31 +15,20 @@ public class Cliente {
 
     @Id
     @GeneratedValue
-    private Long id;
-    
-    private String cedula;
-    private String nombre;
-    private String correo;
-    private String celular;
-    private String foto;
+    private Long id; // Identificador único del cliente
+    private String cedula; // Número de cédula del cliente
+    private String nombre; // Nombre del cliente
+    private String correo; // Correo electrónico del cliente
+    private String celular; // Número de celular del cliente
+    private String foto; // Ruta o enlace a la foto del cliente
 
 
-
-    // Relacion con paciente. Se utiliza borrado en cascada respecto a los pacientes.
+    // Relación con Paciente. Se utiliza borrado en cascada respecto a los pacientes.
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
     private List<Paciente> pacientes = new ArrayList<>();
 
-    public List<Paciente> getPacientes() {
-        return pacientes;
-    }
 
-    public void setPacientes(List<Paciente> pacientes) {
-        this.pacientes = pacientes;
-    }
-
-
-    
-
+    // Constructor que recibe los datos del cliente
     public Cliente(String cedula, String nombre, String correo, String celular, String foto) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -48,10 +37,12 @@ public class Cliente {
         this.foto = foto;
     }
 
+    // Constructor vacío
     public Cliente(){
 
     }
-    
+
+    //Getters y Setters del cliente
     public Long getId() {
         return id;
     }
@@ -88,6 +79,11 @@ public class Cliente {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
+    public void setPacientes(List<Paciente> pacientes) {
+        this.pacientes = pacientes;
+    }
 
 }

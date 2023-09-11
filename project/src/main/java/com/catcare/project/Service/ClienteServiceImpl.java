@@ -33,9 +33,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
      public Cliente SearchByCedula(String cedula) {
-        
+        // Busca un cliente por su número de cédula utilizando el método personalizado findByCedula de repo.
         Logger log = LoggerFactory.getLogger(getClass());
-
         log.info(cedula);
 
         return  repo.findByCedula(cedula);
@@ -45,21 +44,25 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Collection<Cliente> SearchAll() {
+        // Obtiene una colección de todos los clientes almacenados en la base de datos utilizando repo.
         return repo.findAll();
     }
 
     @Override
     public void deleteById(Long id) {
+        // Elimina un cliente de la base de datos por su ID utilizando el método de repo.
         repo.deleteById(id);
     }
 
     @Override
     public void update(Cliente cliente) {
+        // Actualiza los datos de un cliente en la base de datos utilizando el método de repo.
         repo.save(cliente);
     }
 
     @Override
     public void add(Cliente cliente) {
+        // Agrega un nuevo cliente a la base de datos utilizando el método de repo.
         repo.save(cliente);
     }
 

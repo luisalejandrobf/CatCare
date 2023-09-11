@@ -1,6 +1,6 @@
-// Carga despues de que la pagina ya se renderiz
+// Carga despues de que la pagina ya se renderiza
 document.addEventListener("DOMContentLoaded", function () {
-  // slide principal de fotos del landing
+    // Configuración del slider principal de fotos del landing
   var swiper = new Swiper(".bg-slider", {
       slidesPerView: 1,
       spaceBetween: 30,
@@ -15,14 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
       },
   });
 
+    // Cambiar la clase "sticky" del encabezado cuando se desplaza la página
   window.addEventListener("scroll", function () {
       const header = document.querySelector("header");
       header.classList.toggle("sticky", window.scrollY > 0);
   });
 
 
-  // TRANSLUCENT PART
-  // Login
+  // Parte translúcida
+  // Abrir el formulario de inicio de sesión
   const loginLink = document.querySelector(".login");
 
   const blurBackground = document.querySelector(".blur-background");
@@ -35,15 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
       blurBackground.style.visibility = "visible";
       blurBackground.style.display = 'block';
       loginForm.style.display = 'block';      
-      loginForm.style.opacity = "1"; // Show the form gradually
+      loginForm.style.opacity = "1"; // Mostrar el formulario gradualmente
   });
 
-  // Cierra el formulario de inicio de sesión
+  // Cerrar el formulario de inicio de sesión
   closeLoginForm.addEventListener("click", () => {
       blurBackground.style.visibility = "hidden";
       blurBackground.style.display = 'none';
       loginForm.style.display = 'none';      
-      loginForm.style.opacity = "0"; // Hide the form gradually
+      loginForm.style.opacity = "0"; // Ocultar el formulario gradualmente
   });
 
 });

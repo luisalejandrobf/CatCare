@@ -9,21 +9,23 @@ public class Administrador {
     
     @Id
     @GeneratedValue
-    private Long id;
+    private Long id; // Identificador único del administrador
     
-    private String usuario;
-    private String contrasena;
+    private String usuario; // Nombre de usuario del administrador
+    private String contrasena; // Contraseña del administrador
 
 
+    // Constructor que recibe el nombre de usuario y la contraseña
     public Administrador(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
 
+    // Constructor vacío
     public Administrador() {
     }
 
-
+    // Getters y Setters del administrador
     public Long getId() {
         return id;
     }
@@ -42,7 +44,5 @@ public class Administrador {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
-    
 
 }

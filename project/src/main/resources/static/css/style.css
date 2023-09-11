@@ -1,4 +1,4 @@
-/*---------------------------------------------variables css--------------------------------------------- */
+/*---------------------------------------------------------variables css--------------------------------------------- */
 :root {
 
     --text-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1);
@@ -6,7 +6,7 @@
 
 }
 
-/*---------------------------------------------css principal---------------------------------------------*/
+/*--------------------------------------------------------diseño principal-----------------------------------------------*/
 * {
     margin: 0;
     padding: 0;
@@ -35,7 +35,7 @@ body {
 }
 
 
-/*---------------------------------------------Header y barra de navegacion-------------------------------------------*/
+/*-------------------------------------Header y barra de navegacion del langing---------------------------------------*/
 header {
     position: fixed;
     top: 0;
@@ -105,7 +105,7 @@ li {
     transition: 0.5s ease;
 }
 
-/*---------------------------------------------Primera Seccion-------------------------------------------*/
+/*---------------------------------------------Primera Seccion del landing--------------------------------------------*/
 
 .inicio {
     min-height: 100vh;
@@ -197,7 +197,7 @@ li {
     margin-left: 15%;
 }
 
-/*---------------------------------------------segunda  Seccion-------------------------------------------*/
+/*----------------------------------------segunda  Seccion del landing -----------------------------------------------*/
 
 .seccion-general {
     background-color: #f7f7f7;
@@ -289,7 +289,7 @@ li {
     }
 }
 
-/*---------------------------------------------Tercera  Seccion-------------------------------------------*/
+/*---------------------------------------------Tercera  Seccion del landing-------------------------------------------*/
 section.equipo {
     background-color: #f7f7f7;
     padding: 80px 0;
@@ -360,7 +360,7 @@ section.equipo {
 }
 
 
-/*---------------------------------------------footer-------------------------------------------*/
+/*----------------------------------------------------footer general--------------------------------------------------*/
 
 .footer-seccion {
     max-width: 1170px;
@@ -458,7 +458,7 @@ ul {
 }
 
 
-/*--------------------------------------------- Barra Desplazable --------------------------------------------- */
+/*-------------------------------------------------- Barra Desplazable --------------------------------------------- */
 
 .nav-link {
     font-weight: bold;
@@ -515,7 +515,6 @@ ul {
 }
 
 
-
 /*--------------------------------------------- Bordes de las imágenes  --------------------------------------------- */
 
 .rounded-image {
@@ -526,7 +525,7 @@ ul {
 }
 
 
-/*--------------------------------------------- Contenido de mascotas (Tablas)  --------------------------------------------- */
+/*------------------------------------------ tablas de pacientes y clientes  --------------------------------------- */
 
 .center-container {
     text-align: center;
@@ -596,7 +595,7 @@ ul {
 }
 
 
-/*--------------------------------------------- Modificaciones del cuerpo para paginas pequeñas donde el footer debe de pegarse al fondo asi no haya contenido, y el header es estatico.  --------------------------------------------- */
+/*-Modificaciones del cuerpo para paginas pequeñas donde el footer debe de pegarse al fondo asi no haya contenido, y el header es estatico.- */
 
 .wrapper_footerStuckToBottom {
     display: flex;
@@ -616,8 +615,7 @@ ul {
 }
 
 
-
-/*--------------------------------------------- Barra Lateral Paginas Futuras----------------- */
+/*---------------------- Barra Lateral en pacientes, clientes, veterianrios adrministrador--------------------------- */
 
 #body-barra-lateral {
     margin-left: 80px;
@@ -764,8 +762,6 @@ a.selected {
 }
 
 
-
-
 /*---------------------------------------------  Estilos para el formulario de crear ---------------------------------- */
 
 .form-group {
@@ -817,7 +813,7 @@ a.selected {
 }
 
 
-/*---------------------------------------------  Estilos adicionales para el formulario de crear y actualizar ---------------------------------- */
+/*------------------  Estilos adicionales para el formulario de crear y actualizar ---------------------------------- */
 
 .button-container {
     display: flex;
@@ -831,7 +827,7 @@ a.selected {
 }
 
 
-/*---------------------------------------------  Estilos del login ---------------------------------- */
+/*----------------------------------------------------- Estilos del login ------------------------------------------- */
 
 
 /* Estilos para el fondo desenfocado */
@@ -906,9 +902,7 @@ a.selected {
 }
 
 
-
-
-/*---------------------------------------------  Estilos Imagenes de gatos ---------------------------------- */
+/*---------------------------------------------  Estilos Imagenes de gatos ------------------------------------------- */
 
 .centered-image {
     margin-top: 40px;
@@ -918,16 +912,16 @@ a.selected {
     align-items: center;
     max-width: 100%;
     max-height: 80vh; /* Tamano fijo sin importar el tamano de entrada */
-  }
+}
 
-  .centered-image img {
+.centered-image img {
     max-width: 100%;
     max-height: 80vh; /* Tamano fijo sin importar el tamano de entrada */
     border: 5px solid green;
     box-sizing: border-box;
-  }
+}
 
-/*---------------------------------------------  Barra de busqueda ------------------------------------*/
+/*---------------------------------------------  Barra de busqueda -----------------------------------------------------*/
 
 .search-bar {
     display: flex;
@@ -999,7 +993,6 @@ a.selected {
 }
 
 
-
-/*---------------------------------------------  Correciones Nuevas ------------------------------------*/
+/*---------------------------------------------  Correciones Nuevas ---------------------------------------------------*/
 
 
