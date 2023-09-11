@@ -50,10 +50,10 @@
                 <a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL</a>
                 <div class="dropdown-content">
                     <a th:href="@{/catcare/landing}">
-                        <i class="fas fa-sign-out-alt" ></i>Cerrar Sesión
+                        <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
                     </a>
                     <a href="#">
-                        <i class="fas fa-cog" ></i> Configuración
+                        <i class="fas fa-cog"></i> Configuración
                     </a>
                 </div>
             </li>
@@ -134,15 +134,16 @@
                     <td th:text="${paciente.peso}"></td>
                     <td th:text="${paciente.enfermedad}"></td>
                     <td th:text="${paciente.estado}"></td>
-                    <td>
+                    <td style="text-align: center; height: 50px; vertical-align: top;">
                         <th:block th:if="${paciente != null and paciente.cliente != null}">
-                          <a th:href="@{'http://localhost:8090/catcare/clientes/find?id=' + ${paciente.cliente.id}}"
-                             class="btn btn-success">
-                            <span th:text="${paciente.cliente.nombre}"></span>
-                          </a>
+                            <a class="action-link text-success"
+                               th:href="@{'http://localhost:8090/catcare/clientes/find?id=' + ${paciente.cliente.id}}">
+                                <i class="fa fa-user" aria-hidden="true" style="display: block;"></i>
+                                <span th:text="${paciente.cliente.nombre}" style="text-decoration: none; white-space: nowrap;"></span>
+                            </a>
                         </th:block>
                         <span th:unless="${paciente != null and paciente.cliente != null}">Sin dueño registrado</span>
-                    </td>  
+                    </td>
                     <td class="btnHorizontal">
                         <div class="button-container">
                             <!-- Uso de bootstrap -->
