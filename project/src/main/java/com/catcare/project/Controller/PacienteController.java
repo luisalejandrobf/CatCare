@@ -91,7 +91,11 @@ public class PacienteController {
     
         return "redirect:/catcare/pacientes/all";
     }
-    
+
+
+
+
+
     
 
     // ESTANDO EN UN PACIENTE (Regresa a la URL de visualizacion de las mascotas del cliente)
@@ -114,6 +118,16 @@ public class PacienteController {
         pacienteService.update(paciente);
     
         return "redirect:/catcare/clientes/mascotas/{clienteid}";
+    }
+
+    // metodo para encontrar mascota de cliente
+    @GetMapping("/mostrar/{clienteid}/{id}")
+    public String mostrarInfoPacienteDeUnCliente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid, Model model) {
+        Paciente paciente = pacienteService.SearchById(id);
+        model.addAttribute("paciente", paciente);
+        model.addAttribute("clienteid", clienteid);
+
+        return "/Cliente/showPacienteDeUnCliente";
     }
 
     // DELETE
