@@ -24,7 +24,6 @@ public class Veterinario {
     private String contrasena;
     private String especialidad;
     private String foto;
-    private int numeroAtencionesMedicas;
 
     // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE)
@@ -40,13 +39,12 @@ public class Veterinario {
 
 
 
-    public Veterinario(String cedula, String contrasena, String especialidad, String foto,
-            int numeroAtencionesMedicas) {
+    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String foto) {      
         this.cedula = cedula;
+        this.nombre = nombre;  
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.foto = foto;
-        this.numeroAtencionesMedicas = numeroAtencionesMedicas;
     }
 
     public Veterinario() {
@@ -64,6 +62,7 @@ public class Veterinario {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
+
     public String getContrasena() {
         return contrasena;
     }
@@ -81,12 +80,6 @@ public class Veterinario {
     }
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-    public int getNumeroAtencionesMedicas() {
-        return numeroAtencionesMedicas;
-    }
-    public void setNumeroAtencionesMedicas(int numeroAtencionesMedicas) {
-        this.numeroAtencionesMedicas = numeroAtencionesMedicas;
     }
 
     public String getNombre() {
