@@ -1,0 +1,53 @@
+<!-- paciente.component.html -->
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1 class="pet-title">Pacientes</h1>
+      <!--
+            <div class="search-bar">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="nameFilter" placeholder="Filtrar por nombre" (keyup)="filterTable()">
+            </div>
+      -->
+      <table id="patientTable" class="styled-table" border="1">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Raza</th>
+          <th>Edad</th>
+          <th>Peso</th>
+          <th>Enfermedad</th>
+          <th>Estado</th>
+          <th>Dueño</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let paciente of pacienteLista">
+          <td class="styled-table_pet-name">{{ paciente.nombre }}</td>
+          <td>{{ paciente.raza }}</td>
+          <td>{{ paciente.edad }}</td>
+          <td>{{ paciente.peso }}</td>
+          <td>{{ paciente.enfermedad }}</td>
+          <td>{{ paciente.estado }}</td>
+          <td>{{ paciente.clienteNombre }}</td> <!-- Puedes modificar esto según tus necesidades -->
+          <td class="btnHorizontal">
+            <div class="button-container">
+              <!-- tabla-paciente.component.html -->
+              <!-- tabla-paciente.component.html -->
+              <a class="action-link text-success" href="javascript:void(0);" (click)="mostrarInformacion(paciente)"><i class="fas fa-eye"></i> Visualizar</a>
+
+              <!-- tabla-paciente.component.html -->
+              <a class="action-link" href="javascript:void(0);" (click)="manejarModificar(paciente)"><i class="fas fa-edit"></i> Modificar</a>
+
+              <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPaciente(paciente)">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

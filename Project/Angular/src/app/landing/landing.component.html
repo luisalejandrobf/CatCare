@@ -1,0 +1,254 @@
+
+<header>
+  <nav class="navegacion">
+    <img src="/assets/images/CatCareLogo.png" class="logo" width=auto height="70" alt="Logo CatCare">
+    <ul class="navegacion-indice">
+      <li><a class="nav-link nav-link-ltr" href="#Inicio" style="color: #ffffff">INICIO</a></li>
+      <li><a class="nav-link nav-link-ltr" href="#Servicios" style="color: #ffffff">SERVICIOS</a></li>
+      <li><a class="nav-link nav-link-ltr" href="#Nosotros" style="color: #ffffff">NOSOTROS</a></li>
+      <li><a class="nav-link nav-link-ltr" href="#AcercaDe" style="color: #ffffff">ACERCA DE</a></li>
+      <li><a class="nav-link nav-link-ltr login" href="#" style="color: #ce4204">LOG IN </a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Primera seccion -- Inicio  -->
+<section id="Inicio" class="inicio">
+  <div class="swiper bg-slider">
+    <div class=" swiper-wrapper">
+      <article class="swiper-slide" *ngFor="let slide of slides">
+        <img [src]="slide.image" [alt]="slide.alt">
+        <div class="text-content">
+          <h2 class="title">{{slide.title}}</h2>
+          <p>{{slide.description}}</p>
+          <button class="read-btn">Conoce más</button>
+        </div>
+      </article>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
+<!-- Scripts  Incio-->
+<script src="/js/swiper-bundle.min.js"></script>
+<script src="/js/script.js"></script>
+
+<!-- Segunda seccion -- Servicios  -->
+<section id="Servicios" class="seccion-general">
+  <div class="footer-seccion">
+    <div class="section-header">
+      <h2 class="seccion-titulo">Servicios</h2>
+      <h3 class="seccion-subtitulo">Descubre Nuestros <span>Servicios</span></h3>
+      <p class="seccion-texto">Nuestra Plataforma web para clínicas veterinarias ofrece una solución completa y
+        eficiente para optimizar la gestión de su centro. A través de nuestra plataforma, usted podrá tener un
+        control exhaustivo sobre sus pacientes. Además, facilitamos la supervisión del personal, agilizando
+        tareas de asignación y seguimiento. </p>
+    </div>
+    <div class="contenedor-principal">
+      <div class="sub-contenedor" data-aos="zoom-in" data-aos-delay="100">
+        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+        <h4 class="titulo-sub-contenedor"><a href="" class="titulo-sub-contenedor-link">Cuidado
+          Personalizado</a></h4>
+        <p class="texto-sub-contenedor">Seguimiento meticuloso de las historias de
+          salud de sus adorados amigos felinos. </p>
+        <img class="rounded-image"
+             src="https://veterinariadavinci.com.br/blog/wp-content/uploads/2017/07/como-escolher-um-veterinario-de-confianca-para-seu-bichinho.jpg"
+             alt="Servicios Imagen" style="max-width: 100%; height: auto;">
+      </div>
+      <div class="sub-contenedor" data-aos="zoom-in" data-aos-delay="100">
+        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+        <h4 class="titulo-sub-contenedor"><a href="" class="titulo-sub-contenedor-link">Control Práctico</a>
+        </h4>
+        <p class="texto-sub-contenedor">Mantenga un control minucioso de los tratamientos y medicamentos
+          administrados
+          a sus pacientes.</p>
+        <img class="rounded-image"
+             src="https://cdn.euroinnova.edu.es/img/subidasEditor/fotolia_72528520_subscription_monthly_m-1612774711.webp"
+             alt="Servicios Imagen" style="max-width: 100%; height: auto;">
+      </div>
+      <div class="sub-contenedor" data-aos="zoom-in" data-aos-delay="100">
+        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+        <h4 class="titulo-sub-contenedor"><a href="" class="titulo-sub-contenedor-link">Gestión Eficiente</a>
+        </h4>
+        <p class="texto-sub-contenedor">Supervise y coordine a su equipo de profesionales para un funcionamiento
+          óptimo
+          de su clínica.</p>
+        <img class="rounded-image"
+             src="https://s3.nuvemvet.com/blog/wp-content/uploads/2021/11/25111347/pesquisa-e1637849657407.jpg"
+             alt="Servicios Imagen" style="max-width: 100%; height: auto;">
+      </div>
+      <div class="sub-contenedor" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon"><i class="bx bx-file"></i></div>
+        <h4 class="titulo-sub-contenedor"><a href="" class="titulo-sub-contenedor-link">Modernización y
+          Sostenibilidad</a></h4>
+        <p class="texto-sub-contenedor">Diga adiós al registro manual y dé la bienvenida a la era digital.</p>
+        <img class="rounded-image"
+             src="https://img.freepik.com/fotos-premium/equipo-especialistas-medicos-mirando-pantalla-computadora-hablando-sobre-sistema-atencion-medica-tratamiento-fuera-horario-doctor-sosteniendo-tableta-obtener-informacion-mientras-enfermera-apunta-al-monitor_482257-31859.jpg"
+             alt="Servicios Imagen" style="max-width: 100%; height: auto;">
+
+      </div>
+      <div class="sub-contenedor" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon"><i class="bx bx-file"></i></div>
+        <h4 class="titulo-sub-contenedor"><a href="" class="titulo-sub-contenedor-link">Información Instantánea
+          y
+          Actualizada</a>
+        </h4>
+        <p class="texto-sub-contenedor">Acceda a los registros de sus pacientes en tiempo real.</p>
+        <img class="rounded-image"
+             src="https://gestiondeclinicasveterinarias.com/wp-content/uploads/2016/03/software-para-gestion-citas-veterinario.jpg"
+             alt="Servicios Imagen" style="max-width: 100%; height: auto;">
+
+      </div>
+      <div class="sub-contenedor" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon"><i class="bx bx-file"></i></div>
+        <h4 class="titulo-sub-contenedor"><a href="" class="titulo-sub-contenedor-link">Protección Total de los
+          Datos</a></h4>
+        <p class="texto-sub-contenedor">La privacidad de la información de sus pacientes es una
+          prioridad.</p>
+        <img class="rounded-image"
+             src="https://blog.unicep.edu.br/wp-content/uploads/2021/10/o-que-faz-um-veterinario-935x614.jpg"
+             alt="Servicios Imagen" style="max-width: 100%; height: auto;">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tercera Seccion -- Nosotros  -->
+<section id="Nosotros" class="equipo">
+  <div class="footer-seccion">
+    <h2 class="equipo-titulo">Nuestro Equipo de trabajo</h2>
+    <section class="equipo-caracteristicas">
+      <div class="perfil-caracteristica" data-aos="zoom-in" data-aos-delay="100">
+        <div class="perfil-equipo-foto">
+          <img class="imgNoBottomBorder" src="/assets/images/luis-bravo.png" alt="Luis Bravo">
+        </div>
+        <div class="caracteristica-hover">
+          <p class="equipo-texto">Luis Bravo <br> <br>Backend Developer</p>
+        </div>
+      </div>
+
+      <div class="perfil-caracteristica" data-aos="zoom-in" data-aos-delay="200">
+        <div class="perfil-equipo-foto">
+          <img src="/assets/images/ana-ortegon.png" alt="Ana Ortegon">
+        </div>
+        <div class="caracteristica-hover">
+          <p class="equipo-texto">Ana Ortegon <br> <br>Product Manager</p>
+        </div>
+      </div>
+
+      <div class="perfil-caracteristica" data-aos="zoom-in" data-aos-delay="300">
+        <div class="perfil-equipo-foto">
+          <img src="/assets/images/felipe-garcia.png" alt="Felipe Garcia">
+        </div>
+        <div class="caracteristica-hover">
+          <p class="equipo-texto">Felipe Garcia <br> <br>Frontend Developer</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+
+<!-- Ultima seccion -- Pie de Pagina(footer)  -->
+
+<footer class="footer">
+  <div class="footer-seccion">
+    <div class="seccion-vertical">
+      <div class="footer-subsecciones">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="#">Acerca de Nosotros</a></li>
+          <li><a href="#">Nuestros Servicios</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+          <li><a href="#">Programa de Suscriptores</a></li>
+        </ul>
+      </div>
+      <div class="footer-subsecciones">
+        <h4>Obtener ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">PQR's</a></li>
+          <li><a href="#">Contáctenos</a></li>
+          <li><a href="#">Proteccion de Datos</a></li>
+        </ul>
+      </div>
+      <div class="footer-subsecciones">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#">Miembros plus</a></li>
+          <li><a href="#">Cobertura</a></li>
+          <li><a href="#">Opciones de pago</a></li>
+        </ul>
+      </div>
+      <div class="footer-subsecciones">
+        <h4>Síguenos</h4>
+        <div class="redes-sociales">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Hidden Login   -->
+
+
+<div class="blur-background">
+  <div class="login-form">
+
+       <span class="close-login-form">
+            <i class="fas fa-times" style="font-size: 24px; color: red; cursor: pointer; border: 15px"></i>
+       </span>
+
+
+    <h2 class="text-center" style="font-size: 36px;">Inicio de Sesión</h2>
+    <div class="form-group">
+      <button class="btn btn-primary btn-lg" id="clienteBtn" style="font-size: 28px;">Cliente</button>
+      <div id="clienteForm" style="display: none">
+        <input id="CliCedula" type="text" class="form-control form-control-lg" style="font-size: 24px;"
+               placeholder="Cédula"/>
+        <button id="btnCliSignin" class="btn btn-success btn-lg mt-3" style="font-size: 24px;">
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-lg" id="veterinarioBtn" style="font-size: 28px;">
+        Veterinario
+      </button>
+      <div id="veterinarioForm" style="display: none">
+        <input id="VetCedula" type="text" class="form-control form-control-lg" style="font-size: 24px;"
+               placeholder="Cédula"/>
+        <input id="VetPassword" type="password" class="form-control form-control-lg mt-2" style="font-size: 24px;"
+               placeholder="Contraseña"/>
+        <button id="btnVetSignin" class="btn btn-success btn-lg mt-3" style="font-size: 24px;">
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-lg" id="adminBtn" style="font-size: 28px;">
+        Administrador
+      </button>
+      <div id="adminForm" style="display: none">
+        <input id="AdmCedula" type="text" class="form-control form-control-lg" style="font-size: 24px;"
+               placeholder="Cédula"/>
+        <input id="AdmPassword" type="password" class="form-control form-control-lg mt-2" style="font-size: 24px;"
+               placeholder="Contraseña"/>
+        <button id="btnAdmSignin" class="btn btn-success btn-lg mt-3" style="font-size: 24px;">
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,38 @@
+
+<form *ngIf="paciente" (ngSubmit)="enviarFormulario()" style="margin-top: 100px;">
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input [(ngModel)]="paciente.nombre" name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre del gato">
+  </div>
+  <div class="form-group">
+    <label for="raza">Raza</label>
+    <input [(ngModel)]="paciente.raza" name="raza" type="text" class="form-control" id="raza" placeholder="Raza">
+  </div>
+  <div class="form-group">
+    <label for="edad">Edad</label>
+    <input [(ngModel)]="paciente.edad" name="edad" type="text" class="form-control" id="edad" placeholder="Edad">
+  </div>
+  <div class="form-group">
+    <label for="peso">Peso</label>
+    <input [(ngModel)]="paciente.peso" name="peso" type="text" class="form-control" id="peso" placeholder="Peso en KG">
+  </div>
+  <div class="form-group">
+    <label for="enfermedad">Enfermedad</label>
+    <input [(ngModel)]="paciente.enfermedad" name="enfermedad" type="text" class="form-control" id="enfermedad" placeholder="Sin Enfermedad">
+  </div>
+  <div class="form-group">
+    <label for="estado">Estado</label>
+    <input [(ngModel)]="paciente.estado" name="estado" type="text" class="form-control" id="estado" placeholder="Estado">
+  </div>
+  <div class="form-group">
+    <label for="foto">Foto (URL)</label>
+    <input [(ngModel)]="paciente.foto" name="foto" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg">
+  </div>
+  <div class="form-group">
+    <label for="clienteId">Dueño Actual (ID)</label>
+    <input [(ngModel)]="paciente.clienteNombre" name="clienteId" type="text" class="form-control" id="clienteId" placeholder="Sin dueño registrado">
+  </div>
+  <div class="form-group">
+  <button type="submit" class="btn btn-primary">Actualizar Información</button>
+  </div>
+</form>

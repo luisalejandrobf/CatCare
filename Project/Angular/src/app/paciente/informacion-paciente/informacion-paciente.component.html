@@ -1,0 +1,33 @@
+<!-- informacion-paciente.component.html -->
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1 class="pet-title">Paciente: <span class="pet-name">{{paciente?.nombre}}</span></h1>
+      <table class="styled-table" border="1">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Raza</th>
+          <th>Edad</th>
+          <th>Peso (Kg)</th>
+          <th>Enfermedad</th>
+          <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="styled-table_pet-name">{{paciente?.nombre}}</td>
+          <td>{{paciente?.raza}}</td>
+          <td>{{paciente?.edad}}</td>
+          <td>{{paciente?.peso}}</td>
+          <td>{{paciente?.enfermedad}}</td>
+          <td>{{paciente?.estado}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="centered-image">
+        <img src="{{paciente?.foto}}" alt="Foto del Paciente">
+      </div>
+    </div>
+  </div>
+</div>
