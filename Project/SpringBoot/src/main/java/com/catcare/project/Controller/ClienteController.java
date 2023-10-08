@@ -7,6 +7,9 @@ import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Service.ClienteService;
 import com.catcare.project.Service.PacienteService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController // Rest controller
 @RequestMapping("/catcare/clientes")
+@CrossOrigin(origins = "http://localhost:4200") // Permitir realizar peticiones desde angular
 public class ClienteController {
 
     @Autowired
@@ -25,17 +29,16 @@ public class ClienteController {
     //  Envía la lista de clientes desde ClienteService a Thymeleaf para que el HTML pueda acceder a ella.
     //  http://localhost:8090/catcare/clientes/all
     @GetMapping("/all")
-    public String mostrarClientes(Model model) {
-        model.addAttribute("clientes", clienteService.SearchAll());
-
-        // Devuelve la vista llamada "/General/showClientes".
-        return "/General/showClientes";
+    @Operation(summary = "Devuelve todos los clientes")
+    public List<Cliente> mostrarClientes() {
+        return (List<Cliente>) clienteService.SearchAll();
     }
 
 
     // http://localhost:8090/catcare/clientes/mascotas/1
     @GetMapping("/mascotas/{clienteId}")
-    public String mostrarPacientesDeCliente(@PathVariable Long clienteId, Model model) {
+    @Operation(summary = "Devuelve todos los pacientes de un cliente")
+    public List<Paciente> mostrarPacientesDeCliente(@PathVariable Long clienteId) {
         // Busca un cliente por su ID utilizando el servicio clienteService
         Cliente cliente = clienteService.SearchById(clienteId);
 
@@ -44,105 +47,62 @@ public class ClienteController {
             // Si el cliente existe, obtiene la lista de pacientes (mascotas) asociados a ese cliente
             List<Paciente> mascotas = cliente.getPacientes();
 
-            // Agrega el cliente y la lista de pacientes al modelo para que se puedan mostrar en la vista
-            model.addAttribute("cliente", cliente);
-            model.addAttribute("pacientes", mascotas);
-
-            // Devuelve la vista llamada "/Cliente/showPacientesDeUnCliente" para mostrar la lista de pacientes del cliente
-            return "/Cliente/showPacientesDeUnCliente";
+            return mascotas;
         } else {
 
-            // Si no se encontró el cliente, redirige a una página de error (a implementar en el futuro)
-            return "/Error/errorPage";
+            // Si no se encontró el cliente, redirige a una página de error
+            List<Paciente> mascotas = new ArrayList<>();
+            return mascotas;
         }
     }
 
 
     // http://localhost:8090/catcare/clientes/find?id=1
     @GetMapping("/find")
-    public String mostrarInfoClientes(Model model, @RequestParam("id") Long id) {
+    @Operation(summary = "Devuelve un cliente")
+    public Cliente mostrarInfoClientes(@RequestParam("id") Long id) {
         // Busca un cliente por su ID utilizando el servicio clienteService
         Cliente cliente = clienteService.SearchById(id);
 
         // Verifica si se encontró el cliente
         if (cliente != null) {
-            // Si el cliente existe, agrega el cliente al modelo para que se pueda mostrar en la vista
-            model.addAttribute("cliente", cliente);
+
         } else {
-            // Si no se encontró el cliente, lanza una excepción de tipo ClienteNotFoundException
-            throw new ClienteNotFoundException(id);
+            // Si no se encontró el cliente, retornar vacio
+            cliente = new Cliente();
         }
 
-        // Devuelve la vista llamada "/General/showCliente" para mostrar la información del cliente
-        return "/General/showCliente";
+        return cliente;
     }
 
-
-    // http://localhost:8090/catcare/clientes/add
-    @GetMapping("/add")
-    public String mostrarFormularioCrear(Model model) {
-        // Crea un nuevo objeto Cliente con valores predeterminados (cadenas vacías)
-        Cliente cliente = new Cliente("", "", "", "", "");
-
-        // Se Puede asignar un ID calculado aquí (comentado), si se desea
-        // cliente.setId(clienteService.size()+1);
-
-        // Se recomienda añadir un campo oculto para el ID del cliente en el formulario
-        // Recordar añadir <input th:field="${cliente.id}" type="hidden"> para evitar tener un ID nulo.
-
-
-        // Agrega el cliente al modelo para que el formulario pueda acceder a sus datos
-        model.addAttribute("cliente", cliente);
-
-        // Devuelve la vista llamada "/General/crearCliente" para mostrar el formulario de creación de cliente
-        return "/General/crearCliente";
-    }
-
-
+    // El metodo para agregar solo envia a la pagina, se deja unicamente el post.
     // Post para agregar Cliente
+    // http://localhost:8090/catcare/clientes/agregar
     @PostMapping("/agregar")
-    public String agregarCliente(@ModelAttribute("cliente") Cliente cliente) {
+    @Operation(summary = "Agrega un cliente")
+    public void agregarCliente(@RequestBody Cliente cliente) {
         // Llama al servicio clienteService para agregar el cliente a la base de datos
         clienteService.add(cliente);
-
-        // Redirige al usuario a la página que muestra la lista de todos los clientes
-        return "redirect:/catcare/clientes/all";
     }
 
 
     // http://localhost:8090/catcare/clientes/delete/1
-    @GetMapping("/delete/{id}")
-    public String eliminarCliente(@PathVariable("id") Long id) {
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Elimina un cliente")
+    public void eliminarCliente(@PathVariable("id") Long id) {
         // Llama al servicio clienteService para eliminar el cliente con el ID especificado
         clienteService.deleteById(id);
-
-        // Redirige al usuario de regreso a la página que muestra la lista de todos los clientes
-        return "redirect:/catcare/clientes/all";
     }
 
 
-    // http://localhost:8090/catcare/clientes/update/1
-    @GetMapping("/update/{id}")
-    public String actualizarCliente(@PathVariable("id") Long id, Model model) {
-        // Busca un cliente por su ID utilizando el servicio clienteService
-        Cliente cliente = clienteService.SearchById(id);
-
-        // Agrega el cliente al modelo para que se pueda mostrar en el formulario de actualización
-        model.addAttribute("cliente", cliente);
-
-        // Devuelve la vista llamada "/General/actualizarCliente" para mostrar el formulario de actualización
-        return "/General/actualizarCliente";
-    }
-
-
+    // El metodo para actualizar solo envia a la pagina, se deja unicamente el post.
     // Post para Update del cliente. Se accede con el ID del Cliente.
-    @PostMapping("/update/{id}")
-    public String actualizarCliente(@PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
+    // http://localhost:8090/catcare/clientes/update/1
+    @PutMapping("/update/{id}")
+    @Operation(summary = "Actualiza un cliente")
+    public void actualizarCliente(@PathVariable("id") Long id, @RequestBody Cliente cliente) {
         // Llama al servicio clienteService para actualizar los datos del cliente con el ID especificado
         clienteService.update(cliente);
-
-        // Redirige al usuario de regreso a la página que muestra la lista de todos los clientes
-        return "redirect:/catcare/clientes/all";
     }
 
 }

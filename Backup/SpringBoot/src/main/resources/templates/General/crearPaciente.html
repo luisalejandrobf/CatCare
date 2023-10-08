@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CatCare</title>
+
+    <!-- Css principal  -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- Scroll principal  -->
+    <link href="/css/swiper-bundle.min.css" rel="stylesheet">
+
+
+    <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+
+
+    <!-- Iconos  -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="/images/CatCareIcon.png">
+
+
+
+
+</head>
+
+
+<!-- Barra de navegacion  -->
+
+<body id="body-barra-lateral">
+<header class="header-barra-lateral">
+
+    <div>
+        <ul class="navegacion-indice">
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/clientes/all}" style="color: #000000">CLIENTES</a></li>
+            <li><a class="nav-link nav-link-ltr" th:href="@{/catcare/pacientes/all}" style="color: #000000">PACIENTES</a></li>
+            <li class="dropdown">
+                <a class="nav-link nav-link-ltr" href="#" style="color: #ce4204">PERFIL</a>
+                <div class="dropdown-content">
+                    <a th:href="@{/catcare/landing}">
+                        <i class="fas fa-sign-out-alt" ></i>Cerrar Sesión
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-cog" ></i> Configuración
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</header>
+
+<div class="menu__side" id="menu_side">
+
+    <div class="name__page" id="logo">
+        <i> <img src="/images/CatCareIcon.png" height="30rem" style="cursor: pointer"> </i>
+        <h4><img src="/images/CatCareLogo.png" height="30rem"></h4>
+    </div>
+
+    <div class="options__menu">
+
+        <a href="http://localhost:8090/catcare/pacientes/all" >
+            <div class="option">
+                <i class="fas fa-home" title="Inicio Pacientes"></i>
+                <h4>Inicio Pacientes</h4>
+            </div>
+        </a>
+
+        <a href="#" >
+            <div class="option">
+                <i class="far fa-sticky-note" title="Informacion Paciente"></i>
+                <h4>Informacion Paciente</h4>
+            </div>
+        </a>
+
+        <a th:href="@{/catcare/pacientes/add}" class="selected">
+            <div class="option">
+                <i class="fas fa-user-plus" title="Registrar Paciente"></i>
+                <h4>Registrar Paciente</h4>
+            </div>
+        </a>
+
+
+
+
+    </div>
+
+</div>
+
+<!-- formulario de pacientes -->
+
+<div class="wrapper_footerStuckToBottom" >
+    <div class="content_footerStuckToBottom">
+        <div class="center-container paciente-basicInfo">
+            <h1>Registrar Paciente</h1>
+            <form th:object="${paciente}" th:action="@{/catcare/pacientes/agregar}" th:method="post" class="center-container">
+                <div class="form-group">
+                    <label for="nombre" >Nombre</label>
+                    <input th:field="${paciente.nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="raza">Raza</label>
+                    <input th:field="*{raza}" type="text" class="form-control" id="raza" placeholder="Raza">
+                </div>
+                <div class="form-group">
+                    <label for="edad">Edad</label>
+                    <input th:field="*{edad}" type="number" class="form-control" id="edad" placeholder="Edad">
+                </div>
+                <div class="form-group">
+                    <label for="peso">Peso</label>
+                    <input th:field="*{peso}" type="number" class="form-control" id="peso" placeholder="Peso">
+                </div>
+                <div class="form-group">
+                    <label for="enfermedad">Enfermedad</label>
+                    <input th:field="*{enfermedad}" type="text" class="form-control" id="enfermedad" placeholder="Enfermedad">
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <input th:field="*{estado}" type="text" class="form-control" id="estado" placeholder="Estado">
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto (URL)</label>
+                    <input th:field="*{foto}" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="cliente.id">Dueño (ID)</label>
+                    <input th:field="*{cliente.id}" th:value="${paciente != null and paciente.cliente != null ? paciente.cliente.id : 'Sin dueño registrado'}" type="text" class="form-control" id="clienteid" placeholder="Sin dueño registrado">
+                    <!-- SOLO PARA PRUEBAS. Si se retira, no funciona el editar cliente. <input th:field="*{cliente}" type="hidden" id="cliente" /> -->  <!-- Se oculta el cliente para volverlo a sacar en el POST -->
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- Ultima seccion -- Pie de Pagina(footer)  -->
+
+    <footer class="footer">
+        <div class="footer-seccion">
+            <div class="seccion-vertical">
+                <div class="footer-subsecciones">
+                    <h4>Compañía</h4>
+                    <ul>
+                        <li><a href="#">Acerca de Nosotros</a></li>
+                        <li><a href="#">Nuestros Servicios</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Programa de Suscriptores</a></li>
+                    </ul>
+                </div>
+                <div class="footer-subsecciones">
+                    <h4>Obtener ayuda</h4>
+                    <ul>
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                        <li><a href="#">PQR's</a></li>
+                        <li><a href="#">Contáctenos</a></li>
+                        <li><a href="#">Proteccion de Datos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-subsecciones">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="#">Miembros plus</a></li>
+                        <li><a href="#">Cobertura</a></li>
+                        <li><a href="#">Opciones de pago</a></li>
+                    </ul>
+                </div>
+                <div class="footer-subsecciones">
+                    <h4>Síguenos</h4>
+                    <div class="redes-sociales">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<script>
+
+
+    //Ejecutar función en el evento click
+    document.getElementById("logo").addEventListener("click", open_close_menu);
+
+    //Declaramos variables
+    var side_menu = document.getElementById("menu_side");
+    var btn_open = document.getElementById("btn_open");
+    var body = document.getElementById("body-barra-lateral");
+
+    //Evento para mostrar y ocultar menú
+    function open_close_menu() {
+        body.classList.toggle("body_move");
+        side_menu.classList.toggle("menu__side_move");
+    }
+
+    //Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
+
+    if (window.innerWidth < 760) {
+
+        body.classList.add("body_move");
+        side_menu.classList.add("menu__side_move");
+    }
+
+    //Haciendo el menú responsive(adaptable)
+
+    window.addEventListener("resize", function () {
+
+        if (window.innerWidth > 760) {
+
+            body.classList.remove("body_move");
+            side_menu.classList.remove("menu__side_move");
+        }
+
+        if (window.innerWidth < 760) {
+
+            body.classList.add("body_move");
+            side_menu.classList.add("menu__side_move");
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

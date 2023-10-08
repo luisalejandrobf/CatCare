@@ -1,0 +1,94 @@
+.login-box {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 38%;
+}
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form-group {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 20px;
+}
+
+#clienteBtn{
+  width: 250px;
+  background-color: rgb(35, 89, 28);
+  border-color: rgba(37, 91, 30, 0.84);
+}
+
+#clienteBtn:focus {
+  background-color: #00aa39;
+}
+
+#veterinarioBtn{
+  width: 250px;
+  background-color: rgb(35, 89, 28);
+  border-color: rgba(37, 91, 30, 0.84);
+}
+
+#veterinarioBtn:focus {
+  background-color: #00aa39;
+}
+
+#adminBtn{
+  width: 250px;
+  background-color: rgb(35, 89, 28);
+  border-color: rgba(37, 91, 30, 0.84);
+}
+
+#adminBtn:focus {
+  background-color: #00aa39;
+}
+
+#CliCedula{
+  margin-top: 10px;
+}
+
+#VetCedula{
+  margin-top: 10px;
+}
+
+#AdmCedula{
+  margin-top: 10px;
+}
+
+#btnCliSignin{
+  background-color: rgb(197, 76, 6);
+  border-color: rgb(187, 105, 29);
+}
+
+#btnVetSignin{
+  background-color: rgb(197, 76, 6);
+  border-color: rgb(187, 105, 29);
+}
+
+#btnAdmSignin{
+  background-color: rgb(197, 76, 6);
+  border-color: rgb(187, 105, 29);
+}
+
+#user_no_found{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: rgb(82, 37, 0);
+}
+

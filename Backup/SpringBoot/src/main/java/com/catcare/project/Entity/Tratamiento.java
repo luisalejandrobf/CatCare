@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -24,7 +22,7 @@ public class Tratamiento {
     
     private Date fechaDeInicio;
 
-    @JsonIgnore // Evitar retornar informacion referenciada
+
     // Relacion con Paciente
     @ManyToOne
     private Paciente paciente;
@@ -38,7 +36,6 @@ public class Tratamiento {
     }
 
 
-    @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Droga
     @ManyToOne
     private Droga droga;
@@ -52,7 +49,6 @@ public class Tratamiento {
     }
 
 
-    @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Veterinario
     @ManyToOne
     private Veterinario veterinario;

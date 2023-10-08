@@ -4,8 +4,6 @@ package com.catcare.project.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +23,6 @@ public class Cliente {
     private String foto; // Ruta o enlace a la foto del cliente
 
 
-    @JsonIgnore // Evitar retornar informacion referenciada
     // Relación con Paciente. Se utiliza borrado en cascada respecto a los pacientes.
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
     private List<Paciente> pacientes = new ArrayList<>();

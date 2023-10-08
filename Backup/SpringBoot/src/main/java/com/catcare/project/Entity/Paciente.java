@@ -3,9 +3,6 @@ package com.catcare.project.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +27,7 @@ public class Paciente {
     private String foto;
 
 
-    // @JsonIgnore // Evitar retornar informacion referenciada. Se quiere mostrar la info del cliente relacionado, por eso no se pone.
+    
     // Relacion con Cliente
     @ManyToOne
     private Cliente cliente;
@@ -44,7 +41,6 @@ public class Paciente {
     }
 
 
-    @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();

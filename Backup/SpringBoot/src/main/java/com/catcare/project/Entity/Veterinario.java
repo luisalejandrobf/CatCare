@@ -3,8 +3,6 @@ package com.catcare.project.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +25,6 @@ public class Veterinario {
     private String especialidad;
     private String foto;
 
-    @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();

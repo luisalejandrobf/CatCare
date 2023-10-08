@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +26,6 @@ public class Droga {
     private int unidadesDisponibles;
     private int unidadesVendidas;
 
-    @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
     @OneToMany(mappedBy = "droga", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();
