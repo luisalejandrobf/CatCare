@@ -6,11 +6,13 @@ import {PacienteComponent} from "./paciente/paciente.component";
 import {TablaPacienteComponent} from "./paciente/tabla-paciente/tabla-paciente.component";
 import {BarraLateralPacienteComponent} from "./paciente/barra-lateral-paciente/barra-lateral-paciente.component";
 import {BarraSuperiorPacienteComponent} from "./paciente/barra-superior-paciente/barra-superior-paciente.component";
+import { TestComponentComponent } from './test-component/test-component.component';
 
 
 // Define las rutas de la aplicación
 const routes: Routes = [
   {path: '', component: LandingComponent}, // Ruta raíz
+  { path: 'test', component: TestComponentComponent }, // Ruta de Tests
   {
     path: 'paciente',
     component: PacienteComponent, // Componente principal para la ruta 'paciente'
