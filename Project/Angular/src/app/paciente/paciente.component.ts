@@ -13,6 +13,21 @@ export class PacienteComponent {
   pacienteSeleccionado: Paciente | null = null
   mostrarModificarPaciente = false;
 
+  /*
+
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService) { }
+
+  // Inicializa la lista de pacientes aquí
+  pacienteLista: Paciente[] = []; 
+
+  ngOnInit(): void {
+    this.pacienteService.getAllPacientes().subscribe(pacienteLista => {
+      this.pacienteLista = pacienteLista; // Asigna los datos a pacienteLista
+      console.log('Pacientes:', this.pacienteLista); // Agrega este log para verificar los datos
+    });
+  }
+  */
+
   // Inicializa la lista de pacientes aquí
   pacienteLista: Paciente[] = [ {
     nombre: 'Lucky',

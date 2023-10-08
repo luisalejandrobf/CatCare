@@ -1,3 +1,5 @@
+import { Cliente } from "../cliente/cliente";
+
 export interface Paciente {
   nombre: string;
   raza: string;
