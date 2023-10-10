@@ -23,7 +23,7 @@ export class TestComponentComponent {
     });
 
     // Obtener pacientes de un cliente específico
-    const clienteId = 1;
+    const clienteId = 3;
     this.clienteService.getPacientesByClienteId(clienteId).subscribe(pacientes => {
       console.log('Pacientes del cliente con ID', clienteId, ':', pacientes);
     });
