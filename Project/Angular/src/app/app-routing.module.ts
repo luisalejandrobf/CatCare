@@ -19,11 +19,12 @@ const routes: Routes = [
   {path: 'administrador/clientes', component: AdministradorComponent},
   {path: 'administrador/veterinarios', component: AdministradorComponent},
 
+  {path: 'veterinario/pacientes', component: VeterinarioComponent},
+  {path: 'veterinario/clientes', component: VeterinarioComponent},
 
   {path: 'cliente/pacientes', component: ClienteComponent},
 
   {path: 'test', component: TestComponentComponent}
-
 ];
 
 @NgModule({

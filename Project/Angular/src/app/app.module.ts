@@ -28,6 +28,7 @@ import { ModificarClienteComponent } from './cliente/modificar-cliente/modificar
 import { RegistrarClienteComponent } from './cliente/registrar-cliente/registrar-cliente.component';
 import { TablaClienteComponent } from './cliente/tabla-cliente/tabla-cliente.component';
 import { TablaPacienteClienteComponent } from './cliente/tabla-paciente-cliente/tabla-paciente-cliente.component';
+import { BarraSuperiorVeterinarioComponent } from './veterinario/barra-superior-veterinario/barra-superior-veterinario.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { TablaPacienteClienteComponent } from './cliente/tabla-paciente-cliente/
     RegistrarClienteComponent,
     TablaClienteComponent,
     TablaPacienteClienteComponent,
+    BarraSuperiorVeterinarioComponent,
   ],
   imports: [
     BrowserModule,
