@@ -13,6 +13,7 @@ export class RegistrarPacienteComponent {
 
 
   paciente: Paciente = {
+    id: 0,
     nombre: '',
     raza: '',
     edad: '',

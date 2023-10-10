@@ -1,6 +1,7 @@
 import { Cliente } from "../cliente/cliente";
 
 export interface Paciente {
+  id: number;
   nombre: string;
   raza: string;
   edad: string;

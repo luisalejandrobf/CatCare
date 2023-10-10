@@ -26,13 +26,10 @@ export class TablaPacienteComponent {
   }
 
   eliminarPacientes(paciente: Paciente) {
-    const pacienteIdEliminar = this.pacienteLista.indexOf(paciente);
-    this.pacienteService.eliminarPaciente(pacienteIdEliminar).subscribe(response => {
-      console.log('Respuesta al eliminar paciente con ID', pacienteIdEliminar, ':', response);
+    this.pacienteService.eliminarPaciente(paciente.id).subscribe(response => {
+      console.log('Respuesta al eliminar paciente con ID', paciente.id, ':', response);
+      window.location.reload();
     });
-    if (pacienteIdEliminar > -1) {
-      this.pacienteLista.splice(pacienteIdEliminar, 1);
-    }
   }
 }
 
