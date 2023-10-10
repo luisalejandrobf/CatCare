@@ -1,30 +1,32 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {LandingComponent} from "./landing/landing.component";
-import {AdministradorComponent} from "./administrador/administrador.component";
-import {TestComponentComponent} from "./test-component/test-component.component";
-import {VeterinarioComponent} from "./veterinario/veterinario.component";
-import {ClienteComponent} from "./cliente/cliente.component";
+import { LandingComponent } from "./landing/landing.component";
+import { AdministradorComponent } from "./administrador/administrador.component";
+import { TestComponentComponent } from "./test-component/test-component.component";
+import { VeterinarioComponent } from "./veterinario/veterinario.component";
+import { ClienteComponent } from "./cliente/cliente.component";
+import { TablaClienteComponent } from './cliente/tabla-cliente/tabla-cliente.component';
 
 
 // Define las rutas de la aplicación
 const routes: Routes = [
   // Ruta raíz (ruta del landing page)
-  {path: '', component: LandingComponent},
+  { path: '', component: LandingComponent },
 
   // Ruta para llevar a pagina  principal de administrador
   // Componente principal para la ruta 'administrador'
-  {path: 'administrador/pacientes', component: AdministradorComponent},
-  {path: 'administrador/clientes', component: AdministradorComponent},
-  {path: 'administrador/veterinarios', component: AdministradorComponent},
 
-  {path: 'veterinario/pacientes', component: VeterinarioComponent},
-  {path: 'veterinario/clientes', component: VeterinarioComponent},
+  { path: 'administrador/pacientes', component: AdministradorComponent },
+  { path: 'administrador/clientes', component: AdministradorComponent },
+  { path: 'administrador/veterinarios', component: AdministradorComponent },
 
-  {path: 'cliente/pacientes', component: ClienteComponent},
+  { path: 'veterinario/pacientes', component: VeterinarioComponent },
+  { path: 'veterinario/clientes', component: VeterinarioComponent },
 
-  {path: 'test', component: TestComponentComponent}
+  { path: 'cliente/pacientes', component: ClienteComponent },
+
+  { path: 'test', component: TestComponentComponent }
 ];
 
 @NgModule({

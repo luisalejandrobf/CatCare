@@ -13,7 +13,9 @@ public class CatCare {
     // Used: Devtools, Spring Web, Thymeleaf.
     // VSCode Extensions: Java Ext Pack, Spring Boot Ext Pack, Codeium (Optional)
 
-	// Port used: 8090. Defined in application.properties 
+	// Port used: 8090. Defined in application.properties
+
+    // Este springboot es la version inicial sin Rest. Para Rest, consultar /project
 
     // base url: http://localhost:8090/catcare/landing
 
