@@ -27,15 +27,10 @@ export class TablaClienteComponent {
   }
 
   eliminarClientes(cliente: Cliente) {
-    const clienteIdEliminar = this.clienteLista.indexOf(cliente);
-    console.log(clienteIdEliminar);
-
-    if (clienteIdEliminar > -1) {
-      this.clienteLista.splice(clienteIdEliminar, 1);
-      this.clienteService.eliminarCliente(clienteIdEliminar).subscribe(response => {
-        console.log('Respuesta al eliminar cliente con ID', clienteIdEliminar, ':', response);
-      });
-    }
+    this.clienteService.eliminarCliente(cliente.id).subscribe(response => {
+      console.log('Respuesta al eliminar cliente con ID', cliente.id, ':', response);
+      window.location.reload();
+    });
   }
 
 

@@ -13,6 +13,7 @@ export class RegistrarClienteComponent {
 
 
   cliente: Cliente = {
+    id:0,
     nombre: '',
     cedula: '',
     correo: '',

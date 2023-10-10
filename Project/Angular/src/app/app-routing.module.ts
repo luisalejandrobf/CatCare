@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'administrador/veterinarios', component: AdministradorComponent},
 
 
-  {path: 'cliente/pacientes', component: ClienteComponent},
+  {path: 'cliente/pacientes:cedula', component: ClienteComponent},
 
   {path: 'test', component: TestComponentComponent}
 

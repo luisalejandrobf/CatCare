@@ -21,6 +21,7 @@ export class RegistrarPacienteComponent {
     estado: '',
     foto: '',
     cliente: {
+      id: 0,
       cedula: '',
       nombre: '',
       correo: '',

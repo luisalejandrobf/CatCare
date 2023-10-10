@@ -2,7 +2,7 @@
 <div class="wrapper_footerStuckToBottom">
   <div class="content_footerStuckToBottom">
     <div class="center-container paciente-basicInfo">
-      <h1 class="pet-title">Pacientes</h1>
+      <h1 class="pet-title" style="margin-top: 100px;">Pacientes</h1>
       <!--
             <div class="search-bar">
               <i class="fas fa-search search-icon"></i>
@@ -30,7 +30,9 @@
           <td>{{ paciente.peso }}</td>
           <td>{{ paciente.enfermedad }}</td>
           <td>{{ paciente.estado }}</td>
-          <td>{{ paciente.cliente.nombre}}</td>
+          <td>
+            <button type="button" class="btn btn-success" (click)="informacionCliente(paciente.cliente)">{{ paciente.cliente.nombre }}</button>
+          </td>
           <td class="btnHorizontal">
             <div class="button-container">
               <a class="action-link text-success" href="javascript:void(0);" (click)="informacionPacientes(paciente)"><i class="fas fa-eye"></i> Visualizar</a>

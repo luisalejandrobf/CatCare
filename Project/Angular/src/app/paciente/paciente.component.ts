@@ -70,6 +70,7 @@ export class PacienteComponent implements OnInit{
     console.log('Nuevo paciente añadido:', paciente); // Añade este log
     console.log('Lista de pacientes actualizada:', this.pacienteLista); // Añade este log
     this.mostrarTabla = true; // Muestra la tabla de pacientes
+    window.location.reload();
   }
 
 
