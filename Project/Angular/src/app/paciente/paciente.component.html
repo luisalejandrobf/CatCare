@@ -1,7 +1,5 @@
-<!-- paciente.component.html -->
-<app-barra-superior-paciente></app-barra-superior-paciente>
-<app-barra-lateral-paciente (registrarPaciente)="manejarRegistroPaciente()"></app-barra-lateral-paciente>
+<app-tabla-paciente *ngIf="mostrarTabla" [pacienteLista]="pacienteLista" (verInformacionPaciente)="informacionPaciente($event)" (modificarPaciente)="modificarPacientes($event)"></app-tabla-paciente>
 <app-informacion-paciente *ngIf="mostrarInformacionPaciente" [paciente]="pacienteSeleccionado"></app-informacion-paciente>
-<app-tabla-paciente *ngIf="mostrarTabla" [pacienteLista]="pacienteLista" (verInformacionPaciente)="manejarInformacionPaciente($event)" (modificarPaciente)="manejarModificarPaciente($event)"></app-tabla-paciente>
-<app-formulario-registro-paciente *ngIf="!mostrarTabla && !mostrarInformacionPaciente && !mostrarModificarPaciente" (pacienteRegistrado)="manejarNuevoPaciente($event)"></app-formulario-registro-paciente>
-<app-modificar-paciente *ngIf="mostrarModificarPaciente" [paciente]="pacienteSeleccionado" (pacienteModificado)="manejarPacienteModificado($event)"></app-modificar-paciente>
+<app-modificar-paciente *ngIf="mostrarModificarPaciente" [paciente]="pacienteSeleccionado" (pacienteModificado)="pacienteModificado($event)"></app-modificar-paciente>
+<app-barra-lateral-paciente (registrarPaciente)="registroPaciente()"></app-barra-lateral-paciente>
+<app-registrar-paciente *ngIf="!mostrarTabla && !mostrarInformacionPaciente && !mostrarModificarPaciente" (pacienteRegistrado)="nuevoPaciente($event)"></app-registrar-paciente>

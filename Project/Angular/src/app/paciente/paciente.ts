@@ -8,5 +8,5 @@ export interface Paciente {
   enfermedad?: string;
   estado: string;
   foto?: string;
-  clienteNombre: string;
+  cliente: Cliente
 }

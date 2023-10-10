@@ -1,0 +1,28 @@
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1 class="pet-title">Cliente: <span class="pet-name">{{cliente?.nombre}}</span></h1>
+      <table class="styled-table" border="1">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cedula</th>
+          <th>Correo</th>
+          <th>Celular</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="styled-table_pet-name">{{cliente?.nombre}}</td>
+          <td>{{cliente?.cedula}}</td>
+          <td>{{cliente?.correo}}</td>
+          <td>{{cliente?.celular}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="centered-image">
+        <img src="{{cliente?.foto}}" alt="Foto del Paciente">
+      </div>
+    </div>
+  </div>
+</div>

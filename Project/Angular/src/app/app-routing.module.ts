@@ -2,26 +2,28 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {LandingComponent} from "./landing/landing.component";
-import {PacienteComponent} from "./paciente/paciente.component";
-import {TablaPacienteComponent} from "./paciente/tabla-paciente/tabla-paciente.component";
-import {BarraLateralPacienteComponent} from "./paciente/barra-lateral-paciente/barra-lateral-paciente.component";
-import {BarraSuperiorPacienteComponent} from "./paciente/barra-superior-paciente/barra-superior-paciente.component";
-import { TestComponentComponent } from './test-component/test-component.component';
+import {AdministradorComponent} from "./administrador/administrador.component";
+import {TestComponentComponent} from "./test-component/test-component.component";
+import {VeterinarioComponent} from "./veterinario/veterinario.component";
+import {ClienteComponent} from "./cliente/cliente.component";
 
 
 // Define las rutas de la aplicación
 const routes: Routes = [
-  {path: '', component: LandingComponent}, // Ruta raíz
-  { path: 'test', component: TestComponentComponent }, // Ruta de Tests
-  {
-    path: 'paciente',
-    component: PacienteComponent, // Componente principal para la ruta 'paciente'
-    children: [ // Rutas hijas de 'paciente'
-      {path: 'tabla-paciente', component: TablaPacienteComponent},
-      {path: 'barra-lateral-paciennte', component: BarraLateralPacienteComponent},
-      {path: 'barra-superior-paciente', component: BarraSuperiorPacienteComponent},
-    ]
-  }
+  // Ruta raíz (ruta del landing page)
+  {path: '', component: LandingComponent},
+
+  // Ruta para llevar a pagina  principal de administrador
+  // Componente principal para la ruta 'administrador'
+  {path: 'administrador/pacientes', component: AdministradorComponent},
+  {path: 'administrador/clientes', component: AdministradorComponent},
+  {path: 'administrador/veterinarios', component: AdministradorComponent},
+
+
+  {path: 'cliente/pacientes', component: ClienteComponent},
+
+  {path: 'test', component: TestComponentComponent}
+
 ];
 
 @NgModule({

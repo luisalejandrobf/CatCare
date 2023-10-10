@@ -23,13 +23,13 @@ export class TestComponentComponent {
     });
 
     // Obtener pacientes de un cliente específico
-    const clienteId = 1;
+    const clienteId = 3;
     this.clienteService.getPacientesByClienteId(clienteId).subscribe(pacientes => {
       console.log('Pacientes del cliente con ID', clienteId, ':', pacientes);
     });
 
     // Obtener un cliente por ID
-    const clienteIdConsulta = 2; 
+    const clienteIdConsulta = 2;
     this.clienteService.getClienteById(clienteIdConsulta).subscribe(cliente => {
       console.log('Cliente con ID', clienteIdConsulta, ':', cliente);
     });
@@ -90,7 +90,7 @@ export class TestComponentComponent {
     });
 
     // Eliminar un paciente por ID
-    const pacienteIdEliminar = 6;
+    const pacienteIdEliminar = 1;
     this.pacienteService.eliminarPaciente(pacienteIdEliminar).subscribe(response => {
       console.log('Respuesta al eliminar paciente con ID', pacienteIdEliminar, ':', response);
     });
@@ -122,8 +122,6 @@ export class TestComponentComponent {
     });
 
 
-
-
     // Esperar 2 segundos (2000 milisegundos)
     const tiempoEspera2 = 2000;
 
@@ -141,11 +139,5 @@ export class TestComponentComponent {
     });
 
     }, tiempoEspera2);
-
-
-
   }
-
-
-  
 }

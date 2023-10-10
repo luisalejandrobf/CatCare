@@ -1,13 +1,27 @@
-import { Component, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import {Component, ElementRef, AfterViewInit, Renderer2, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';
+import {Cliente} from "../cliente/cliente";
+import {ClienteService} from "../service/cliente/cliente.service";
+import {PacienteService} from "../service/paciente/paciente.service";
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent  {
+export class LandingComponent implements OnInit{
+
+  clienteLista: Cliente[] = [];
+
+
+  ngOnInit() {
+    //metodo para obtener todos los clientes
+    this.clienteService.getAllClientes().subscribe(clienteLista => {
+      this.clienteLista = clienteLista; // Asigna los datos a clientesLista
+      console.log('Clientes:', this.clienteLista); // Agrega este log para verificar los datos
+    });
+  }
 
   title = 'catcareAngular';
 
@@ -35,7 +49,8 @@ export class LandingComponent  {
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
-    private router: Router
+    private router: Router,
+    private clienteService: ClienteService
   ) {}
 
   ngAfterViewInit() {
@@ -97,18 +112,28 @@ export class LandingComponent  {
     btnCliSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#CliCedula').value;
       const contraseña = '1111'; // Contraseña por defecto. Se usa para que el método no falle.
-      if (this.validarCampos(cedula, contraseña)) {
-        const url = `/catcare/signin/${cedula}`;
-        window.location.href = url;
+      const errorCedula = this.el.nativeElement.querySelector('#errorCedula');
+
+      // Verificar si la cédula coincide con alguna cédula en la lista de clientes
+      const clienteEncontrado = this.clienteLista.find(cliente => cliente.cedula === cedula);
+
+      if (clienteEncontrado) {
+        errorCedula.style.display = 'none'; // Oculta el mensaje de error
+        if (this.validarCampos(cedula, contraseña)) {
+          this.router.navigate(['/cliente/pacientes']); // Navega al componente de PACIENTE
+        }
+      } else {
+        errorCedula.style.display = 'block'; // Muestra el mensaje de error
       }
     });
+
+
 
     btnVetSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;
       const contraseña = this.el.nativeElement.querySelector('#VetPassword').value;
       if (this.validarCampos(cedula, contraseña)) {
-        const url = `/catcare/pacientes/all`;
-        window.location.href = url;
+        this.router.navigate(['/veterinario/pacientes']); // Navega al componente de PACIENTE
       }
     });
 
@@ -116,7 +141,7 @@ export class LandingComponent  {
       const cedula = this.el.nativeElement.querySelector('#AdmCedula').value;
       const contraseña = this.el.nativeElement.querySelector('#AdmPassword').value;
       if (this.validarCampos(cedula, contraseña)) {
-        this.router.navigate(['/paciente']); // Navega al componente de PACIENTE
+        this.router.navigate(['/administrador/pacientes']); // Navega al componente de PACIENTE
       }
     });
 

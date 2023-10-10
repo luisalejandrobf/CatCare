@@ -1,0 +1,42 @@
+<!-- paciente.component.html -->
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1 class="pet-title">Pacientes</h1>
+      <!--
+            <div class="search-bar">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="nameFilter" placeholder="Filtrar por nombre" (keyup)="filterTable()">
+            </div>
+      -->
+      <table id="patientTable" class="styled-table" border="1">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cedula</th>
+          <th>Correo</th>
+          <th>Celular</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cliente of clienteLista">
+          <td class="styled-table_pet-name">{{ cliente.nombre }}</td>
+          <td>{{ cliente.cedula }}</td>
+          <td>{{ cliente.correo }}</td>
+          <td>{{ cliente.celular }}</td>
+          <td class="btnHorizontal">
+            <div class="button-container">
+              <a class="action-link text-success" href="javascript:void(0);" (click)="informacionClientes(cliente)"><i class="fas fa-eye"></i> Visualizar</a>
+              <a class="action-link" href="javascript:void(0);" (click)="modificarClientes(cliente)"><i class="fas fa-edit"></i> Modificar</a>
+              <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarClientes(cliente)">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

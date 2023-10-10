@@ -1,1 +1,15 @@
-<p>cliente works!</p>
+<!-- Si vista es 'pacientes', muestra este bloque -->
+<div *ngIf="vista === 'pacientes'; else otroBloque">
+  <app-barra-superior-cliente ></app-barra-superior-cliente>
+  <app-tabla-paciente-cliente [pacienteClienteLista]="pacienteClienteLista"></app-tabla-paciente-cliente>
+  <app-footer></app-footer>
+</div>
+
+<!-- Bloque 'else' que se mostrará si la condición anterior no se cumple -->
+<ng-template #otroBloque>
+  <app-tabla-cliente *ngIf="mostrarTabla" [clienteLista]="clienteLista" (verInformacionCliente)="informacionCliente($event)" (modificarCliente)="modificarClientes($event)"></app-tabla-cliente>
+  <app-informacion-cliente *ngIf="mostrarInformacionCliente" [cliente]="clienteSeleccionado"></app-informacion-cliente>
+  <app-modificar-cliente *ngIf="mostrarModificarCliente" [cliente]="clienteSeleccionado" (clienteModificado)="clienteModificado($event)"></app-modificar-cliente>
+  <app-barra-lateral-cliente (registrarCliente)="registroCliente()"></app-barra-lateral-cliente>
+  <app-registrar-cliente *ngIf="!mostrarTabla && !mostrarInformacionCliente && !mostrarModificarCliente" (clienteRegistrado)="nuevoCliente($event)"></app-registrar-cliente>
+</ng-template>

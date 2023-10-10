@@ -1,0 +1,32 @@
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1>Registrar Paciente</h1>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="center-container">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input [(ngModel)]="cliente.nombre" name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="cedula">Cedula</label>
+          <input [(ngModel)]="cliente.cedula" name="cedula" type="text" class="form-control" id="cedula" placeholder="Cedula" required>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input [(ngModel)]="cliente.correo" name="correo" type="text" class="form-control" id="correo" placeholder="Correo" required>
+        </div>
+        <div class="form-group">
+          <label for="celular">Celular</label>
+          <input [(ngModel)]="cliente.celular" name="celular" type="text" class="form-control" id="celular" placeholder="Celular" required>
+        </div>
+        <div class="form-group">
+          <label for="foto">Foto (URL)</label>
+          <input [(ngModel)]="cliente.foto" name="foto" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg" required>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>

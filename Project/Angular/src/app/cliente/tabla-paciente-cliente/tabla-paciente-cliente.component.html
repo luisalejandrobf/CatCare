@@ -19,11 +19,10 @@
           <th>Enfermedad</th>
           <th>Estado</th>
           <th>Dueño</th>
-          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let paciente of pacienteLista">
+        <tr *ngFor="let paciente of pacienteClienteLista">
           <td class="styled-table_pet-name">{{ paciente.nombre }}</td>
           <td>{{ paciente.raza }}</td>
           <td>{{ paciente.edad }}</td>
@@ -31,15 +30,6 @@
           <td>{{ paciente.enfermedad }}</td>
           <td>{{ paciente.estado }}</td>
           <td>{{ paciente.cliente.nombre}}</td>
-          <td class="btnHorizontal">
-            <div class="button-container">
-              <a class="action-link text-success" href="javascript:void(0);" (click)="informacionPacientes(paciente)"><i class="fas fa-eye"></i> Visualizar</a>
-              <a class="action-link" href="javascript:void(0);" (click)="modificarPacientes(paciente)"><i class="fas fa-edit"></i> Modificar</a>
-              <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPacientes(paciente)">
-                <i class="fas fa-trash-alt"></i> Eliminar
-              </a>
-            </div>
-          </td>
         </tr>
         </tbody>
       </table>
