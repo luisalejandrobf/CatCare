@@ -14,7 +14,6 @@ export class ClienteComponent implements OnInit {
 
   vista: 'pacientes' | 'clientes' | 'veterinarios' = 'pacientes';
 
-  cedula: string | null = '';
 
   //inicializar componentes para esconder o mostrar
   mostrarTabla = true;
@@ -47,9 +46,7 @@ export class ClienteComponent implements OnInit {
       console.log('Pacientes del cliente con ID', clienteId, ':', pacienteClienteLista);
     });
 
-    // Recuperar el valor del parámetro 'cedula'
-    this.cedula = this.route.snapshot.paramMap.get('cedula');
-    console.log('Cédula recibida:', this.cedula);
+
   }
 
 
