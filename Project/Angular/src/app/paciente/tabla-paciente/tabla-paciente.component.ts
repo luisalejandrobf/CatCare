@@ -1,9 +1,9 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Paciente } from '../paciente';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
+import {Paciente} from '../paciente';
 import {ClienteService} from "../../service/cliente/cliente.service";
 import {PacienteService} from "../../service/paciente/paciente.service";
 import {Cliente} from "../../cliente/cliente";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class TablaPacienteComponent {
 
-  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {}
-
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {
+  }
 
 
   @Input() pacienteLista: Paciente[] = [];
@@ -22,16 +22,11 @@ export class TablaPacienteComponent {
   @Output() modificarPaciente = new EventEmitter<Paciente>();
 
 
-  informacionPacientes(paciente: Paciente) {
-    this.router.navigate(['/administrador/pacientes/info', paciente.id]);
-  }
 
   informacionCliente(cliente: Cliente) {
-    //metodo para recibir el id del cliente y luego redireccionar a un nuevo compoente con ese id
+    this.router.navigate(['/administrador/clientes/info', cliente.id]);
   }
-  modificarPacientes(paciente: Paciente) {
-    this.router.navigate(['/administrador/pacientes/modificar', paciente.id]);
-  }
+
 
   eliminarPacientes(paciente: Paciente) {
     this.pacienteService.eliminarPaciente(paciente.id).subscribe(response => {

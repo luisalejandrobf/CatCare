@@ -18,14 +18,6 @@ export class TablaClienteComponent {
   @Output() modificarCliente = new EventEmitter<Cliente>();
 
 
-  informacionClientes(cliente: Cliente) {
-    this.verInformacionCliente.emit(cliente);
-  }
-
-  modificarClientes(cliente: Cliente) {
-    this.modificarCliente.emit(cliente);
-  }
-
   eliminarClientes(cliente: Cliente) {
     this.clienteService.eliminarCliente(cliente.id).subscribe(response => {
       console.log('Respuesta al eliminar cliente con ID', cliente.id, ':', response);
