@@ -32,7 +32,7 @@ export class ClienteComponent implements OnInit {
     if (currentPath === 'cliente' && idParam && subPath === 'pacientes') {
       this.vista = 'pacientes';
     } else {
-      this.vista = 'clientes'; // o cualquier otro valor por defecto que desees
+      this.vista = 'clientes';
     }
 
     this.clienteService.getAllClientes().subscribe(clienteLista => {

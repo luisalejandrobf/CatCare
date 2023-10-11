@@ -18,6 +18,8 @@ export class AdministradorComponent implements OnInit {
       this.vista = 'clientes';
     } else if (currentPath === 'veterinarios') {
       this.vista = 'veterinarios';
+    } else if (currentPath === 'pacientes') {
+      this.vista = 'pacientes';
     }
   }
 
