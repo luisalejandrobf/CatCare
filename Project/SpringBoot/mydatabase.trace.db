@@ -103,3 +103,18 @@ The connection was not closed by the application and is garbage collected [90018
 2023-10-10 20:09:53 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]CLIENTE"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT"; SQL statement:
 CLIENTE [42001-214]
+2023-10-11 12:07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FOTO CHARACTER VARYING(255)": "'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYP... (5707)"; SQL statement:
+update cliente set cedula=?,celular=?,correo=?,foto=?,nombre=? where id=? [22001-214]
+2023-10-11 12:07:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FOTO CHARACTER VARYING(255)": "'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYP... (5707)"; SQL statement:
+update cliente set cedula=?,celular=?,correo=?,foto=?,nombre=? where id=? [22001-214]
+2023-10-11 12:07:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FOTO CHARACTER VARYING(255)": "'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYP... (5707)"; SQL statement:
+update cliente set cedula=?,celular=?,correo=?,foto=?,nombre=? where id=? [22001-214]
+2023-10-11 12:07:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FOTO CHARACTER VARYING(255)": "'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYP... (5707)"; SQL statement:
+update cliente set cedula=?,celular=?,correo=?,foto=?,nombre=? where id=? [22001-214]
+2023-10-11 12:07:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FOTO CHARACTER VARYING(255)": "'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYP... (5707)"; SQL statement:
+update cliente set cedula=?,celular=?,correo=?,foto=?,nombre=? where id=? [22001-214]

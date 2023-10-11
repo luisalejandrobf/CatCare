@@ -1,10 +1,8 @@
-<div
-  style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-size: 24px;">
-  <p>VETERINARIO WORKS</p>
-
-</div>
-
-
+<app-informacion-veterinario *ngIf="mostrarInformacionVeterinario" [veterinario]="veterinarioSeleccionado"></app-informacion-veterinario>
+<app-tabla-veterinario *ngIf="mostrarTabla" [veterinarioLista]="veterinarioLista" (verInformacionVeterinario)="informacionVeterinario($event)" (modificarVeterinario)="modificarVeterinarios($event)"></app-tabla-veterinario>
+<app-modificar-veterinario *ngIf="mostrarModificarVeterinario" [veterinario]="veterinarioSeleccionado" (veterinarioModificado)="veterinarioModificado($event)"></app-modificar-veterinario>
+<app-barra-lateral-veterinario (registrarVeterinario)="registroVeterinario()"></app-barra-lateral-veterinario>
+<app-registrar-veterinario *ngIf="!mostrarTabla && !mostrarInformacionVeterinario && !mostrarModificarVeterinario" (veterinarioRegistrado)="nuevoVeterinario($event)"></app-registrar-veterinario>
 
 
 

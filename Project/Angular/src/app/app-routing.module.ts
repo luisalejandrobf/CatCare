@@ -13,6 +13,9 @@ import {PacienteComponent} from "./paciente/paciente.component";
 import {InformacionClienteComponent} from "./cliente/informacion-cliente/informacion-cliente.component";
 import {ModificarClienteComponent} from "./cliente/modificar-cliente/modificar-cliente.component";
 import {RegistrarClienteComponent} from "./cliente/registrar-cliente/registrar-cliente.component";
+import {ModificarVeterinarioComponent} from "./veterinario/modificar-veterinario/modificar-veterinario.component";
+import {InformacionVeterinarioComponent} from "./veterinario/informacion-veterinario/informacion-veterinario.component";
+import {RegistrarVeterinarioComponent} from "./veterinario/registrar-veterinario/registrar-veterinario.component";
 
 // Define las rutas de la aplicación
 const routes: Routes = [
@@ -34,7 +37,10 @@ const routes: Routes = [
       {path: 'clientes/modificar/:id', component: ModificarClienteComponent},
       {path: 'clientes/registrar', component: RegistrarClienteComponent},
 
-      {path: 'veterinarios', component: VeterinarioComponent}
+      {path: 'veterinarios', component: VeterinarioComponent},
+      {path: 'veterinarios/info/:id', component: InformacionVeterinarioComponent},
+      {path: 'veterinarios/modificar/:id', component: ModificarVeterinarioComponent},
+      {path: 'veterinarios/registrar', component: RegistrarVeterinarioComponent}
     ]
   },
 

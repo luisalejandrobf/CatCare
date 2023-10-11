@@ -29,6 +29,11 @@ import { RegistrarClienteComponent } from './cliente/registrar-cliente/registrar
 import { TablaClienteComponent } from './cliente/tabla-cliente/tabla-cliente.component';
 import { TablaPacienteClienteComponent } from './cliente/tabla-paciente-cliente/tabla-paciente-cliente.component';
 import { BarraSuperiorVeterinarioComponent } from './veterinario/barra-superior-veterinario/barra-superior-veterinario.component';
+import { InformacionVeterinarioComponent } from './veterinario/informacion-veterinario/informacion-veterinario.component';
+import { TablaVeterinarioComponent } from './veterinario/tabla-veterinario/tabla-veterinario.component';
+import { ModificarVeterinarioComponent } from './veterinario/modificar-veterinario/modificar-veterinario.component';
+import { RegistrarVeterinarioComponent } from './veterinario/registrar-veterinario/registrar-veterinario.component';
+import { BarraLateralVeterinarioComponent } from './veterinario/barra-lateral-veterinario/barra-lateral-veterinario.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +61,11 @@ import { BarraSuperiorVeterinarioComponent } from './veterinario/barra-superior-
     TablaClienteComponent,
     TablaPacienteClienteComponent,
     BarraSuperiorVeterinarioComponent,
+    InformacionVeterinarioComponent,
+    TablaVeterinarioComponent,
+    ModificarVeterinarioComponent,
+    RegistrarVeterinarioComponent,
+    BarraLateralVeterinarioComponent,
   ],
   imports: [
     BrowserModule,

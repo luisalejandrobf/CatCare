@@ -1,0 +1,39 @@
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1 class="pet-title" style="margin-top: 100px;">Veterinarios</h1>
+      <!--
+            <div class="search-bar">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="nameFilter" placeholder="Filtrar por nombre" (keyup)="filterTable()">
+            </div>
+      -->
+      <table id="veterinarioTable" class="styled-table" border="1">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cédula</th>
+          <th>Especialidad</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let veterinario of veterinarioLista">
+          <td class="styled-table_vet-name">{{ veterinario.nombre }}</td>
+          <td>{{ veterinario.cedula }}</td>
+          <td>{{ veterinario.especialidad }}</td>
+          <td class="btnHorizontal">
+            <div class="button-container">
+              <a [routerLink]="['/administrador/veterinarios/info', veterinario.id]" class="action-link text-success"><i class="fas fa-eye"></i> Visualizar</a>
+              <a [routerLink]="['/administrador/veterinarios/modificar', veterinario.id]" class="action-link"><i class="fas fa-edit"></i> Modificar</a>
+              <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarVeterinario(veterinario)">
+              <i class="fas fa-trash-alt"></i> Eliminar
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

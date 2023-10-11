@@ -1,0 +1,26 @@
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1 class="pet-title" style="margin-top: 100px;">Veterinario: <span class="pet-name">{{veterinario?.nombre}}</span></h1>
+      <table class="styled-table" border="1">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cédula</th>
+          <th>Especialidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="styled-table_pet-name">{{veterinario?.nombre}}</td>
+          <td>{{veterinario?.cedula}}</td>
+          <td>{{veterinario?.especialidad}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="centered-image">
+        <img src="{{veterinario?.foto}}" alt="Foto del Veterinario">
+      </div>
+    </div>
+  </div>
+</div>
