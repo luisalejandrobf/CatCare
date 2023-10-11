@@ -20,7 +20,6 @@ public class Veterinario {
     @Id
     @GeneratedValue
     private Long id;
-    
     private String cedula;
     private String nombre;
     private String contrasena;
@@ -28,7 +27,8 @@ public class Veterinario {
     private String foto;
 
     @JsonIgnore // Evitar retornar informacion referenciada
-    // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los Tratamientos.
+    // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los
+    // Tratamientos.
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
@@ -40,28 +40,29 @@ public class Veterinario {
         this.tratamientos = tratamientos;
     }
 
+    public Veterinario() {
+    }
 
-
-    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String foto) {      
+    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String foto) {
         this.cedula = cedula;
-        this.nombre = nombre;  
+        this.nombre = nombre;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.foto = foto;
     }
 
-    public Veterinario() {
-    }
-
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getCedula() {
         return cedula;
     }
+
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
@@ -69,18 +70,23 @@ public class Veterinario {
     public String getContrasena() {
         return contrasena;
     }
+
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
     public String getEspecialidad() {
         return especialidad;
     }
+
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
+
     public String getFoto() {
         return foto;
     }
+
     public void setFoto(String foto) {
         this.foto = foto;
     }
@@ -93,6 +99,4 @@ public class Veterinario {
         this.nombre = nombre;
     }
 
-    
-    
 }
