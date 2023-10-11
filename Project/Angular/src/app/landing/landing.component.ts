@@ -120,12 +120,13 @@ export class LandingComponent implements OnInit{
       if (clienteEncontrado) {
         errorCedula.style.display = 'none'; // Oculta el mensaje de error
         if (this.validarCampos(cedula, contraseña)) {
-          this.router.navigate(['/cliente/pacientes']);// Navega al componente de PACIENTE
+          this.router.navigate([`/cliente/${clienteEncontrado.id}/pacientes`]);
         }
       } else {
         errorCedula.style.display = 'block'; // Muestra el mensaje de error
       }
     });
+
 
 
 

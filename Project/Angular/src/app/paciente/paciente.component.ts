@@ -1,8 +1,9 @@
 // paciente.component.ts
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Paciente} from './paciente';
 import {ClienteService} from "../service/cliente/cliente.service";
 import {PacienteService} from "../service/paciente/paciente.service";
+import {Cliente} from "../cliente/cliente";
 
 @Component({
   selector: 'app-paciente',
@@ -21,7 +22,7 @@ export class PacienteComponent implements OnInit{
   // Inicializacion de la lista de pacientes aquí
   pacienteLista: Paciente[] = [];
 
-  constructor(private clienteService: ClienteService, private pacienteService: PacienteService) {}
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private cdRef: ChangeDetectorRef) {}
 
   //metodo para obtener todos los pacientes
   ngOnInit(): void {
@@ -66,17 +67,23 @@ export class PacienteComponent implements OnInit{
   nuevoPaciente(paciente: Paciente) {
     this.pacienteService.agregarPaciente(paciente).subscribe(response => {
       console.log('Respuesta al agregar paciente:', response);
+      this.actualizarListaPacientes(); // Actualiza la lista de pacientes
     });
-    console.log('Nuevo paciente añadido:', paciente); // Añade este log
-    console.log('Lista de pacientes actualizada:', this.pacienteLista); // Añade este log
-    this.mostrarTabla = true; // Muestra la tabla de pacientes
-    window.location.reload();
   }
+
+  actualizarListaPacientes() {
+    this.pacienteService.getAllPacientes().subscribe(pacienteLista => {
+      this.pacienteLista = pacienteLista;
+      console.log('Pacientes actualizados:', this.pacienteLista);
+    });
+  }
+
 
 
   //metodo para mostrar el formulario de registro de pacientes
   registroPaciente() {
     this.mostrarTabla = false;
   }
+
 
 }

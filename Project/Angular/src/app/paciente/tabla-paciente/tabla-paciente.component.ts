@@ -3,6 +3,8 @@ import { Paciente } from '../paciente';
 import {ClienteService} from "../../service/cliente/cliente.service";
 import {PacienteService} from "../../service/paciente/paciente.service";
 import {Cliente} from "../../cliente/cliente";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tabla-paciente',
@@ -11,7 +13,7 @@ import {Cliente} from "../../cliente/cliente";
 })
 export class TablaPacienteComponent {
 
-  constructor(private clienteService: ClienteService, private pacienteService: PacienteService) {}
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {}
 
 
 
@@ -21,14 +23,14 @@ export class TablaPacienteComponent {
 
 
   informacionPacientes(paciente: Paciente) {
-    this.verInformacionPaciente.emit(paciente);
+    this.router.navigate(['/administrador/pacientes/info', paciente.id]);
   }
 
   informacionCliente(cliente: Cliente) {
     //metodo para recibir el id del cliente y luego redireccionar a un nuevo compoente con ese id
   }
   modificarPacientes(paciente: Paciente) {
-    this.modificarPaciente.emit(paciente);
+    this.router.navigate(['/administrador/pacientes/modificar', paciente.id]);
   }
 
   eliminarPacientes(paciente: Paciente) {

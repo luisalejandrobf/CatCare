@@ -35,8 +35,8 @@
           </td>
           <td class="btnHorizontal">
             <div class="button-container">
-              <a class="action-link text-success" href="javascript:void(0);" (click)="informacionPacientes(paciente)"><i class="fas fa-eye"></i> Visualizar</a>
-              <a class="action-link" href="javascript:void(0);" (click)="modificarPacientes(paciente)"><i class="fas fa-edit"></i> Modificar</a>
+              <a [routerLink]="['/administrador/pacientes/info', paciente.id]" class="action-link text-success"><i class="fas fa-eye"></i> Visualizar</a>
+              <a [routerLink]="['/administrador/pacientes/modificar', paciente.id]" class="action-link"><i class="fas fa-edit"></i> Modificar</a>
               <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPacientes(paciente)">
                 <i class="fas fa-trash-alt"></i> Eliminar
               </a>

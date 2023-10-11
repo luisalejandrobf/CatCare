@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Paciente} from "../../paciente/paciente";
 import {Cliente} from "../cliente";
+import {Router} from "@angular/router";
+import {PacienteService} from "../../service/paciente/paciente.service";
+import {ClienteService} from "../../service/cliente/cliente.service";
 
 @Component({
   selector: 'app-registrar-cliente',
@@ -10,6 +13,8 @@ import {Cliente} from "../cliente";
 export class RegistrarClienteComponent {
 
   @Output() clienteRegistrado = new EventEmitter<Cliente>();
+
+  constructor(private router: Router, private clienteService: ClienteService) { }
 
 
   cliente: Cliente = {
@@ -23,8 +28,10 @@ export class RegistrarClienteComponent {
 
   onSubmit(form: any) {
     if (form.valid) {
-      this.clienteRegistrado.emit(this.cliente);
-      console.log('Evento clienteRegistrado emitido:', this.cliente);
+      this.clienteService.agregarCliente(this.cliente).subscribe((response: any) => {
+        console.log('Respuesta al agregar cliente:', response);
+        this.router.navigate(['/administrador/clientes']); // Redirige a la vista de la tabla de clientes
+      });
     } else {
       alert('Por favor, completa el formulario correctamente.');
     }
