@@ -5,4 +5,5 @@ export interface Veterinario{
   contrasena: string;
   especialidad: string;
   foto?: string;
+  estado: string;
 }

@@ -20,7 +20,8 @@ export class RegistrarVeterinarioComponent {
     nombre: '',
     contrasena: '',
     especialidad: '',
-    foto: ''
+    foto: '',
+    estado: 'Activo'
   };
 
   onSubmit(form: any) {

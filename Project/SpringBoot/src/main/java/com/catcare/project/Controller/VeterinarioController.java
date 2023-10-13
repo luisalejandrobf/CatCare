@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.catcare.project.Entity.Cliente;
+import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Entity.Veterinario;
 import com.catcare.project.Service.VeterinarioService;
 
@@ -17,23 +18,24 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("/catcare/veterinarios")
 @CrossOrigin(origins = "http://localhost:4200") // Permitir realizar peticiones desde angular
 public class VeterinarioController {
-    
+
     @Autowired
     VeterinarioService veterinarioService;
 
-    //  Envía la lista de veterinarios desde VeterinarioService a Thymeleaf para que el HTML pueda acceder a ella.
-     //  http://localhost:8090/catcare/veterinarios/all
+    // Envía la lista de veterinarios desde VeterinarioService a Thymeleaf para que
+    // el HTML pueda acceder a ella.
+    // http://localhost:8090/catcare/veterinarios/all
     @GetMapping("/all")
     @Operation(summary = "Devuelve todos los veterinarios")
     public List<Veterinario> mostrarVeterinarios() {
         return (List<Veterinario>) veterinarioService.SearchAll();
     }
 
-    //http://localhost:8090/catcare/veterinarios/find?id=1
+    // http://localhost:8090/catcare/veterinarios/find?id=1
     @GetMapping("/find")
     @Operation(summary = "Devuelve un veterinario")
     public Veterinario mostrarInfoVeterinarios(@RequestParam("id") Long id) {
-    
+
         // Busca un veterinario por su ID utilizando el servicio veterinarioService
         Veterinario veterinario = veterinarioService.SearchById(id);
 
@@ -52,18 +54,27 @@ public class VeterinarioController {
     @PostMapping("/agregar")
     @Operation(summary = "Agrega un veterinario")
     public void agregarVeterinario(@RequestBody Veterinario veterinario) {
-        // Llama al servicio veterinarioService para agregar el veterinario a la base de datos
+        // Llama al servicio veterinarioService para agregar el veterinario a la base de
+        // datos
         veterinarioService.add(veterinario);
     }
 
     // http://localhost:8090/catcare/veterinarios/delete/1
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Elimina un veterinario")
+    @Operation(summary = "Elimina un veterinario (Cambia su estado a inactivo)")
     public void eliminarVeterinario(@PathVariable("id") Long id) {
         // Llama al servicio veterinarioService para eliminar el veterinario con el ID especificado
-        veterinarioService.deleteById(id);
-    }
+        // veteriarioService.deleteById(id);
 
+        Veterinario veterinario = veterinarioService.SearchById(id);
+
+        // Cambia el estado del veterinario a "Inactivo"
+        veterinario.setEstado("Inactivo");
+
+        // Actualiza el veterinario en la base de datos utilizando el servicio
+        veterinarioService.update(veterinario);
+
+    }
 
     // El metodo para actualizar solo envia a la pagina, se deja unicamente el post.
     // Post para Update del veterinario. Se accede con el ID del Veterinario.
@@ -71,11 +82,9 @@ public class VeterinarioController {
     @PutMapping("/update/{id}")
     @Operation(summary = "Actualiza un veterinario")
     public void actualizarVeterinario(@PathVariable("id") Long id, @RequestBody Veterinario veterinario) {
-        // Llama al servicio veterinarioService para actualizar los datos del veterinario con el ID especificado
+        // Llama al servicio veterinarioService para actualizar los datos del
+        // veterinario con el ID especificado
         veterinarioService.update(veterinario);
     }
-
-
-
 
 }

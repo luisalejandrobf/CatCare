@@ -25,6 +25,7 @@ public class Veterinario {
     private String contrasena;
     private String especialidad;
     private String foto;
+    private String estado;
 
     @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Tratamiento. Se utiliza borrado en cascada respecto a los
@@ -43,12 +44,13 @@ public class Veterinario {
     public Veterinario() {
     }
 
-    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String foto) {
+    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String foto, String estado) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.foto = foto;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -97,6 +99,14 @@ public class Veterinario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

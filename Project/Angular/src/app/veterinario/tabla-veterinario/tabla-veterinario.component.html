@@ -14,6 +14,7 @@
           <th>Nombre</th>
           <th>Cédula</th>
           <th>Especialidad</th>
+          <th>Estado</th>
           <th>Acciones</th>
         </tr>
         </thead>
@@ -22,6 +23,7 @@
           <td class="styled-table_vet-name">{{ veterinario.nombre }}</td>
           <td>{{ veterinario.cedula }}</td>
           <td>{{ veterinario.especialidad }}</td>
+          <td>{{ veterinario.estado }}</td>
           <td class="btnHorizontal">
             <div class="button-container">
               <a [routerLink]="['/administrador/veterinarios/info', veterinario.id]" class="action-link text-success"><i class="fas fa-eye"></i> Visualizar</a>
