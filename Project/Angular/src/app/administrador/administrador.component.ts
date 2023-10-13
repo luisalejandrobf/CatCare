@@ -7,7 +7,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
-  vista: 'pacientes' | 'clientes' | 'veterinarios' = 'pacientes';
+    vista: 'pacientes' | 'clientes' | 'veterinarios' = 'pacientes';
 
 
   constructor(private route: ActivatedRoute) {}

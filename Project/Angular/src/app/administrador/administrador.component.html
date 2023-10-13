@@ -1,19 +1,27 @@
 <div *ngIf="vista === 'pacientes'">
   <app-barra-superior-administrador></app-barra-superior-administrador>
-  <app-barra-lateral-paciente></app-barra-lateral-paciente>
   <router-outlet></router-outlet>
+  <!-- 
+  <app-paciente></app-paciente>
+  -->
   <app-footer></app-footer>
 </div>
 
 <div *ngIf="vista === 'clientes'">
   <app-barra-superior-administrador></app-barra-superior-administrador>
+  <router-outlet></router-outlet>
+  <!-- 
   <app-cliente></app-cliente>
+  -->
   <app-footer></app-footer>
 </div>
 
 <div *ngIf="vista === 'veterinarios'">
   <app-barra-superior-administrador></app-barra-superior-administrador>
+  <router-outlet></router-outlet>
+  <!-- 
   <app-veterinario></app-veterinario>
+  -->
   <app-footer></app-footer>
 </div>
 
