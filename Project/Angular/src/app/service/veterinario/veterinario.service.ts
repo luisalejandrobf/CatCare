@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class VeterinarioService {
 
-  private ROOT_URL = 'http://localhost:8090/catcare/veterinarios'; // Replace with the actual API URL
+  private ROOT_URL = 'http://localhost:8090/catcare/veterinarios';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +29,10 @@ export class VeterinarioService {
 
   actualizarVeterinario(veterinarioId: number, veterinario: any): Observable<any> {
     return this.http.put<any>(`${this.ROOT_URL}/update/${veterinarioId}`, veterinario);
+  }
+
+  getTratamientosByVeterinarioId(veterinarioId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/tratamientos/${veterinarioId}`);
   }
 
 }

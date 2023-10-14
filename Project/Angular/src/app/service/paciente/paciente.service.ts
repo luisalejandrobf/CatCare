@@ -9,7 +9,7 @@ export class PacienteService {
 
   // Generado con ng generate service service/paciente/paciente
 
-  private ROOT_URL = 'http://localhost:8090/catcare/pacientes'; // Replace with the actual API URL
+  private ROOT_URL = 'http://localhost:8090/catcare/pacientes';
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +31,10 @@ export class PacienteService {
 
   actualizarPaciente(pacienteId: number, paciente: any): Observable<any> {
     return this.http.put<any>(`${this.ROOT_URL}/update/${pacienteId}`, paciente);
+  }
+
+  getTratamientosByPacienteId(pacienteId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/tratamientos/${pacienteId}`);
   }
 
 }

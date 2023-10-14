@@ -385,7 +385,7 @@ public class DatabaseInit implements ApplicationRunner {
         List<Long> drogaIds = drogaRepository.findAllIds();
         List<Long> veterinarioIds = veterinarioRepository.findAllIds();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             long pacienteId = pacienteIds.get(random.nextInt(pacienteIds.size()));
             long drogaId = drogaIds.get(random.nextInt(drogaIds.size()));
             long veterinarioId = veterinarioIds.get(random.nextInt(veterinarioIds.size()));
@@ -402,6 +402,23 @@ public class DatabaseInit implements ApplicationRunner {
                 tratamiento.setFechaDeInicio(new java.sql.Date(System.currentTimeMillis())); // Fecha actual como ejemplo
                 tratamientoRepository.save(tratamiento);
             }
+        }
+
+        // Crear Tratamientos para el paciente y veterinario con ID 1 (Tests)
+        if (true) {
+            Paciente paciente = pacienteRepository.findById(1L).orElse(null);
+            Veterinario veterinario = veterinarioRepository.findById(1L).orElse(null);
+            Tratamiento tratamiento = new Tratamiento();
+            tratamiento.setPaciente(paciente);
+            long drogaId = drogaIds.get(random.nextInt(drogaIds.size()));
+            Droga droga = drogaRepository.findById(drogaId).orElse(null);
+            tratamiento.setDroga(droga);
+            tratamiento.setVeterinario(veterinario);
+            tratamiento.setFechaDeInicio(new java.sql.Date(System.currentTimeMillis())); // Current date as an example
+
+            tratamientoRepository.save(tratamiento);
+        } else {
+            // Nothing
         }
 
 
