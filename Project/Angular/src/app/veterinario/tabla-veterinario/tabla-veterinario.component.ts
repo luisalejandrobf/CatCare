@@ -17,9 +17,6 @@ export class TablaVeterinarioComponent {
   @Output() verInformacionVeterinario = new EventEmitter<Veterinario>();
   @Output() modificarVeterinario = new EventEmitter<Veterinario>();
 
-  informacionVeterinario(veterinario: Veterinario) {
-    this.router.navigate(['/administrador/veterinarios/info', veterinario.id]);
-  }
 
   eliminarVeterinario(veterinario: Veterinario) {
     this.veterinarioService.eliminarVeterinario(veterinario.id).subscribe(response => {

@@ -1,0 +1,17 @@
+.big-number {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+.smaller-text {
+  font-size: 0.8em;
+}
+.card-header {
+  background-color: #f7f7f7;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 100px;  /* Margen superior de 100px */
+}

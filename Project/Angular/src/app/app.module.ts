@@ -34,6 +34,7 @@ import { TablaVeterinarioComponent } from './veterinario/tabla-veterinario/tabla
 import { ModificarVeterinarioComponent } from './veterinario/modificar-veterinario/modificar-veterinario.component';
 import { RegistrarVeterinarioComponent } from './veterinario/registrar-veterinario/registrar-veterinario.component';
 import { BarraLateralVeterinarioComponent } from './veterinario/barra-lateral-veterinario/barra-lateral-veterinario.component';
+import { TableroDatosAdministradorComponent } from './administrador/tablero-datos-administrador/tablero-datos-administrador.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { BarraLateralVeterinarioComponent } from './veterinario/barra-lateral-ve
     ModificarVeterinarioComponent,
     RegistrarVeterinarioComponent,
     BarraLateralVeterinarioComponent,
+    TableroDatosAdministradorComponent,
   ],
   imports: [
     BrowserModule,
