@@ -273,6 +273,7 @@ export class TestComponentComponent {
     const administradorIdActualizar = 1;
     const datosAdministradorActualizados =
     {
+      id: "1",
       usuario: "LuisitoActualizado",
       contrasena: "1234"
     };
