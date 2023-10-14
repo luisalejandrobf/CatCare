@@ -14,7 +14,7 @@ public class CatCare {
 	// Port used: 8090. Defined in application.properties 
 
     // base url: http://localhost:8090/catcare/landing
-    // Swagger UI: http://localhost:8090/swagger-ui/index.html
+    // ---> Swagger UI: http://localhost:8090/swagger-ui/index.html
 
 	public static void main(String[] args) {
 		SpringApplication.run(CatCare.class, args);
