@@ -1,5 +1,6 @@
 package com.catcare.project.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
+import com.catcare.project.Entity.Tratamiento;
 import com.catcare.project.Entity.Veterinario;
 import com.catcare.project.Service.VeterinarioService;
 
@@ -85,6 +87,27 @@ public class VeterinarioController {
         // Llama al servicio veterinarioService para actualizar los datos del
         // veterinario con el ID especificado
         veterinarioService.update(veterinario);
+    }
+
+    // http://localhost:8090/catcare/veterinarios/tratamientos/1
+    @GetMapping("/tratamientos/{id}")
+    @Operation(summary = "Devuelve todos los tratamientos aplicados por un veterinario")
+    public List<Tratamiento> mostrarTratamientosDeUnPaciente(@PathVariable("id") Long id) {
+        // Busca un cliente por su ID utilizando el servicio clienteService
+        Veterinario veterinario = veterinarioService.SearchById(id);
+
+        // Verifica si se encontró el cliente
+        if (veterinario != null) {
+            // Si el cliente existe, obtiene la lista de pacientes (mascotas) asociados a ese cliente
+            List<Tratamiento> tratamientos = veterinario.getTratamientos();
+
+            return tratamientos;
+        } else {
+
+            // Si no se encontró el cliente, redirige a una página de error
+            List<Tratamiento> tratamientos = new ArrayList<>();
+            return tratamientos;
+        }
     }
 
 }

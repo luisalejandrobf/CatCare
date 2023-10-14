@@ -24,7 +24,7 @@ public class Tratamiento {
     
     private Date fechaDeInicio;
 
-    @JsonIgnore // Evitar retornar informacion referenciada
+    // @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Paciente
     @ManyToOne
     private Paciente paciente;
@@ -38,7 +38,7 @@ public class Tratamiento {
     }
 
 
-    @JsonIgnore // Evitar retornar informacion referenciada
+    // @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Droga
     @ManyToOne
     private Droga droga;
@@ -52,7 +52,7 @@ public class Tratamiento {
     }
 
 
-    @JsonIgnore // Evitar retornar informacion referenciada
+    // @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Veterinario
     @ManyToOne
     private Veterinario veterinario;

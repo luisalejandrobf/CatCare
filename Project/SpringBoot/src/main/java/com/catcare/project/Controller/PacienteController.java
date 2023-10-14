@@ -3,11 +3,13 @@ package com.catcare.project.Controller;
 import com.catcare.project.Controller.Error.PacienteNotFoundException;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
+import com.catcare.project.Entity.Tratamiento;
 import com.catcare.project.Service.ClienteService;
 import com.catcare.project.Service.PacienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +88,27 @@ public class PacienteController {
     public void actualizarPaciente(@PathVariable("id") Long id, @RequestBody Paciente paciente) {
         // Actualiza el paciente con los datos recibidos del formulario utilizando el servicio pacienteService
         pacienteService.update(paciente);
+    }
+
+    // http://localhost:8090/catcare/pacientes/tratamientos/1
+    @GetMapping("/tratamientos/{id}")
+    @Operation(summary = "Devuelve todos los tratamientos de un paciente")
+    public List<Tratamiento> mostrarTratamientosDeUnPaciente(@PathVariable("id") Long id) {
+        // Busca un cliente por su ID utilizando el servicio clienteService
+        Paciente paciente = pacienteService.SearchById(id);
+
+        // Verifica si se encontró el cliente
+        if (paciente != null) {
+            // Si el cliente existe, obtiene la lista de pacientes (mascotas) asociados a ese cliente
+            List<Tratamiento> tratamientos = paciente.getTratamientos();
+
+            return tratamientos;
+        } else {
+
+            // Si no se encontró el cliente, redirige a una página de error
+            List<Tratamiento> tratamientos = new ArrayList<>();
+            return tratamientos;
+        }
     }
 
 

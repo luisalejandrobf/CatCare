@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
+import com.catcare.project.Repository.AdministradorRepository;
 import com.catcare.project.Repository.ClienteRepository;
 import com.catcare.project.Repository.DrogaRepository;
 import com.catcare.project.Repository.PacienteRepository;
@@ -45,11 +46,26 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     TratamientoRepository tratamientoRepository;
 
+    @Autowired
+    AdministradorRepository administradorRepository;
+
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        // Cargue de medicamentos desde el archivo Excel.
         cargarMedicamentosDesdeExcel();
+
+
+
+        // Inicializacion de administradores
+        administradorRepository.save(new Administrador("LuisBravo", "1234"));
+        administradorRepository.save(new Administrador("FelipeGarcia", "1234"));
+        administradorRepository.save(new Administrador("AnaOrtegon", "1234"));
+        administradorRepository.save(new Administrador("JuanAngarita", "1234"));
+
+
+
         // Inicialización e inserción  de la base de datos con clientes
         clienteRepository.save(new Cliente("12211351234", "Luis Alejandro Bravo Ferreira", "luis.bravof@javeriana.edu.co", "3162858895", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
         clienteRepository.save(new Cliente("231113124523", "Felipe Garcia Castiblanco", "felipe.gar@javeriana.edu.co", "32424234334", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
@@ -151,6 +167,8 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente("78236234234230", "Felipe Ramirez", "Felipe12@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
         clienteRepository.save(new Cliente("234245632476235", "Julia Martinez", "Carolina1212@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
         clienteRepository.save(new Cliente("45253252325235", "Juanita Lopez", "juanitaLp1213@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
+
+
 
         // Inicialización e inserción  de la base de datos con pacientes (mascotas)
         pacienteRepository.save(new Paciente("Max", "Abisinio", 3, 25.5, "Fiebre", "Activo", "https://www.elespectador.com/resizer/lZcP_cqKxjBwScJGInZnNF6Oghc=/arc-anglerfish-arc2-prod-elespectador/public/SQT6VSTKY5ALBBK4QFI22JCWNY.jpg"));
@@ -256,9 +274,7 @@ public class DatabaseInit implements ApplicationRunner {
 
 
 
-        
         // Inicialización e inserción  de la base de datos con veterinarios       
-
         veterinarioRepository.save(new Veterinario("67890123456789", "Luisa Ortega", "k1l2", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         veterinarioRepository.save(new Veterinario("78901234567890", "Miguel Urtado", "m3n4", "Traumatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         veterinarioRepository.save(new Veterinario("89012345678901", "Ana Morales", "o5p6", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
@@ -361,8 +377,8 @@ public class DatabaseInit implements ApplicationRunner {
         veterinarioRepository.save(new Veterinario("78901234567805", "Felipe Francisco Fuentes", "k7l8", "Traumatología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         
 
-        //Inicialización e inserción  de la base de datos con los tratamientos 
 
+        //Inicialización e inserción  de la base de datos con los tratamientos 
         Random random = new Random();
 
         List<Long> pacienteIds = pacienteRepository.findAllIds();
@@ -388,9 +404,10 @@ public class DatabaseInit implements ApplicationRunner {
             }
         }
 
+
+
         // Relacionar clientes con mascotas
-        
-        // Relacionar 30 clientes con 3 pacientes cada uno
+        // Relacionar 25 clientes con 4 pacientes cada uno
         List<Cliente> clientes = clienteRepository.findAll();
         List<Paciente> pacientes = pacienteRepository.findAll();
 
@@ -408,6 +425,9 @@ public class DatabaseInit implements ApplicationRunner {
         }
     }
 
+
+
+    // Cargue de medicamentos del excel
     private void cargarMedicamentosDesdeExcel() throws Exception {
         InputStream is = getClass().getResourceAsStream("/MEDICAMENTOS_VETERINARIA.xlsx");
         Workbook workbook = new XSSFWorkbook(is);
@@ -433,5 +453,7 @@ public class DatabaseInit implements ApplicationRunner {
         drogaRepository.saveAll(drogas); 
         workbook.close();
     }
+
+
     
 }
