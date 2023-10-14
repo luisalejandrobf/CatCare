@@ -5,7 +5,7 @@
       <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="center-container">
         <div class="form-group">
           <label for="cedula">Cédula</label>
-          <input [(ngModel)]="veterinario.cedula" name="cedula" type="text" class="form-control" id="cedula" placeholder="Cédula" required>
+          <input [(ngModel)]="veterinario.cedula" name="cedula" type="number" class="form-control" id="cedula" placeholder="Cédula" required>
         </div>
         <div class="form-group">
           <label for="nombre">Nombre</label>
