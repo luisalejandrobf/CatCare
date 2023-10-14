@@ -1,5 +1,8 @@
-export interface Droga{
-  nombre:string;
-  precio:string;
+export interface Droga {
+  id: number;
+  nombre: string;
+  precioVenta: string;
+  precioCompra: string;
+  unidadesDisponibles: string;
+  unidadesVendidas: string;
 }
-
