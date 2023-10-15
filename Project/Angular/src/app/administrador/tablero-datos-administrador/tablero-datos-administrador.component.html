@@ -1,81 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Estadísticas</title>
+</head>
 <body>
 
-<div class="center-container">
-  <div class="container mt-4">
-    <div class="row">
+<div class="center-container"  ng-app="myApp" ng-controller="myCtrl">
+  <div class="container-fluid mt-4" style="margin: 50px;">
+    <h1>Dashboard de Estadísticas</h1>
 
-      <!-- Primera columna -->
-      <div class="col-md-3">
-        <div class="card">
-          <div class="card-header">
-            Proposed Undeveloped Lots
-          </div>
-          <div class="card-body text-center">
-            <span class="big-number">20,960</span>
-            <div class="smaller-text">Developed Lots</div>
-          </div>
-        </div>
-        <div class="card mt-3">
-          <div class="card-header">
-            Subdivision Lots Lodged
-          </div>
-          <div class="card-body text-center">
-            <span class="big-number">66%</span>
-          </div>
-        </div>
-        <div class="card mt-3">
-          <div class="card-header">
-            Subdivision Lots Lodged
-          </div>
-          <div class="card-body text-center">
-            <!-- Aquí puedes agregar más detalles -->
-          </div>
-        </div>
-      </div>
+        <!-- Primera fila -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Estadística 1: Cantidad total de tratamientos administrados en el último mes -->
+                <div class="card" style="height: 200px;">
+                  <div class="card-header">
+                        Cantidad Total de Tratamientos
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="total-tratamientos">{{ totalTratamientos }}</span>
+                        <p style="font-size: 12px;">En el Último Mes</p>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Segunda columna -->
-      <div class="col-md-3">
-        <div class="card">
-          <div class="card-header">
-            Residential Land Activity
-          </div>
-          <div class="card-body">
-            <!-- Aquí puedes agregar detalles usando Bootstrap 'list-group' o cualquier otro componente -->
-          </div>
-        </div>
-        <div class="card mt-3">
-          <div class="card-header">
-            Subdivision Lots Issued SOC
-          </div>
-          <div class="card-body text-center">
-            <span class="big-number">23%</span>
-          </div>
-        </div>
-        <div class="card mt-3">
-          <div class="card-header">
-            Subdivision Lots Issued SOC
-          </div>
-          <div class="card-body text-center">
-            <!-- Aquí puedes agregar más detalles -->
-          </div>
-        </div>
-      </div>
+            <div class="col-md-4">
+                <!-- Estadística 2: Cantidad de tratamientos por tipo de medicamento administrado en el último mes -->
+                <div class="card" style="height: 200px;">
+                  <div class="card-header">
+                        Tratamientos por Tipo de Medicamento
+                    </div>
+                    <div class="card-body" id="tratamientos-por-medicamento">
+                        <span class="big-number" id="tratamientosPorMedicamento">{{ tratamientosPorMedicamento }}</span>
+                        <p style="font-size: 12px;">En el Último Mes</p>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Tercera columna -->
-      <div class="col-md-3">
-        <!-- Aquí puedes replicar las tarjetas/card de las columnas anteriores según tus necesidades -->
-      </div>
+            <div class="col-md-4">
+                <!-- Estadística 3: Cantidad de veterinarios activos en la plataforma -->
+                <div class="card" style="height: 200px;">
+                  <div class="card-header">
+                        Cantidad de Veterinarios Activos
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="veterinarios-activos">{{ veterinariosActivos }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- Cuarta columna -->
-      <div class="col-md-3">
-        <!-- Aquí puedes replicar las tarjetas/card de las columnas anteriores según tus necesidades -->
-      </div>
+        <!-- Segunda fila -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Estadística 4: Cantidad de veterinarios inactivos en la plataforma -->
+                <div class="card">
+                    <div class="card-header">
+                        Cantidad de Veterinarios Inactivos
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="veterinarios-inactivos">{{ veterinariosInactivos }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Estadística 5: Cantidad de mascotas totales en la veterinaria -->
+                <div class="card">
+                    <div class="card-header">
+                        Cantidad de Mascotas Totales
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="mascotas-totales">{{ mascotasTotales }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Estadística 6: Cantidad de mascotas activas (en tratamiento) en la veterinaria -->
+                <div class="card">
+                    <div class="card-header">
+                        Cantidad de Mascotas Activas en Tratamiento
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="mascotas-activas">{{ mascotasActivas }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tercera fila -->
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <!-- Estadística 7: Ventas totales de la veterinaria -->
+                <div class="card">
+                    <div class="card-header">
+                        Ventas Totales de la Veterinaria
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="ventas-totales">{{ ventasTotales }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mx-auto">
+                <!-- Estadística 8: Ganancias totales de la veterinaria -->
+                <div class="card">
+                    <div class="card-header">
+                        Ganancias Totales de la Veterinaria
+                    </div>
+                    <div class="card-body text-center">
+                        <span class="big-number" id="ganancias-totales">{{ gananciasTotales }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <!-- Estadística 9: Top 3 tratamientos con más unidades vendidas -->
+                <div class="card">
+                    <div class="card-header">
+                        Top 3 Tratamientos con Más Unidades Vendidas
+                    </div>
+                    <div class="card-body" id="top-tratamientos">
+                      <span class="big-number" id="tratamiento1">{{ tratamiento1 }}</span><br>
+                      <span class="big-number" id="tratamiento2">{{ tratamiento2 }}</span><br>
+                      <span class="big-number" id="tratamiento3">{{ tratamiento3 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </div>
 
+<!-- Agrega tus scripts para actualizar dinámicamente las estadísticas aquí -->
+
 </body>
+</html>

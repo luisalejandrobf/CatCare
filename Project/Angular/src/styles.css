@@ -997,17 +997,22 @@ a.selected {
 }
 
 
+/*---------------------------------------------  Tarjetas del dashboard ------------------------------------*/
 
 
+.card-header {
+  font-size: medium;
+}
 
-
-
-
-
-
-
-
-
+.card-header {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  margin: 20px 0;
+}
 
 
 
