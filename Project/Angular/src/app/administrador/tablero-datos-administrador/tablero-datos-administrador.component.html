@@ -8,14 +8,14 @@
 <body>
 
 <div class="center-container"  ng-app="myApp" ng-controller="myCtrl">
-  <div class="container-fluid mt-4" style="margin: 50px;">
+  <div class="container-fluid mt-4 card" style="margin: 50px; padding: 20px; background-color:rgb(245, 245, 245)">
     <h1>Dashboard de Estadísticas</h1>
 
         <!-- Primera fila -->
         <div class="row">
             <div class="col-md-4">
                 <!-- Estadística 1: Cantidad total de tratamientos administrados en el último mes -->
-                <div class="card" style="height: 200px;">
+                <div class="card cardHover" style="height: 200px;">
                   <div class="card-header">
                         Cantidad Total de Tratamientos
                     </div>
@@ -28,7 +28,7 @@
 
             <div class="col-md-4">
                 <!-- Estadística 2: Cantidad de tratamientos por tipo de medicamento administrado en el último mes -->
-                <div class="card" style="height: 200px;">
+                <div class="card cardHover" style="height: 200px;">
                   <div class="card-header">
                         Tratamientos por Tipo de Medicamento
                     </div>
@@ -41,7 +41,7 @@
 
             <div class="col-md-4">
                 <!-- Estadística 3: Cantidad de veterinarios activos en la plataforma -->
-                <div class="card" style="height: 200px;">
+                <div class="card cardHover" style="height: 200px;">
                   <div class="card-header">
                         Cantidad de Veterinarios Activos
                     </div>
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-md-4">
                 <!-- Estadística 4: Cantidad de veterinarios inactivos en la plataforma -->
-                <div class="card">
+                <div class="card cardHover">
                     <div class="card-header">
                         Cantidad de Veterinarios Inactivos
                     </div>
@@ -68,7 +68,7 @@
 
             <div class="col-md-4">
                 <!-- Estadística 5: Cantidad de mascotas totales en la veterinaria -->
-                <div class="card">
+                <div class="card cardHover">
                     <div class="card-header">
                         Cantidad de Mascotas Totales
                     </div>
@@ -80,7 +80,7 @@
 
             <div class="col-md-4">
                 <!-- Estadística 6: Cantidad de mascotas activas (en tratamiento) en la veterinaria -->
-                <div class="card">
+                <div class="card cardHover">
                     <div class="card-header">
                         Cantidad de Mascotas Activas en Tratamiento
                     </div>
@@ -95,7 +95,7 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <!-- Estadística 7: Ventas totales de la veterinaria -->
-                <div class="card">
+                <div class="card cardHover">
                     <div class="card-header">
                         Ventas Totales de la Veterinaria
                     </div>
@@ -107,7 +107,7 @@
 
             <div class="col-md-6 mx-auto">
                 <!-- Estadística 8: Ganancias totales de la veterinaria -->
-                <div class="card">
+                <div class="card cardHover">
                     <div class="card-header">
                         Ganancias Totales de la Veterinaria
                     </div>
@@ -119,7 +119,7 @@
 
             <div class="col-md-12">
                 <!-- Estadística 9: Top 3 tratamientos con más unidades vendidas -->
-                <div class="card">
+                <div class="card cardHover">
                     <div class="card-header">
                         Top 3 Tratamientos con Más Unidades Vendidas
                     </div>

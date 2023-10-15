@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { AdministradorService } from 'src/app/service/administrador/administrador.service';
+import { ClienteService } from 'src/app/service/cliente/cliente.service';
+import { DrogaService } from 'src/app/service/droga/droga.service';
+import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { TratamientoService } from 'src/app/service/tratamiento/tratamiento.service';
+import { VeterinarioService } from 'src/app/service/veterinario/veterinario.service';
 
 @Component({
   selector: 'app-tablero-datos-administrador',
@@ -6,6 +12,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./tablero-datos-administrador.component.css']
 })
 export class TableroDatosAdministradorComponent {
+
+  constructor(
+    private clienteService: ClienteService,
+    private pacienteService: PacienteService,
+    private veterinarioService: VeterinarioService,
+    private administradorService: AdministradorService,
+    private drogaService: DrogaService,
+    private tratamientoService: TratamientoService
+  ) { }
 
   totalTratamientos = 50;
   tratamientosPorMedicamento = 20;
@@ -24,6 +39,7 @@ export class TableroDatosAdministradorComponent {
   ngOnInit() {
 
 
+    
   }
 
 }
