@@ -1,140 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard de Estadísticas</title>
+    <style>
+        .card-header {
+            font-size: 16px;
+        }
+
+        .card-body {
+            height: 100px;
+        }
+
+        .big-number {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="center-container"  ng-app="myApp" ng-controller="myCtrl">
-  <div class="container-fluid mt-4 card" style="margin: 50px; padding: 20px; background-color:rgb(245, 245, 245)">
-    <h1>Dashboard de Estadísticas</h1>
+    <div class="center-container" ng-app="myApp" ng-controller="myCtrl">
+        <div class="container-fluid mt-4 card"
+            style="margin: 50px; padding: 20px; background-color:rgb(245, 245, 245);">
+            <h1 style="color: rgba(35, 89, 28, 0.82);">Dashboard de Estadísticas</h1>
 
-        <!-- Primera fila -->
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Estadística 1: Cantidad total de tratamientos administrados en el último mes -->
-                <div class="card cardHover" style="height: 200px;">
-                  <div class="card-header">
-                        Cantidad Total de Tratamientos
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="total-tratamientos">{{ totalTratamientos }}</span>
-                        <p style="font-size: 12px;">En el Último Mes</p>
+            <div class="column-container" style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 20px;">
+
+
+            <!-- Primera fila -->
+            <div class="column card" style="width: 33%;">
+
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Cantidad Total de Tratamientos
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="total-tratamientos">{{ totalTratamientos }}</span>
+                            <p>En el Último Mes</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header d-flex flex-column">
+                            Tratamientos por Tipo de Medicamento
+                            <p style="margin-bottom: 0;">En el Último Mes</p>
+                        </div>
+                        <div class="card-body" id="tratamientos-por-medicamento"
+                            style="height: 200px; overflow-y: auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Medicamento</th>
+                                        <th scope="col">Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let entry of drogaCantidadMap | keyvalue">
+                                        <td>{{ entry.key }}</td>
+                                        <td>{{ entry.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Cantidad de Mascotas Activas en Tratamiento
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="mascotas-activas">{{ mascotasActivas }}</span>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
-            <div class="col-md-4">
-                <!-- Estadística 2: Cantidad de tratamientos por tipo de medicamento administrado en el último mes -->
-                <div class="card cardHover" style="height: 200px;">
-                  <div class="card-header">
-                        Tratamientos por Tipo de Medicamento
-                    </div>
-                    <div class="card-body" id="tratamientos-por-medicamento">
-                        <span class="big-number" id="tratamientosPorMedicamento">{{ tratamientosPorMedicamento }}</span>
-                        <p style="font-size: 12px;">En el Último Mes</p>
+            <!-- Segunda fila -->
+            <div class="column card" style="width: 33%;">
+
+
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Cantidad de Veterinarios Activos
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="veterinarios-activos">{{ veterinariosActivos }}</span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Cantidad de Veterinarios Inactivos
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="veterinarios-inactivos">{{ veterinariosInactivos }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Cantidad de Mascotas Totales
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="mascotas-totales">{{ mascotasTotales }}</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="col-md-4">
-                <!-- Estadística 3: Cantidad de veterinarios activos en la plataforma -->
-                <div class="card cardHover" style="height: 200px;">
-                  <div class="card-header">
-                        Cantidad de Veterinarios Activos
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="veterinarios-activos">{{ veterinariosActivos }}</span>
+            <!-- Tercera fila -->
+            <div class="column card" style="width: 33%;">
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Ventas Totales de la Veterinaria
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="ventas-totales">$ {{ ventasTotales }} COP</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Segunda fila -->
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Estadística 4: Cantidad de veterinarios inactivos en la plataforma -->
-                <div class="card cardHover">
-                    <div class="card-header">
-                        Cantidad de Veterinarios Inactivos
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="veterinarios-inactivos">{{ veterinariosInactivos }}</span>
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header">
+                            Ganancias Totales de la Veterinaria
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="big-number" id="ganancias-totales">$ {{ gananciasTotales }} COP</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <!-- Estadística 5: Cantidad de mascotas totales en la veterinaria -->
-                <div class="card cardHover">
-                    <div class="card-header">
-                        Cantidad de Mascotas Totales
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="mascotas-totales">{{ mascotasTotales }}</span>
+                <div class="col">
+                    <div class="card cardHover">
+                        <div class="card-header d-flex flex-column">
+                            Top 3 tratamientos con más unidades vendidas
+                        </div>
+                        <div class="card-body" id="tratamientos-por-medicamento"
+                            style="height: 200px; overflow-y: auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Medicamento</th>
+                                        <th scope="col">Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let entry of top3MedicamentosMap | keyvalue">
+                                        <td>{{ entry.key }}</td>
+                                        <td>{{ entry.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <!-- Estadística 6: Cantidad de mascotas activas (en tratamiento) en la veterinaria -->
-                <div class="card cardHover">
-                    <div class="card-header">
-                        Cantidad de Mascotas Activas en Tratamiento
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="mascotas-activas">{{ mascotasActivas }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Tercera fila -->
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <!-- Estadística 7: Ventas totales de la veterinaria -->
-                <div class="card cardHover">
-                    <div class="card-header">
-                        Ventas Totales de la Veterinaria
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="ventas-totales">{{ ventasTotales }}</span>
-                    </div>
-                </div>
+
+
             </div>
 
-            <div class="col-md-6 mx-auto">
-                <!-- Estadística 8: Ganancias totales de la veterinaria -->
-                <div class="card cardHover">
-                    <div class="card-header">
-                        Ganancias Totales de la Veterinaria
-                    </div>
-                    <div class="card-body text-center">
-                        <span class="big-number" id="ganancias-totales">{{ gananciasTotales }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <!-- Estadística 9: Top 3 tratamientos con más unidades vendidas -->
-                <div class="card cardHover">
-                    <div class="card-header">
-                        Top 3 Tratamientos con Más Unidades Vendidas
-                    </div>
-                    <div class="card-body" id="top-tratamientos">
-                      <span class="big-number" id="tratamiento1">{{ tratamiento1 }}</span><br>
-                      <span class="big-number" id="tratamiento2">{{ tratamiento2 }}</span><br>
-                      <span class="big-number" id="tratamiento3">{{ tratamiento3 }}</span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Agrega tus scripts para actualizar dinámicamente las estadísticas aquí -->
+    <!-- Agrega tus scripts para actualizar dinámicamente las estadísticas aquí -->
 
 </body>
+
 </html>

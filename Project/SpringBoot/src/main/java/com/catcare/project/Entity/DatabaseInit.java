@@ -377,7 +377,7 @@ public class DatabaseInit implements ApplicationRunner {
         veterinarioRepository.save(new Veterinario("78901234567805", "Felipe Francisco Fuentes", "k7l8", "Traumatología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         
 
-
+        
         //Inicialización e inserción  de la base de datos con los tratamientos 
         Random random = new Random();
 
@@ -417,6 +417,7 @@ public class DatabaseInit implements ApplicationRunner {
                 tratamientoRepository.save(tratamiento);
             }
         }
+        
 
         // Crear Tratamientos para el paciente y veterinario con ID 1 (Tests)
         if (true) {
