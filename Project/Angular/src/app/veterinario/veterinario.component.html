@@ -1,11 +1,26 @@
-<app-informacion-veterinario *ngIf="mostrarInformacionVeterinario" [veterinario]="veterinarioSeleccionado"></app-informacion-veterinario>
-<app-tabla-veterinario *ngIf="mostrarTabla" [veterinarioLista]="veterinarioLista" (verInformacionVeterinario)="informacionVeterinario($event)" (modificarVeterinario)="modificarVeterinarios($event)"></app-tabla-veterinario>
-<app-modificar-veterinario *ngIf="mostrarModificarVeterinario" [veterinario]="veterinarioSeleccionado" (veterinarioModificado)="veterinarioModificado($event)"></app-modificar-veterinario>
-<app-barra-lateral-veterinario (registrarVeterinario)="registroVeterinario()"></app-barra-lateral-veterinario>
-<app-registrar-veterinario *ngIf="!mostrarTabla && !mostrarInformacionVeterinario && !mostrarModificarVeterinario" (veterinarioRegistrado)="nuevoVeterinario($event)"></app-registrar-veterinario>
+<div *ngIf="vista === 'pacientes'">
+  <app-barra-superior-veterinario></app-barra-superior-veterinario>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
 
 
+<div *ngIf="vista === 'clientes'">
+  <app-barra-superior-veterinario></app-barra-superior-veterinario>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
 
 
-
-
+<div *ngIf="vista === 'veterinarios'">
+  <app-informacion-veterinario *ngIf="mostrarInformacionVeterinario"
+                               [veterinario]="veterinarioSeleccionado"></app-informacion-veterinario>
+  <app-tabla-veterinario *ngIf="mostrarTabla" [veterinarioLista]="veterinarioLista"
+                         (verInformacionVeterinario)="informacionVeterinario($event)"
+                         (modificarVeterinario)="modificarVeterinarios($event)"></app-tabla-veterinario>
+  <app-modificar-veterinario *ngIf="mostrarModificarVeterinario" [veterinario]="veterinarioSeleccionado"
+                             (veterinarioModificado)="veterinarioModificado($event)"></app-modificar-veterinario>
+  <app-barra-lateral-veterinario (registrarVeterinario)="registroVeterinario()"></app-barra-lateral-veterinario>
+  <app-registrar-veterinario *ngIf="!mostrarTabla && !mostrarInformacionVeterinario && !mostrarModificarVeterinario"
+                             (veterinarioRegistrado)="nuevoVeterinario($event)"></app-registrar-veterinario>
+</div>

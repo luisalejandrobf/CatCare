@@ -49,6 +49,23 @@ const routes: Routes = [
     ]
   },
 
+  // Rutas para el veterinario
+  {
+    path: 'veterinario',
+    component: VeterinarioComponent,
+    children: [
+      {path: 'pacientes', component: PacienteComponent},
+      {path: 'pacientes/info/:id', component: InformacionPacienteComponent},
+      {path: 'pacientes/modificar/:id', component: ModificarPacienteComponent},
+      {path: 'pacientes/registrar', component: RegistrarPacienteComponent},
+
+      {path: 'clientes', component: ClienteComponent},
+      {path: 'clientes/info/:id', component: InformacionClienteComponent},
+      {path: 'clientes/modificar/:id', component: ModificarClienteComponent},
+      {path: 'clientes/registrar', component: RegistrarClienteComponent}
+    ]
+  },
+
 
   {path: 'cliente/:id/pacientes', component: ClienteComponent},
   {path: 'test', component: TestComponentComponent}

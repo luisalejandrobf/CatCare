@@ -3,13 +3,14 @@ import {Veterinario} from './veterinario';
 import {ClienteService} from "../service/cliente/cliente.service";
 import {VeterinarioService} from "../service/veterinario/veterinario.service";
 import {Cliente} from "../cliente/cliente";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-veterinario',
   templateUrl: './veterinario.component.html',
   styleUrls: ['./veterinario.component.css']
 })
-export class VeterinarioComponent implements OnInit{
+export class VeterinarioComponent implements OnInit {
   mostrarTabla = true;
   mostrarInformacionVeterinario = false;
   veterinarioSeleccionado: Veterinario | null = null;
@@ -17,9 +18,28 @@ export class VeterinarioComponent implements OnInit{
 
   veterinarioLista: Veterinario[] = [];
 
-  constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef) {}
+  vista: 'pacientes' | 'clientes' | 'veterinarios' | 'veterinario' = 'pacientes';
+
+
+  constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute) {
+  }
+
 
   ngOnInit(): void {
+    const currentPath = this.route.snapshot.url[0]?.path;
+    const subPathOne = this.route.snapshot.url[1]?.path;
+
+    if (currentPath === 'veterinario') {
+      if (subPathOne === 'pacientes') {
+        this.vista = 'pacientes';
+      } else {
+        this.vista = 'clientes';
+      }
+    } else {
+      this.vista = 'veterinarios';
+    }
+
+
     this.veterinarioService.getAllVeterinarios().subscribe(veterinarioLista => {
       this.veterinarioLista = veterinarioLista;
       console.log('Veterinarios:', this.veterinarioLista);
