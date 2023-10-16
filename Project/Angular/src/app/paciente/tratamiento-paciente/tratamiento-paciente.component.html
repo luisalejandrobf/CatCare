@@ -1,7 +1,7 @@
 <div class="wrapper_footerStuckToBottom">
   <div class="content_footerStuckToBottom">
     <div class="center-container paciente-basicInfo">
-      <h1>Registrar Tratamiento</h1>
+      <h1 class="pet-title" style="margin-top: 100px;">Tratamiento para: <span class="pet-name">{{paciente?.nombre}}</span></h1>
       <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="center-container">
         <!-- Fecha de Inicio -->
         <div class="form-group">
@@ -25,7 +25,7 @@
 
         <!-- Contrasena del veterinario -->
         <div class="form-group">
-          <label for="contrasena">Contrasena Veterinario</label>
+          <label for="contrasena">Contraseña Veterinario</label>
           <input [(ngModel)]="contrasena" name="contrasena" type="password" class="form-control" id="contrasena" required>
         </div>
 
