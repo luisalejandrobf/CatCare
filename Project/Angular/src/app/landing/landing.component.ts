@@ -172,15 +172,15 @@ export class LandingComponent implements OnInit {
     });
 
     btnAdmSignin.addEventListener('click', () => {
-      const usuario = this.el.nativeElement.querySelector('#AdmCedula').value;
+      const cedula = this.el.nativeElement.querySelector('#AdmCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#AdmPassword').value;
 
-      console.log('Cédula ingresada:', usuario); // Log para depuración
+      console.log('Cédula ingresada:', cedula); // Log para depuración
       console.log('Contraseña ingresada:', contrasena); // Log para depuración
 
       // Verificar si la cédula y la contraseña coinciden con algún administrador en la lista
-      const administradorEncontrado = this.administradorLista.find(administrador => administrador.usuario === usuario && administrador.constrasena === contrasena);
-      console.log('Administrador encontrado:', administradorEncontrado);
+      const administradorEncontrado = this.administradorLista.find(administrador => administrador.cedula === cedula && administrador.contrasena === contrasena);
+
       if (administradorEncontrado) {
         console.log('Administrador encontrado:', administradorEncontrado); // Log para depuración
         // Si se encuentra el administrador, navega a su página de perfil o dashboard

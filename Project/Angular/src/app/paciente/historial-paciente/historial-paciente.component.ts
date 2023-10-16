@@ -18,7 +18,6 @@ export class HistorialPacienteComponent implements OnInit {
       private pacienteService: PacienteService,
       private tratamientoService: TratamientoService
   ) {}
-
   ngOnInit() {
     const pacienteId = this.route.snapshot.params['id'];
 

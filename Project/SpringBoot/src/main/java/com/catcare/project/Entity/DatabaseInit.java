@@ -59,10 +59,10 @@ public class DatabaseInit implements ApplicationRunner {
 
 
         // Inicializacion de administradores
-        administradorRepository.save(new Administrador("LuisBravo", "1234"));
-        administradorRepository.save(new Administrador("FelipeGarcia", "1234"));
-        administradorRepository.save(new Administrador("AnaOrtegon", "1234"));
-        administradorRepository.save(new Administrador("JuanAngarita", "1234"));
+        administradorRepository.save(new Administrador("9632", "LuisBravo", "1234"));
+        administradorRepository.save(new Administrador("8521","FelipeGarcia", "1234"));
+        administradorRepository.save(new Administrador("7410","AnaOrtegon", "1234"));
+        administradorRepository.save(new Administrador("7896","JuanAngarita", "1234"));
 
 
 

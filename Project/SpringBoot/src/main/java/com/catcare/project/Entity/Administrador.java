@@ -10,13 +10,21 @@ public class Administrador {
     @Id
     @GeneratedValue
     private Long id; // Identificador único del administrador
-    
+    private String cedula;
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
     private String usuario; // Nombre de usuario del administrador
     private String contrasena; // Contraseña del administrador
 
 
     // Constructor que recibe el nombre de usuario y la contraseña
-    public Administrador(String usuario, String contrasena) {
+    public Administrador(String cedula,String usuario, String contrasena) {
+        this.cedula = cedula;
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
