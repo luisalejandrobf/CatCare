@@ -37,6 +37,7 @@ import { BarraLateralVeterinarioComponent } from './veterinario/barra-lateral-ve
 import { TableroDatosAdministradorComponent } from './administrador/tablero-datos-administrador/tablero-datos-administrador.component';
 import { TratamientoPacienteComponent } from './paciente/tratamiento-paciente/tratamiento-paciente.component';
 import { HistorialPacienteComponent } from './paciente/historial-paciente/historial-paciente.component';
+import { Error404Component } from './error/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { HistorialPacienteComponent } from './paciente/historial-paciente/histor
     TableroDatosAdministradorComponent,
     TratamientoPacienteComponent,
     HistorialPacienteComponent,
+    Error404Component,
   ],
   imports: [
     BrowserModule,

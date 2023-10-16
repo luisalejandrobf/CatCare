@@ -21,6 +21,7 @@ import {
 } from "./administrador/tablero-datos-administrador/tablero-datos-administrador.component";
 import {TratamientoPacienteComponent} from "./paciente/tratamiento-paciente/tratamiento-paciente.component";
 import {HistorialPacienteComponent} from "./paciente/historial-paciente/historial-paciente.component";
+import { Error404Component } from './error/error404/error404.component';
 
 // Define las rutas de la aplicación
 const routes: Routes = [
@@ -72,7 +73,9 @@ const routes: Routes = [
 
 
   {path: 'cliente/:id/pacientes', component: ClienteComponent},
-  {path: 'test', component: TestComponentComponent}
+  {path: 'test', component: TestComponentComponent},
+  { path: '404', component: Error404Component },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
