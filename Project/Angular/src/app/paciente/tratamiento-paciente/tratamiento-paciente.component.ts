@@ -4,6 +4,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ClienteService} from "../../service/cliente/cliente.service";
 import {PacienteService} from "../../service/paciente/paciente.service";
 import {Tratamiento} from "../../tratamiento/tratamiento";
+import {AdministradorService} from "../../service/administrador/administrador.service";
+import {DrogaService} from "../../service/droga/droga.service";
+import {TratamientoService} from "../../service/tratamiento/tratamiento.service";
 
 @Component({
   selector: 'app-tratamiento-paciente',
@@ -15,8 +18,14 @@ export class TratamientoPacienteComponent implements OnChanges, OnInit {
   @Output() tratamientoRegistrado = new EventEmitter<Tratamiento>();
 
 
-
-  constructor(private router: Router,private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService) {}
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private clienteService: ClienteService,
+              private pacienteService: PacienteService,
+              private administradorService: AdministradorService,
+              private drogaService: DrogaService,
+              private tratamientoService: TratamientoService
+  ) {}
 
   tratamiento: Tratamiento = {
     id: 0,
@@ -73,9 +82,9 @@ export class TratamientoPacienteComponent implements OnChanges, OnInit {
 
   onSubmit(form: any) {
     if (form.valid) {
-      this.pacienteService.agregarPaciente(this.paciente).subscribe((response: any) => {
-        console.log('Respuesta al agregar paciente:', response);
-        this.router.navigate(['/administrador/pacientes']); // Redirige a la vista de la tabla de pacientes
+      this.tratamientoService.agregarTratamiento(this.tratamiento).subscribe(response => {
+        console.log('Respuesta al agregar tratamiento:', response);
+        this.router.navigate(['/veterinario/pacientes']); // Redirige a la vista de la tabla de pacientes
       });
     } else {
       alert('Por favor, completa el formulario correctamente.');
