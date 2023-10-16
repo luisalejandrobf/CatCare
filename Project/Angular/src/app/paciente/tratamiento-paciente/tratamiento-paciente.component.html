@@ -1,16 +1,36 @@
 <div class="wrapper_footerStuckToBottom">
   <div class="content_footerStuckToBottom">
     <div class="center-container paciente-basicInfo">
-      <h1>Registrar Paciente</h1>
+      <h1>Registrar Tratamiento</h1>
       <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="center-container">
+        <!-- Fecha de Inicio -->
         <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input [(ngModel)]="tratamiento.id" name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+          <label for="fechaDeInicio">Fecha de Inicio</label>
+          <input [(ngModel)]="tratamiento.fechaDeInicio" name="fechaDeInicio" type="date" class="form-control" id="fechaDeInicio" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <!-- Lista desplegable de drogas -->
+        <div class="form-group">
+          <label for="droga">Droga</label>
+          <select [(ngModel)]="selectedDroga" name="drogaId" id="droga" class="form-control" required>
+            <option *ngFor="let droga of drogasDisponibles" [value]="droga.id">{{droga.nombre}}</option>
+          </select>
+        </div>
+
+        <!-- Cedula del veterinario -->
+        <div class="form-group">
+          <label for="cedula">Cedula Veterinario</label>
+          <input [(ngModel)]="tratamiento.veterinario.cedula" name="cedula" type="text" class="form-control" id="cedula" required>
+        </div>
+
+        <!-- Contrasena del veterinario -->
+        <div class="form-group">
+          <label for="contrasena">Contrasena Veterinario</label>
+          <input [(ngModel)]="contrasena" name="contrasena" type="password" class="form-control" id="contrasena" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !isPasswordCorrect">Enviar</button>
       </form>
     </div>
   </div>
 </div>
-
