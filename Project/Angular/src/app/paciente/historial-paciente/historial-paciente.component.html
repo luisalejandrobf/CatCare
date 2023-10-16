@@ -1,1 +1,29 @@
-<p>historial-paciente works!</p>
+<div>
+    <div class="wrapper_footerStuckToBottom">
+        <div class="content_footerStuckToBottom">
+            <div class="center-container paciente-basicInfo">
+                <h1 class="pet-title" style="margin-top: 100px;">Tratamiento: <span class="pet-name">{{paciente?.nombre}}</span></h1>
+                <table class="styled-table" border="1">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Paciente</th>
+                        <th>Droga</th>
+                        <th>Veterinario</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let tratamiento of tratamientos">
+                        <td class="styled-table_tratamiento-id">{{tratamiento.id}}</td>
+                        <td>{{tratamiento.fechaDeInicio}}</td>
+                        <td>{{tratamiento.paciente.nombre}}</td>
+                        <td>{{tratamiento.droga.nombre}}</td>
+                        <td>{{tratamiento.veterinario.nombre}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
