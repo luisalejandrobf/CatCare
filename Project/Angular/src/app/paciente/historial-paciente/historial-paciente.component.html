@@ -8,7 +8,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Fecha de Inicio</th>
-                        <th>Paciente</th>
                         <th>Droga</th>
                         <th>Veterinario</th>
                     </tr>
@@ -17,7 +16,6 @@
                     <tr *ngFor="let tratamiento of tratamientos">
                         <td class="styled-table_tratamiento-id">{{tratamiento.id}}</td>
                         <td>{{tratamiento.fechaDeInicio}}</td>
-                        <td>{{tratamiento.paciente.nombre}}</td>
                         <td>{{tratamiento.droga.nombre}}</td>
                         <td>{{tratamiento.veterinario.nombre}}</td>
                     </tr>
