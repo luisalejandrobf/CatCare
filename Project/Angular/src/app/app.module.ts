@@ -35,6 +35,8 @@ import { ModificarVeterinarioComponent } from './veterinario/modificar-veterinar
 import { RegistrarVeterinarioComponent } from './veterinario/registrar-veterinario/registrar-veterinario.component';
 import { BarraLateralVeterinarioComponent } from './veterinario/barra-lateral-veterinario/barra-lateral-veterinario.component';
 import { TableroDatosAdministradorComponent } from './administrador/tablero-datos-administrador/tablero-datos-administrador.component';
+import { TratamientoPacienteComponent } from './paciente/tratamiento-paciente/tratamiento-paciente.component';
+import { HistorialPacienteComponent } from './paciente/historial-paciente/historial-paciente.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { TableroDatosAdministradorComponent } from './administrador/tablero-dato
     RegistrarVeterinarioComponent,
     BarraLateralVeterinarioComponent,
     TableroDatosAdministradorComponent,
+    TratamientoPacienteComponent,
+    HistorialPacienteComponent,
   ],
   imports: [
     BrowserModule,

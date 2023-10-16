@@ -1,9 +1,9 @@
-import {Component, Input, EventEmitter, Output} from '@angular/core';
+import {Component, Input, EventEmitter, Output, OnInit} from '@angular/core';
 import {Paciente} from '../paciente';
 import {ClienteService} from "../../service/cliente/cliente.service";
 import {PacienteService} from "../../service/paciente/paciente.service";
 import {Cliente} from "../../cliente/cliente";
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -11,9 +11,10 @@ import {Router} from '@angular/router';
   templateUrl: './tabla-paciente.component.html',
   styleUrls: ['./tabla-paciente.component.css']
 })
-export class TablaPacienteComponent {
+export class TablaPacienteComponent implements OnInit{
 
-  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {
+  vista!: string;
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router, private route: ActivatedRoute) {
   }
 
 
@@ -21,6 +22,14 @@ export class TablaPacienteComponent {
   @Output() verInformacionPaciente = new EventEmitter<Paciente>();
   @Output() modificarPaciente = new EventEmitter<Paciente>();
 
+
+  ngOnInit(): void {
+    // Obtiene la URL completa
+    const fullPath = this.router.url;
+    // Divide la URL por '/' y toma el primer segmento
+    this.vista = fullPath.split('/')[1];
+    console.log("Valor de vista:", this.vista);
+  }
 
 
   informacionCliente(cliente: Cliente) {
@@ -61,7 +70,7 @@ export class TablaPacienteComponent {
   }
 
 
-  
+
 }
 
 

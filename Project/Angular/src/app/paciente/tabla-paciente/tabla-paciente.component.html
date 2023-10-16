@@ -3,12 +3,12 @@
   <div class="content_footerStuckToBottom">
     <div class="center-container paciente-basicInfo">
       <h1 class="pet-title" style="margin-top: 100px;">Pacientes</h1>
-      
+
             <div class="search-bar">
               <i class="fas fa-search search-icon"></i>
               <input type="text" id="nameFilter" placeholder="Filtrar por nombre" (keyup)="filterTable()">
             </div>
-      
+
       <table id="patientTable" class="styled-table" border="1">
         <thead>
         <tr>
@@ -35,11 +35,23 @@
           </td>
           <td class="btnHorizontal">
             <div class="button-container">
-              <a [routerLink]="['/administrador/pacientes/info', paciente.id]" class="action-link text-success"><i class="fas fa-eye"></i> Visualizar</a>
-              <a [routerLink]="['/administrador/pacientes/modificar', paciente.id]" class="action-link"><i class="fas fa-edit"></i> Modificar</a>
-              <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPacientes(paciente)">
-                <i class="fas fa-trash-alt"></i> Eliminar
-              </a>
+
+              <!-- Si la vista es 'administrador', muestra estas acciones -->
+              <ng-container *ngIf="vista === 'administrador'">
+                <a [routerLink]="['/administrador/pacientes/info', paciente.id]" class="action-link text-success"><i class="fas fa-eye"></i> Visualizar</a>
+                <a [routerLink]="['/administrador/pacientes/modificar', paciente.id]" class="action-link"><i class="fas fa-edit"></i> Modificar</a>
+                <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPacientes(paciente)"><i class="fas fa-trash-alt"></i> Eliminar</a>
+              </ng-container>
+
+              <!-- Si la vista es 'veterinario', muestra estas acciones -->
+              <ng-container *ngIf="vista === 'veterinario'">
+                <a [routerLink]="['/veterinario/pacientes/info', paciente.id]" class="action-link text-success"><i class="fas fa-eye"></i> Visualizar</a>
+                <a [routerLink]="['/veterinario/pacientes/modificar', paciente.id]" class="action-link"><i class="fas fa-edit"></i> Modificar</a>
+                <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPacientes(paciente)"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                <a [routerLink]="['/veterinario/pacientes/tratamiento', paciente.id]" class="action-link" style="color: #0db5e8;"><i class="fas fa-syringe"></i> Tratamiento</a>
+                <a [routerLink]="['/veterinario/pacientes/historial', paciente.id]" class="action-link" style="color: #9836ea;"><i class="fas fa-history"></i> Historial</a>
+              </ng-container>
+
             </div>
           </td>
         </tr>

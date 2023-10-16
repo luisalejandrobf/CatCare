@@ -11,12 +11,20 @@ import {PacienteService} from "../../service/paciente/paciente.service";
 })
 export class ModificarPacienteComponent implements OnInit{
 
+  vista!: string;
+
+
   @Input() paciente: Paciente | null = null;
   @Output() pacienteModificado = new EventEmitter<Paciente>();
 
   constructor(private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {}
 
   ngOnInit() {
+    // Obtiene la URL completa
+    const fullPath = this.router.url;
+    // Divide la URL por '/' y toma el primer segmento
+    this.vista = fullPath.split('/')[1];
+
     const pacienteId = this.route.snapshot.params['id'];
 
     // Obtener el paciente por ID
@@ -34,8 +42,14 @@ export class ModificarPacienteComponent implements OnInit{
         // Emitir el evento para notificar que el paciente ha sido modificado
         this.pacienteModificado.emit(pacienteActualizado);
 
-        // Redirigir al usuario a la tabla de pacientes
-        this.router.navigate(['/administrador/pacientes']);
+        // Verificar el valor de vista y redirigir al usuario a la ruta correspondiente
+        if (this.vista === 'administrador') {
+          // Redirigir al usuario a la tabla de pacientes de un administrador
+          this.router.navigate(['/administrador/pacientes']);
+        } else if (this.vista === 'veterinario') {
+          // Redirigir al usuario a la tabla de pacientes de un veterinario
+          this.router.navigate(['/veterinario/pacientes']);
+        }
       });
     }
   }
