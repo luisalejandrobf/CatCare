@@ -17,11 +17,15 @@
         </div>
         <div class="form-group">
           <label for="celular">Celular</label>
-          <input [(ngModel)]="cliente.celular" name="celular" type="text" class="form-control" id="celular" placeholder="Celular" required>
+          <input [(ngModel)]="cliente.celular" name="celular" type="number" class="form-control" id="celular" placeholder="Celular" required>
         </div>
+
         <div class="form-group">
           <label for="foto">Foto (URL)</label>
-          <input [(ngModel)]="cliente.foto" name="foto" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg" required>
+          <input [(ngModel)]="cliente.foto" name="foto" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg" required pattern="https?://.+">
+          <div *ngIf="form.controls['foto']?.errors?.['pattern']" class="text-danger">
+            Por favor, introduce una URL válida.
+          </div>
         </div>
 
 

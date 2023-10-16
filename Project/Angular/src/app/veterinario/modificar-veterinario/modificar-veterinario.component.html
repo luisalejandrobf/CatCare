@@ -1,4 +1,4 @@
-<form *ngIf="veterinario" (ngSubmit)="enviarFormulario()" style="margin-top: 100px;">
+<form *ngIf="veterinario" #form="ngForm" (ngSubmit)="enviarFormulario(form)" style="margin-top: 100px;">
   <div class="form-group">
     <label for="cedula">Cédula</label>
     <input [(ngModel)]="veterinario.cedula" name="cedula" type="number" class="form-control" id="cedula" placeholder="Cédula del veterinario">
@@ -24,7 +24,10 @@
   </div>
   <div class="form-group">
     <label for="foto">Foto (URL)</label>
-    <input [(ngModel)]="veterinario.foto" name="foto" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg">
+    <input [(ngModel)]="veterinario.foto" name="foto" type="text" class="form-control" id="foto" placeholder="https://img.whatsapp.com/foto-ejemplo.jpg" required pattern="https?://.+">
+    <div *ngIf="form.controls['foto']?.errors?.['pattern']" class="text-danger">
+      Por favor, introduce una URL válida.
+    </div>
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-primary">Actualizar Información</button>

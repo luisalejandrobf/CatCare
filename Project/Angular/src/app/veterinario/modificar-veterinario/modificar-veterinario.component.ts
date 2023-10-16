@@ -25,8 +25,8 @@ export class ModificarVeterinarioComponent implements OnInit{
     });
   }
 
-  enviarFormulario() {
-    if (this.veterinario) {
+  enviarFormulario(form: any) {
+    if (this.veterinario && form.valid) {
       const veterinarioActualizado: Veterinario = this.veterinario;
       this.veterinarioService.actualizarVeterinario(veterinarioActualizado.id, veterinarioActualizado).subscribe(response => {
         console.log('Veterinario actualizado:', response);

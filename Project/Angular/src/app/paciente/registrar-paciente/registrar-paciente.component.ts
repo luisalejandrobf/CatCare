@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Paciente } from "../paciente";
-import { Cliente } from "../../cliente/cliente";
-import { Router } from "@angular/router";
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Paciente} from "../paciente";
+import {Cliente} from "../../cliente/cliente";
+import {Router} from "@angular/router";
 import {PacienteService} from "../../service/paciente/paciente.service";
 
 @Component({
@@ -13,7 +13,8 @@ export class RegistrarPacienteComponent {
 
   @Output() pacienteRegistrado = new EventEmitter<Paciente>();
 
-  constructor(private router: Router, private pacienteService: PacienteService) { }
+  constructor(private router: Router, private pacienteService: PacienteService) {
+  }
 
   paciente: Paciente = {
     id: 0,
@@ -43,5 +44,6 @@ export class RegistrarPacienteComponent {
       alert('Por favor, completa el formulario correctamente.');
     }
   }
-
 }
+
+

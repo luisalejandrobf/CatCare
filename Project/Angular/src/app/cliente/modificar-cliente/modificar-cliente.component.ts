@@ -10,14 +10,15 @@ import {PacienteService} from "../../service/paciente/paciente.service";
   templateUrl: './modificar-cliente.component.html',
   styleUrls: ['./modificar-cliente.component.css']
 })
-export class ModificarClienteComponent implements OnInit{
+export class ModificarClienteComponent implements OnInit {
 
   vista!: string;
 
   @Input() cliente: Cliente | null = null;
   @Output() clienteModificado = new EventEmitter<Cliente>();
 
-  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) {
+  }
 
   ngOnInit() {
 
@@ -34,8 +35,8 @@ export class ModificarClienteComponent implements OnInit{
     });
   }
 
-  enviarFormulario() {
-    if (this.cliente) {
+  enviarFormulario(form: any) {
+    if (this.cliente && form.valid) {
       const clienteActualizado: Cliente = this.cliente;
       this.clienteService.actualizarCliente(clienteActualizado.id, clienteActualizado).subscribe(response => {
         console.log('Cliente actualizado:', response);
@@ -51,7 +52,8 @@ export class ModificarClienteComponent implements OnInit{
           this.router.navigate(['/veterinario/clientes']);
         }
       });
+    } else {
+      alert('Por favor, completa el formulario correctamente.');
     }
-}
-
+  }
 }

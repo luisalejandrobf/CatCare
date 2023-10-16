@@ -34,8 +34,8 @@ export class ModificarPacienteComponent implements OnInit{
     });
   }
 
-  enviarFormulario() {
-    if (this.paciente) {
+  enviarFormulario(form: any) {
+    if (this.paciente && form.valid) {
       const pacienteActualizado: Paciente = this.paciente;
       this.pacienteService.actualizarPaciente(pacienteActualizado.id, pacienteActualizado).subscribe(response => {
         console.log('Paciente actualizado:', response);
@@ -51,6 +51,8 @@ export class ModificarPacienteComponent implements OnInit{
           this.router.navigate(['/veterinario/pacientes']);
         }
       });
+    } else {
+      alert('Por favor, completa el formulario correctamente.');
     }
   }
 
