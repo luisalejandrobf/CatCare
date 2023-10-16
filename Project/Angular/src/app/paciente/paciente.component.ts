@@ -4,6 +4,10 @@ import {Paciente} from './paciente';
 import {ClienteService} from "../service/cliente/cliente.service";
 import {PacienteService} from "../service/paciente/paciente.service";
 import {Cliente} from "../cliente/cliente";
+import {Tratamiento} from "../tratamiento/tratamiento";
+import {AdministradorService} from "../service/administrador/administrador.service";
+import {DrogaService} from "../service/droga/droga.service";
+import {TratamientoService} from "../service/tratamiento/tratamiento.service";
 
 @Component({
   selector: 'app-paciente',
@@ -22,8 +26,12 @@ export class PacienteComponent implements OnInit{
 
   // Inicializacion de la lista de pacientes aquí
   pacienteLista: Paciente[] = [];
+  tratamientoLista: Paciente[] = [];
 
-  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private cdRef: ChangeDetectorRef) {}
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private cdRef: ChangeDetectorRef,
+              private administradorService: AdministradorService,
+              private drogaService: DrogaService,
+              private tratamientoService: TratamientoService) {}
 
   //metodo para obtener todos los pacientes
   ngOnInit(): void {
@@ -96,6 +104,22 @@ export class PacienteComponent implements OnInit{
     this.pacienteSeleccionado = paciente;
 
   }
+
+  //metodo para agregar un nuevo tratamiento
+  nuevoTratamiento(tratamiento: Tratamiento) {
+    this.tratamientoService.agregarTratamiento(tratamiento).subscribe(response => {
+      console.log('Respuesta al agregar tratamiento:', response);
+      this.actualizarTratamientos(); // Actualiza la lista de pacientes
+    });
+  }
+
+  actualizarTratamientos() {
+    this.tratamientoService.getAllTratamientos().subscribe(tratamientoLista => {
+      this.tratamientoLista = tratamientoLista;
+      console.log('tratamientos actualizados:', this.tratamientoLista);
+    });
+  }
+
 
 
 }
