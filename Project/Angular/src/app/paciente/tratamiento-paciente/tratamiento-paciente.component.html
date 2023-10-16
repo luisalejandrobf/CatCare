@@ -12,7 +12,7 @@
         <!-- Lista desplegable de drogas -->
         <div class="form-group">
           <label for="droga">Droga</label>
-          <select [(ngModel)]="selectedDroga" name="drogaId" id="droga" class="form-control" required>
+          <select [(ngModel)]="selectedDroga" name="drogaId" id="droga" class="form-control" style="height: 50px;" required>
             <option *ngFor="let droga of drogasDisponibles" [value]="droga.id">{{droga.nombre}}</option>
           </select>
         </div>
