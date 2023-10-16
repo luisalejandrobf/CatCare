@@ -22,7 +22,10 @@
   </div>
   <div class="form-group">
     <label for="estado">Estado</label>
-    <input [(ngModel)]="paciente.estado" name="estado" type="text" class="form-control" id="estado" placeholder="Estado">
+    <select [(ngModel)]="paciente.estado" name="estado" class="form-control" id="estado" style="height: 50px;" required>
+      <option value="Activo">Activo</option>
+      <option value="Inactivo">Inactivo</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="foto">Foto (URL)</label>
