@@ -242,7 +242,7 @@ export class TestComponentComponent {
 
     console.log("AdministradorService tests")
 
-    // Todos
+    // Todos los administradores
     this.administradorService.getAllAdministradores().subscribe(administradores => {
       console.log('Lista de administradores:', administradores);
     });

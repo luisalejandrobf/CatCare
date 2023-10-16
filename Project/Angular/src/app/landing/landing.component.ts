@@ -1,18 +1,26 @@
 import {Component, ElementRef, AfterViewInit, Renderer2, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import Swiper from 'swiper';
 import {Cliente} from "../cliente/cliente";
 import {ClienteService} from "../service/cliente/cliente.service";
 import {PacienteService} from "../service/paciente/paciente.service";
+import {VeterinarioService} from "../service/veterinario/veterinario.service";
+import {AdministradorService} from "../service/administrador/administrador.service";
+import {DrogaService} from "../service/droga/droga.service";
+import {TratamientoService} from "../service/tratamiento/tratamiento.service";
+import {Veterinario} from "../veterinario/veterinario";
+import {Administrador} from "../administrador/administrador";
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent implements OnInit{
+export class LandingComponent implements OnInit {
 
   clienteLista: Cliente[] = [];
+  veterinarioLista: Veterinario[] = [];
+  administradorLista: Administrador[] = [];
 
 
   ngOnInit() {
@@ -20,6 +28,18 @@ export class LandingComponent implements OnInit{
     this.clienteService.getAllClientes().subscribe(clienteLista => {
       this.clienteLista = clienteLista; // Asigna los datos a clientesLista
       console.log('Clientes:', this.clienteLista); // Agrega este log para verificar los datos
+    });
+
+    // Método para obtener todos los veterinarios
+    this.veterinarioService.getAllVeterinarios().subscribe(veterinarios => {
+      this.veterinarioLista = veterinarios; // Asigna los datos a veterinarioLista
+      console.log('Veterinarios:', this.veterinarioLista); // Log para verificar los datos
+    });
+
+    // Método para obtener todos los administradores
+    this.administradorService.getAllAdministradores().subscribe(administradores => {
+      this.administradorLista = administradores; // Asigna los datos a administradorLista
+      console.log('Administradores:', this.administradorLista); // Log para verificar los datos
     });
   }
 
@@ -50,8 +70,15 @@ export class LandingComponent implements OnInit{
     private el: ElementRef,
     private renderer: Renderer2,
     private router: Router,
-    private clienteService: ClienteService
-  ) {}
+    private clienteService: ClienteService,
+    private pacienteService: PacienteService,
+    private veterinarioService: VeterinarioService,
+    private administradorService: AdministradorService,
+    private drogaService: DrogaService,
+    private tratamientoService: TratamientoService
+  ) {
+  }
+
 
   ngAfterViewInit() {
     this.setupSwiper();
@@ -128,23 +155,43 @@ export class LandingComponent implements OnInit{
     });
 
 
-
-
     btnVetSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;
-      const contraseña = this.el.nativeElement.querySelector('#VetPassword').value;
-      if (this.validarCampos(cedula, contraseña)) {
-        this.router.navigate(['/veterinario/pacientes']); // Navega al componente de PACIENTE
+      const contrasena = this.el.nativeElement.querySelector('#VetPassword').value;
+
+      // Verificar si la cédula y la contraseña coinciden con algún veterinario en la lista
+      const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula && veterinario.contrasena === contrasena);
+
+      if (veterinarioEncontrado) {
+        // Si se encuentra el veterinario, navega a su página de perfil o dashboard
+        this.router.navigate([`/veterinario/pacientes`]);
+      } else {
+        // Si no se encuentra, muestra un mensaje de error
+        alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
       }
     });
 
     btnAdmSignin.addEventListener('click', () => {
-      const cedula = this.el.nativeElement.querySelector('#AdmCedula').value;
-      const contraseña = this.el.nativeElement.querySelector('#AdmPassword').value;
-      if (this.validarCampos(cedula, contraseña)) {
-        this.router.navigate(['/administrador/pacientes']); // Navega al componente de PACIENTE
+      const usuario = this.el.nativeElement.querySelector('#AdmCedula').value;
+      const contrasena = this.el.nativeElement.querySelector('#AdmPassword').value;
+
+      console.log('Cédula ingresada:', usuario); // Log para depuración
+      console.log('Contraseña ingresada:', contrasena); // Log para depuración
+
+      // Verificar si la cédula y la contraseña coinciden con algún administrador en la lista
+      const administradorEncontrado = this.administradorLista.find(administrador => administrador.usuario === usuario && administrador.constrasena === contrasena);
+      console.log('Administrador encontrado:', administradorEncontrado);
+      if (administradorEncontrado) {
+        console.log('Administrador encontrado:', administradorEncontrado); // Log para depuración
+        // Si se encuentra el administrador, navega a su página de perfil o dashboard
+        this.router.navigate([`/administrador/pacientes`]);
+      } else {
+        console.error('No se encontró administrador con las credenciales proporcionadas.'); // Mensaje de error en consola
+        // Si no se encuentra, muestra un mensaje de error
+        alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
       }
     });
+
 
     loginLink.addEventListener('click', () => {
       blurBackground.style.visibility = 'visible';
