@@ -1,9 +1,16 @@
-<p>tratamiento-paciente works!</p>
-<p>tratamiento-paciente works!</p>
-<p>tratamiento-paciente works!</p>
-<p>tratamiento-paciente works!</p>
-<p>tratamiento-paciente works!</p>
+<div class="wrapper_footerStuckToBottom">
+  <div class="content_footerStuckToBottom">
+    <div class="center-container paciente-basicInfo">
+      <h1>Registrar Paciente</h1>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="center-container">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input [(ngModel)]="tratamiento.id" name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+        </div>
 
-
-
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
 
