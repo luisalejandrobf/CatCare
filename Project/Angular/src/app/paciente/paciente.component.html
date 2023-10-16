@@ -1,5 +1,6 @@
-<app-tabla-paciente *ngIf="mostrarTabla" [pacienteLista]="pacienteLista" (verInformacionPaciente)="informacionPaciente($event)" (modificarPaciente)="modificarPacientes($event)"></app-tabla-paciente>
+<app-tabla-paciente *ngIf="mostrarTabla" [pacienteLista]="pacienteLista" (verInformacionPaciente)="informacionPaciente($event)" (modificarPaciente)="modificarPacientes($event)" (tratarPaciente)="tratarPacientes($event)"></app-tabla-paciente>
 <app-informacion-paciente *ngIf="mostrarInformacionPaciente" [paciente]="pacienteSeleccionado"></app-informacion-paciente>
 <app-modificar-paciente *ngIf="mostrarModificarPaciente" [paciente]="pacienteSeleccionado" (pacienteModificado)="pacienteModificado($event)"></app-modificar-paciente>
 <app-barra-lateral-paciente (registrarPaciente)="registroPaciente()"></app-barra-lateral-paciente>
 <app-registrar-paciente *ngIf="!mostrarTabla && !mostrarInformacionPaciente && !mostrarModificarPaciente" (pacienteRegistrado)="nuevoPaciente($event)"></app-registrar-paciente>
+<app-tratamiento-paciente *ngIf="mostrarTratarPaciente" [paciente]="pacienteSeleccionado"></app-tratamiento-paciente>

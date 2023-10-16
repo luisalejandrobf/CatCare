@@ -21,7 +21,7 @@ export class TablaPacienteComponent implements OnInit{
   @Input() pacienteLista: Paciente[] = [];
   @Output() verInformacionPaciente = new EventEmitter<Paciente>();
   @Output() modificarPaciente = new EventEmitter<Paciente>();
-
+  @Output() tratarPaciente = new EventEmitter<Paciente>();
 
   ngOnInit(): void {
     // Obtiene la URL completa

@@ -16,6 +16,7 @@ export class PacienteComponent implements OnInit{
   mostrarInformacionPaciente = false;
   pacienteSeleccionado: Paciente | null = null
   mostrarModificarPaciente = false;
+  mostrarTratarPaciente = false;
 
 
 
@@ -83,6 +84,17 @@ export class PacienteComponent implements OnInit{
   //metodo para mostrar el formulario de registro de pacientes
   registroPaciente() {
     this.mostrarTabla = false;
+  }
+
+
+  //metodo para mostrar el formulario de crear tratamientos
+  tratarPacientes(paciente: Paciente) {
+    this.mostrarTabla = false;
+    this.mostrarInformacionPaciente = false;
+    this.mostrarModificarPaciente = false;
+    this.mostrarTratarPaciente = true;
+    this.pacienteSeleccionado = paciente;
+
   }
 
 

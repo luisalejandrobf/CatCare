@@ -20,15 +20,23 @@
         <h4>Informacion Cliente</h4>
       </div>
     </a>
-
+    <ng-container *ngIf="vista === 'administrador'">
     <a [routerLink]="['/administrador/clientes/registrar']">
       <div class="option">
         <i class="fas fa-user-plus" title="Registrar Cliente"></i>
         <h4>Registrar Paciente</h4>
       </div>
     </a>
-
-
+    </ng-container>
+    <!-- Si la vista es 'veterinario', muestra estas acciones -->
+    <ng-container *ngIf="vista === 'veterinario'">
+      <a [routerLink]="['/veterinario/clientes/registrar']">
+        <div class="option">
+          <i class="fas fa-user-plus" title="Registrar Cliente"></i>
+          <h4>Registrar Paciente</h4>
+        </div>
+      </a>
+    </ng-container>
   </div>
 
 </div>

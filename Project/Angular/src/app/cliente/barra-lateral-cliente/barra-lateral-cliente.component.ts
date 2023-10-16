@@ -1,13 +1,22 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ClienteService} from "../../service/cliente/cliente.service";
+import {PacienteService} from "../../service/paciente/paciente.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-barra-lateral-cliente',
   templateUrl: './barra-lateral-cliente.component.html',
   styleUrls: ['./barra-lateral-cliente.component.css']
 })
-export class BarraLateralClienteComponent {
+export class BarraLateralClienteComponent implements OnInit{
+
+  vista!: string;
+
 
   @Output() registrarCliente = new EventEmitter<void>();
+
+  constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router, private route: ActivatedRoute) {
+  }
 
   registrarNuevoCliente() {
     this.registrarCliente.emit();
@@ -16,6 +25,13 @@ export class BarraLateralClienteComponent {
 
 
   ngOnInit() {
+    // Obtiene la URL completa
+    const fullPath = this.router.url;
+    // Divide la URL por '/' y toma el primer segmento
+    this.vista = fullPath.split('/')[1];
+    console.log("Valor de vista:", this.vista);
+
+
     this.checkWindowSize();
   }
 

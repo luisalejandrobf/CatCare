@@ -60,13 +60,13 @@ const routes: Routes = [
       {path: 'pacientes/info/:id', component: InformacionPacienteComponent},
       {path: 'pacientes/modificar/:id', component: ModificarPacienteComponent},
       {path: 'pacientes/registrar', component: RegistrarPacienteComponent},
+      {path: 'pacientes/tratamiento/:id', component: TratamientoPacienteComponent},
+      {path: 'pacientes/historial/:id', component: HistorialPacienteComponent},
 
       {path: 'clientes', component: ClienteComponent},
       {path: 'clientes/info/:id', component: InformacionClienteComponent},
       {path: 'clientes/modificar/:id', component: ModificarClienteComponent},
-      {path: 'clientes/registrar', component: RegistrarClienteComponent},
-      {path: 'clientes/tratamiento/:id', component: TratamientoPacienteComponent},
-      {path: 'clientes/historial/:id', component: HistorialPacienteComponent},
+      {path: 'clientes/registrar', component: RegistrarClienteComponent}
     ]
   },
 
