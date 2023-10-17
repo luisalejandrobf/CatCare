@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './droga.component.html',
   styleUrls: ['./droga.component.css']
 })
+// Componente para la gestión de drogas.
 export class DrogaComponent {
 
 }

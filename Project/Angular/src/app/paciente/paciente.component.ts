@@ -113,6 +113,7 @@ export class PacienteComponent implements OnInit{
     });
   }
 
+ // Actualiza la lista de tratamientos en el componente al recuperar la información
   actualizarTratamientos() {
     this.tratamientoService.getAllTratamientos().subscribe(tratamientoLista => {
       this.tratamientoLista = tratamientoLista;

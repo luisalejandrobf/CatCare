@@ -79,13 +79,14 @@ export class LandingComponent implements OnInit {
   ) {
   }
 
-
+// Después de que la vista se inicializa, se configura un carrusel de imágenes (Swiper) y varios listeners.
   ngAfterViewInit() {
     this.setupSwiper();
     this.setupListeners();
     this.setupScrollListener();
   }
 
+  // Configuración del carrusel de imágenes usando Swiper.
   private setupSwiper() {
     console.log('Setting up Swiper');
     new Swiper('.bg-slider', {
@@ -102,7 +103,7 @@ export class LandingComponent implements OnInit {
     });
   }
 
-
+  // Configuración de listeners para varios botones y elementos de la interfaz.
   private setupListeners() {
     const clienteBtn = this.el.nativeElement.querySelector('#clienteBtn');
     const veterinarioBtn = this.el.nativeElement.querySelector('#veterinarioBtn');
@@ -208,6 +209,8 @@ export class LandingComponent implements OnInit {
     });
   }
 
+
+  // Configuración de un listener para el evento de desplazamiento. Esto podría ser para cambiar estilos dinámicamente cuando el usuario se desplaza.
   private setupScrollListener() {
     this.renderer.listen('window', 'scroll', () => {
       const header = this.el.nativeElement.querySelector('header');
@@ -222,7 +225,7 @@ export class LandingComponent implements OnInit {
     });
   }
 
-
+  // Método para validar los campos de entrada para la cédula y la contraseña. Retorna verdadero si ambos campos son válidos.
   private validarCampos(cedula: string, contrasena: string): boolean {
     if (!cedula.trim()) {
       alert('Por favor, ingrese la cédula.');

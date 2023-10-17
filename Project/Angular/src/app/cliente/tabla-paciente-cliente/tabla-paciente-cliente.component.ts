@@ -9,8 +9,9 @@ import {PacienteService} from "../../service/paciente/paciente.service";
   templateUrl: './tabla-paciente-cliente.component.html',
   styleUrls: ['./tabla-paciente-cliente.component.css']
 })
+// Componente para mostrar una tabla de pacientes asociados a un cliente.
 export class TablaPacienteClienteComponent  {
-
+  // Lista de pacientes recibida desde un componente padre para mostrar.
   @Input() pacienteClienteLista: Paciente[] = [];
 
 }

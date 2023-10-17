@@ -48,6 +48,7 @@ export class TableroDatosAdministradorComponent {
 
   }
 
+  // Método para contar el número total de tratamientos en el último mes.
   countTratamientosLastMonth() {
     const currentDate: Date = new Date();
     const lastMonthDate: Date = new Date();
@@ -70,6 +71,7 @@ export class TableroDatosAdministradorComponent {
     );
   }
 
+  // Método para obtener la cantidad de cada droga prescrita en el último mes.
   getDrogaCantidadLastMonth() {
     const currentDate: Date = new Date();
     const lastMonthDate: Date = new Date();
@@ -93,6 +95,7 @@ export class TableroDatosAdministradorComponent {
     console.log(this.drogaCantidadMap);
   }
 
+  // Método para obtener el número de veterinarios activos e inactivos.
   getNumeroVeterinariosActivosInactivos() {
     this.veterinarioService.getAllVeterinarios().subscribe(veterinarios => {
       veterinarios.forEach(veterinario => {
@@ -108,6 +111,7 @@ export class TableroDatosAdministradorComponent {
     });
   }
 
+  // Método para contar el total de mascotas registradas.
   contarTotalMascotas() {
 
     this.pacienteService.getAllPacientes().subscribe(pacientes => {
@@ -119,6 +123,7 @@ export class TableroDatosAdministradorComponent {
 
   }
 
+  // Método para contar el número de mascotas actualmente en tratamiento.
   contarMascotasEnTratamiento() {
     this.tratamientoService.getAllTratamientos().subscribe(tratamientos => {
       const mascotasEnTratamiento = new Set();
@@ -133,8 +138,9 @@ export class TableroDatosAdministradorComponent {
     });
   }
 
+  // Método para calcular el total de ventas.
   calcularVentasTotales() {
- 
+
     let ventasTotalesAux = 0
 
     // Obtener todas las drogas
@@ -148,14 +154,15 @@ export class TableroDatosAdministradorComponent {
       });
 
       this.ventasTotales = ventasTotalesAux.toLocaleString('es-CO');
-  
+
       console.log('Ventas totales de la veterinaria:', this.ventasTotales);
     });
   }
 
+  // Método para calcular el total de ganancias.
   calcularGananciasTotales() {
     let gananciasTotalesAux = 0;
-  
+
     // Obtener todas las drogas
     this.drogaService.getAllDrogas().subscribe(drogas => {
       drogas.forEach(droga => {
@@ -167,13 +174,14 @@ export class TableroDatosAdministradorComponent {
           gananciasTotalesAux += gananciaPorDroga;
         }
       });
-  
+
       this.gananciasTotales = gananciasTotalesAux.toLocaleString('es-CO');
-  
+
       console.log('Ganancias totales de la veterinaria:', this.gananciasTotales);
     });
   }
 
+  // Método para obtener los tres medicamentos más vendidos.
   getTop3MedicamentosUnidadesVendidas() {
 
     let drogaCantidadMapAux = new Map<string, number>();
@@ -188,11 +196,11 @@ export class TableroDatosAdministradorComponent {
           drogaCantidadMapAux.set(drogaNombre, 1);
         }
       });
-  
+
       // Ordenar el mapa por valores en orden descendente y tomar los tres primeros elementos
       const sortedDrogaCantidadArray = Array.from(drogaCantidadMapAux).sort((a, b) => b[1] - a[1]).slice(0, 3);
       const top3DrogasUnidadesVendidas = new Map(sortedDrogaCantidadArray);
-  
+
       console.log("Top 3 de medicamentos con más unidades vendidas en todos los tiempos:");
       console.log(top3DrogasUnidadesVendidas);
       this.top3MedicamentosMap = top3DrogasUnidadesVendidas;

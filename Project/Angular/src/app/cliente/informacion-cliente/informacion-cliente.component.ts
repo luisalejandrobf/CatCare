@@ -10,8 +10,9 @@ import {PacienteService} from "../../service/paciente/paciente.service";
   templateUrl: './informacion-cliente.component.html',
   styleUrls: ['./informacion-cliente.component.css']
 })
+// Componente para mostrar la información detallada de un cliente.
 export class InformacionClienteComponent implements OnChanges, OnInit {
-
+// Propiedad que recibe la información del cliente desde un componente padre.
   @Input() cliente: Cliente | null = null;
 
 
@@ -26,6 +27,7 @@ export class InformacionClienteComponent implements OnChanges, OnInit {
     });
   }
 
+  // Detecta y maneja los cambios en la propiedad @Input del cliente.
   ngOnChanges() {
     console.log('Cliente recibido:', this.cliente);
   }

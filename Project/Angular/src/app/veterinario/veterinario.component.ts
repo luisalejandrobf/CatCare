@@ -18,9 +18,10 @@ export class VeterinarioComponent implements OnInit {
 
   veterinarioLista: Veterinario[] = [];
 
+  // Variable para controlar qué vista se está mostrando.
   vista: 'pacientes' | 'clientes' | 'veterinarios' | 'veterinario' = 'pacientes';
 
-
+  // Inyección de dependencias necesarias para el componente.
   constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute) {
   }
 
@@ -39,19 +40,21 @@ export class VeterinarioComponent implements OnInit {
       this.vista = 'veterinarios';
     }
 
-
+  // Obtener todos los veterinarios y guardarlos en la lista.
     this.veterinarioService.getAllVeterinarios().subscribe(veterinarioLista => {
       this.veterinarioLista = veterinarioLista;
       console.log('Veterinarios:', this.veterinarioLista);
     });
   }
 
+  // Método para mostrar información de un veterinario específico.
   informacionVeterinario(veterinario: Veterinario) {
     this.mostrarTabla = false;
     this.mostrarInformacionVeterinario = true;
     this.veterinarioSeleccionado = veterinario;
   }
 
+  // Método para manejar la lógica cuando un veterinario es modificado.
   veterinarioModificado(datosVeterinarioActualizados: Veterinario) {
     const veterinarioIdActualizar = this.veterinarioLista.findIndex(veterinario => veterinario.nombre === datosVeterinarioActualizados.nombre);
     this.veterinarioService.actualizarVeterinario(veterinarioIdActualizar, datosVeterinarioActualizados).subscribe(response => {
@@ -61,6 +64,7 @@ export class VeterinarioComponent implements OnInit {
     this.mostrarTabla = true;
   }
 
+  // Método para preparar la vista de modificación de un veterinario.
   modificarVeterinarios(veterinario: Veterinario) {
     this.mostrarTabla = false;
     this.mostrarInformacionVeterinario = false;
@@ -68,6 +72,7 @@ export class VeterinarioComponent implements OnInit {
     this.veterinarioSeleccionado = veterinario;
   }
 
+  // Método para agregar un nuevo veterinario.
   nuevoVeterinario(veterinario: Veterinario) {
     this.veterinarioService.agregarVeterinario(veterinario).subscribe(response => {
       console.log('Respuesta al agregar veterinario:', response);
@@ -75,6 +80,7 @@ export class VeterinarioComponent implements OnInit {
     });
   }
 
+  // Método para actualizar la lista de veterinarios.
   actualizarListaVeterinarios() {
     this.veterinarioService.getAllVeterinarios().subscribe(veterinarioLista => {
       this.veterinarioLista = veterinarioLista;

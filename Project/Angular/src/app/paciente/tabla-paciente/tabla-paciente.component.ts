@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class TablaPacienteComponent implements OnInit{
 
+// Variable para almacenar una parte de la URL actual.
   vista!: string;
   constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router, private route: ActivatedRoute) {
   }
@@ -31,12 +32,12 @@ export class TablaPacienteComponent implements OnInit{
     console.log("Valor de vista:", this.vista);
   }
 
-
+  // Método para navegar a la vista de información del cliente.
   informacionCliente(cliente: Cliente) {
     this.router.navigate(['/administrador/clientes/info', cliente.id]);
   }
 
-
+// Método para eliminar un paciente.
   eliminarPacientes(paciente: Paciente) {
     this.pacienteService.eliminarPaciente(paciente.id).subscribe(response => {
       console.log('Respuesta al eliminar paciente con ID', paciente.id, ':', response);
@@ -44,7 +45,7 @@ export class TablaPacienteComponent implements OnInit{
     });
   }
 
-  // Filtrar por nombre
+  // Método para filtrar la tabla de pacientes por nombre.
   filterTable(): void {
     let input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("nameFilter") as HTMLInputElement;

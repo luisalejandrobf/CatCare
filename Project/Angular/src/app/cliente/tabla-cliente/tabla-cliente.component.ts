@@ -10,12 +10,15 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './tabla-cliente.component.html',
   styleUrls: ['./tabla-cliente.component.css']
 })
+// Componente para manejar y mostrar una tabla de clientes.
 export class TablaClienteComponent implements OnInit{
 
+  // Variable para controlar la vista actual.
   vista!: string;
 
   constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router, private route: ActivatedRoute) {
   }
+  // Lista de clientes para mostrar, recibida desde un componente padre.
   @Input() clienteLista: Cliente[] = [];
   @Output() verInformacionCliente = new EventEmitter<Cliente>();
   @Output() modificarCliente = new EventEmitter<Cliente>();
@@ -29,6 +32,7 @@ export class TablaClienteComponent implements OnInit{
     console.log("Valor de vista:", this.vista);
   }
 
+  // Método para eliminar un cliente de la lista
   eliminarClientes(cliente: Cliente) {
     this.clienteService.eliminarCliente(cliente.id).subscribe(response => {
       console.log('Respuesta al eliminar cliente con ID', cliente.id, ':', response);
@@ -36,7 +40,7 @@ export class TablaClienteComponent implements OnInit{
     });
   }
 
-  // Filtrar por cedula
+  // Método para filtrar la tabla de clientes por cédula.
   filterTable(): void {
     let input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("nameFilter") as HTMLInputElement;

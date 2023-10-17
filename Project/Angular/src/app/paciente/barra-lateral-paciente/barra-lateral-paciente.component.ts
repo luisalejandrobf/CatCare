@@ -14,14 +14,16 @@ export class BarraLateralPacienteComponent implements OnInit{
 
   @Output() registrarPaciente = new EventEmitter<void>();
 
+  // Constructor del componente donde se inyectan servicios y se inicializan variables.
   constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router, private route: ActivatedRoute) {
   }
 
+  // Método para emitir el evento 'registrarPaciente', que se activará al llamar este método.
   registrarNuevoPaciente() {
     this.registrarPaciente.emit();
   }
 
-
+  // Ciclo de vida 'OnInit' que se ejecuta después del constructor y luego de recibir las propiedades 'input'.
   ngOnInit() {
     // Obtiene la URL completa
     const fullPath = this.router.url;
@@ -32,6 +34,7 @@ export class BarraLateralPacienteComponent implements OnInit{
     this.checkWindowSize();
   }
 
+  // Método que maneja la apertura y cierre del menú lateral.
   openCloseMenu() {
     const body = document.getElementById("body-barra-lateral");
     const side_menu = document.getElementById("menu_side");
@@ -39,6 +42,7 @@ export class BarraLateralPacienteComponent implements OnInit{
     side_menu?.classList.toggle("menu__side_move");
   }
 
+  // Método que verifica el tamaño de la ventana y ajusta clases CSS si es menor a un cierto breakpoint.
   checkWindowSize() {
     const body = document.getElementById("body-barra-lateral");
     const side_menu = document.getElementById("menu_side");

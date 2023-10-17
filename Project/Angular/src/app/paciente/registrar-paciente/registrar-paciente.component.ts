@@ -13,8 +13,11 @@ export class RegistrarPacienteComponent {
 
   @Output() pacienteRegistrado = new EventEmitter<Paciente>();
 
+  // Constructor del componente, donde se inyectan dependencias.
   constructor(private router: Router, private pacienteService: PacienteService) {
   }
+
+  // Objeto que representa un nuevo paciente, con estructura basada en el modelo 'Paciente'.
 
   paciente: Paciente = {
     id: 0,
@@ -34,6 +37,7 @@ export class RegistrarPacienteComponent {
     }
   };
 
+  // Método que se ejecuta cuando se envía el formulario de registro de paciente.
   onSubmit(form: any) {
     if (form.valid) {
       this.pacienteService.agregarPaciente(this.paciente).subscribe((response: any) => {

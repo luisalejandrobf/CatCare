@@ -18,6 +18,7 @@ export class TablaVeterinarioComponent {
   @Output() modificarVeterinario = new EventEmitter<Veterinario>();
 
 
+  // Método para eliminar un veterinario.
   eliminarVeterinario(veterinario: Veterinario) {
     this.veterinarioService.eliminarVeterinario(veterinario.id).subscribe(response => {
       console.log('Respuesta al eliminar veterinario con ID', veterinario.id, ':', response);
@@ -25,7 +26,7 @@ export class TablaVeterinarioComponent {
     });
   }
 
-  // Filtrar por cedula
+  // Método para filtrar la tabla de veterinarios por cédula.
   filterTable(): void {
     let input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("nameFilter") as HTMLInputElement;
@@ -37,6 +38,7 @@ export class TablaVeterinarioComponent {
       for (i = 1; i < tr.length; i++) {
         td = tr[i]?.getElementsByTagName("td")[1];
 
+        // Si la celda existe, continúa con el proceso de filtrado.
         if (td) {
           txtValue = td.textContent || td.innerText;
 

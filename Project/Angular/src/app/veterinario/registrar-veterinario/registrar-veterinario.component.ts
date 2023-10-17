@@ -12,8 +12,10 @@ export class RegistrarVeterinarioComponent {
 
   @Output() veterinarioRegistrado = new EventEmitter<Veterinario>();
 
+  // Inyectando dependencias necesarias: el servicio de veterinario y el router.
   constructor(private router: Router, private veterinarioService: VeterinarioService) { }
 
+  // Objeto que representa un nuevo veterinario con valores predeterminados.
   veterinario: Veterinario = {
     id: 0,
     cedula: '',
@@ -24,6 +26,7 @@ export class RegistrarVeterinarioComponent {
     estado: 'Activo'
   };
 
+  // Método que se ejecuta al enviar el formulario de registro de veterinarios.
   onSubmit(form: any) {
     if (form.valid) {
       this.veterinarioService.agregarVeterinario(this.veterinario).subscribe((response: any) => {

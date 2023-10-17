@@ -13,12 +13,15 @@ import {Tratamiento} from "../../tratamiento/tratamiento";
 export class HistorialPacienteComponent implements OnInit {
   tratamientos: any[] = [];
   @Input() paciente: Paciente | null = null;
+
+  // Constructor donde se inyectan dependencias y se inicializan servicios.
   constructor(
       private route: ActivatedRoute,
       private pacienteService: PacienteService,
       private tratamientoService: TratamientoService
   ) {}
   ngOnInit() {
+    // Obtiene el 'id' del paciente de la URL.
     const pacienteId = this.route.snapshot.params['id'];
 
 

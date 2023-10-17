@@ -13,6 +13,7 @@ export class ModificarVeterinarioComponent implements OnInit{
   @Input() veterinario: Veterinario | null = null;
   @Output() veterinarioModificado = new EventEmitter<Veterinario>();
 
+  // Inyección de dependencias del servicio, ruta activa y enrutador.
   constructor(private route: ActivatedRoute, private veterinarioService: VeterinarioService, private router: Router) {}
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class ModificarVeterinarioComponent implements OnInit{
     });
   }
 
+  // Método que maneja el envío del formulario de actualización del veterinario.
   enviarFormulario(form: any) {
     if (this.veterinario && form.valid) {
       const veterinarioActualizado: Veterinario = this.veterinario;

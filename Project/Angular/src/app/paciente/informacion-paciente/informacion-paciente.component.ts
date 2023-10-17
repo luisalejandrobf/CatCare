@@ -12,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 export class InformacionPacienteComponent implements OnChanges, OnInit {
   @Input() paciente: Paciente | null = null;
 
-
+//Constructor para la inyección de dependencias de los servicios y otras inicializaciones.
   constructor(private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService) {}
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class InformacionPacienteComponent implements OnChanges, OnInit {
     });
   }
 
+  // Método que se ejecuta cuando cualquier dato vinculado a propiedades de entrada cambia.
   ngOnChanges() {
     console.log('Paciente recibido:', this.paciente);
   }

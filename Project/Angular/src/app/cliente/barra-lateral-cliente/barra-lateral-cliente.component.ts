@@ -8,16 +8,19 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './barra-lateral-cliente.component.html',
   styleUrls: ['./barra-lateral-cliente.component.css']
 })
+// Componente para la barra lateral de navegación para clientes.
 export class BarraLateralClienteComponent implements OnInit{
-
+  // Variable para controlar la vista actual.
   vista!: string;
 
-
+  // Evento que se emite para registrar un nuevo cliente.
   @Output() registrarCliente = new EventEmitter<void>();
 
   constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router, private route: ActivatedRoute) {
   }
 
+
+  // Método para emitir el evento de registro de nuevo cliente.
   registrarNuevoCliente() {
     this.registrarCliente.emit();
   }
@@ -35,6 +38,7 @@ export class BarraLateralClienteComponent implements OnInit{
     this.checkWindowSize();
   }
 
+  // Método para abrir o cerrar el menú lateral.
   openCloseMenu() {
     const body = document.getElementById("body-barra-lateral");
     const side_menu = document.getElementById("menu_side");
@@ -42,6 +46,7 @@ export class BarraLateralClienteComponent implements OnInit{
     side_menu?.classList.toggle("menu__side_move");
   }
 
+  // Método para verificar el tamaño de la ventana y ajustar la UI si es necesario.
   checkWindowSize() {
     const body = document.getElementById("body-barra-lateral");
     const side_menu = document.getElementById("menu_side");
