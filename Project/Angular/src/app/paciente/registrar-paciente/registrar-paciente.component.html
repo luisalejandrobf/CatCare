@@ -40,8 +40,10 @@
         </div>
 
         <div class="form-group">
-          <label for="cliente">Dueño (ID) </label>
-          <input [(ngModel)]="paciente.cliente.id" name="cliente" type="text" class="form-control" id="cliente" placeholder="Dueño" required>
+          <label for="cliente">Dueño</label>
+          <select [(ngModel)]="paciente.cliente.id" name="cliente" class="form-control" style="height: 50px;" id="cliente" required>
+            <option *ngFor="let cliente of clienteLista" [value]="cliente.id">{{cliente.nombre}}</option>
+          </select>
         </div>
 
 

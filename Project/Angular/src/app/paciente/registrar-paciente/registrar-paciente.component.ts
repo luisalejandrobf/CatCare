@@ -3,6 +3,7 @@ import {Paciente} from "../paciente";
 import {Cliente} from "../../cliente/cliente";
 import {Router} from "@angular/router";
 import {PacienteService} from "../../service/paciente/paciente.service";
+import {ClienteService} from "../../service/cliente/cliente.service";
 
 @Component({
   selector: 'app-registrar-paciente',
@@ -13,10 +14,12 @@ export class RegistrarPacienteComponent implements OnInit{
 
   vista!: string;
 
+  clienteLista: Cliente[] = [];
+
   @Output() pacienteRegistrado = new EventEmitter<Paciente>();
 
   // Constructor del componente, donde se inyectan dependencias.
-  constructor(private router: Router, private pacienteService: PacienteService) {
+  constructor(private router: Router, private clienteService: ClienteService, private pacienteService: PacienteService) {
   }
 
 
@@ -25,6 +28,12 @@ export class RegistrarPacienteComponent implements OnInit{
     const fullPath = this.router.url;
     // Divide la URL por '/' y toma el primer segmento
     this.vista = fullPath.split('/')[1];
+
+    // Recupera la lista de todos los clientes.
+    this.clienteService.getAllClientes().subscribe(clienteLista => {
+      this.clienteLista = clienteLista;
+      console.log('Clientes:', this.clienteLista);
+    });
   }
 
   // Objeto que representa un nuevo paciente, con estructura basada en el modelo 'Paciente'.

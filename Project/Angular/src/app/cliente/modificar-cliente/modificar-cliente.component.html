@@ -1,4 +1,3 @@
-<!-- modificar-cliente.component.html -->
 <form #form="ngForm" *ngIf="cliente" (ngSubmit)="enviarFormulario(form)" style="margin-top: 100px;">
   <div class="form-group">
     <label for="nombre">Nombre</label>
@@ -10,7 +9,10 @@
   </div>
   <div class="form-group">
     <label for="correo">Correo</label>
-    <input [(ngModel)]="cliente.correo" name="correo" type="email" class="form-control" id="correo" placeholder="Correo" required>
+    <input [(ngModel)]="cliente.correo" name="correo" type="email" class="form-control" id="correo" placeholder="Correo" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+    <div *ngIf="form.controls['correo']?.errors?.['pattern']" class="text-danger">
+      Por favor, introduce una dirección de correo válida.
+    </div>
   </div>
   <div class="form-group">
     <label for="celular">Celular</label>
