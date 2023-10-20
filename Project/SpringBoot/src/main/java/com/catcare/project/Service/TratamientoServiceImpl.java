@@ -29,9 +29,9 @@ public class TratamientoServiceImpl implements TratamientoService {
     }
 
     @Override
-    public void add(Tratamiento tratamiento) {
+    public Tratamiento add(Tratamiento tratamiento) {
         // Agrega un nuevo tratamiento a la base de datos utilizando el método de repo.
-        repo.save(tratamiento);
+        return repo.save(tratamiento);
     }
 
     @Override

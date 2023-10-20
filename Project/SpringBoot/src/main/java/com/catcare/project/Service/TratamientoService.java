@@ -13,7 +13,7 @@ public interface TratamientoService {
     public Tratamiento SearchById(Long id);
 
     // Agregar un nuevo veterinario
-    public void add(Tratamiento tratamiento);
+    public Tratamiento add(Tratamiento tratamiento);
 
      // Eliminar un tratamiento por su ID
      public void deleteById(Long id);
