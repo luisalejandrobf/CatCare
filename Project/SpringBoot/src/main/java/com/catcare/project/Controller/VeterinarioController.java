@@ -110,4 +110,22 @@ public class VeterinarioController {
         }
     }
 
+
+
+    // Consultas
+
+    // http://localhost:8090/catcare/veterinarios/veterinariosActivos
+    @GetMapping("/veterinariosActivos")
+    @Operation(summary = "Devuelve la cantidad de veterinarios activos")
+    public Long veterinariosActivos() {
+    return veterinarioService.countVeterinariosActivos();
+    }
+
+    // http://localhost:8090/catcare/veterinarios/veterinariosInactivos
+    @GetMapping("/veterinariosInactivos")
+    @Operation(summary = "Devuelve la cantidad de veterinarios inactivos")
+    public Long veterinariosInactivos() {
+    return veterinarioService.countVeterinariosInactivos();
+    }
+
 }

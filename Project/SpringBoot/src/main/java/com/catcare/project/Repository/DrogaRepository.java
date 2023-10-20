@@ -24,6 +24,24 @@ import java.util.List;
 
 @Repository
 public interface DrogaRepository extends JpaRepository<Droga, Long> {
+
     @Query("SELECT d.id FROM Droga d")
-List<Long> findAllIds();
+    List<Long> findAllIds();
+
+    @Query("SELECT t.droga.nombre, COUNT(t) FROM Tratamiento t WHERE t.fechaDeInicio >= DATEADD(MONTH, -1, CURRENT_DATE) AND t.fechaDeInicio <= CURRENT_DATE GROUP BY t.droga.nombre")
+    List<Object[]> getDrogaCantidadLastMonth();
+
+    @Query("SELECT SUM(d.unidadesVendidas * d.precioVenta) FROM Droga d")
+    Float calcularVentasTotales();
+
+    @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) FROM Droga d")
+    Float calcularGananciasTotales();
+
+    @Query(value = "SELECT d.nombre, COUNT(t.droga) as cantidad " +
+                   "FROM Tratamiento t JOIN t.droga d " +
+                   "GROUP BY d.nombre " +
+                   "ORDER BY cantidad DESC " +
+                   "LIMIT 3")
+    List<Object[]> getTop3MedicamentosUnidadesVendidas();
+
 }

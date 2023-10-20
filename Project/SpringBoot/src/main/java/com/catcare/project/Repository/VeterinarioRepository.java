@@ -23,4 +23,11 @@ import java.util.List;
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> {
     @Query("SELECT v.id FROM Veterinario v")
     List<Long> findAllIds();
+
+    @Query("SELECT COUNT(v) FROM Veterinario v WHERE v.estado = 'Activo'")
+    Long countVeterinariosActivos();
+
+    @Query("SELECT COUNT(v) FROM Veterinario v WHERE v.estado = 'Inactivo'")
+    Long countVeterinariosInactivos();
+
 }

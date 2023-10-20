@@ -21,4 +21,8 @@ public interface TratamientoService {
     // Actualizar los datos de un tratamiento
     public void update(Tratamiento tratamiento);
 
+    // Devuelve la cantidad de tratamientos administrados en el último mes
+    public Long countTratamientosLastMonth();
+
+
 }

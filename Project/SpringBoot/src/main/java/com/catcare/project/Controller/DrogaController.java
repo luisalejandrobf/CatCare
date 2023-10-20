@@ -74,4 +74,37 @@ public class DrogaController {
         drogaService.update(droga);
     }
 
+
+    
+
+    // Consultas
+
+    // http://localhost:8090/catcare/drogas/medicamentosUltimoMes
+    @GetMapping("/medicamentosUltimoMes")
+    @Operation(summary = "Devuelve la cantidad de tratamientos por tipo de medicamento administrado en el último mes")
+    public List<Object[]> medicamentosUltimoMes() {
+    return drogaService.getDrogaCantidadLastMonth();
+    }
+
+    // http://localhost:8090/catcare/drogas/ventasTotales
+    @GetMapping("/ventasTotales")
+    @Operation(summary = "Devuelve las ventas totales de la veterinaria")
+    public Float ventasTotales() {
+    return drogaService.calcularVentasTotales();
+    }
+
+    // http://localhost:8090/catcare/drogas/gananciasTotales
+    @GetMapping("/gananciasTotales")
+    @Operation(summary = "Devuelve las ganancias totales de la veterinaria")
+    public Float gananciasTotales() {
+    return drogaService.calcularGananciasTotales();
+    }
+
+    // http://localhost:8090/catcare/drogas/top3Tratamientos
+    @GetMapping("/top3Tratamientos")
+    @Operation(summary = "Devuelve el top 3 tratamientos con más unidades vendidas")
+    public List<Object[]> top3Tratamientos() {
+    return drogaService.getTop3MedicamentosUnidadesVendidas();
+    }
+
 }

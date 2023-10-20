@@ -20,13 +20,14 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public Collection<Veterinario> SearchAll() {
         return repo.findAll();
     }
-    
+
     @Override
     public Veterinario SearchById(Long id) {
-        // Se tuvo que utilizar optional para que JPA no retorne java.util.NoSuchElementException: No value present.
+        // Se tuvo que utilizar optional para que JPA no retorne
+        // java.util.NoSuchElementException: No value present.
         // Si es vacio, retorna nulo y el controlador gestiona el error.
-       Optional<Veterinario> optionalVeterinario = repo.findById(id);
-       return optionalVeterinario.orElse(null);
+        Optional<Veterinario> optionalVeterinario = repo.findById(id);
+        return optionalVeterinario.orElse(null);
     }
 
     @Override
@@ -37,14 +38,28 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public void deleteById(Long id) {
-        // Elimina un veterinario de la base de datos por su ID utilizando el método de repo.
+        // Elimina un veterinario de la base de datos por su ID utilizando el método de
+        // repo.
         repo.deleteById(id);
     }
 
     @Override
     public void update(Veterinario veterinario) {
-        // Actualiza los datos de un veterinario en la base de datos utilizando el método de repo.
+        // Actualiza los datos de un veterinario en la base de datos utilizando el
+        // método de repo.
         repo.save(veterinario);
+    }
+
+    // Devuelve la cantidad de veterinarios activos
+    @Override
+    public Long countVeterinariosActivos() {
+        return repo.countVeterinariosActivos();
+    }
+
+    // Devuelve la cantidad de veterinarios inactivos
+    @Override
+    public Long countVeterinariosInactivos() {
+        return repo.countVeterinariosInactivos();
     }
 
 }

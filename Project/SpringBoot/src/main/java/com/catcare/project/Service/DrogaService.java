@@ -1,6 +1,7 @@
 package com.catcare.project.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import com.catcare.project.Entity.Droga;
@@ -21,5 +22,17 @@ public interface DrogaService {
 
     // Agregar una nueva droga
     public void add(Droga droga);
+
+    // Cantidad de tratamientos por tipo de medicamento administrado en el último mes (tabla medicamento - cantidad)
+    public List<Object[]> getDrogaCantidadLastMonth();
+    
+    // Ventas totales de la veterinaria
+    public Float calcularVentasTotales();
+
+    // Ganancias totales de la veterinaria
+    public Float calcularGananciasTotales();
+
+    // Top 3 tratamientos con más unidades vendidas
+    public List<Object[]> getTop3MedicamentosUnidadesVendidas();
 
 }

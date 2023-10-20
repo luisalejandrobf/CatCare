@@ -48,4 +48,12 @@ public class PacienteServiceImpl implements PacienteService {
         repo.save(paciente);
     }
 
+    
+    // Devuelve la cantidad total de mascotas de la veterinaria
+    @Override
+    public Long countTotalMascotas(){
+        return repo.countTotalMascotas();
+    }
+
+
 }

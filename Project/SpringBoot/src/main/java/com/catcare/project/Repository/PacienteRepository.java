@@ -19,4 +19,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
      @Query("SELECT p.id FROM Paciente p")
     List<Long> findAllIds();
 
+    @Query("SELECT COUNT(p) FROM Paciente p")
+    Long countTotalMascotas();
+
 }

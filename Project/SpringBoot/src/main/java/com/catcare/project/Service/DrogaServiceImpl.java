@@ -1,6 +1,7 @@
 package com.catcare.project.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import com.catcare.project.Entity.Droga;
@@ -14,21 +15,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DrogaServiceImpl implements DrogaService {
-    
+
     @Autowired
     DrogaRepository repo;
 
     @Override
     public Droga SearchById(Long id) {
-        // Se tuvo que utilizar optional para que JPA no retorne java.util.NoSuchElementException: No value present.
+        // Se tuvo que utilizar optional para que JPA no retorne
+        // java.util.NoSuchElementException: No value present.
         // Si es vacio, retorna nulo y el controlador gestiona el error.
-       Optional<Droga> optionalDroga = repo.findById(id);
-       return optionalDroga.orElse(null);
-    }    
+        Optional<Droga> optionalDroga = repo.findById(id);
+        return optionalDroga.orElse(null);
+    }
 
     @Override
     public Collection<Droga> SearchAll() {
-        // Obtiene una colección de todas las drogas almacenados en la base de datos utilizando repo.
+        // Obtiene una colección de todas las drogas almacenados en la base de datos
+        // utilizando repo.
         return repo.findAll();
     }
 
@@ -40,7 +43,8 @@ public class DrogaServiceImpl implements DrogaService {
 
     @Override
     public void update(Droga droga) {
-        // Actualiza los datos de una droga en la base de datos utilizando el método de repo.
+        // Actualiza los datos de una droga en la base de datos utilizando el método de
+        // repo.
         repo.save(droga);
     }
 
@@ -48,6 +52,30 @@ public class DrogaServiceImpl implements DrogaService {
     public void add(Droga droga) {
         // Agrega una nueva droga a la base de datos utilizando el método de repo.
         repo.save(droga);
+    }
+
+    // Cantidad de tratamientos por tipo de medicamento administrado en el último mes (tabla medicamento - cantidad)
+    @Override
+    public List<Object[]> getDrogaCantidadLastMonth(){
+        return repo.getDrogaCantidadLastMonth();
+    }
+
+    // Ventas totales de la veterinaria
+    @Override
+    public Float calcularVentasTotales(){
+        return repo.calcularVentasTotales();
+    }
+
+    // Ganancias totales de la veterinaria
+    @Override
+    public Float calcularGananciasTotales(){
+        return repo.calcularGananciasTotales();
+    }
+
+    // Top 3 tratamientos con más unidades vendidas
+    @Override
+    public List<Object[]> getTop3MedicamentosUnidadesVendidas(){
+        return repo.getTop3MedicamentosUnidadesVendidas();
     }
 
 }

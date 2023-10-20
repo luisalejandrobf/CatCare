@@ -2,6 +2,8 @@ package com.catcare.project.Service;
 
 import java.util.Collection;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.catcare.project.Entity.Paciente;
 
 public interface PacienteService {
@@ -20,5 +22,8 @@ public interface PacienteService {
 
     // Agrega un nuevo paciente.
     public void add(Paciente paciente);
+    
+    // Devuelve la cantidad total de mascotas de la veterinaria
+    public Long countTotalMascotas();
     
 }

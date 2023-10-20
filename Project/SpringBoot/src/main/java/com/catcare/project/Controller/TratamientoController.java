@@ -53,7 +53,8 @@ public class TratamientoController {
     @PostMapping("/agregar")
     @Operation(summary = "Agrega un tratamiento")
     public void agregarTratamiento(@RequestBody Tratamiento tratamiento) {
-        // Llama al servicio tratamientoService para agregar el tratamiento a la base de datos
+        // Llama al servicio tratamientoService para agregar el tratamiento a la base de
+        // datos
         tratamientoService.add(tratamiento);
     }
 
@@ -61,7 +62,8 @@ public class TratamientoController {
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Elimina un tratamiento")
     public void eliminarTratamiento(@PathVariable("id") Long id) {
-        // Llama al servicio tratamientoService para eliminar el tratamiento con el ID especificado
+        // Llama al servicio tratamientoService para eliminar el tratamiento con el ID
+        // especificado
         tratamientoService.deleteById(id);
     }
 
@@ -71,8 +73,19 @@ public class TratamientoController {
     @PutMapping("/update/{id}")
     @Operation(summary = "Actualiza un tratamiento")
     public void actualizarTratamiento(@PathVariable("id") Long id, @RequestBody Tratamiento tratamiento) {
-        // Llama al servicio tratamientoService para actualizar los datos del tratamiento con el ID especificado
+        // Llama al servicio tratamientoService para actualizar los datos del
+        // tratamiento con el ID especificado
         tratamientoService.update(tratamiento);
+    }
+
+    
+    // Consultas
+
+    // http://localhost:8090/catcare/tratamientos/tratamientosEnElUltimoMes
+    @GetMapping("/tratamientosEnElUltimoMes")
+    @Operation(summary = "Devuelve la cantidad de tratamientos administrados en el último mes")
+    public Long tratamientosEnElUltimoMes() {
+    return tratamientoService.countTratamientosLastMonth();
     }
 
 }

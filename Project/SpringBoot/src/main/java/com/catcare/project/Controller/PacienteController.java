@@ -111,46 +111,15 @@ public class PacienteController {
         }
     }
 
+    
 
-    // ESTANDO EN UN Cliente (Regresa a la URL de visualizacion de las mascotas del cliente)
+    // Consultas
 
-    // Metodo para encontrar mascota de cliente
-    // Redireccion a showPacienteDeUnCliente
-    /* Se debe implementar la redireccion en angular, despues de visualizar.
-    @GetMapping("/mostrar/{clienteid}/{id}")
-    @Operation(summary = "Devuelve el paciente asociado a un cliente")
-    public Paciente mostrarInfoPacienteDeUnCliente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid) {
-        // Busca al paciente por su ID utilizando el servicio pacienteService
-        Paciente paciente = pacienteService.SearchById(id);
-
-        // Devuelve la vista llamada "/Cliente/showPacienteDeUnCliente" que muestra la información del paciente de un cliente específico
-        return "/Cliente/showPacienteDeUnCliente";
+    // http://localhost:8090/catcare/pacientes/mascotasTotales
+    @GetMapping("/mascotasTotales")
+    @Operation(summary = "Devuelve la cantidad total de mascotas")
+    public Long mascotasTotales() {
+    return pacienteService.countTotalMascotas();
     }
-    */
 
-    // Post para Update del cliente. Se accede con el ID del Paciente.
-    /* Se debe implementar la redireccion en angular, despues de actualizar.
-    @PutMapping("/update/{clienteid}/{id}")
-    @Operation(summary = "Actualiza un paciente, desde la vista de un cliente")
-    public void actualizarPacienteDeUnCliente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid, @RequestBody Paciente paciente) {
-        // Actualiza el paciente con los datos recibidos del formulario utilizando el servicio pacienteService
-        pacienteService.update(paciente);
-
-        // Redirige al usuario de vuelta a la página de visualización de las mascotas del cliente después de la actualización
-        // return "redirect:/catcare/clientes/mascotas/{clienteid}";
-    }
-    */
-
-    // DELETE http://localhost:8090/catcare/pacientes/delete/1
-    /* Se debe implementar la redireccion en angular, despues de borrar.
-    @DeleteMapping("/delete/{clienteid}/{id}")
-    @Operation(summary = "Elimina un paciente, desde la vista de un cliente")
-    public void eliminarPaciente(@PathVariable("id") Long id, @PathVariable("clienteid") Long clienteid) {
-        // Elimina el paciente con el ID proporcionado utilizando el servicio pacienteService
-        pacienteService.deleteById(id);
-
-        // Después de eliminar el paciente, redirige al usuario de vuelta a la página de visualización de mascotas del cliente
-        // return "redirect:/catcare/clientes/mascotas/{clienteid}";
-    }
-    */
 }
