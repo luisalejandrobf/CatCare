@@ -35,4 +35,15 @@ export class TratamientoService {
   actualizarTratamiento(tratamientoId: number, tratamiento: any): Observable<any> {
     return this.http.put<any>(`${this.ROOT_URL}/update/${tratamientoId}`, tratamiento);
   }
+
+  // Obtener cantidad de tratamientos en el último mes
+  getTratamientosUltimoMes(): Observable<any> {
+    return this.http.get<any>(`${this.ROOT_URL}/tratamientosEnElUltimoMes`);
+  }
+
+  // Obtener cantidad de mascotas activas
+  getMascotasActivas(): Observable<any> {
+    return this.http.get<any>(`${this.ROOT_URL}/mascotasActivas`);
+  }
+
 }

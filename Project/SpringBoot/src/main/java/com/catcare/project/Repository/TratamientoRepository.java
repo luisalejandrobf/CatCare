@@ -28,5 +28,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
 
     @Query("SELECT COUNT(t) FROM Tratamiento t WHERE t.fechaDeInicio >= DATEADD(MONTH, -1, CURRENT_DATE) AND t.fechaDeInicio <= CURRENT_DATE")
     Long countTratamientosLastMonth();
+
+    @Query("SELECT COUNT(DISTINCT t.paciente.id) FROM Tratamiento t WHERE t.paciente.id IS NOT NULL")
+    Long countMascotasEnTratamiento();
     
 }

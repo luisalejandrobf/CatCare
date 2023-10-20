@@ -88,4 +88,11 @@ public class TratamientoController {
     return tratamientoService.countTratamientosLastMonth();
     }
 
+    // http://localhost:8090/catcare/tratamientos/mascotasActivas
+    @GetMapping("/mascotasActivas")
+    @Operation(summary = "Devuelve la cantidad de mascotas activas (En tratamiento)")
+    public Long mascotasActivas() {
+    return tratamientoService.countMascotasEnTratamiento();
+    }
+
 }

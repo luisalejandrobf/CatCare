@@ -24,5 +24,8 @@ public interface TratamientoService {
     // Devuelve la cantidad de tratamientos administrados en el último mes
     public Long countTratamientosLastMonth();
 
+    // Devuelve la cantidad de mascotas Activas
+    public Long countMascotasEnTratamiento();
+
 
 }

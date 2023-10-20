@@ -41,4 +41,14 @@ export class VeterinarioService {
     return this.http.get<any[]>(`${this.ROOT_URL}/tratamientos/${veterinarioId}`);
   }
 
+  //Obtener cantidad de veterinarios activos
+  getVeterinariosActivos(): Observable<any> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/veterinariosActivos`);
+  }
+
+  //Obtener cantidad de veterinarios inactivos
+  getVeterinariosInactivos(): Observable<any> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/veterinariosInactivos`);
+  }
+
 }

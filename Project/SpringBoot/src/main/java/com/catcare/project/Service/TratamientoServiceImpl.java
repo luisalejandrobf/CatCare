@@ -57,4 +57,11 @@ public class TratamientoServiceImpl implements TratamientoService {
         return repo.countTratamientosLastMonth();
     }
 
+    // Devuelve la cantidad de mascotas Activas
+    @Override
+    public Long countMascotasEnTratamiento() {
+        return repo.countMascotasEnTratamiento();
+    }
+
+
 }

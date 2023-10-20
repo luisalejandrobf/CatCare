@@ -9,7 +9,7 @@ public class QueryTests {
      * 3. Cantidad de veterinarios activos en la plataforma -> VeterinarioService
      * 4. Cantidad de veterinarios inactivos en la plataforma -> VeterinarioService
      * 5. Cantidad de mascotas totales en la veterinaria -> PacienteService
-     * 6. Cantidad de mascotas activas (en tratamiento) en la veterinaria -> DrogaService
+     * 6. Cantidad de mascotas activas (en tratamiento) en la veterinaria -> TratamientoService
      * 7. Ventas totales de la veterinaria -> DrogaService
      * 8. Ganancias totales de la veterinaria -> DrogaService
      * 9. Top 3 tratamientos con más unidades vendidas -> DrogaService

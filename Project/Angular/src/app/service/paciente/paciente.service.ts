@@ -38,9 +38,14 @@ export class PacienteService {
     return this.http.put<any>(`${this.ROOT_URL}/update/${pacienteId}`, paciente);
   }
 
-//Obtener tratamiento por medio deel ID de paciente
+  //Obtener tratamiento por medio deel ID de paciente
   getTratamientosByPacienteId(pacienteId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.ROOT_URL}/tratamientos/${pacienteId}`);
+  }
+
+  // Obtener total de mascotas
+  getTotalDeMascotas(): Observable<any> {
+    return this.http.get<any>(`${this.ROOT_URL}/mascotasTotales`);
   }
 
 }
