@@ -71,22 +71,59 @@ public class TratamientoServiceTestNaive {
         tratamiento2.setDroga(drogaTest);
         tratamiento2.setVeterinario(veterinarioTest);
         tratamiento2.setFechaDeInicio(new Date(System.currentTimeMillis()));
-    
-        
         tratamientoService.add(tratamiento2);
         tratamientosPreCargados.add(tratamiento2);
     }
 
- @Test
-    public void TratamientoService_createTratamiento_Tratamiento(){
- 
+    @Test
+    public void TratamientoService_crearTratamiento_Tratamiento() {
         Tratamiento tratamiento = new Tratamiento();
+        tratamiento.setPaciente(pacienteTest);
+        tratamiento.setDroga(drogaTest);
+        tratamiento.setVeterinario(veterinarioTest);
+        tratamiento.setFechaDeInicio(new Date(System.currentTimeMillis()));
 
-        tratamientoService.add(tratamiento);
-        
-        Tratamiento newTratamiento = tratamientoService.SearchById(tratamiento.getId()); 
+        Tratamiento tratamientoCreado = tratamientoService.add(tratamiento);
+    
+        Assertions.assertThat(tratamientoCreado).isNotNull();
+        Assertions.assertThat(tratamientoCreado.getPaciente()).isEqualTo(pacienteTest);
+        Assertions.assertThat(tratamientoCreado.getDroga()).isEqualTo(drogaTest);
+        Assertions.assertThat(tratamientoCreado.getVeterinario()).isEqualTo(veterinarioTest);
+    }
 
-        Assertions.assertThat(newTratamiento).isNotNull();
+    @Test
+    public void TratamientoService_eliminarTratamientoPorId_Tratamiento() {
+        Long tratamientoId = tratamientosPreCargados.get(0).getId(); 
+        tratamientoService.deleteById(tratamientoId);
+    
+        Tratamiento tratamientoEliminado = tratamientoService.SearchById(tratamientoId);
+        Assertions.assertThat(tratamientoEliminado).isNull();
+    }
+
+    @Test
+    public void TratamientoService_actualizarTratamiento_Tratamiento() {
+        Tratamiento tratamiento = tratamientoService.SearchById(tratamientosPreCargados.get(0).getId()); 
+        Droga nuevaDroga = new Droga();
+        nuevaDroga.setNombre("Nueva Droga");
+        drogaRepository.save(nuevaDroga); 
+        tratamiento.setDroga(nuevaDroga);
+        tratamientoService.update(tratamiento);
+    
+        Tratamiento tratamientoActualizado = tratamientoService.SearchById(tratamiento.getId());
+        Assertions.assertThat(tratamientoActualizado).isNotNull();
+        Assertions.assertThat(tratamientoActualizado.getDroga().getNombre()).isEqualTo("Nueva Droga");
+    }
+
+    @Test
+    public void TratamientoService_contarTratamientosUltimoMes_Cantidad() {
+        Long cantidad = tratamientoService.countTratamientosLastMonth();
+        Assertions.assertThat(cantidad).isEqualTo(2L); 
+    }
+
+    @Test
+    public void TratamientoService_contarMascotasEnTratamiento_Cantidad() {
+        Long cantidad = tratamientoService.countMascotasEnTratamiento();
+        Assertions.assertThat(cantidad).isEqualTo(1L); 
     }
 
     @Test
@@ -94,6 +131,6 @@ public class TratamientoServiceTestNaive {
         Collection<Tratamiento> tratamientos = tratamientoService.SearchAll();
 
         Assertions.assertThat(tratamientos).isNotNull();
-        Assertions.assertThat(tratamientos.size()).isEqualTo(2);
+        Assertions.assertThat(tratamientos.size()).isEqualTo(2); 
     }
 }
