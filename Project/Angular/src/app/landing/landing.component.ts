@@ -164,6 +164,7 @@ export class LandingComponent implements OnInit {
       const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula && veterinario.contrasena === contrasena);
 
       if (veterinarioEncontrado) {
+        sessionStorage.setItem('veterinarioID', String(veterinarioEncontrado.id));
         // Si se encuentra el veterinario, navega a su página de perfil o dashboard
         this.router.navigate([`/veterinario/pacientes`]);
       } else {
