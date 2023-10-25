@@ -1,4 +1,4 @@
-package com.catcare.project;
+package com.catcare.project.query;
 
 import com.catcare.project.Entity.Droga;
 import com.catcare.project.Entity.Paciente;
