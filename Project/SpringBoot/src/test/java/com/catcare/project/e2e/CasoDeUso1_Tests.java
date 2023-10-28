@@ -68,8 +68,11 @@ public class CasoDeUso1_Tests {
     @Test
     public void CasoDeUso1_Test(){
 
-        driver.get(BASE_URL + "/administrador/veterinarios");
+        driver.get(BASE_URL);
 
+        // Pruebas de inicio del DatabaseInit para teste2e
+        /* 
+        driver.get(BASE_URL + "/administrador/veterinarios");
         // Se verifica que hay datos cargados para que el veterinario inicie sesión
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[1]")));
         
@@ -79,7 +82,7 @@ public class CasoDeUso1_Tests {
             
         WebElement btnCerrarSesionAdministrador = driver.findElement(By.xpath("//html//body//app-root//app-administrador//div//app-barra-superior-administrador//header//div//ul//li[5]//div//a[1]"));
         btnCerrarSesionAdministrador.click();
-
+        */
 
         // DESARROLLO DEL CASO DE USO
 
@@ -89,17 +92,17 @@ public class CasoDeUso1_Tests {
         Este se equivoca la primera vez
         */
 
-        WebElement btnLoginVeterinario = driver.findElement(By.xpath("//html//body//app-root//app-landing//header//nav//ul//li[5]//a"));
+        WebElement btnLoginVeterinario = driver.findElement(By.className("login"));
         btnLoginVeterinario.click();
-        WebElement btnSeleccionVeterinario = driver.findElement(By.xpath("//*[@id=\"veterinarioBtn\"]"));
+        WebElement btnSeleccionVeterinario = driver.findElement(By.id("veterinarioBtn"));
         btnSeleccionVeterinario.click();
 
-        WebElement inputCedula = driver.findElement(By.xpath("//*[@id=\"VetCedula\"]"));
-        WebElement inputContrasena= driver.findElement(By.xpath("//*[@id=\"VetPassword\"]"));
+        WebElement inputCedula = driver.findElement(By.id("VetCedula"));
+        WebElement inputContrasena= driver.findElement(By.id("VetPassword"));
         inputCedula.sendKeys("123456789"); // Se equivoca la primera vez (Datos incorrectos)
         inputContrasena.sendKeys("123456789"); // Se equivoca la primera vez (Datos incorrectos)
 
-        WebElement loginVeterinarioSubmit = driver.findElement(By.xpath("//*[@id=\"btnVetSignin\"]"));
+        WebElement loginVeterinarioSubmit = driver.findElement(By.id("btnVetSignin"));
         loginVeterinarioSubmit.click();
         Alert alert = driver.switchTo().alert();
         alert.accept(); // Se acepta la alerta de contrasena incorrecta
@@ -112,19 +115,19 @@ public class CasoDeUso1_Tests {
         loginVeterinarioSubmit.click();
 
         // Va a la sección de registro de clientes
-        WebElement btnSeccionClientes = driver.findElement(By.xpath("//html//body//app-root//app-veterinario//div//app-barra-superior-veterinario//header//div//ul//li[1]//a"));
+        WebElement btnSeccionClientes = driver.findElement(By.id("btnClientes"));
         btnSeccionClientes.click();
-        WebElement btnBarraLateralClientes = driver.findElement(By.xpath("//*[@id=\"logo\"]/i/img"));
+        WebElement btnBarraLateralClientes = driver.findElement(By.id("logo"));
         btnBarraLateralClientes.click();
-        WebElement btnRegistrarClientes = driver.findElement(By.xpath("//*[@id=\"menu_side\"]//div[2]//a[3]//div//h4"));
+        WebElement btnRegistrarClientes = driver.findElement(By.className("fa-user-plus"));
         btnRegistrarClientes.click();
 
         // Pide los datos y da en el botón de “registrar”. Nuevamente el veterinario se equivoca en uno de los campos
-        WebElement inputNombreCliente = driver.findElement(By.xpath("//*[@id=\"nombre\"]"));
-        WebElement inputCedulaCliente = driver.findElement(By.xpath("//*[@id=\"cedula\"]"));
-        WebElement inputCorreoCliente = driver.findElement(By.xpath("//*[@id=\"correo\"]"));
-        WebElement inputCelularCliente = driver.findElement(By.xpath("//*[@id=\"celular\"]"));
-        WebElement inputFotoCliente = driver.findElement(By.xpath("//*[@id=\"foto\"]"));
+        WebElement inputNombreCliente = driver.findElement(By.id("nombre"));
+        WebElement inputCedulaCliente = driver.findElement(By.id("cedula"));
+        WebElement inputCorreoCliente = driver.findElement(By.id("correo"));
+        WebElement inputCelularCliente = driver.findElement(By.id("celular"));
+        WebElement inputFotoCliente = driver.findElement(By.id("foto"));
         String nombreCliente = "Juanito Angarita Castiblanco";
         inputNombreCliente.sendKeys(nombreCliente);
         String cedulaCliente = "787664";
@@ -132,7 +135,7 @@ public class CasoDeUso1_Tests {
         inputCorreoCliente.sendKeys("Juan."); // Se equivoca la primera vez (Dato incorrecto, correo no valido)
         inputCelularCliente.sendKeys("3162736456");
         inputFotoCliente.sendKeys("https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
-        WebElement btnEnviarRegistroCliente = driver.findElement(By.xpath("//html//body//app-root//app-veterinario//div//app-registrar-cliente//div//div//div//form//button"));
+        WebElement btnEnviarRegistroCliente = driver.findElement(By.id("btnEnviar"));
         btnEnviarRegistroCliente.click();
         alert.accept(); // Se acepta la alerta de formulario diligenciado incorrectamente
 
@@ -142,27 +145,27 @@ public class CasoDeUso1_Tests {
         btnEnviarRegistroCliente.click();
 
         // El cliente queda registrado.
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"patientTable\"]//tbody//tr"))); // Se espera a que carguen los datos, dado a que se carga otra pagina
-        List<WebElement> listClientes = driver.findElements(By.xpath("//*[@id=\"patientTable\"]//tbody//tr"));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("cliente"))); // Se espera a que carguen los datos, dado a que se carga otra pagina
+        List<WebElement> listClientes = driver.findElements(By.className("cliente"));
         Assertions.assertThat(listClientes.size()).isEqualTo(5); // Quinto cliente registrado
 
         // Posteriormente va a la sección de mascotas
-        WebElement btnSeccionPacientes = driver.findElement(By.xpath("//html//body//app-root//app-veterinario//div//app-barra-superior-veterinario//header//div//ul//li[2]//a"));
+        WebElement btnSeccionPacientes = driver.findElement(By.id("btnPacientes"));
         btnSeccionPacientes.click();
-        WebElement btnBarraLateralPacientes = driver.findElement(By.xpath("//*[@id=\"logo\"]//i//img"));
+        WebElement btnBarraLateralPacientes = driver.findElement(By.id("logo"));
         btnBarraLateralPacientes.click();
-        WebElement btnRegistrarPacientes = driver.findElement(By.xpath("//*[@id=\"menu_side\"]//div[2]//a[3]//div//h4"));
+        WebElement btnRegistrarPacientes = driver.findElement(By.className("fa-user-plus"));
         btnRegistrarPacientes.click();
 
         // Y registra la mascota asociándola al dueño
-        WebElement inputNombrePaciente = driver.findElement(By.xpath("//*[@id=\"nombre\"]"));
-        WebElement inputRazaPaciente = driver.findElement(By.xpath("//*[@id=\"raza\"]"));
-        WebElement inputEdadPaciente = driver.findElement(By.xpath("//*[@id=\"edad\"]"));
-        WebElement inputPesoPaciente = driver.findElement(By.xpath("//*[@id=\"peso\"]"));
-        WebElement inputEnfermedadPaciente = driver.findElement(By.xpath("//*[@id=\"enfermedad\"]"));
-        WebElement inputEstadoPaciente = driver.findElement(By.xpath("//*[@id=\"estado\"]"));
-        WebElement inputFotoPaciente = driver.findElement(By.xpath("//*[@id=\"foto\"]"));
-        WebElement inputDuenoPaciente = driver.findElement(By.xpath("//*[@id=\"cliente\"]"));
+        WebElement inputNombrePaciente = driver.findElement(By.id("nombre"));
+        WebElement inputRazaPaciente = driver.findElement(By.id("raza"));
+        WebElement inputEdadPaciente = driver.findElement(By.id("edad"));
+        WebElement inputPesoPaciente = driver.findElement(By.id("peso"));
+        WebElement inputEnfermedadPaciente = driver.findElement(By.id("enfermedad"));
+        WebElement inputEstadoPaciente = driver.findElement(By.id("estado"));
+        WebElement inputFotoPaciente = driver.findElement(By.id("foto"));
+        WebElement inputDuenoPaciente = driver.findElement(By.id("cliente"));
         String nombrePaciente = "Paquito";
         String razaPaciente = "Siamés";
         String edadPaciente = "5";
@@ -183,54 +186,53 @@ public class CasoDeUso1_Tests {
         int lastOptionIndex = options.size() - 1; // Ultimo cliente agregado
         selectDuenoPaciente.selectByIndex(lastOptionIndex);
 
-        WebElement btnEnviarRegistroPaciente = driver.findElement(By.xpath("//html//body//app-root//app-veterinario//div//app-registrar-paciente//div//div//div//form//button"));
+        WebElement btnEnviarRegistroPaciente = driver.findElement(By.id("btnEnviar"));
         btnEnviarRegistroPaciente.click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"patientTable\"]//tbody//tr"))); // Se espera a que carguen los datos, dado a que se carga otra pagina
-        List<WebElement> listPacientes = driver.findElements(By.xpath("//*[@id=\"patientTable\"]//tbody//tr"));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("paciente"))); // Se espera a que carguen los datos, dado a que se carga otra pagina
+        List<WebElement> listPacientes = driver.findElements(By.className("paciente"));
         Assertions.assertThat(listPacientes.size()).isEqualTo(1); // Primera mascota registrada
 
         // El veterinario pide al dueño que ingrese con su cedula a través del portal de clientes. 
-        WebElement btnPerfilVeterinarioPaciente = driver.findElement(By.xpath("//html//body//app-root//app-veterinario//div//app-barra-superior-veterinario//header//div//ul//li[3]//a"));
+        WebElement btnPerfilVeterinarioPaciente = driver.findElement(By.id("btnPerfil"));
         btnPerfilVeterinarioPaciente.click();
             
-        WebElement btnCerrarSesionVeterinarioPaciente = driver.findElement(By.xpath("//html//body//app-root//app-veterinario//div//app-barra-superior-veterinario//header//div//ul//li[3]//div//a[1]"));
+        WebElement btnCerrarSesionVeterinarioPaciente = driver.findElement(By.id("cerrarSesion"));
         btnCerrarSesionVeterinarioPaciente.click();
 
         // Este ingresa y ve que los datos de la mascota son correctos. 
-        WebElement btnLoginCliente = driver.findElement(By.xpath("//html//body//app-root//app-landing//header//nav//ul//li[5]//a"));
+        WebElement btnLoginCliente = driver.findElement(By.className("login"));
         btnLoginCliente.click();
-        WebElement btnSeleccionCliente = driver.findElement(By.xpath("//*[@id=\"clienteBtn\"]"));
+        WebElement btnSeleccionCliente = driver.findElement(By.id("clienteBtn"));
         btnSeleccionCliente.click();
-        WebElement inputCedulaClienteLogin = driver.findElement(By.xpath("//*[@id=\"CliCedula\"]"));
+        WebElement inputCedulaClienteLogin = driver.findElement(By.id("CliCedula"));
         inputCedulaClienteLogin.sendKeys(cedulaCliente);
-        WebElement loginClienteSubmit = driver.findElement(By.xpath("//*[@id=\"btnCliSignin\"]"));
+        WebElement loginClienteSubmit = driver.findElement(By.id("btnCliSignin"));
         loginClienteSubmit.click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[last()]//td[1]"))); // Se espera a que carguen los datos, dado a que se carga otra pagina
-        WebElement outputtNombrePaciente = driver.findElement(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[last()]//td[1]"));
-        WebElement outputRazaPaciente = driver.findElement(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[last()]//td[2]"));
-        WebElement outputEdadPaciente = driver.findElement(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[last()]//td[3]"));
-        WebElement outputPesoPaciente = driver.findElement(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[last()]//td[4]"));
-        WebElement outputEnfermedadPaciente = driver.findElement(By.xpath("//*[@id=\"patientTable\"]//tbody//tr[last()]//td[5]"));
-        Assertions.assertThat(outputtNombrePaciente.getText()).isEqualTo(nombrePaciente);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("pacienteDeCliente"))); // Se espera a que carguen los datos, dado a que se carga otra pagina
+        WebElement outputNombrePaciente = driver.findElement(By.className("outputNombrePaciente"));
+        WebElement outputRazaPaciente = driver.findElement(By.className("outputRazaPaciente"));
+        WebElement outputEdadPaciente = driver.findElement(By.className("outputEdadPaciente"));
+        WebElement outputPesoPaciente = driver.findElement(By.className("outputPesoPaciente"));
+        WebElement outputEnfermedadPaciente = driver.findElement(By.className("outputEnfermedadPaciente"));
+        WebElement outputEstadoPaciente = driver.findElement(By.className("outputEstadoPaciente"));
+        Assertions.assertThat(outputNombrePaciente.getText()).isEqualTo(nombrePaciente);
         Assertions.assertThat(outputRazaPaciente.getText()).isEqualTo(razaPaciente);
         Assertions.assertThat(outputEdadPaciente.getText()).isEqualTo(edadPaciente);
         Assertions.assertThat(outputPesoPaciente.getText()).isEqualTo(pesoPaciente);
         Assertions.assertThat(outputEnfermedadPaciente.getText()).isEqualTo(enfermedadPaciente);
+        Assertions.assertThat(outputEstadoPaciente.getText()).isEqualTo("Activo");
 
         // Se acaba la prueba.
 
     }
 
-
-    /*
     // Se puede apagar durante el desarrollo de pruebas para verificar el estado final de la misma
     @AfterEach
     void tearDown(){
         driver.quit();
     }
-    */
 
     
 }

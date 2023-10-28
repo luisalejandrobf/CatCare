@@ -22,12 +22,12 @@
         </thead>
         <tbody>
         <tr *ngFor="let paciente of pacienteClienteLista">
-          <td class="styled-table_pet-name">{{ paciente.nombre }}</td>
-          <td>{{ paciente.raza }}</td>
-          <td>{{ paciente.edad }}</td>
-          <td>{{ paciente.peso }}</td>
-          <td>{{ paciente.enfermedad }}</td>
-          <td>{{ paciente.estado }}</td>
+          <td class="styled-table_pet-name pacienteDeCliente outputNombrePaciente">{{ paciente.nombre }}</td>
+          <td class="outputRazaPaciente">{{ paciente.raza }}</td>
+          <td class="outputEdadPaciente">{{ paciente.edad }}</td>
+          <td class="outputPesoPaciente">{{ paciente.peso }}</td>
+          <td class="outputEnfermedadPaciente">{{ paciente.enfermedad }}</td>
+          <td class="outputEstadoPaciente">{{ paciente.estado }}</td>
         </tr>
         </tbody>
       </table>

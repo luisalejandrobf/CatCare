@@ -22,14 +22,14 @@
     </a>
     <ng-container *ngIf="vista === 'administrador'">
       <a [routerLink]="['/administrador/pacientes/registrar']">
-        <div class="option"><i class="fas fa-user-plus" title="Registrar Paciente"></i><h4>Registrar Paciente</h4></div>
+        <div id="registrarPaciente" class="option"><i class="fas fa-user-plus" title="Registrar Paciente"></i><h4>Registrar Paciente</h4></div>
       </a>
     </ng-container>
 
     <!-- Si la vista es 'veterinario', muestra estas acciones -->
     <ng-container *ngIf="vista === 'veterinario'">
       <a [routerLink]="['/veterinario/pacientes/registrar']">
-        <div class="option"><i class="fas fa-user-plus" title="Registrar Paciente"></i><h4>Registrar Paciente</h4></div>
+        <div id="registrarPaciente" class="option registrarPaciente"><i class="fas fa-user-plus" title="Registrar Paciente"></i><h4>Registrar Paciente</h4></div>
       </a>
     </ng-container>
   </div>
