@@ -19,5 +19,4 @@ public class CatCare {
 	public static void main(String[] args) {
 		SpringApplication.run(CatCare.class, args);
 	}
-
 }

@@ -28,7 +28,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @ActiveProfiles("teste2ecaso2") // Se usa un perfil especifico para pruebas e2e
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class CasoDeUso2_Tests {
-    
+
     private final String BASE_URL = "http://localhost:4200";
     private WebDriver driver;
     private WebDriverWait wait;
@@ -49,41 +49,50 @@ public class CasoDeUso2_Tests {
     }
 
     @Test
-    public void CasoDeUso2_Test(){
-
+    public void CasoDeUso2_Test() {
+        // Abre el sitio web y maximiza la ventana.
         driver.get(BASE_URL);
         driver.manage().window().maximize();
 
+        // Inicia sesión como administrador.
         WebElement botonLogIn = driver.findElement(By.id("btnLogIn"));
         botonLogIn.click();
 
+        // Busca el botón de administrador por su ID y hace clic en él para iniciar sesión como administrador.
         WebElement botonAdmin = driver.findElement(By.id("adminBtn"));
         botonAdmin.click();
 
+        // Busca los campos de entrada para la cédula y la contraseña del administrador por sus IDs.
         WebElement inputCedula = driver.findElement(By.id("AdmCedula"));
         WebElement inputContrasena= driver.findElement(By.id("AdmPassword"));
-        inputCedula.sendKeys("9632"); 
-        inputContrasena.sendKeys("1234"); 
+
+        // Ingresa la cédula y la contraseña del administrador en los campos correspondientes.
+        inputCedula.sendKeys("9632");
+        inputContrasena.sendKeys("1234");
 
         WebElement botonSigIn = driver.findElement(By.id("btnAdmSignin"));
         botonSigIn.click();
 
+        // Accede al panel de control y guarda los datos iniciales.
         WebElement botonDashBoard = driver.findElement(By.id("dashbord"));
         botonDashBoard.click();
 
-        //Acá debes guardar los datos iniciales del dashboard
-        //Ten en cuenta que las ganancias vienen con puntos y el cop y el signo $ entonces debes hacer que el dato llegue sin eso
-        //Para traer los datos le haces lo de WebElement y luego parseas el texto del WebElement
-        //Espero te rinda :)
+        // Guardar los datos iniciales del dashboard
+        WebElement totalMedicamentoVendido = driver.findElement(By.id("total-tratamientos"));
+        int initialMedicamentoCount = Integer.parseInt(totalMedicamentoVendido.getText());
 
+        WebElement ventasTotalesElem = driver.findElement(By.id("ventas-totales"));
+        String ventasText = ventasTotalesElem.getText().replace("$", "").replace("COP", "").replace(".", "").trim();
+        double initialVentasTotales = Double.parseDouble(ventasText);
 
+        // Cierra la sesión de administrador.
         WebElement botonPerfil = driver.findElement(By.id("perfil"));
         botonPerfil.click();
 
         WebElement botonLogOut = driver.findElement(By.id("cerrarSesion"));
         botonLogOut.click();
 
-
+        // Inicia sesión como veterinario y realiza acciones.
         WebElement btnLoginVeterinario = driver.findElement(By.className("login"));
         btnLoginVeterinario.click();
         WebElement btnSeleccionVeterinario = driver.findElement(By.id("veterinarioBtn"));
@@ -91,28 +100,34 @@ public class CasoDeUso2_Tests {
 
         WebElement inputCedulaVet = driver.findElement(By.id("VetCedula"));
         WebElement inputContrasenaVet = driver.findElement(By.id("VetPassword"));
-        inputCedulaVet.sendKeys("78901234567805"); 
-        inputContrasenaVet.sendKeys("k7l8"); 
+        inputCedulaVet.sendKeys("78901234567805");
+        inputContrasenaVet.sendKeys("k7l8");
 
         WebElement loginVeterinarioSubmit = driver.findElement(By.id("btnVetSignin"));
         loginVeterinarioSubmit.click();
 
+        // Busca una mascota y realiza acciones sobre ella.
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("tratamientoLink")));
         WebElement inputBuscarMascota = driver.findElement(By.id("nameFilter"));
-        inputBuscarMascota.sendKeys("Bella"); 
+        inputBuscarMascota.sendKeys("Bella");
 
-        
+        // Busca todos los elementos con la clase "tratamientoLink" y selecciona el segundo elemento de la lista (índice 1).
         List <WebElement> btnTratamiento = driver.findElements(By.className("tratamientoLink"));
         btnTratamiento.get(1).click();
 
+        // Busca el campo de entrada para añadir una fecha por su ID y lo limpia.
         WebElement añadirFecha = driver.findElement(By.id("fechaDeInicio"));
         añadirFecha.clear();
-        String fechaDeseada = "01/12/2023"; 
+
+        // Define la fecha deseada y la ingresa en el campo de fecha.
+        String fechaDeseada = "30/10/2023";
         añadirFecha.sendKeys(fechaDeseada);
 
+        // Busca el campo de entrada para seleccionar una droga por su ID y hace clic en él.
         WebElement inputDroga = driver.findElement(By.id("droga"));
         inputDroga.click();
 
+        // Busca todas las opciones de drogas disponibles y selecciona "AMOXICILINA".
         List <WebElement> opcionesDroga = driver.findElements(By.className("opciones"));
         for(WebElement opciones: opcionesDroga){
             if(opciones.getText().equals("AMOXICILINA")){
@@ -121,20 +136,29 @@ public class CasoDeUso2_Tests {
             }
         }
 
+        // Busca el botón para enviar el tratamiento y hace clic en él.
         WebElement botonEnviarTratamiento = driver.findElement(By.id("botonEnviar"));
         botonEnviarTratamiento.click();
+
+        // Espera hasta que el elemento con la clase "tratamientoLink" esté presente.
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("tratamientoLink")));
 
+        // Busca el campo de entrada para buscar una mascota por su nombre y escribe "Bella".
         inputBuscarMascota = driver.findElement(By.id("nameFilter"));
-        inputBuscarMascota.sendKeys("Bella"); 
+        inputBuscarMascota.sendKeys("Bella");
 
-        
+        // Busca todos los elementos con la clase "historialLink" y selecciona el segundo elemento de la lista (índice 1) para ver el historial.
         List <WebElement> btnHistorial = driver.findElements(By.className("historialLink"));
         btnHistorial.get(1).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("nombreDroga"))); 
-        List<WebElement> listPacientes = driver.findElements(By.className("nombreDroga"));
-        Assertions.assertThat(listPacientes.size()).isEqualTo(1); 
 
+        // Espera hasta que el elemento con la clase "nombreDroga" esté presente.
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("nombreDroga")));
+
+        // Verifica que solo haya un paciente en la lista con el nombre de la droga.
+        List<WebElement> listPacientes = driver.findElements(By.className("nombreDroga"));
+        Assertions.assertThat(listPacientes.size()).isEqualTo(1);
+
+        // Cierra la sesión de veterinario.
         WebElement botonPerfilVet = driver.findElement(By.id("btnPerfil"));
         botonPerfilVet.click();
 
@@ -142,5 +166,68 @@ public class CasoDeUso2_Tests {
         botonLogOutVet.click();
 
 
+        // Inicia sesión nuevamente como administrador y verifica los datos actualizados en el panel de control.
+        botonLogIn = driver.findElement(By.id("btnLogIn"));
+        botonLogIn.click();
+
+        // Busca y hace clic en el botón de administrador.
+        botonAdmin = driver.findElement(By.id("adminBtn"));
+        botonAdmin.click();
+
+        // Busca los campos de entrada para la cédula y contraseña del administrador.
+        inputCedula = driver.findElement(By.id("AdmCedula"));
+        inputContrasena= driver.findElement(By.id("AdmPassword"));
+
+        // Ingresa la cédula y contraseña del administrador.
+        inputCedula.sendKeys("9632");
+        inputContrasena.sendKeys("1234");
+
+        // Busca y hace clic en el botón para iniciar sesión.
+        botonSigIn = driver.findElement(By.id("btnAdmSignin"));
+        botonSigIn.click();
+
+        // Busca y hace clic en el botón del tablero o dashboard.
+        botonDashBoard = driver.findElement(By.id("dashbord"));
+        botonDashBoard.click();
+
+        // Espera hasta que los elementos del tablero estén presentes.
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("total-tratamientos")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ventas-totales")));
+
+        // Busca y obtiene el total de medicamentos vendidos.
+        WebElement updatedMedicamentoVendido = driver.findElement(By.id("total-tratamientos"));
+        int updatedMedicamentoCount = Integer.parseInt(updatedMedicamentoVendido.getText());
+
+        // Cálculo manual de los tratamientos añadidos
+        int tratamientosAnadidos = updatedMedicamentoCount - initialMedicamentoCount;
+
+        // Verificacion Manual de los tratamientos
+        Assertions.assertThat(tratamientosAnadidos).isEqualTo(1); // Verifica que se haya añadido un tratamiento
+
+        // Verifica que el total de medicamentos vendidos haya aumentado en 1.
+        Assertions.assertThat(updatedMedicamentoCount).isEqualTo(initialMedicamentoCount + 1);
+
+        // Busca y obtiene el total de ventas.
+        WebElement updatedVentasTotalesElem = driver.findElement(By.id("ventas-totales"));
+        String updatedVentasText = updatedVentasTotalesElem.getText().replace("$", "").replace("COP", "").replace(".", "").trim();
+        double updatedVentasTotales = Double.parseDouble(updatedVentasText);
+
+        // Cálculo manual de las ganancias
+        double ganancias = updatedVentasTotales - initialVentasTotales;
+        Assertions.assertThat(ganancias).isGreaterThan(0); // Verifica que haya habido ganancias
+
+        // Verifica que el total de ventas haya aumentado.
+        Assertions.assertThat(updatedVentasTotales).isGreaterThan(initialVentasTotales);
+
+
+
+
+        // Busca y hace clic en el botón de perfil del administrador.
+        WebElement botonPerfilAdmin = driver.findElement(By.id("perfil"));
+        botonPerfilAdmin.click();
+
+        // Busca y hace clic en el botón para cerrar sesión del administrador.
+        WebElement botonLogOutAdmin = driver.findElement(By.id("cerrarSesion"));
+        botonLogOutAdmin.click();
     }
 }
