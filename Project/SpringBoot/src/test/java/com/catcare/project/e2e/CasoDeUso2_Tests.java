@@ -95,7 +95,7 @@ public class CasoDeUso2_Tests {
         WebElement totalMedicamentoVendido = driver.findElement(By.id("total-tratamientos"));
         int initialMedicamentoCount = Integer.parseInt(totalMedicamentoVendido.getText());
 
-        WebElement ventasTotalesElem = driver.findElement(By.id("ventas-totales"));
+        WebElement ventasTotalesElem = driver.findElement(By.id("ganancias-totales"));
         String ventasText = ventasTotalesElem.getText().replace("$", "").replace("COP", "").replace(".", "").trim();
         double initialVentasTotales = Double.parseDouble(ventasText);
 
@@ -206,7 +206,7 @@ public class CasoDeUso2_Tests {
 
         // Espera hasta que los elementos del tablero estén presentes.
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("total-tratamientos")));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ventas-totales")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ganancias-totales")));
 
         // Busca y obtiene el total de medicamentos vendidos.
         WebElement updatedMedicamentoVendido = driver.findElement(By.id("total-tratamientos"));
@@ -222,7 +222,7 @@ public class CasoDeUso2_Tests {
         Assertions.assertThat(updatedMedicamentoCount).isEqualTo(initialMedicamentoCount + 1);
 
         // Busca y obtiene el total de ventas.
-        WebElement updatedVentasTotalesElem = driver.findElement(By.id("ventas-totales"));
+        WebElement updatedVentasTotalesElem = driver.findElement(By.id("ganancias-totales"));
         String updatedVentasText = updatedVentasTotalesElem.getText().replace("$", "").replace("COP", "").replace(".", "").trim();
         double updatedVentasTotales = Double.parseDouble(updatedVentasText);
 
@@ -232,9 +232,6 @@ public class CasoDeUso2_Tests {
 
         // Verifica que el total de ventas haya aumentado.
         Assertions.assertThat(updatedVentasTotales).isGreaterThan(initialVentasTotales);
-
-
-
 
         // Busca y hace clic en el botón de perfil del administrador.
         WebElement botonPerfilAdmin = driver.findElement(By.id("perfil"));
