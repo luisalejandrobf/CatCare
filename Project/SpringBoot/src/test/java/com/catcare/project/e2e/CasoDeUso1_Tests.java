@@ -69,6 +69,7 @@ public class CasoDeUso1_Tests {
     public void CasoDeUso1_Test(){
 
         driver.get(BASE_URL);
+        driver.manage().window().maximize();
 
         // Pruebas de inicio del DatabaseInit para teste2e
         /* 

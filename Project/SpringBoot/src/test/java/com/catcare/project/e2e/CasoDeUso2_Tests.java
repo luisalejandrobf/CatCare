@@ -36,7 +36,20 @@ public class CasoDeUso2_Tests {
 
     @BeforeEach
     public void init() {
-        WebDriverManager.edgedriver().setup(); // Asegúrate de que WebDriverManager esté configurado para Edge
+
+        
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
+
+        chromeOptions.addArguments("--disable-notifications");
+        chromeOptions.addArguments("--disable-extensions");
+        // chromeOptions.addArguments("--headless");
+
+        this.driver = new ChromeDriver(chromeOptions);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        /* EDGE DRIVERS
+        WebDriverManager.edgedriver().setup();
 
         EdgeOptions edgeOptions = new EdgeOptions();
 
@@ -46,6 +59,7 @@ public class CasoDeUso2_Tests {
 
         this.driver = new EdgeDriver(edgeOptions);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+         */
     }
 
     @Test
