@@ -17,7 +17,7 @@
                     <tr *ngFor="let tratamiento of tratamientos">
                         <td class="styled-table_tratamiento-id">{{tratamiento.id}}</td>
                         <td>{{tratamiento.fechaDeInicio}}</td>
-                        <td>{{tratamiento.droga.nombre}}</td>
+                        <td class="nombreDroga">{{tratamiento.droga.nombre}}</td>
                         <td>{{tratamiento.veterinario.nombre}}</td>
                         <td class="btnHorizontal">
                             <div class="button-container">

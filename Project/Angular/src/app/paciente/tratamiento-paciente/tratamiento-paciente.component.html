@@ -14,12 +14,12 @@
         <div class="form-group">
           <label for="droga">Droga</label>
           <select [(ngModel)]="selectedDroga" name="drogaId" id="droga" class="form-control" style="height: 50px;" required>
-            <option *ngFor="let droga of drogasDisponibles" [value]="droga.id">{{droga.nombre}}</option>
+            <option class="opciones" *ngFor="let droga of drogasDisponibles" [value]="droga.id">{{droga.nombre}}</option>
           </select>
         </div>
 
         <!-- Botón de enviar -->
-        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Enviar</button>
+        <button type="submit" id="botonEnviar" class="btn btn-primary" [disabled]="!form.valid">Enviar</button>
       </form>
     </div>
   </div>

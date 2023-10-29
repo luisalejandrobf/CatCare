@@ -57,10 +57,10 @@
                       class="fas fa-edit"></i> Modificar</a>
                   <a class="action-link text-danger" href="javascript:void(0);" (click)="eliminarPacientes(paciente)"><i
                       class="fas fa-trash-alt"></i> Eliminar</a>
-                  <a [routerLink]="['/veterinario/pacientes/tratamiento', paciente.id]" class="action-link"
-                    style="color: #0db5e8;"><i class="fas fa-syringe"></i> Tratamiento</a>
-                  <a [routerLink]="['/veterinario/pacientes/historial', paciente.id]" class="action-link"
-                    style="color: #9836ea;"><i class="fas fa-history"></i> Historial</a>
+                  <a [routerLink]="['/veterinario/pacientes/tratamiento', paciente.id]" class="action-link tratamientoLink"
+                     style="color: #0db5e8;"><i class="fas fa-syringe" ></i> Tratamiento</a>
+                  <a [routerLink]="['/veterinario/pacientes/historial', paciente.id]" class="action-link historialLink"
+                    style="color: #9836ea;"><i class="fas fa-history" ></i> Historial</a>
                 </ng-container>
 
               </div>
