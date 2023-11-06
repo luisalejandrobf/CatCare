@@ -3,6 +3,8 @@ package com.catcare.project.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -77,5 +79,26 @@ public class AdministradorController {
         // administrador con el ID especificado
         administradorService.update(administrador);
     }
+
+    // Verificar inicio de sesión para un administrador, dada cédula y contraseña
+    @GetMapping("/login")
+    @Operation(summary = "Verifica el inicio de sesión de un administrador")
+    public ResponseEntity<Administrador> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
+        // Llama al servicio administradorService para verificar el inicio de sesión
+        // Busca un administrador por la cédula
+        Administrador administrador = administradorService.findByCedula(cedula);
+
+        if (administrador != null) {
+            // Verifica si la contraseña coincide
+            if (administrador.getContrasena().equals(contrasena)) {
+                return new ResponseEntity<Administrador>(administrador, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Administrador>(administrador, HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<Administrador>(administrador, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }

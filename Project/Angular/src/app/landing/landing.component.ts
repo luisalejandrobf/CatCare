@@ -1,15 +1,15 @@
-import {Component, ElementRef, AfterViewInit, Renderer2, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swiper from 'swiper';
-import {Cliente} from "../cliente/cliente";
-import {ClienteService} from "../service/cliente/cliente.service";
-import {PacienteService} from "../service/paciente/paciente.service";
-import {VeterinarioService} from "../service/veterinario/veterinario.service";
-import {AdministradorService} from "../service/administrador/administrador.service";
-import {DrogaService} from "../service/droga/droga.service";
-import {TratamientoService} from "../service/tratamiento/tratamiento.service";
-import {Veterinario} from "../veterinario/veterinario";
-import {Administrador} from "../administrador/administrador";
+import { Cliente } from "../cliente/cliente";
+import { ClienteService } from "../service/cliente/cliente.service";
+import { PacienteService } from "../service/paciente/paciente.service";
+import { VeterinarioService } from "../service/veterinario/veterinario.service";
+import { AdministradorService } from "../service/administrador/administrador.service";
+import { DrogaService } from "../service/droga/droga.service";
+import { TratamientoService } from "../service/tratamiento/tratamiento.service";
+import { Veterinario } from "../veterinario/veterinario";
+import { Administrador } from "../administrador/administrador";
 
 @Component({
   selector: 'app-landing',
@@ -79,7 +79,7 @@ export class LandingComponent implements OnInit {
   ) {
   }
 
-// Después de que la vista se inicializa, se configura un carrusel de imágenes (Swiper) y varios listeners.
+  // Después de que la vista se inicializa, se configura un carrusel de imágenes (Swiper) y varios listeners.
   ngAfterViewInit() {
     this.setupSwiper();
     this.setupListeners();
@@ -160,7 +160,27 @@ export class LandingComponent implements OnInit {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#VetPassword').value;
 
-      // Verificar si la cédula y la contraseña coinciden con algún veterinario en la lista
+      // Verificar si la cédula y la contraseña coinciden con algún veterinario
+
+      this.veterinarioService.verificarInicioSesion(cedula, contrasena)
+        .subscribe(
+          (response) => {
+            if (response) {
+              sessionStorage.setItem('veterinarioID', String(response.id));
+              // Si se encuentra el veterinario, navega a su página de perfil o dashboard
+              this.router.navigate(['/veterinario/pacientes']);
+            } else {
+              // Si no se encuentra, muestra un mensaje de error
+              alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
+            }
+          },
+          (error) => {
+            console.error(error);
+            alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
+          }
+        );
+
+      /*
       const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula && veterinario.contrasena === contrasena);
 
       if (veterinarioEncontrado) {
@@ -171,6 +191,10 @@ export class LandingComponent implements OnInit {
         // Si no se encuentra, muestra un mensaje de error
         alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
       }
+      */
+
+
+
     });
 
     btnAdmSignin.addEventListener('click', () => {
@@ -180,7 +204,29 @@ export class LandingComponent implements OnInit {
       console.log('Cédula ingresada:', cedula); // Log para depuración
       console.log('Contraseña ingresada:', contrasena); // Log para depuración
 
-      // Verificar si la cédula y la contraseña coinciden con algún administrador en la lista
+      // Verificar si la cédula y la contraseña coinciden con algún administrador
+
+      this.administradorService.verificarInicioSesion(cedula, contrasena)
+        .subscribe(
+          (response) => {
+            console.log(response);
+            const administradorEncontrado = true;
+            console.log('Administrador encontrado:', administradorEncontrado); // Log para depuración
+
+            // Si se encuentra el administrador, navega a su página de perfil o dashboard
+            this.router.navigate([`/administrador/pacientes`]);
+          },
+          (error) => {
+            console.error(error);
+
+            console.error('No se encontró administrador con las credenciales proporcionadas.'); // Mensaje de error en consola
+
+            // Si no se encuentra, muestra un mensaje de error
+            alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
+          }
+        );
+
+      /*
       const administradorEncontrado = this.administradorLista.find(administrador => administrador.cedula === cedula && administrador.contrasena === contrasena);
 
       if (administradorEncontrado) {
@@ -192,6 +238,9 @@ export class LandingComponent implements OnInit {
         // Si no se encuentra, muestra un mensaje de error
         alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
       }
+      */
+
+
     });
 
 

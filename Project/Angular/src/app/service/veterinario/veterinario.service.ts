@@ -51,4 +51,9 @@ export class VeterinarioService {
     return this.http.get<any[]>(`${this.ROOT_URL}/veterinariosInactivos`);
   }
 
+  // Verificar inicio de sesión de un veterinario
+  verificarInicioSesion(cedula: string, contrasena: string): Observable<any> {
+    return this.http.get<any>(`${this.ROOT_URL}/login?cedula=${cedula}&contrasena=${contrasena}`);
+  }
+
 }

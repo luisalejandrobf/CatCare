@@ -3,6 +3,7 @@ package com.catcare.project.Service;
 import java.util.Collection;
 
 import com.catcare.project.Entity.Administrador;
+import com.catcare.project.Entity.Cliente;
 
 public interface AdministradorService {
     
@@ -11,6 +12,9 @@ public interface AdministradorService {
 
     // Buscar un administrador por su ID
     public Administrador SearchById(Long id);
+
+    // Buscar un administrador por su número de cédula
+    public Administrador findByCedula(String cedula);
 
     // Agregar un nuevo administrador
     public void add(Administrador administrador);

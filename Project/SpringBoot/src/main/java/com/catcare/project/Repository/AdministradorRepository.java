@@ -21,5 +21,5 @@ import java.util.List;
 
 @Repository
 public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
-
+    Administrador findByCedula(String cedula);
 }

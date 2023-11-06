@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Entity.Veterinario;
@@ -21,6 +22,9 @@ import java.util.List;
 
 @Repository
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> {
+
+    Veterinario findByCedula(String cedula);
+
     @Query("SELECT v.id FROM Veterinario v")
     List<Long> findAllIds();
 

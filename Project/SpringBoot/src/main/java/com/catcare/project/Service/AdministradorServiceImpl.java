@@ -3,6 +3,8 @@ package com.catcare.project.Service;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,15 @@ public class AdministradorServiceImpl implements AdministradorService {
         // Si es vacio, retorna nulo y el controlador gestiona el error.
        Optional<Administrador> optionalAdministrador = repo.findById(id);
        return optionalAdministrador.orElse(null);
+    }
+
+    @Override
+     public Administrador findByCedula(String cedula) {
+        // Busca un cliente por su número de cédula utilizando el método personalizado findByCedula de repo.
+        Logger log = LoggerFactory.getLogger(getClass());
+        log.info(cedula);
+
+        return  repo.findByCedula(cedula);
     }
 
     @Override

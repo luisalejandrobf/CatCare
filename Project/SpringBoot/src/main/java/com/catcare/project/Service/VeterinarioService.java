@@ -2,6 +2,7 @@ package com.catcare.project.Service;
 
 import java.util.Collection;
 
+import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Veterinario;
 
@@ -12,6 +13,9 @@ public interface VeterinarioService {
 
     // Buscar un veterinario por su ID
     public Veterinario SearchById(Long id);
+
+    // Buscar un veterinario por su número de cédula
+    public Veterinario findByCedula(String cedula);
 
     // Agregar un nuevo veterinario
     public void add(Veterinario veterinario);

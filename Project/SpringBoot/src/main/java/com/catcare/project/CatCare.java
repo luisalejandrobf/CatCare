@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-public class CatCare { 
+public class CatCare {  
 
     // Luis Bravo, Felipe Garcia, Ana Ortegon.
     // Used: Devtools, Spring Web, Thymeleaf, Rest.

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Entity.Tratamiento;
@@ -99,6 +100,27 @@ public class VeterinarioController {
         }
         List<Tratamiento> tratamientos = veterinario.getTratamientos();
         return new ResponseEntity<>(tratamientos, HttpStatus.OK);
+    }
+
+
+    // Verificar inicio de sesión para un veterinario, dada cédula y contraseña
+    @GetMapping("/login")
+    @Operation(summary = "Verifica el inicio de sesión de un veterinario")
+    public ResponseEntity<Veterinario> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
+        // Llama al servicio veterinarioService para verificar el inicio de sesión
+        // Busca un veterinario por la cédula
+        Veterinario veterinario = veterinarioService.findByCedula(cedula);
+
+        if (veterinario != null) {
+            // Verifica si la contraseña coincide
+            if (veterinario.getContrasena().equals(contrasena)) {
+                return new ResponseEntity<Veterinario>(veterinario, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Veterinario>(veterinario, HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<Veterinario>(veterinario, HttpStatus.BAD_REQUEST);
+        }
     }
 
 

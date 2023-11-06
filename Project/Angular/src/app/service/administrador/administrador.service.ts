@@ -36,4 +36,10 @@ export class AdministradorService {
   actualizarAdministrador(administradorId: number, administrador: any): Observable<any> {
     return this.http.put<any>(`${this.ROOT_URL}/update/${administradorId}`, administrador);
   }
+
+  // Verificar inicio de sesión de un administrador
+  verificarInicioSesion(cedula: string, contrasena: string): Observable<any> {
+    return this.http.get<any>(`${this.ROOT_URL}/login?cedula=${cedula}&contrasena=${contrasena}`);
+  }
+
 }
