@@ -64,14 +64,14 @@ public class VeterinarioController {
     // http://localhost:8090/catcare/veterinarios/delete/1
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Elimina un veterinario (Cambia su estado a inactivo)")
-    public ResponseEntity<String> eliminarVeterinario(@PathVariable("id") Long id) {
+    public void eliminarVeterinario(@PathVariable("id") Long id) {
         Veterinario veterinario = veterinarioService.SearchById(id);
         if (veterinario == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         veterinario.setEstado("Inactivo");
         veterinarioService.update(veterinario);
-        return new ResponseEntity<>("Veterinario inactivado", HttpStatus.OK);
+        // return new ResponseEntity<>("Veterinario inactivado", HttpStatus.OK);
     }
 
     // El metodo para actualizar solo envia a la pagina, se deja unicamente el post.

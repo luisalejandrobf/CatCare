@@ -13,8 +13,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Tratamiento {
 
 
@@ -29,57 +37,18 @@ public class Tratamiento {
     @ManyToOne
     private Paciente paciente;
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-
     // @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Droga
     @ManyToOne
     private Droga droga;
-
-    public Droga getDroga() {
-        return droga;
-    }
-
-    public void setDroga(Droga droga) {
-        this.droga = droga;
-    }
-
 
     // @JsonIgnore // Evitar retornar informacion referenciada
     // Relacion con Veterinario
     @ManyToOne
     private Veterinario veterinario;
 
-    public Veterinario getVeterinario() {
-        return veterinario;
-    }
+    // Constructor vacío (implementado con Lombok)
 
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
-    }
-
-
-
-    public Tratamiento() {
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public Date getFechaDeInicio() {
-        return fechaDeInicio;
-    }
-    public void setFechaDeInicio(Date fechaDeInicio) {
-        this.fechaDeInicio = fechaDeInicio;
-    }
+    // Getters y Setters (implementado con Lombok)
 
 }

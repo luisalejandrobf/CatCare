@@ -61,11 +61,14 @@ public class DatabaseInitTest2 implements ApplicationRunner {
 
 
         // Inicializacion de administradores
-        administradorRepository.save(new Administrador("9632", "LuisBravo", "1234"));
-        administradorRepository.save(new Administrador("8521","FelipeGarcia", "1234"));
-        administradorRepository.save(new Administrador("7410","AnaOrtegon", "1234"));
-        administradorRepository.save(new Administrador("7896","JuanAngarita", "1234"));
-
+        Administrador administrador = new Administrador("9632", "LuisBravo", "1234");
+        administradorRepository.save(administrador);
+        administrador = new Administrador("8521","FelipeGarcia", "1234");
+        administradorRepository.save(administrador);
+        administrador = new Administrador("7410","AnaOrtegon", "1234");
+        administradorRepository.save(administrador);
+        administrador = new Administrador("7896","JuanAngarita", "1234");
+        administradorRepository.save(administrador);
 
 
         // Inicialización e inserción  de la base de datos con clientes

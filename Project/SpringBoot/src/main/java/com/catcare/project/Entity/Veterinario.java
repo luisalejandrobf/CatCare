@@ -13,8 +13,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Veterinario {
 
     @Id
@@ -33,17 +41,7 @@ public class Veterinario {
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
-
-    public Veterinario() {
-    }
-
+    // Constructor especifico sin ID o relaciones.
     public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String foto, String estado) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -53,60 +51,8 @@ public class Veterinario {
         this.estado = estado;
     }
 
-    public Long getId() {
-        return id;
-    }
+    // Constructor vacío (implementado con Lombok)
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    // Getters y Setters (implementado con Lombok)
 
 }

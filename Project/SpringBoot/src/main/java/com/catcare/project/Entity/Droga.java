@@ -14,8 +14,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Droga {
     
     @Id
@@ -33,15 +41,7 @@ public class Droga {
     @OneToMany(mappedBy = "droga", cascade = CascadeType.REMOVE)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
-
-
+    // Constructor especifico sin ID o relaciones.
     public Droga(String nombre, float precioVenta, float precioCompra, int unidadesDisponibles, int unidadesVendidas) {
         this.nombre = nombre;
         this.precioVenta = precioVenta;
@@ -50,50 +50,8 @@ public class Droga {
         this.unidadesVendidas = unidadesVendidas;
     }
 
-    public Droga() {
-    }
+    // Constructor vacío (implementado con Lombok)
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public float getPrecioVenta() {
-        return precioVenta;
-    }
-    public void setPrecioVenta(float precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    public float getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(float precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public int getUnidadesDisponibles() {
-        return unidadesDisponibles;
-    }
-
-    public void setUnidadesDisponibles(int unidadesDisponibles) {
-        this.unidadesDisponibles = unidadesDisponibles;
-    }
-
-    public int getUnidadesVendidas() {
-        return unidadesVendidas;
-    }
-
-    public void setUnidadesVendidas(int unidadesVendidas) {
-        this.unidadesVendidas = unidadesVendidas;
-    }
+    // Getters y Setters (implementado con Lombok)
 
 }
