@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Administrador {
 
+    // User role
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private UserEntity user;

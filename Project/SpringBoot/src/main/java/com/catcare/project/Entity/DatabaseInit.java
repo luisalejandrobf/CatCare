@@ -74,6 +74,16 @@ public class DatabaseInit implements ApplicationRunner {
         return userRepository.save(user);
     }
 
+    private UserEntity saveUserVeterinario(Veterinario veterinario){
+        UserEntity user = new UserEntity();
+        user.setUsername(veterinario.getNombre());
+        user.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
+        Role roles = roleRepository.findByName("VETERINARIO").get();
+        user.setRoles(List.of(roles));
+        return userRepository.save(user);
+    }
+
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
@@ -89,12 +99,14 @@ public class DatabaseInit implements ApplicationRunner {
         roleRepository.save(new Role("VETERINARIO"));
         roleRepository.save(new Role("CLIENTE"));
 
+        // SECURITY STEPS
         // 1. Crear objeto
         // 2. Guardar en tabla user
         // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
         // 4. Guardar el objeto en la tabla respectiva
 
         Administrador administradorSave;
+        Veterinario veterinarioSave;
         UserEntity userEntity;
 
 
@@ -103,31 +115,33 @@ public class DatabaseInit implements ApplicationRunner {
         // USAR EL PATRÓN BUILDER PARA CREAR LAS INSTANCIAS DE 1 DE SUS ENTIDADES
 
         // Administrador 1
-        Administrador administrador = new Administrador().builder().cedula("9632").usuario("LuisBravo").contrasena("1234").build(); // 1. Crear objeto
+        administradorSave = new Administrador().builder().cedula("9632").usuario("LuisBravo").contrasena("1234").build(); // 1. Crear objeto
         // Administrador administrador = new Administrador("9632", "LuisBravo", "1234");
-        userEntity = saveUserAdministrador(administrador); // 2. Guardar en tabla user
-        administrador.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
-        administradorRepository.save(administrador); // 4. Guardar el objeto en la tabla respectiva
+        userEntity = saveUserAdministrador(administradorSave); // 2. Guardar en tabla user
+        administradorSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        administradorRepository.save(administradorSave); // 4. Guardar el objeto en la tabla respectiva
         //
         // Administrador 2
-        administrador = new Administrador().builder().cedula("8521").usuario("FelipeGarcia").contrasena("1234").build();
+        administradorSave = new Administrador().builder().cedula("8521").usuario("FelipeGarcia").contrasena("1234").build();
         // administrador = new Administrador("8521","FelipeGarcia", "1234");
-        userEntity = saveUserAdministrador(administrador);
-        administrador.setUser(userEntity);
-        administradorRepository.save(administrador);
+        userEntity = saveUserAdministrador(administradorSave);
+        administradorSave.setUser(userEntity);
+        administradorRepository.save(administradorSave);
         // Administrador 3
-        administrador = new Administrador().builder().cedula("7410").usuario("AnaOrtegon").contrasena("1234").build();
+        administradorSave = new Administrador().builder().cedula("7410").usuario("AnaOrtegon").contrasena("1234").build();
         // administrador = new Administrador("7410","AnaOrtegon", "1234");
-        userEntity = saveUserAdministrador(administrador);
-        administrador.setUser(userEntity);
-        administradorRepository.save(administrador);
+        userEntity = saveUserAdministrador(administradorSave);
+        administradorSave.setUser(userEntity);
+        administradorRepository.save(administradorSave);
         //
         // Administrador 4
-        administrador = new Administrador().builder().cedula("7896").usuario("JuanAngarita").contrasena("1234").build();
+        administradorSave = new Administrador().builder().cedula("7896").usuario("JuanAngarita").contrasena("1234").build();
         // administrador = new Administrador("7896","JuanAngarita", "1234");
-        userEntity = saveUserAdministrador(administrador);
-        administrador.setUser(userEntity);
-        administradorRepository.save(administrador);
+        userEntity = saveUserAdministrador(administradorSave);
+        administradorSave.setUser(userEntity);
+        administradorRepository.save(administradorSave);
+
+
 
         // Inicialización e inserción  de la base de datos con clientes
         clienteRepository.save(new Cliente("12211351234", "Luis Alejandro Bravo Ferreira", "luis.bravof@javeriana.edu.co", "3162858895", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
@@ -338,107 +352,506 @@ public class DatabaseInit implements ApplicationRunner {
 
 
         // Inicialización e inserción  de la base de datos con veterinarios       
-        veterinarioRepository.save(new Veterinario("67890123456789", "Luisa Ortega", "1234", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("78901234567890", "Miguel Urtado", "m3n4", "Traumatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("89012345678901", "Ana Morales", "o5p6", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("90123456789012", "Jorge Salinas", "q7r8", "Endocrinología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("01234567890123", "Sandra Bullock", "s9t0", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("12345678901234", "Carlos Mena", "a1b2", "Cardiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("23456789012345", "Martina Ruiz", "c3d4", "Dermatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("34567890123456", "Juan Pérez", "e5f6", "Neurología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("45678901234567", "Gabriela Torres", "g1h2", "Urología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("56789012345678", "Roberto Méndez", "i3j4", "Neurocirugía", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678901123456789", "Andrea Fernández", "k5l6", "Nefrología", "https://img.freepik.com/fotos-premium/feliz-veterinaria-doctora-sosteniendo-gato-pie-hospital-veterinario_116547-67769.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("789012324567890", "David Morán", "m7n8", "Oftalmología", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo"));
-        veterinarioRepository.save(new Veterinario("890123453678901", "Paula Vargas", "o9p0", "Anestesiología", "https://img.freepik.com/fotos-premium/retrato-joven-veterinario-dos-gatos-sobre-fondo-blanco-ia-generativa_634053-8266.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901234567489012", "Antonio Aguilar", "q1r2", "Oncología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012345678950123", "Patricia Castillo", "s3t4", "Hematología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("123456789016234", "Enrique Montoya", "u5v6", "Reumatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("234567890123745", "Luisa Peña", "w7x8", "Infectología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("3456789012345986", "Jorge Salazar", "y9z0", "Dermatología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456789012345607", "Sandra Mora", "a0b1", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("567089012345678", "Rafael Estrada", "c2d3", "Cardiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678900123456789", "Carmen Ortiz", "e4f5", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("789012304567890", "Miguel Ángel Ramírez", "g6h7", "Endocrinología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("890123450678901", "Verónica Guzmán", "i8j9", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901230456789012", "Adrián Blanco", "k0l1", "Traumatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012345607890123", "Bárbara Muñoz", "m2n3", "Neurología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("123450678901234", "Carlos Alberto Cruz", "o4p5", "Urología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("234567890012345", "Diana Carolina Soto", "q6r7", "Neurocirugía", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("345067890123456", "Fernando Martín Gómez", "s8t9", "Nefrología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456078901234567", "Gloria Patricia Díaz", "u0v1", "Oftalmología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("567890012345678", "Hector Manuel Rojas", "w2x3", "Anestesiología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("678901023456789", "Iván Darío Torres", "y4z5", "Oncología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("780901234567890", "Javier Enrique Rodríguez", "a6b7", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("890123456708901", "Karen Johana Rincón", "c8d9", "Reumatología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901234560789012", "Laura Victoria Gómez", "e0f1", "Infectología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012034567890123", "Manuel Alejandro Pérez", "g2h3", "Dermatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("102345678901234", "Natalia Andrea Ramírez", "i4j5", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("234567890102345", "Óscar Julián Martínez", "k6l7", "Cardiología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("345678901230456", "Paola Andrea Castro", "m8n9", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456789012345067", "Ricardo José Vargas", "o0p1", "Endocrinología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("567890123456708", "Sandra Milena Pinto", "q2r3", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678090123456789", "Tomás Antonio Morales", "s4t5", "Traumatología", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo"));
-        veterinarioRepository.save(new Veterinario("708901234567890", "Viviana Marcela Suárez", "u6v7", "Neurología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("890012345678901", "Walter Enrique Peña", "w8x9", "Urología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901023456789012", "Yolanda del Pilar Moreno", "y0z1", "Neurocirugía", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012304567890123", "Zulma Yaneth Ortiz", "a2b3", "Nefrología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("123450678901234", "Alfonso Rafael Castillo", "c4d5", "Oftalmología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("234567089012345", "Beatriz Elena Guzmán", "e6f7", "Anestesiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("345678900123456", "César Augusto Rincón", "g8h9", "Oncología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456789010234567", "Dora Liliana Romero", "i0j1", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("567890123045678", "Ernesto Antonio Vargas", "k2l3", "Reumatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678901234506789", "Fanny Carolina Díaz", "m4n5", "Infectología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("789012345670890", "Germán Alberto Torres", "o6p7", "Dermatología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("890123456789001", "Hernán Darío Gómez", "q8r9", "Pediatría", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo"));
-        veterinarioRepository.save(new Veterinario("1234567890123004", "Katia Marcela Pérez", "w4x5", "Endocrinología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("023456789012346", "Leonardo Fabián López", "y6z7", "Radiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("304567890123457", "Mariana Patricia García", "a8b9", "Traumatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("450678901234568", "Nicolas Enrique Martínez", "c0d1", "Neurología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("567089012345679", "Olga Lucía Hernández", "e2f3", "Urología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678900123456780", "Pedro Juan Guerra", "g4h5", "Neurocirugía", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("789010234567891", "Quintín Rafael Vega", "i6j7", "Nefrología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("890123045678902", "Ramiro Samuel Ruiz", "k8l9", "Oftalmología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901234506789013", "Silvia Tatiana Mora", "m0n1", "Anestesiología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012345670890124", "Tomás Ulises Ramírez", "o2p3", "Oncología", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo"));
-        veterinarioRepository.save(new Veterinario("123456789001235", "Úrsula Valentina Pérez", "q4r5", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("234567890102347", "Víctor Valentín Gómez", "s6t7", "Reumatología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("345678901230458", "Walter William Morales", "u8v9", "Infectología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456789012345069", "Ximena Yolanda Díaz", "w0x1", "Dermatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("567890123456700", "Yahir Zachary Castro", "y2z3", "Pediatría", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678901234567810", "Zara Zoe Salazar", "a4b5", "Cardiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("078901234567892", "Alessandro Antonio Vargas", "c6d7", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("809012345678903", "Blanca Beatriz Salinas", "e8f9", "Endocrinología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("900123456789014", "Catalina Claudia Serrano", "g0h1", "Radiología", "https://img.freepik.com/fotos-premium/feliz-veterinaria-doctora-sosteniendo-gato-pie-hospital-veterinario_116547-67769.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012034567890125", "Dario Diego Torres", "i2j3", "Traumatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("123405678901236", "Ernesto Efraín Pinto", "k4l5", "Neurología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("234560789012348", "Fernanda Fabiola Parra", "m6n7", "Urología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("345678090123459", "Gabriela Graciela Peña", "o8p9", "Neurocirugía", "https://img.freepik.com/fotos-premium/feliz-veterinaria-doctora-sosteniendo-gato-pie-hospital-veterinario_116547-67769.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456789001234560", "Homero Héctor Ortega", "q0r1", "Nefrología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("567890120345671", "Isabel Ivonne Olivares", "s2t3", "Oftalmología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678901234056782", "Julián Jorge Osorio", "u4v5", "Anestesiología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("789012345607893", "Karla Karina Ortega", "w6x7", "Oncología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("890123456780904", "León Leonardo Palacios", "y8z9", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901234567890015", "Mónica Mariana Páez", "a0b1", "Reumatología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012345678901206", "Nelson Nicolás Rincón", "c2d3", "Infectología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("123456789012370", "Óscar Orlando Romero", "e4f5", "Dermatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("203456789012349", "Pamela Patricia Rojas", "g6h7", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("340567890123450", "René Ricardo Ruiz", "i8j9", "Cardiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456078901234561", "Sonia Susana Soto", "k0l1", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("567809012345672", "Tania Tatiana Torres", "m2n3", "Endocrinología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678900123456783", "Ubaldo Ulises Vargas", "o4p5", "Radiología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("789012034567894", "Viviana Vanessa Velasco", "q6r7", "Traumatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("890123405678905", "Wilson Wilfredo Vera", "s8t9", "Neurología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("901234560789016", "Xavier Ximeno Villanueva", "u0v1", "Urología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("012345678090127", "Yolanda Yaneth Zambrano", "w2x3", "Neurocirugía", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("123456789001238", "Zacarías Zenón Zapata", "y4z5", "Nefrología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("234567890120350", "Ariadna Andrea Arango", "a7b8", "Cardiología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("345678901234061", "Bruno Benjamín Blanco", "c9d0", "Dermatología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("456789012345702", "Camila Carolina Cifuentes", "e1f2", "Neurología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("567890123456830", "Damián David Díaz", "g3h4", "Gastroenterología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("678090123456794", "Elena Estefanía Espinosa", "i5j6", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        veterinarioRepository.save(new Veterinario("789012304567805", "Felipe Francisco Fuentes", "k7l8", "Traumatología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
-        
+        veterinarioSave = new Veterinario("67890123456789", "Luisa Ortega", "1234", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"); // 1. Crear el objeto
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("78901234567890", "Miguel Urtado", "m3n4", "Traumatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("89012345678901", "Ana Morales", "o5p6", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("90123456789012", "Jorge Salinas", "q7r8", "Endocrinología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("01234567890123", "Sandra Bullock", "s9t0", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("12345678901234", "Carlos Mena", "a1b2", "Cardiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("23456789012345", "Martina Ruiz", "c3d4", "Dermatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("34567890123456", "Juan Pérez", "e5f6", "Neurología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("45678901234567", "Gabriela Torres", "g1h2", "Urología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("56789012345678", "Roberto Méndez", "i3j4", "Neurocirugía", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678901123456789", "Andrea Fernández", "k5l6", "Nefrología", "https://img.freepik.com/fotos-premium/feliz-veterinaria-doctora-sosteniendo-gato-pie-hospital-veterinario_116547-67769.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789012324567890", "David Morán", "m7n8", "Oftalmología", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123453678901", "Paula Vargas", "o9p0", "Anestesiología", "https://img.freepik.com/fotos-premium/retrato-joven-veterinario-dos-gatos-sobre-fondo-blanco-ia-generativa_634053-8266.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901234567489012", "Antonio Aguilar", "q1r2", "Oncología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012345678950123", "Patricia Castillo", "s3t4", "Hematología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123456789016234", "Enrique Montoya", "u5v6", "Reumatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234567890123745", "Luisa Peña", "w7x8", "Infectología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("3456789012345986", "Jorge Salazar", "y9z0", "Dermatología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456789012345607", "Sandra Mora", "a0b1", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567089012345678", "Rafael Estrada", "c2d3", "Cardiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678900123456789", "Carmen Ortiz", "e4f5", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789012304567890", "Miguel Ángel Ramírez", "g6h7", "Endocrinología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123450678901", "Verónica Guzmán", "i8j9", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901230456789012", "Adrián Blanco", "k0l1", "Traumatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012345607890123", "Bárbara Muñoz", "m2n3", "Neurología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123450678901234", "Carlos Alberto Cruz", "o4p5", "Urología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234567890012345", "Diana Carolina Soto", "q6r7", "Neurocirugía", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("345067890123456", "Fernando Martín Gómez", "s8t9", "Nefrología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456078901234567", "Gloria Patricia Díaz", "u0v1", "Oftalmología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567890012345678", "Hector Manuel Rojas", "w2x3", "Anestesiología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678901023456789", "Iván Darío Torres", "y4z5", "Oncología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("780901234567890", "Javier Enrique Rodríguez", "a6b7", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123456708901", "Karen Johana Rincón", "c8d9", "Reumatología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901234560789012", "Laura Victoria Gómez", "e0f1", "Infectología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012034567890123", "Manuel Alejandro Pérez", "g2h3", "Dermatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("102345678901234", "Natalia Andrea Ramírez", "i4j5", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234567890102345", "Óscar Julián Martínez", "k6l7", "Cardiología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("345678901230456", "Paola Andrea Castro", "m8n9", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456789012345067", "Ricardo José Vargas", "o0p1", "Endocrinología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567890123456708", "Sandra Milena Pinto", "q2r3", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678090123456789", "Tomás Antonio Morales", "s4t5", "Traumatología", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("708901234567890", "Viviana Marcela Suárez", "u6v7", "Neurología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890012345678901", "Walter Enrique Peña", "w8x9", "Urología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901023456789012", "Yolanda del Pilar Moreno", "y0z1", "Neurocirugía", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012304567890123", "Zulma Yaneth Ortiz", "a2b3", "Nefrología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123450678901234", "Alfonso Rafael Castillo", "c4d5", "Oftalmología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234567089012345", "Beatriz Elena Guzmán", "e6f7", "Anestesiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("345678900123456", "César Augusto Rincón", "g8h9", "Oncología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456789010234567", "Dora Liliana Romero", "i0j1", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567890123045678", "Ernesto Antonio Vargas", "k2l3", "Reumatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678901234506789", "Fanny Carolina Díaz", "m4n5", "Infectología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789012345670890", "Germán Alberto Torres", "o6p7", "Dermatología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123456789001", "Hernán Darío Gómez", "q8r9", "Pediatría", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("1234567890123004", "Katia Marcela Pérez", "w4x5", "Endocrinología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("023456789012346", "Leonardo Fabián López", "y6z7", "Radiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("304567890123457", "Mariana Patricia García", "a8b9", "Traumatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("450678901234568", "Nicolas Enrique Martínez", "c0d1", "Neurología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567089012345679", "Olga Lucía Hernández", "e2f3", "Urología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678900123456780", "Pedro Juan Guerra", "g4h5", "Neurocirugía", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789010234567891", "Quintín Rafael Vega", "i6j7", "Nefrología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123045678902", "Ramiro Samuel Ruiz", "k8l9", "Oftalmología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901234506789013", "Silvia Tatiana Mora", "m0n1", "Anestesiología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012345670890124", "Tomás Ulises Ramírez", "o2p3", "Oncología", "https://img.freepik.com/fotos-premium/experto-veterinario-examina-salud-gatito-chequeo-rutina-clinica-ai_894067-8651.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=ais", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123456789001235", "Úrsula Valentina Pérez", "q4r5", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234567890102347", "Víctor Valentín Gómez", "s6t7", "Reumatología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("345678901230458", "Walter William Morales", "u8v9", "Infectología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456789012345069", "Ximena Yolanda Díaz", "w0x1", "Dermatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567890123456700", "Yahir Zachary Castro", "y2z3", "Pediatría", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678901234567810", "Zara Zoe Salazar", "a4b5", "Cardiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("078901234567892", "Alessandro Antonio Vargas", "c6d7", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("809012345678903", "Blanca Beatriz Salinas", "e8f9", "Endocrinología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("900123456789014", "Catalina Claudia Serrano", "g0h1", "Radiología", "https://img.freepik.com/fotos-premium/feliz-veterinaria-doctora-sosteniendo-gato-pie-hospital-veterinario_116547-67769.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012034567890125", "Dario Diego Torres", "i2j3", "Traumatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123405678901236", "Ernesto Efraín Pinto", "k4l5", "Neurología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234560789012348", "Fernanda Fabiola Parra", "m6n7", "Urología", "https://img.freepik.com/foto-gratis/veterinario-cuidando-mascota_23-2149198624.jpg?size=626&ext=jpg&ga=GA1.2.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("345678090123459", "Gabriela Graciela Peña", "o8p9", "Neurocirugía", "https://img.freepik.com/fotos-premium/feliz-veterinaria-doctora-sosteniendo-gato-pie-hospital-veterinario_116547-67769.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456789001234560", "Homero Héctor Ortega", "q0r1", "Nefrología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567890120345671", "Isabel Ivonne Olivares", "s2t3", "Oftalmología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678901234056782", "Julián Jorge Osorio", "u4v5", "Anestesiología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789012345607893", "Karla Karina Ortega", "w6x7", "Oncología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123456780904", "León Leonardo Palacios", "y8z9", "Hematología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901234567890015", "Mónica Mariana Páez", "a0b1", "Reumatología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012345678901206", "Nelson Nicolás Rincón", "c2d3", "Infectología", "https://img.freepik.com/fotos-premium/medico-veterinario-comprobando-gato-clinica-veterinaria_255667-35310.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123456789012370", "Óscar Orlando Romero", "e4f5", "Dermatología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("203456789012349", "Pamela Patricia Rojas", "g6h7", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("340567890123450", "René Ricardo Ruiz", "i8j9", "Cardiología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456078901234561", "Sonia Susana Soto", "k0l1", "Gastroenterología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567809012345672", "Tania Tatiana Torres", "m2n3", "Endocrinología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678900123456783", "Ubaldo Ulises Vargas", "o4p5", "Radiología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789012034567894", "Viviana Vanessa Velasco", "q6r7", "Traumatología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("890123405678905", "Wilson Wilfredo Vera", "s8t9", "Neurología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("901234560789016", "Xavier Ximeno Villanueva", "u0v1", "Urología", "https://img.freepik.com/fotos-premium/gato-mesa-mientras-veterinario-guapo-examinando_85574-7701.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("012345678090127", "Yolanda Yaneth Zambrano", "w2x3", "Neurocirugía", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("123456789001238", "Zacarías Zenón Zapata", "y4z5", "Nefrología", "https://img.freepik.com/fotos-premium/joven-guapo-barba_251136-3566.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("234567890120350", "Ariadna Andrea Arango", "a7b8", "Cardiología", "https://img.freepik.com/foto-gratis/acercamiento-al-medico-veterinario-cuidando-mascota_23-2149267966.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("345678901234061", "Bruno Benjamín Blanco", "c9d0", "Dermatología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("456789012345702", "Camila Carolina Cifuentes", "e1f2", "Neurología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100168.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Inactivo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("567890123456830", "Damián David Díaz", "g3h4", "Gastroenterología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("678090123456794", "Elena Estefanía Espinosa", "i5j6", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        veterinarioSave = new Veterinario("789012304567805", "Felipe Francisco Fuentes", "k7l8", "Traumatología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo");
+        userEntity = saveUserVeterinario(veterinarioSave); // 2. Guardar en tabla user
+        veterinarioSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        veterinarioRepository.save(veterinarioSave); // 4. Guardar el objeto en la tabla respectiva
+
 
         
         //Inicialización e inserción  de la base de datos con los tratamientos 
