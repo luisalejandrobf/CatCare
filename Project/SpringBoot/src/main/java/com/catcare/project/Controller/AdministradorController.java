@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.catcare.project.DTOs.AdministradorDTO;
+import com.catcare.project.DTOs.AdministradorMapper;
 import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
@@ -83,20 +85,21 @@ public class AdministradorController {
     // Verificar inicio de sesión para un administrador, dada cédula y contraseña
     @GetMapping("/login")
     @Operation(summary = "Verifica el inicio de sesión de un administrador")
-    public ResponseEntity<Administrador> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
+    public ResponseEntity<AdministradorDTO> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
         // Llama al servicio administradorService para verificar el inicio de sesión
         // Busca un administrador por la cédula
         Administrador administrador = administradorService.findByCedula(cedula);
+        AdministradorDTO administradorDTO = AdministradorMapper.INSTANCE.convert(administrador);
 
         if (administrador != null) {
             // Verifica si la contraseña coincide
             if (administrador.getContrasena().equals(contrasena)) {
-                return new ResponseEntity<Administrador>(administrador, HttpStatus.OK);
+                return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.OK);
             } else {
-                return new ResponseEntity<Administrador>(administrador, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<Administrador>(administrador, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.catcare.project.DTOs.VeterinarioDTO;
+import com.catcare.project.DTOs.VeterinarioMapper;
 import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
@@ -106,20 +108,21 @@ public class VeterinarioController {
     // Verificar inicio de sesión para un veterinario, dada cédula y contraseña
     @GetMapping("/login")
     @Operation(summary = "Verifica el inicio de sesión de un veterinario")
-    public ResponseEntity<Veterinario> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
+    public ResponseEntity<VeterinarioDTO> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
         // Llama al servicio veterinarioService para verificar el inicio de sesión
         // Busca un veterinario por la cédula
         Veterinario veterinario = veterinarioService.findByCedula(cedula);
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
 
         if (veterinario != null) {
             // Verifica si la contraseña coincide
             if (veterinario.getContrasena().equals(contrasena)) {
-                return new ResponseEntity<Veterinario>(veterinario, HttpStatus.OK);
+                return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
             } else {
-                return new ResponseEntity<Veterinario>(veterinario, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<Veterinario>(veterinario, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.BAD_REQUEST);
         }
     }
 
