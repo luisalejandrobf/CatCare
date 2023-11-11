@@ -85,7 +85,7 @@ public class AdministradorController {
     // Verificar inicio de sesión para un administrador, dada cédula y contraseña
     @GetMapping("/login")
     @Operation(summary = "Verifica el inicio de sesión de un administrador")
-    public ResponseEntity<AdministradorDTO> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
+    public ResponseEntity<AdministradorDTO> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {   
         // Llama al servicio administradorService para verificar el inicio de sesión
         // Busca un administrador por la cédula
         Administrador administrador = administradorService.findByCedula(cedula);
@@ -99,7 +99,7 @@ public class AdministradorController {
                 return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.NOT_FOUND);
         }
     }
 

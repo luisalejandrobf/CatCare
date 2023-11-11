@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Veterinario {
     private Long id;
     private String cedula;
     private String nombre;
+    //@Transient // No se muestra en H2
     private String contrasena;
     private String especialidad;
     private String foto;

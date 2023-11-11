@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.catcare.project.Repository.AdministradorRepository;
 import com.catcare.project.Repository.ClienteRepository;
 import com.catcare.project.Repository.DrogaRepository;
 import com.catcare.project.Repository.PacienteRepository;
+import com.catcare.project.Repository.RoleRepository;
 import com.catcare.project.Repository.TratamientoRepository;
+import com.catcare.project.Repository.UserRepository;
 import com.catcare.project.Repository.VeterinarioRepository;
 
 import java.io.InputStream;
@@ -51,6 +54,25 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     AdministradorRepository administradorRepository;
 
+    // Security
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+
+    private UserEntity saveUserAdministrador(Administrador administrador){
+        UserEntity user = new UserEntity();
+        user.setUsername(administrador.getUsuario());
+        user.setPassword(passwordEncoder.encode(administrador.getContrasena()));
+        Role roles = roleRepository.findByName("ADMINISTRADOR").get();
+        user.setRoles(List.of(roles));
+        return userRepository.save(user);
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -60,18 +82,52 @@ public class DatabaseInit implements ApplicationRunner {
 
 
 
+        // SECURITY
+
+        // Create roles
+        roleRepository.save(new Role("ADMINISTRADOR"));
+        roleRepository.save(new Role("VETERINARIO"));
+        roleRepository.save(new Role("CLIENTE"));
+
+        // 1. Crear objeto
+        // 2. Guardar en tabla user
+        // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        // 4. Guardar el objeto en la tabla respectiva
+
+        Administrador administradorSave;
+        UserEntity userEntity;
+
+
+
         // Inicializacion de administradores
         // USAR EL PATRÓN BUILDER PARA CREAR LAS INSTANCIAS DE 1 DE SUS ENTIDADES
 
-        Administrador administrador = new Administrador("9632", "LuisBravo", "1234");
+        // Administrador 1
+        Administrador administrador = new Administrador().builder().cedula("9632").usuario("LuisBravo").contrasena("1234").build(); // 1. Crear objeto
+        // Administrador administrador = new Administrador("9632", "LuisBravo", "1234");
+        userEntity = saveUserAdministrador(administrador); // 2. Guardar en tabla user
+        administrador.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        administradorRepository.save(administrador); // 4. Guardar el objeto en la tabla respectiva
+        //
+        // Administrador 2
+        administrador = new Administrador().builder().cedula("8521").usuario("FelipeGarcia").contrasena("1234").build();
+        // administrador = new Administrador("8521","FelipeGarcia", "1234");
+        userEntity = saveUserAdministrador(administrador);
+        administrador.setUser(userEntity);
         administradorRepository.save(administrador);
-        administrador = new Administrador("8521","FelipeGarcia", "1234");
+        // Administrador 3
+        administrador = new Administrador().builder().cedula("7410").usuario("AnaOrtegon").contrasena("1234").build();
+        // administrador = new Administrador("7410","AnaOrtegon", "1234");
+        userEntity = saveUserAdministrador(administrador);
+        administrador.setUser(userEntity);
         administradorRepository.save(administrador);
-        administrador = new Administrador("7410","AnaOrtegon", "1234");
+        //
+        // Administrador 4
+        administrador = new Administrador().builder().cedula("7896").usuario("JuanAngarita").contrasena("1234").build();
+        // administrador = new Administrador("7896","JuanAngarita", "1234");
+        userEntity = saveUserAdministrador(administrador);
+        administrador.setUser(userEntity);
         administradorRepository.save(administrador);
-        administrador = new Administrador("7896","JuanAngarita", "1234");
-        administradorRepository.save(administrador);
-
 
         // Inicialización e inserción  de la base de datos con clientes
         clienteRepository.save(new Cliente("12211351234", "Luis Alejandro Bravo Ferreira", "luis.bravof@javeriana.edu.co", "3162858895", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
@@ -282,7 +338,7 @@ public class DatabaseInit implements ApplicationRunner {
 
 
         // Inicialización e inserción  de la base de datos con veterinarios       
-        veterinarioRepository.save(new Veterinario("67890123456789", "Luisa Ortega", "k1l2", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
+        veterinarioRepository.save(new Veterinario("67890123456789", "Luisa Ortega", "1234", "Pediatría", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         veterinarioRepository.save(new Veterinario("78901234567890", "Miguel Urtado", "m3n4", "Traumatología", "https://img.freepik.com/fotos-premium/joven-veterinario-asiatico-matorrales-anteojos-examina-gato-mascota_448865-3730.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         veterinarioRepository.save(new Veterinario("89012345678901", "Ana Morales", "o5p6", "Radiología", "https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-mascota_23-2149143894.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
         veterinarioRepository.save(new Veterinario("90123456789012", "Jorge Salinas", "q7r8", "Endocrinología", "https://img.freepik.com/foto-gratis/veterinario-masculino-que-examina-infeccion-oido-gato-otoscopio-clinica-veterinaria_613910-21567.jpg?size=626&ext=jpg&ga=GA1.1.42545629.1693093912&semt=sph", "Activo"));
