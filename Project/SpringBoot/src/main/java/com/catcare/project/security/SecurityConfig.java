@@ -22,7 +22,6 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests( requests -> requests
                 .requestMatchers("/h2/**").permitAll()
-                .requestMatchers("/administrador/**").permitAll()
                 .anyRequest().permitAll()
             );
         return http.build();

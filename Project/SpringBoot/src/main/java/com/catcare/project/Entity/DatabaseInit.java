@@ -67,7 +67,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     private UserEntity saveUserAdministrador(Administrador administrador){
         UserEntity user = new UserEntity();
-        user.setUsername(administrador.getUsuario());
+        user.setUsername(administrador.getCedula());
         user.setPassword(passwordEncoder.encode(administrador.getContrasena()));
         Role roles = roleRepository.findByName("ADMINISTRADOR").get();
         user.setRoles(List.of(roles));
@@ -76,13 +76,21 @@ public class DatabaseInit implements ApplicationRunner {
 
     private UserEntity saveUserVeterinario(Veterinario veterinario){
         UserEntity user = new UserEntity();
-        user.setUsername(veterinario.getNombre());
+        user.setUsername(veterinario.getCedula());
         user.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
         Role roles = roleRepository.findByName("VETERINARIO").get();
         user.setRoles(List.of(roles));
         return userRepository.save(user);
     }
 
+    private UserEntity saveUserCliente(Cliente cliente){
+        UserEntity user = new UserEntity();
+        user.setUsername(cliente.getCedula());
+        user.setPassword(passwordEncoder.encode("123"));
+        Role roles = roleRepository.findByName("CLIENTE").get();
+        user.setRoles(List.of(roles));
+        return userRepository.save(user);
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -107,6 +115,8 @@ public class DatabaseInit implements ApplicationRunner {
 
         Administrador administradorSave;
         Veterinario veterinarioSave;
+        Cliente clienteSave;
+
         UserEntity userEntity;
 
 
@@ -144,106 +154,505 @@ public class DatabaseInit implements ApplicationRunner {
 
 
         // Inicialización e inserción  de la base de datos con clientes
-        clienteRepository.save(new Cliente("12211351234", "Luis Alejandro Bravo Ferreira", "luis.bravof@javeriana.edu.co", "3162858895", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("231113124523", "Felipe Garcia Castiblanco", "felipe.gar@javeriana.edu.co", "32424234334", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("231523532523", "Ana María Ortegón Sepulveda", "ana.ortegon@javeriana.edu.co", "43242423434", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("5132532523", "María García Pérez", "Maria.garcia2131@hotmail.com", "3112345678", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("15435235234", "Ana Martínez González", "ana.martinez54352@gmail.com", "3334567890", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("15215141231", "Carlos Sánchez Ruiz", "carlos.sanchez234234@hotmail.com", "3445678901", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("21415151213", "Isabel López Ramírez", "isabel.lopez123@gmail.com", "3556789012", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("34542352134", "Andrés Hernández Herrera", "andres23.hernandez@gmail.com", "3667890123", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("2115145121412", "Waldina López", "wald.lopez414@gmail.com", "3556789012", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("5443421134", "Hernando Hernández Herrera", "hernando15.hernandez@gmail.com", "3667890123", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("5426416", "Juan Romero", "Juan@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("2343153253253223", "Andrés Medina", "Andres515@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("431125355345345", "Sofía Mendoza", "Sofia12@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("51435345435678", "Daniela Castro", "Daniela234324@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("3434534543556", "Luisa Delgado", "Luisa213123@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("167345345345819", "Alejandro Silva", "Alejandro34234@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("2354335345415", "Valentina Morales", "Valentina12313@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("435345345314534", "Felipe Morales", "Felipe214214@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("2343453451345", "Carolina Romero ", "Carolina213213@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("78345345143590", "Andrés Rodriguez", "AndresR14@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("1345435134234", "Carlos Martinez", "Carlossss23@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("2334531454323", "Ulises Lopez", "Ulisessss12@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("33453145434", "Sofía Gonzalez", "Sofia23@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("5345345678", "Karla Lopez", "Karla122@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("3435134534456", "Luisa Flores", "Luisaaaa121@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("6734534514389", "Alejandro Rivera", "Alejandro12@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("2334541353445", "Isabella Torres", "Isabella123@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("74351435345890", "Felipe Morales", "Felipe2323@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("23454354315345", "Natalia Flores", "Natalia23@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("78345311453490", "Gabriel Ramirez", "Gabriel2323@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("123453454334", "Juan Gonzalez", "Juan2323@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("23453454135323", "Andrés Hernandez", "Andres2323@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("34345345143534", "Raquel Ramirez", "Raquel12313@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("53453453145678", "María Martinez", "Maria123213@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("34345314543556", "Valentina Ramirez", "Valentina2131231@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("6783453453459", "Ricardo Ortega", "Ricardo21321314@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("2334534543541345", "Natalia Cruz", "Natalia2323@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("785345113453453490", "Felipe Sanchez", "Felipe2323@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("23345345145", "Natalia Martinez", "Natalia12@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("785345134543590", "Andrés Garcia", "Andres12@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("1234531454334", "Juan Rodriguez", "Juan323@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("2334534111523", "Andrés Perez", "Andres1212@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("33453451435434", "Sofía Torres", "Sofia2133@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("53454351435678", "María Reyes", "Maria23234@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("3345345435456", "Luisa Gonzalez", "Luisa443@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("67345314543589", "Alejandro Hernandez", "Alejandro3434@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("233453411545", "Valentina Sanchez", "Valentina2323@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("7843534154390", "Felipe Ramirez", "Felipe11@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("234351134545", "Ximena Ortega", "Ximena111@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("78341534534590", "Andrés Mendoza", "Andres1212@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("123411111534534", "Gabriel Hernandez", "Gabriel1212@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("2334151114354323", "Hugo Gonzalez", "Hugo1212@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("34345111134534534", "Sofía Torres", "Sofia2323231@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("56345113114578", "Laura Ramirez", "Laura43@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("34411111113534534556", "Gabriela Mendoza", "Gabriela23@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("67431534534589", "Eduardo Ortega", "Eduardo12@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("2435341534345", "Valentina Sanchez", "Valentina123@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("7834534154390", "Tomas Ramirez", "Tomas35@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("2334534534545", "Carolina Ortiz", "Carolina6767@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("7534541135890", "Andrés Mendoza", "Andres67@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("12435411354334", "Luis Rodriguez", "Luis5656@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("2334511134523", "Carlos Garcia", "Carlos45@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("3345435413434", "Fernanda Hernandez", "Fernanda34@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("534531111452378", "Laura Gonzalez", "Laura53@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("3413111412434534556", "Luisa Ramirez", "Luisa122@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("678314534549", "Ivan Ortega", "Ivan323@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("233411534543545", "Valentina Sanchez", "Valentina12134@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("7834154315390", "Felipe Ramirez", "Felipe23231@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("23463416345", "Carolina Ortiz", "Carolina12323@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("73463461345890", "Andrés Mendoza", "Andres122@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("1213453454334", "Juan Hernandez", "Juan1213@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("23346131463423", "Andrés Perez", "Andres1132@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("34234312434", "Sofía Torres", "Sofia12442@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("563453456413638", "Valentina Martinez", "Valentina232434@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("345134634634566", "Luisa Ortega", "Luisa1244@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("63453415345789", "Alejandro Hernandez", "Alejandro12314@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("2242352235345", "Valentina Sanchez", "Valentina53@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("7823523532490", "Felipe Ramirez", "Felipe6343@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("236134631464345", "Julia Martinez", "Carolina235@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("7235325623890", "Andrés Mendoza", "Andres523@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("123622136234", "Juan Hernandez", "Juan535@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("223652323623323", "Lalo Perez", "Lalo234523@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("332422335434", "Sofía Torres", "Sofia231@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("562312363278", "María Gutierrez", "Maria323@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("3324132323562456", "Luisa Ortega", "Luisa231@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("672323632689", "Alejandro Hernandez", "Alejandro121@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("23423121324235345", "Valentina Sanchez", "Valentina12434@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("726223236590", "Felipe Ramirez", "Felipe12423@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("2332431312456245", "Julia Martinez", "Carolina345@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("783642652590", "Pepito Mendoza", "Pepito342@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("122362232623534", "Juan Hernandez", "Juan321@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"));
-        clienteRepository.save(new Cliente("233242362323523", "Juan Perez", "Juan212@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"));
-        clienteRepository.save(new Cliente("3432423432423434", "Sofía Torres", "Sofia423@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg"));
-        clienteRepository.save(new Cliente("53246235262678", "María Gutierrez", "Elena1211@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg"));
-        clienteRepository.save(new Cliente("34622352312456", "Luisa Ortega", "Luisa124@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp"));
-        clienteRepository.save(new Cliente("6262323423554789", "Alejandro Hernandez", "Alejandro1242@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg"));
-        clienteRepository.save(new Cliente("2332423523675445", "Valentina Sanchez", "Valentina121@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680"));
-        clienteRepository.save(new Cliente("78236234234230", "Felipe Ramirez", "Felipe12@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg"));
-        clienteRepository.save(new Cliente("234245632476235", "Julia Martinez", "Carolina1212@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
-        clienteRepository.save(new Cliente("45253252325235", "Juanita Lopez", "juanitaLp1213@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM="));
+        clienteSave = new Cliente("12211351234", "Luis Alejandro Bravo Ferreira", "luis.bravof@javeriana.edu.co", "3162858895", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600"); // 1. Crear el objeto
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("231113124523", "Felipe Garcia Castiblanco", "felipe.gar@javeriana.edu.co", "32424234334", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("231523532523", "Ana María Ortegón Sepulveda", "ana.ortegon@javeriana.edu.co", "43242423434", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("5132532523", "María García Pérez", "Maria.garcia2131@hotmail.com", "3112345678", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("15435235234", "Ana Martínez González", "ana.martinez54352@gmail.com", "3334567890", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("15215141231", "Carlos Sánchez Ruiz", "carlos.sanchez234234@hotmail.com", "3445678901", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("21415151213", "Isabel López Ramírez", "isabel.lopez123@gmail.com", "3556789012", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34542352134", "Andrés Hernández Herrera", "andres23.hernandez@gmail.com", "3667890123", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2115145121412", "Waldina López", "wald.lopez414@gmail.com", "3556789012", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("5443421134", "Hernando Hernández Herrera", "hernando15.hernandez@gmail.com", "3667890123", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("5426416", "Juan Romero", "Juan@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2343153253253223", "Andrés Medina", "Andres515@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("431125355345345", "Sofía Mendoza", "Sofia12@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("51435345435678", "Daniela Castro", "Daniela234324@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3434534543556", "Luisa Delgado", "Luisa213123@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("167345345345819", "Alejandro Silva", "Alejandro34234@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2354335345415", "Valentina Morales", "Valentina12313@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("435345345314534", "Felipe Morales", "Felipe214214@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2343453451345", "Carolina Romero ", "Carolina213213@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("78345345143590", "Andrés Rodriguez", "AndresR14@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("1345435134234", "Carlos Martinez", "Carlossss23@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334531454323", "Ulises Lopez", "Ulisessss12@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("33453145434", "Sofía Gonzalez", "Sofia23@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("5345345678", "Karla Lopez", "Karla122@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3435134534456", "Luisa Flores", "Luisaaaa121@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("6734534514389", "Alejandro Rivera", "Alejandro12@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334541353445", "Isabella Torres", "Isabella123@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("74351435345890", "Felipe Morales", "Felipe2323@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("23454354315345", "Natalia Flores", "Natalia23@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("78345311453490", "Gabriel Ramirez", "Gabriel2323@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("123453454334", "Juan Gonzalez", "Juan2323@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("23453454135323", "Andrés Hernandez", "Andres2323@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34345345143534", "Raquel Ramirez", "Raquel12313@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("53453453145678", "María Martinez", "Maria123213@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34345314543556", "Valentina Ramirez", "Valentina2131231@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("6783453453459", "Ricardo Ortega", "Ricardo21321314@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334534543541345", "Natalia Cruz", "Natalia2323@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("785345113453453490", "Felipe Sanchez", "Felipe2323@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("23345345145", "Natalia Martinez", "Natalia12@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("785345134543590", "Andrés Garcia", "Andres12@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("1234531454334", "Juan Rodriguez", "Juan323@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334534111523", "Andrés Perez", "Andres1212@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("33453451435434", "Sofía Torres", "Sofia2133@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("53454351435678", "María Reyes", "Maria23234@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3345345435456", "Luisa Gonzalez", "Luisa443@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("67345314543589", "Alejandro Hernandez", "Alejandro3434@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("233453411545", "Valentina Sanchez", "Valentina2323@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("7843534154390", "Felipe Ramirez", "Felipe11@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("234351134545", "Ximena Ortega", "Ximena111@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("78341534534590", "Andrés Mendoza", "Andres1212@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("123411111534534", "Gabriel Hernandez", "Gabriel1212@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334151114354323", "Hugo Gonzalez", "Hugo1212@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34345111134534534", "Sofía Torres", "Sofia2323231@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("56345113114578", "Laura Ramirez", "Laura43@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34411111113534534556", "Gabriela Mendoza", "Gabriela23@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("67431534534589", "Eduardo Ortega", "Eduardo12@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2435341534345", "Valentina Sanchez", "Valentina123@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("7834534154390", "Tomas Ramirez", "Tomas35@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334534534545", "Carolina Ortiz", "Carolina6767@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("7534541135890", "Andrés Mendoza", "Andres67@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("12435411354334", "Luis Rodriguez", "Luis5656@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2334511134523", "Carlos Garcia", "Carlos45@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3345435413434", "Fernanda Hernandez", "Fernanda34@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("534531111452378", "Laura Gonzalez", "Laura53@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3413111412434534556", "Luisa Ramirez", "Luisa122@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("678314534549", "Ivan Ortega", "Ivan323@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("233411534543545", "Valentina Sanchez", "Valentina12134@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("7834154315390", "Felipe Ramirez", "Felipe23231@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("23463416345", "Carolina Ortiz", "Carolina12323@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("73463461345890", "Andrés Mendoza", "Andres122@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("1213453454334", "Juan Hernandez", "Juan1213@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("23346131463423", "Andrés Perez", "Andres1132@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34234312434", "Sofía Torres", "Sofia12442@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("563453456413638", "Valentina Martinez", "Valentina232434@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("345134634634566", "Luisa Ortega", "Luisa1244@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("63453415345789", "Alejandro Hernandez", "Alejandro12314@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2242352235345", "Valentina Sanchez", "Valentina53@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("7823523532490", "Felipe Ramirez", "Felipe6343@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("236134631464345", "Julia Martinez", "Carolina235@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("7235325623890", "Andrés Mendoza", "Andres523@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("123622136234", "Juan Hernandez", "Juan535@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("223652323623323", "Lalo Perez", "Lalo234523@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("332422335434", "Sofía Torres", "Sofia231@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("562312363278", "María Gutierrez", "Maria323@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3324132323562456", "Luisa Ortega", "Luisa231@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("672323632689", "Alejandro Hernandez", "Alejandro121@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("23423121324235345", "Valentina Sanchez", "Valentina12434@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("726223236590", "Felipe Ramirez", "Felipe12423@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2332431312456245", "Julia Martinez", "Carolina345@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("783642652590", "Pepito Mendoza", "Pepito342@gmail.com", "3155145243521312", "https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("122362232623534", "Juan Hernandez", "Juan321@gmail.com", "315532423412", "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("233242362323523", "Juan Perez", "Juan212@gmail.com", "31551512324324", "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("3432423432423434", "Sofía Torres", "Sofia423@gmail.com", "31532432412", "https://img.freepik.com/foto-gratis/retrato-mujer-joven-rubia-seria-concentrada-viste-camisa-lunares-mantiene-manos-juntas-ve-pensativo-pensando-aislado-sobre-pared-blanca_295783-1160.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("53246235262678", "María Gutierrez", "Elena1211@gmail.com", "315515132432412", "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("34622352312456", "Luisa Ortega", "Luisa124@gmail.com", "315513242341312", "https://pymstatic.com/6399/conversions/mejores-virtudes-persona-wide_webp.webp");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("6262323423554789", "Alejandro Hernandez", "Alejandro1242@gmail.com", "3155234324234312", "https://images.ecestaticos.com/vU8sC8tLdkx-2YYh1fkOGL8vfeY=/0x0:990x557/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F62c%2Fe5d%2F314%2F62ce5d3141c0b670144a692b7f6a21fa.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("2332423523675445", "Valentina Sanchez", "Valentina121@gmail.com", "3155151234242", "https://images.hola.com/imagenes/estar-bien/20221018219233/buenas-personas-caracteristicas/1-153-242/getty-chica-feliz-t.jpg?tx=w_680");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("78236234234230", "Felipe Ramirez", "Felipe12@gmail.com", "3155324345121312", "https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("234245632476235", "Julia Martinez", "Carolina1212@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
+        //
+        clienteSave = new Cliente("45253252325235", "Juanita Lopez", "juanitaLp1213@gmail.com", "3155151232432412", "https://media.istockphoto.com/id/1465591757/es/foto/exitosa-arquitecta-senior-de-pie-en-su-oficina-con-los-brazos-cruzados.jpg?b=1&s=612x612&w=0&k=20&c=ruG7n9AqWckQD9T9f_Qq__hii2RqZUoRKYk-bB9ZCNM=");
+        userEntity = saveUserCliente(clienteSave); // 2. Guardar en tabla user
+        clienteSave.setUser(userEntity); // 3. Agregar al objeto del paso 1 el ID obtenido en el paso 2.
+        clienteRepository.save(clienteSave); // 4. Guardar el objeto en la tabla respectiva
 
 
 
