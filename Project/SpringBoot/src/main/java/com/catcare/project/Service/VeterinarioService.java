@@ -18,7 +18,7 @@ public interface VeterinarioService {
     public Veterinario findByCedula(String cedula);
 
     // Agregar un nuevo veterinario
-    public void add(Veterinario veterinario);
+    public Veterinario add(Veterinario veterinario);
 
     // Eliminar un veterinario por su ID
     public void deleteById(Long id);

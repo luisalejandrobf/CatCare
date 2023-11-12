@@ -43,10 +43,11 @@ public class AdministradorServiceImpl implements AdministradorService {
     }
 
     @Override
-    public void add(Administrador administrador) {
+    public Administrador add(Administrador administrador) {
         // Agrega un nuevo administrador a la base de datos utilizando el método de repo.
-        repo.save(administrador);
+        return repo.save(administrador);
     }
+    
 
     @Override
     public void deleteById(Long id) {

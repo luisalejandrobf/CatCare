@@ -6,6 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +20,12 @@ import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Entity.Tratamiento;
+import com.catcare.project.Entity.UserEntity;
 import com.catcare.project.Entity.Veterinario;
+import com.catcare.project.Repository.UserRepository;
 import com.catcare.project.Service.VeterinarioService;
+import com.catcare.project.security.CustomUserDetailService;
+import com.catcare.project.security.JWTGenerator;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -28,6 +36,18 @@ public class VeterinarioController {
 
     @Autowired
     VeterinarioService veterinarioService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
 
     // Envía la lista de veterinarios desde VeterinarioService a Thymeleaf para que
     // el HTML pueda acceder a ella.
@@ -54,15 +74,28 @@ public class VeterinarioController {
     // http://localhost:8090/catcare/veterinarios/agregar
     @PostMapping("/agregar")
     @Operation(summary = "Agrega un veterinario")
-    public ResponseEntity<Veterinario> agregarVeterinario(@RequestBody Veterinario veterinario) {
-        try {
-            veterinarioService.add(veterinario);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity agregarVeterinario(@RequestBody Veterinario veterinario) {
+        if (userRepository.existsByUsername(veterinario.getCedula())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(veterinario, HttpStatus.CREATED);
+    
+        UserEntity userEntity = customUserDetailService.VeterinarioToUser(veterinario);
+        veterinario.setUser(userEntity);
+    
+        if (veterinario.getUser() != null) {
+            Veterinario newVeterinario = veterinarioService.add(veterinario);
+    
+            if (newVeterinario == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+    
+            return new ResponseEntity<>(newVeterinario, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     
+
     
     // http://localhost:8090/catcare/veterinarios/delete/1
     @DeleteMapping("/delete/{id}")
@@ -106,15 +139,15 @@ public class VeterinarioController {
 
 
     // Verificar inicio de sesión para un veterinario, dada cédula y contraseña
-    @GetMapping("/login")
+    @PostMapping("/login")
     @Operation(summary = "Verifica el inicio de sesión de un veterinario")
-    public ResponseEntity<VeterinarioDTO> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {
+    public ResponseEntity verificarInicioSesion(@RequestBody Veterinario veterinario) {
         // Llama al servicio veterinarioService para verificar el inicio de sesión
         // Busca un veterinario por la cédula
-        Veterinario veterinario = veterinarioService.findByCedula(cedula);
-        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
+        //Veterinario veterinario = veterinarioService.findByCedula(cedula);
+        //VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
 
-        if (veterinario != null) {
+        /*if (veterinario != null) {
             // Verifica si la contraseña coincide
             if (veterinario.getContrasena().equals(contrasena)) {
                 return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
@@ -123,9 +156,18 @@ public class VeterinarioController {
             }
         } else {
             return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.NOT_FOUND);
-        }
-    }
+        } */
 
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(veterinario.getCedula(), veterinario.getContrasena()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
+
+    }
 
 
     // Consultas

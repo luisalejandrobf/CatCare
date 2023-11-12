@@ -61,9 +61,9 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void add(Cliente cliente) {
+    public Cliente add(Cliente cliente) {
         // Agrega un nuevo cliente a la base de datos utilizando el método de repo.
-        repo.save(cliente);
+        return repo.save(cliente);
     }
 
 }

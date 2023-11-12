@@ -23,6 +23,6 @@ public interface ClienteService {
     public void update(Cliente cliente);
 
     // Agregar un nuevo cliente
-    public void add(Cliente cliente);
+    public Cliente add(Cliente cliente);
 
 }

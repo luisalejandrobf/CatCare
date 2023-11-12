@@ -4,8 +4,12 @@ import com.catcare.project.Controller.Error.ClienteNotFoundException;
 import com.catcare.project.Controller.Error.PacienteNotFoundException;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
+import com.catcare.project.Entity.UserEntity;
+import com.catcare.project.Entity.Veterinario;
+import com.catcare.project.Repository.UserRepository;
 import com.catcare.project.Service.ClienteService;
 import com.catcare.project.Service.PacienteService;
+import com.catcare.project.security.CustomUserDetailService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -13,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +30,13 @@ public class ClienteController {
 
     @Autowired
     ClienteService clienteService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
+
 
 
     //  Envía la lista de clientes desde ClienteService a Thymeleaf para que el HTML pueda acceder a ella.
@@ -80,10 +93,29 @@ public class ClienteController {
     // http://localhost:8090/catcare/clientes/agregar
     @PostMapping("/agregar")
     @Operation(summary = "Agrega un cliente")
-    public void agregarCliente(@RequestBody Cliente cliente) {
-        // Llama al servicio clienteService para agregar el cliente a la base de datos
-        clienteService.add(cliente);
+    public ResponseEntity agregarCliente(@RequestBody Cliente cliente) {
+        // Check if the username already exists in the repository
+        if (userRepository.existsByUsername(cliente.getCedula())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        
+
+        UserEntity userEntity = customUserDetailService.ClienteToUser(cliente);
+        cliente.setUser(userEntity);
+
+        if(cliente.getUser() != null){
+            Cliente newCliente = clienteService.add(cliente);
+
+            if(newCliente == null){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(newCliente, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
+    
+    
 
 
     // http://localhost:8090/catcare/clientes/delete/1

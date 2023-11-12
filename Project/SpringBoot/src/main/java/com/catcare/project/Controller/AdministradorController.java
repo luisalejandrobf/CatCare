@@ -3,8 +3,13 @@ package com.catcare.project.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +19,11 @@ import com.catcare.project.DTOs.AdministradorMapper;
 import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
+import com.catcare.project.Entity.UserEntity;
+import com.catcare.project.Repository.UserRepository;
 import com.catcare.project.Service.AdministradorService;
+import com.catcare.project.security.CustomUserDetailService;
+import com.catcare.project.security.JWTGenerator;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -25,6 +34,22 @@ public class AdministradorController {
 
     @Autowired
     AdministradorService administradorService;
+    
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
+
+
+    //@Autowired
+   /// JWTGenerator jwtGenerator;
 
     // Envía la lista de administradores desde administradorService a Thymeleaf para que
     // el HTML pueda acceder a ella.
@@ -57,10 +82,22 @@ public class AdministradorController {
     // http://localhost:8090/catcare/administradores/agregar
     @PostMapping("/agregar")
     @Operation(summary = "Agrega un administrador")
-    public void agregarAdministrador(@RequestBody Administrador administrador) {
+    public ResponseEntity<Administrador> agregarAdministrador(@RequestBody Administrador administrador) {
         // Llama al servicio administradorService para agregar el administrador a la base de
         // datos
-        administradorService.add(administrador);
+        //administradorService.add(administrador);
+
+        if(userRepository.existsByUsername(administrador.getUsuario())) {
+            return new ResponseEntity<Administrador>(administrador, HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity userEntity = customUserDetailService.AdministradorToUser(administrador);
+        administrador.setUser(userEntity);
+        Administrador newAdministrador = administradorService.add(administrador);
+        if(newAdministrador == null){
+            return new ResponseEntity<Administrador>(newAdministrador, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Administrador>(newAdministrador, HttpStatus.CREATED);
     }
 
     // http://localhost:8090/catcare/administradores/delete/1
@@ -83,12 +120,12 @@ public class AdministradorController {
     }
 
     // Verificar inicio de sesión para un administrador, dada cédula y contraseña
-    @GetMapping("/login")
+    @PostMapping("/login")
     @Operation(summary = "Verifica el inicio de sesión de un administrador")
-    public ResponseEntity<AdministradorDTO> verificarInicioSesion(@RequestParam("cedula") String cedula, @RequestParam("contrasena") String contrasena) {   
+    public ResponseEntity verificarInicioSesion(@RequestBody Administrador administrador) {   
         // Llama al servicio administradorService para verificar el inicio de sesión
         // Busca un administrador por la cédula
-        Administrador administrador = administradorService.findByCedula(cedula);
+       /*Administrador administrador = administradorService.findByCedula(cedula);
         AdministradorDTO administradorDTO = AdministradorMapper.INSTANCE.convert(administrador);
 
         if (administrador != null) {
@@ -100,7 +137,17 @@ public class AdministradorController {
             }
         } else {
             return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.NOT_FOUND);
-        }
+        } */ 
+
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(administrador.getCedula(), administrador.getContrasena()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
+
     }
 
 

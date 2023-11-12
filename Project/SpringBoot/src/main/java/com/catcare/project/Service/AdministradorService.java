@@ -17,7 +17,7 @@ public interface AdministradorService {
     public Administrador findByCedula(String cedula);
 
     // Agregar un nuevo administrador
-    public void add(Administrador administrador);
+    public Administrador add(Administrador administrador);
 
     // Eliminar un administrador por su ID
     public void deleteById(Long id);
