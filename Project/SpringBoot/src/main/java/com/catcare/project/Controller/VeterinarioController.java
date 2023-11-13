@@ -76,7 +76,7 @@ public class VeterinarioController {
     @Operation(summary = "Agrega un veterinario")
     public ResponseEntity agregarVeterinario(@RequestBody Veterinario veterinario) {
         if (userRepository.existsByUsername(veterinario.getCedula())) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
     
         UserEntity userEntity = customUserDetailService.VeterinarioToUser(veterinario);
@@ -86,12 +86,12 @@ public class VeterinarioController {
             Veterinario newVeterinario = veterinarioService.add(veterinario);
     
             if (newVeterinario == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<VeterinarioDTO>(HttpStatus.BAD_REQUEST);
             }
     
             return new ResponseEntity<>(newVeterinario, HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<VeterinarioDTO>(HttpStatus.BAD_REQUEST);
         }
     }
     
@@ -169,6 +169,22 @@ public class VeterinarioController {
 
     }
 
+    // http://localhost:8090/veterinario/details
+    @GetMapping("/details")
+    public ResponseEntity<VeterinarioDTO> buscarVeterinario(){
+
+        Veterinario veterinario = veterinarioService.findByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
+
+
+        if(veterinario == null){
+            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
+    }
 
     // Consultas
 

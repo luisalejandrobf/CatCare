@@ -2,6 +2,9 @@ package com.catcare.project.Controller;
 
 import com.catcare.project.Controller.Error.ClienteNotFoundException;
 import com.catcare.project.Controller.Error.PacienteNotFoundException;
+import com.catcare.project.DTOs.VeterinarioDTO;
+import com.catcare.project.DTOs.VeterinarioMapper;
+import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Entity.UserEntity;
@@ -10,6 +13,7 @@ import com.catcare.project.Repository.UserRepository;
 import com.catcare.project.Service.ClienteService;
 import com.catcare.project.Service.PacienteService;
 import com.catcare.project.security.CustomUserDetailService;
+import com.catcare.project.security.JWTGenerator;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -19,6 +23,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +44,12 @@ public class ClienteController {
 
     @Autowired
     CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
 
 
 
@@ -69,6 +83,19 @@ public class ClienteController {
         }
     }
 
+    // http://localhost:8090/cliente/details
+    @GetMapping("/details")
+    public ResponseEntity<Cliente> buscarCliente(){
+
+        Cliente cliente = clienteService.SearchByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if(cliente == null){
+            return new ResponseEntity<Cliente>(cliente, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+    }
 
     // http://localhost:8090/catcare/clientes/find?id=1
     @GetMapping("/find")
@@ -137,4 +164,27 @@ public class ClienteController {
         clienteService.update(cliente);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity verificarIniciarSesion(@RequestBody Cliente cliente){
+        
+       /*  Cliente cliente = clienteService.SearchByCedula(cedula);
+
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(cliente.getCedula(), "123"));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<>(token, HttpStatus.OK); */
+
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(cliente.getCedula(), "123"));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
+    }
 }

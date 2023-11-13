@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.catcare.project.DTOs.AdministradorDTO;
 import com.catcare.project.DTOs.AdministradorMapper;
+import com.catcare.project.DTOs.VeterinarioDTO;
+import com.catcare.project.DTOs.VeterinarioMapper;
 import com.catcare.project.Entity.Administrador;
 import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Paciente;
 import com.catcare.project.Entity.UserEntity;
+import com.catcare.project.Entity.Veterinario;
 import com.catcare.project.Repository.UserRepository;
 import com.catcare.project.Service.AdministradorService;
 import com.catcare.project.security.CustomUserDetailService;
@@ -59,6 +62,25 @@ public class AdministradorController {
     public List<Administrador> mostrarAdministradores() {
         return (List<Administrador>) administradorService.SearchAll();
     }
+
+
+    // http://localhost:8090/catcare/administradores/details
+    @GetMapping("/details")
+    public ResponseEntity<AdministradorDTO> buscarAdministrador(){
+
+        Administrador administrador = administradorService.findByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        AdministradorDTO administradorDTO = AdministradorMapper.INSTANCE.convert(administrador);
+
+
+        if(administrador == null){
+            return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<AdministradorDTO>(administradorDTO, HttpStatus.OK);
+    }
+
 
     // http://localhost:8090/catcare/administradores/find?id=1
     @GetMapping("/find")

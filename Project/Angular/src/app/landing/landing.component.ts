@@ -139,22 +139,28 @@ export class LandingComponent implements OnInit {
 
     btnCliSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#CliCedula').value;
-      const contraseña = '1111'; // Contraseña por defecto. Se usa para que el método no falle.
-      const errorCedula = this.el.nativeElement.querySelector('#errorCedula');
 
       // Verificar si la cédula coincide con alguna cédula en la lista de clientes
-      const clienteEncontrado = this.clienteLista.find(cliente => cliente.cedula === cedula);
-
-      if (clienteEncontrado) {
-        errorCedula.style.display = 'none'; // Oculta el mensaje de error
-        if (this.validarCampos(cedula, contraseña)) {
-          this.router.navigate([`/cliente/${clienteEncontrado.id}/pacientes`]);
-        }
-      } else {
-        errorCedula.style.display = 'block'; // Muestra el mensaje de error
-      }
+      this.clienteService.verificarInicioSesion(cedula)
+        .subscribe(
+          (response) => {
+            if (response) {
+              console.log('Login successful');
+              localStorage.setItem('token', String(response.token)); // Assuming the response contains a token
+              // Navigate to the client's home page
+              this.router.navigate([`/cliente/home`]);
+            } else {
+              // If login fails, alert the user
+              alert('Credenciales de inicio de sesión no válidas');
+            }
+          },
+          (error) => {
+            console.error('Error during login', error);
+            // If there's an error during the HTTP request, alert the user
+            alert('Error de inicio de sesión. Por favor, intente de nuevo.');
+          }
+        );
     });
-
 
     btnVetSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;

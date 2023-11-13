@@ -30,6 +30,9 @@ public class SecurityConfig {
             .authorizeHttpRequests( requests -> requests
                 .requestMatchers("/h2/**").permitAll()
                 .requestMatchers("/administrador/find").authenticated()
+                .requestMatchers("/administrador/details").hasAuthority("ADMINISTRADOR")
+                .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
+                .requestMatchers("/cliente/details").hasAuthority("CLIENTE")
                 .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));

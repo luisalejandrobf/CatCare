@@ -46,5 +46,9 @@ export class ClienteService {
     return this.http.put<any>(`${this.ROOT_URL}/update/${clienteId}`, cliente);
   }
 
+  verificarInicioSesion(cedula: String): Observable<any>{
+    return this.http.get<any>(`${this.ROOT_URL}/login?cedula=${cedula}`);
+  }
+
 
 }
