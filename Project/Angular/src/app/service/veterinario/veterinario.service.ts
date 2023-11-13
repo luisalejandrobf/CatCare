@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Cliente} from "../../cliente/cliente";
+import {Veterinario} from "../../veterinario/veterinario";
+import {User} from "../../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +55,19 @@ export class VeterinarioService {
   }
 
   // Verificar inicio de sesión de un veterinario
-  verificarInicioSesion(cedula: string, contrasena: string): Observable<any> {
-    return this.http.get<any>(`${this.ROOT_URL}/login?cedula=${cedula}&contrasena=${contrasena}`);
+  verificarInicioSesion(user:Veterinario): Observable<string> {
+    return this.http.post(`${this.ROOT_URL}/login`, user,
+      {
+        responseType: "text"
+      });
+  }
+
+  veterinarioHome():Observable<Veterinario>{
+    return this.http.get<Veterinario>("http://localhost:8090/catcare/veterinarios/details");
   }
 
 }
+
+
+
+

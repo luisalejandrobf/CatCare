@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {RouterOutlet} from "@angular/router";
 
@@ -38,6 +38,7 @@ import { TableroDatosAdministradorComponent } from './administrador/tablero-dato
 import { TratamientoPacienteComponent } from './paciente/tratamiento-paciente/tratamiento-paciente.component';
 import { HistorialPacienteComponent } from './paciente/historial-paciente/historial-paciente.component';
 import { Error404Component } from './error/error404/error404.component';
+import {AuthInterceptor} from "./helpers/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -82,7 +83,11 @@ import { Error404Component } from './error/error404/error404.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

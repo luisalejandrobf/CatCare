@@ -92,8 +92,16 @@ export class TratamientoPacienteComponent implements OnInit {
       console.log('List of veterinarios:', veterinarios);
     });
 
-    this.veterinarioId = sessionStorage.getItem('veterinarioID');
-    console.log('veterinarioID', this.veterinarioId);
+    // this.veterinarioId = sessionStorage.getItem('veterinarioID');
+    // console.log('veterinarioID', this.veterinarioId);
+
+    this.veterinarioService.veterinarioHome().subscribe(respuesta =>{
+      this.veterinarioId =  String(respuesta.id);
+        }
+    )
+
+
+
   }
 
   onSubmit(form: any) {

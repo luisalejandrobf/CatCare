@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Cliente} from "../../cliente/cliente";
+import {User} from "../../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -46,8 +48,15 @@ export class ClienteService {
     return this.http.put<any>(`${this.ROOT_URL}/update/${clienteId}`, cliente);
   }
 
-  verificarInicioSesion(cedula: String): Observable<any>{
-    return this.http.get<any>(`${this.ROOT_URL}/login?cedula=${cedula}`);
+  verificarInicioSesion(user:User): Observable<string>{
+    return this.http.post(`${this.ROOT_URL}/login`, user,
+      {
+        responseType: "text"
+      });
+  }
+
+  clienteHome():Observable<Cliente>{
+    return this.http.get<Cliente>("http://localhost:8090/catcare/clientes/details");
   }
 
 

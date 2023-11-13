@@ -10,6 +10,7 @@ import { DrogaService } from "../service/droga/droga.service";
 import { TratamientoService } from "../service/tratamiento/tratamiento.service";
 import { Veterinario } from "../veterinario/veterinario";
 import { Administrador } from "../administrador/administrador";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-landing',
@@ -139,20 +140,22 @@ export class LandingComponent implements OnInit {
 
     btnCliSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#CliCedula').value;
+      const user:User = {cedula:cedula, password:"123"}
 
+      const clienteEncontrado = this.clienteLista.find(cliente => cliente.cedula === cedula);
       // Verificar si la cédula coincide con alguna cédula en la lista de clientes
-      this.clienteService.verificarInicioSesion(cedula)
+      this.clienteService.verificarInicioSesion(user)
         .subscribe(
-          (response) => {
-            if (response) {
+          (data) => {
+
               console.log('Login successful');
-              localStorage.setItem('token', String(response.token)); // Assuming the response contains a token
+              localStorage.setItem('token', String(data)); // Assuming the response contains a token
               // Navigate to the client's home page
-              this.router.navigate([`/cliente/home`]);
-            } else {
+              this.router.navigate([`/cliente/`+ clienteEncontrado?.id +`/pacientes`]);
+            /*} else {
               // If login fails, alert the user
               alert('Credenciales de inicio de sesión no válidas');
-            }
+            }*/
           },
           (error) => {
             console.error('Error during login', error);
@@ -165,20 +168,21 @@ export class LandingComponent implements OnInit {
     btnVetSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#VetPassword').value;
+      const user:Veterinario = {cedula:cedula, contrasena:contrasena, especialidad:"", id:0, estado:"", foto:"", nombre:""}
 
       // Verificar si la cédula y la contraseña coinciden con algún veterinario
 
-      this.veterinarioService.verificarInicioSesion(cedula, contrasena)
+      this.veterinarioService.verificarInicioSesion(user)
         .subscribe(
-          (response) => {
-            if (response) {
-              sessionStorage.setItem('veterinarioID', String(response.id));
+          (data) => {
+
+              sessionStorage.setItem('veterinarioID', String(data));
               // Si se encuentra el veterinario, navega a su página de perfil o dashboard
               this.router.navigate(['/veterinario/pacientes']);
-            } else {
+            //} else {
               // Si no se encuentra, muestra un mensaje de error
-              alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
-            }
+              //alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
+            //}
           },
           (error) => {
             console.error(error);
@@ -206,16 +210,17 @@ export class LandingComponent implements OnInit {
     btnAdmSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#AdmCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#AdmPassword').value;
+      const user:Administrador = {cedula:cedula, contrasena:contrasena, id:0, usuario:""}
 
-      console.log('Cédula ingresada:', cedula); // Log para depuración
-      console.log('Contraseña ingresada:', contrasena); // Log para depuración
+      //console.log('Cédula ingresada:', cedula); // Log para depuración
+      //console.log('Contraseña ingresada:', contrasena); // Log para depuración
 
       // Verificar si la cédula y la contraseña coinciden con algún administrador
 
-      this.administradorService.verificarInicioSesion(cedula, contrasena)
+      this.administradorService.verificarInicioSesion(user)
         .subscribe(
-          (response) => {
-            console.log(response);
+          (data) => {
+            //console.log(response);
             const administradorEncontrado = true;
             console.log('Administrador encontrado:', administradorEncontrado); // Log para depuración
 
