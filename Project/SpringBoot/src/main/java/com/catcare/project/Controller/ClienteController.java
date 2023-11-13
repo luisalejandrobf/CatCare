@@ -83,7 +83,7 @@ public class ClienteController {
         }
     }
 
-    // http://localhost:8090/cliente/details
+    //http://localhost:8090/catcare/clientes/details
     @GetMapping("/details")
     public ResponseEntity<Cliente> buscarCliente(){
 
