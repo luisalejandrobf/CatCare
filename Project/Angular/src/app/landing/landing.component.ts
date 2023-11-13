@@ -1,16 +1,17 @@
-import { Component, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, ElementRef, AfterViewInit, Renderer2, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import Swiper from 'swiper';
-import { Cliente } from "../cliente/cliente";
-import { ClienteService } from "../service/cliente/cliente.service";
-import { PacienteService } from "../service/paciente/paciente.service";
-import { VeterinarioService } from "../service/veterinario/veterinario.service";
-import { AdministradorService } from "../service/administrador/administrador.service";
-import { DrogaService } from "../service/droga/droga.service";
-import { TratamientoService } from "../service/tratamiento/tratamiento.service";
-import { Veterinario } from "../veterinario/veterinario";
-import { Administrador } from "../administrador/administrador";
+import {Cliente} from "../cliente/cliente";
+import {ClienteService} from "../service/cliente/cliente.service";
+import {PacienteService} from "../service/paciente/paciente.service";
+import {VeterinarioService} from "../service/veterinario/veterinario.service";
+import {AdministradorService} from "../service/administrador/administrador.service";
+import {DrogaService} from "../service/droga/droga.service";
+import {TratamientoService} from "../service/tratamiento/tratamiento.service";
+import {Veterinario} from "../veterinario/veterinario";
+import {Administrador} from "../administrador/administrador";
 import {User} from "../model/user";
+import {LandbotService} from "../service/landbot/landbot-service.service";
 
 @Component({
   selector: 'app-landing',
@@ -42,6 +43,8 @@ export class LandingComponent implements OnInit {
       this.administradorLista = administradores; // Asigna los datos a administradorLista
       console.log('Administradores:', this.administradorLista); // Log para verificar los datos
     });
+
+
   }
 
   title = 'catcareAngular';
@@ -72,11 +75,8 @@ export class LandingComponent implements OnInit {
     private renderer: Renderer2,
     private router: Router,
     private clienteService: ClienteService,
-    private pacienteService: PacienteService,
     private veterinarioService: VeterinarioService,
     private administradorService: AdministradorService,
-    private drogaService: DrogaService,
-    private tratamientoService: TratamientoService
   ) {
   }
 
@@ -140,7 +140,7 @@ export class LandingComponent implements OnInit {
 
     btnCliSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#CliCedula').value;
-      const user:User = {cedula:cedula, password:"123"}
+      const user: User = {cedula: cedula, password: "123"}
 
       const clienteEncontrado = this.clienteLista.find(cliente => cliente.cedula === cedula);
       // Verificar si la cédula coincide con alguna cédula en la lista de clientes
@@ -148,10 +148,10 @@ export class LandingComponent implements OnInit {
         .subscribe(
           (data) => {
 
-              console.log('Login successful');
-              localStorage.setItem('token', String(data)); // Assuming the response contains a token
-              // Navigate to the client's home page
-              this.router.navigate([`/cliente/`+ clienteEncontrado?.id +`/pacientes`]);
+            console.log('Login successful');
+            localStorage.setItem('token', String(data)); // Assuming the response contains a token
+            // Navigate to the client's home page
+            this.router.navigate([`/cliente/` + clienteEncontrado?.id + `/pacientes`]);
             /*} else {
               // If login fails, alert the user
               alert('Credenciales de inicio de sesión no válidas');
@@ -168,7 +168,15 @@ export class LandingComponent implements OnInit {
     btnVetSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#VetPassword').value;
-      const user:Veterinario = {cedula:cedula, contrasena:contrasena, especialidad:"", id:0, estado:"", foto:"", nombre:""}
+      const user: Veterinario = {
+        cedula: cedula,
+        contrasena: contrasena,
+        especialidad: "",
+        id: 0,
+        estado: "",
+        foto: "",
+        nombre: ""
+      }
 
       // Verificar si la cédula y la contraseña coinciden con algún veterinario
 
@@ -176,12 +184,12 @@ export class LandingComponent implements OnInit {
         .subscribe(
           (data) => {
 
-              sessionStorage.setItem('veterinarioID', String(data));
-              // Si se encuentra el veterinario, navega a su página de perfil o dashboard
-              this.router.navigate(['/veterinario/pacientes']);
+            sessionStorage.setItem('veterinarioID', String(data));
+            // Si se encuentra el veterinario, navega a su página de perfil o dashboard
+            this.router.navigate(['/veterinario/pacientes']);
             //} else {
-              // Si no se encuentra, muestra un mensaje de error
-              //alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
+            // Si no se encuentra, muestra un mensaje de error
+            //alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
             //}
           },
           (error) => {
@@ -204,13 +212,12 @@ export class LandingComponent implements OnInit {
       */
 
 
-
     });
 
     btnAdmSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#AdmCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#AdmPassword').value;
-      const user:Administrador = {cedula:cedula, contrasena:contrasena, id:0, usuario:""}
+      const user: Administrador = {cedula: cedula, contrasena: contrasena, id: 0, usuario: ""}
 
       //console.log('Cédula ingresada:', cedula); // Log para depuración
       //console.log('Contraseña ingresada:', contrasena); // Log para depuración
@@ -299,5 +306,7 @@ export class LandingComponent implements OnInit {
     }
     return true;
   }
+
+
 }
 

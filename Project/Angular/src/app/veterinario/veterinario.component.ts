@@ -2,8 +2,8 @@ import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Veterinario} from './veterinario';
 import {ClienteService} from "../service/cliente/cliente.service";
 import {VeterinarioService} from "../service/veterinario/veterinario.service";
-import {Cliente} from "../cliente/cliente";
 import {ActivatedRoute} from "@angular/router";
+import {LandbotService} from "../service/landbot/landbot-service.service";
 
 @Component({
   selector: 'app-veterinario',
@@ -22,7 +22,7 @@ export class VeterinarioComponent implements OnInit {
   vista: 'pacientes' | 'clientes' | 'veterinarios' | 'veterinario' = 'pacientes';
 
   // Inyección de dependencias necesarias para el componente.
-  constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute) {
+  constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute, private landbotService: LandbotService) {
   }
 
 
@@ -40,11 +40,19 @@ export class VeterinarioComponent implements OnInit {
       this.vista = 'veterinarios';
     }
 
-  // Obtener todos los veterinarios y guardarlos en la lista.
+    // Obtener todos los veterinarios y guardarlos en la lista.
     this.veterinarioService.getAllVeterinarios().subscribe(veterinarioLista => {
       this.veterinarioLista = veterinarioLista;
       console.log('Veterinarios:', this.veterinarioLista);
     });
+
+
+    this.initLandbot()
+
+  }
+
+  initLandbot(): void {
+    this.landbotService.initLandbot();
   }
 
   // Método para mostrar información de un veterinario específico.
