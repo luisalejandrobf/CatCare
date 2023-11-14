@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Cliente} from "../../cliente/cliente";
 import {Veterinario} from "../../veterinario/veterinario";
 import {User} from "../../model/user";
@@ -12,7 +12,8 @@ export class VeterinarioService {
 
   private ROOT_URL = 'http://localhost:8090/catcare/veterinarios';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   // Obtener todos los veterinarios
   getAllVeterinarios(): Observable<any[]> {
@@ -55,16 +56,17 @@ export class VeterinarioService {
   }
 
   // Verificar inicio de sesión de un veterinario
-  verificarInicioSesion(user:Veterinario): Observable<string> {
+  verificarInicioSesion(user: Veterinario): Observable<string> {
     return this.http.post(`${this.ROOT_URL}/login`, user,
       {
         responseType: "text"
       });
   }
 
-  veterinarioHome():Observable<Veterinario>{
+  veterinarioHome(): Observable<Veterinario> {
     return this.http.get<Veterinario>("http://localhost:8090/catcare/veterinarios/details");
   }
+
 
 }
 

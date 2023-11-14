@@ -178,13 +178,18 @@ export class LandingComponent implements OnInit {
         nombre: ""
       }
 
+
       // Verificar si la cédula y la contraseña coinciden con algún veterinario
 
       this.veterinarioService.verificarInicioSesion(user)
         .subscribe(
           (data) => {
+            const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula);
 
             sessionStorage.setItem('veterinarioID', String(data));
+            // @ts-ignore
+            sessionStorage.setItem('veterinarioIDTratamiento', String(veterinarioEncontrado.id));
+
             // Si se encuentra el veterinario, navega a su página de perfil o dashboard
             this.router.navigate(['/veterinario/pacientes']);
             //} else {
