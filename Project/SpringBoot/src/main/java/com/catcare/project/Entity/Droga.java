@@ -29,7 +29,6 @@ public class Droga {
     @Id
     @GeneratedValue
     private Long id;
-    
     private String nombre;
     private float precioVenta;
     private float precioCompra;

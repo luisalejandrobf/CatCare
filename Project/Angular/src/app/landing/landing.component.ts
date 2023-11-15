@@ -184,6 +184,9 @@ export class LandingComponent implements OnInit {
       this.veterinarioService.verificarInicioSesion(user)
         .subscribe(
           (data) => {
+
+            localStorage.setItem('token', String(data)); // Assuming the response contains a token
+
             const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula);
 
             sessionStorage.setItem('veterinarioID', String(data));
@@ -232,6 +235,9 @@ export class LandingComponent implements OnInit {
       this.administradorService.verificarInicioSesion(user)
         .subscribe(
           (data) => {
+
+            localStorage.setItem('token', String(data)); // Assuming the response contains a token
+
             //console.log(response);
             const administradorEncontrado = true;
             console.log('Administrador encontrado:', administradorEncontrado); // Log para depuración

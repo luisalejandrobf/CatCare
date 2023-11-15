@@ -54,9 +54,16 @@ public class VeterinarioController {
     // http://localhost:8090/catcare/veterinarios/all
     @GetMapping("/all")
     @Operation(summary = "Devuelve todos los veterinarios")
-    public ResponseEntity<List<Veterinario>> mostrarVeterinarios() {
-        List<Veterinario> lista = new ArrayList<>(veterinarioService.SearchAll());
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+    public ResponseEntity<List<VeterinarioDTO>> mostrarVeterinarios() {
+        List<Veterinario> listaVeterinarios = new ArrayList<>(veterinarioService.SearchAll());
+        List<VeterinarioDTO> listaVeterinarioDTOs = new ArrayList<>();
+    
+        for (Veterinario veterinario : listaVeterinarios) {
+            VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
+            listaVeterinarioDTOs.add(veterinarioDTO);
+        }
+    
+        return new ResponseEntity<>(listaVeterinarioDTOs, HttpStatus.OK);
     }
 
     // http://localhost:8090/catcare/veterinarios/find?id=1

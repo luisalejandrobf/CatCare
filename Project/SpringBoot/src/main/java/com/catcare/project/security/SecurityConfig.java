@@ -29,10 +29,12 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests( requests -> requests
                 .requestMatchers("/h2/**").permitAll()
-                .requestMatchers("/administrador/find").authenticated()
                 .requestMatchers("/administrador/details").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
                 .requestMatchers("/cliente/details").hasAuthority("CLIENTE")
+                .requestMatchers("/administrador/**").hasAuthority("ADMINISTRADOR")
+                .requestMatchers("/veterinario/**").hasAuthority("VETERINARIO")
+                .requestMatchers("/cliente/**").hasAuthority("CLIENTE")
                 .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
