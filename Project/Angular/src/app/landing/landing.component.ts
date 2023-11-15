@@ -26,6 +26,10 @@ export class LandingComponent implements OnInit {
 
 
   ngOnInit() {
+
+    // Borrar todo token
+    localStorage.clear();
+
     //metodo para obtener todos los clientes
     this.clienteService.getAllClientes().subscribe(clienteLista => {
       this.clienteLista = clienteLista; // Asigna los datos a clientesLista
@@ -149,7 +153,7 @@ export class LandingComponent implements OnInit {
           (data) => {
 
             console.log('Login successful');
-            localStorage.setItem('token', String(data)); // Assuming the response contains a token
+            localStorage.setItem('tokenCliente', String(data)); // Assuming the response contains a token
             // Navigate to the client's home page
             this.router.navigate([`/cliente/` + clienteEncontrado?.id + `/pacientes`]);
             /*} else {
@@ -185,7 +189,7 @@ export class LandingComponent implements OnInit {
         .subscribe(
           (data) => {
 
-            localStorage.setItem('token', String(data)); // Assuming the response contains a token
+            localStorage.setItem('tokenVeterinario', String(data)); // Assuming the response contains a token
 
             const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula);
 
@@ -236,7 +240,7 @@ export class LandingComponent implements OnInit {
         .subscribe(
           (data) => {
 
-            localStorage.setItem('token', String(data)); // Assuming the response contains a token
+            localStorage.setItem('tokenAdministrador', String(data)); // Assuming the response contains a token
 
             //console.log(response);
             const administradorEncontrado = true;
