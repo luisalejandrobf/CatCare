@@ -56,7 +56,7 @@ public class CustomUserDetailService implements UserDetailsService{
     public UserEntity AdministradorToUser(Administrador administrador){
         UserEntity user = new UserEntity();
         user.setUsername(administrador.getCedula());
-        user.setPassword(passwordEncoder.encode("123"));
+        user.setPassword(passwordEncoder.encode(administrador.getContrasena()));
 
         Role roles  = roleRepository.findByName("ADMINISTRADOR").get();
         user.setRoles(List.of(roles));
@@ -66,7 +66,7 @@ public class CustomUserDetailService implements UserDetailsService{
     public UserEntity VeterinarioToUser(Veterinario veterinario){
         UserEntity user = new UserEntity();
         user.setUsername(veterinario.getCedula()); 
-        user.setPassword(passwordEncoder.encode("123"));
+        user.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
     
 
         Role roles  = roleRepository.findByName("VETERINARIO").get();

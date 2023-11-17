@@ -87,7 +87,7 @@ public class ClienteController {
     @GetMapping("/details")
     public ResponseEntity<Cliente> buscarCliente(){
 
-        Cliente cliente = clienteService.SearchByCedula(
+        Cliente cliente = clienteService.getByCedula(
             SecurityContextHolder.getContext().getAuthentication().getName()
         );
 
