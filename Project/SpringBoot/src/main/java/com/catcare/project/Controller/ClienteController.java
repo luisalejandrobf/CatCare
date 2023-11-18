@@ -2,8 +2,6 @@ package com.catcare.project.Controller;
 
 import com.catcare.project.Controller.Error.ClienteNotFoundException;
 import com.catcare.project.Controller.Error.PacienteNotFoundException;
-import com.catcare.project.DTOs.ClienteDTO;
-import com.catcare.project.DTOs.ClienteMapper;
 import com.catcare.project.DTOs.VeterinarioDTO;
 import com.catcare.project.DTOs.VeterinarioMapper;
 import com.catcare.project.Entity.Administrador;
@@ -63,23 +61,6 @@ public class ClienteController {
         return (List<Cliente>) clienteService.SearchAll();
     }
 
-    // Envia una lista filtrada, haciendo uso del DTO    
-    @GetMapping("/allFiltered")
-    @Operation(summary = "Devuelve todos los clientes (Unicamente id, cedula y nombre)")
-    public ResponseEntity<List<ClienteDTO>> mostrarClientes_filtered() {
-
-        List<Cliente> listaClientes = new ArrayList<>(clienteService.SearchAll());
-        List<ClienteDTO> listaClienteDTOs = new ArrayList<>();
-    
-        for (Cliente cliente : listaClientes) {
-            ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(cliente);
-            listaClienteDTOs.add(clienteDTO);
-        }
-    
-        return new ResponseEntity<>(listaClienteDTOs, HttpStatus.OK);
-
-    }
-    
 
     // http://localhost:8090/catcare/clientes/mascotas/1
     @GetMapping("/mascotas/{clienteId}")
@@ -106,7 +87,7 @@ public class ClienteController {
     @GetMapping("/details")
     public ResponseEntity<Cliente> buscarCliente(){
 
-        Cliente cliente = clienteService.SearchByCedula(
+        Cliente cliente = clienteService.getByCedula(
             SecurityContextHolder.getContext().getAuthentication().getName()
         );
 

@@ -9,5 +9,5 @@ import com.catcare.project.Entity.Veterinario;
 public interface VeterinarioMapper {
     VeterinarioMapper INSTANCE = Mappers.getMapper(VeterinarioMapper.class);
     
-    VeterinarioDTO convert(Veterinario veterinario);
+    VeterinarioDTO convert(Veterinario administrador);
 }

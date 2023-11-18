@@ -30,7 +30,7 @@ export class RegistrarPacienteComponent implements OnInit{
     this.vista = fullPath.split('/')[1];
 
     // Recupera la lista de todos los clientes.
-    this.clienteService.getAllClientes_filtered().subscribe(clienteLista => {
+    this.clienteService.getAllClientes().subscribe(clienteLista => {
       this.clienteLista = clienteLista;
       console.log('Clientes:', this.clienteLista);
     });

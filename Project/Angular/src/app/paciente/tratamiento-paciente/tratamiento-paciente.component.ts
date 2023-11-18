@@ -82,7 +82,7 @@ export class TratamientoPacienteComponent implements OnInit {
       console.log('Paciente con ID', pacienteIdConsulta, ':', paciente);
     });
 
-    this.drogaService.getAllDrogas_filtered().subscribe(drogas => {
+    this.drogaService.getAllDrogas().subscribe(drogas => {
       this.drogasDisponibles = drogas.filter(droga => parseInt(droga.unidadesDisponibles) > 0);
       console.log('Drogas disponibles:', this.drogasDisponibles);
     });

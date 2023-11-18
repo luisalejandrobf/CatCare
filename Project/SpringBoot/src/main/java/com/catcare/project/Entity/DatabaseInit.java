@@ -132,20 +132,20 @@ public class DatabaseInit implements ApplicationRunner {
         administradorRepository.save(administradorSave); // 4. Guardar el objeto en la tabla respectiva
         //
         // Administrador 2
-        administradorSave = new Administrador().builder().cedula("8521").usuario("FelipeGarcia").contrasena("1234").build();
+        administradorSave = new Administrador().builder().cedula("8521").usuario("FelipeGarcia").contrasena("12345").build();
         // administrador = new Administrador("8521","FelipeGarcia", "1234");
         userEntity = saveUserAdministrador(administradorSave);
         administradorSave.setUser(userEntity);
         administradorRepository.save(administradorSave);
         // Administrador 3
-        administradorSave = new Administrador().builder().cedula("7410").usuario("AnaOrtegon").contrasena("1234").build();
+        administradorSave = new Administrador().builder().cedula("7410").usuario("AnaOrtegon").contrasena("123456").build();
         // administrador = new Administrador("7410","AnaOrtegon", "1234");
         userEntity = saveUserAdministrador(administradorSave);
         administradorSave.setUser(userEntity);
         administradorRepository.save(administradorSave);
         //
         // Administrador 4
-        administradorSave = new Administrador().builder().cedula("7896").usuario("JuanAngarita").contrasena("1234").build();
+        administradorSave = new Administrador().builder().cedula("7896").usuario("JuanAngarita").contrasena("123456").build();
         // administrador = new Administrador("7896","JuanAngarita", "1234");
         userEntity = saveUserAdministrador(administradorSave);
         administradorSave.setUser(userEntity);
