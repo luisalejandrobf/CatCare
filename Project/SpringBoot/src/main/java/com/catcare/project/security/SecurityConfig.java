@@ -29,35 +29,12 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests( requests -> requests
                 .requestMatchers("/h2/**").permitAll()
-                /* .requestMatchers("/administrador/find").authenticated()
                 .requestMatchers("/administrador/details").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
                 .requestMatchers("/cliente/details").hasAuthority("CLIENTE")
-                */
-
-                .requestMatchers("/catcare/clientes/details").hasAuthority("CLIENTE")
-                
-                .requestMatchers("/catcare/clientes/find/**").hasAuthority("CLIENTE")
-                .requestMatchers("/catcare/clientes/mascotas/**").hasAuthority("CLIENTE")
-
-                .requestMatchers("/catcare/veterinarios/details").hasAuthority("VETERINARIO")
-                .requestMatchers("/catcare/pacientes/all").hasAnyAuthority("CLIENTE","VETERINARIO","ADMINISTRADOR")
-                .requestMatchers("/catcare/clientes/all").hasAnyAuthority("VETERINARIO", "ADMINISTRADOR","CLIENTE")
-
-                .requestMatchers("/catcare/administradores/details").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/delete/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/update/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/add").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/all").hasAnyAuthority("ADMINISTRADOR", "VETERINARIO")
-
-              /*  .requestMatchers("/catcare/veterinarios/details").hasAuthority("VETERINARIO")
-                .requestMatchers("/catcare/veterinarios/all").hasAuthority("VETERINARIO")
-                .requestMatchers("/catcare/veterinarios/find/**").hasAuthority("VETERINARIO")
-                .requestMatchers("/catcare/veterinarios/agregar").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/delete/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/update/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers("/catcare/veterinarios/veterinariosActivos").hasAuthority("VETERINARIO")
-                .requestMatchers("/catcare/veterinarios/veterinariosInactivos").hasAuthority("VETERINARIO") */ 
+                .requestMatchers("/administrador/**").hasAuthority("ADMINISTRADOR")
+                .requestMatchers("/veterinario/**").hasAuthority("VETERINARIO")
+                .requestMatchers("/cliente/**").hasAuthority("CLIENTE")
                 .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));

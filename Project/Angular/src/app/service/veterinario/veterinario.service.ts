@@ -56,7 +56,7 @@ export class VeterinarioService {
   }
 
   // Verificar inicio de sesión de un veterinario
-  verificarInicioSesion(user: User): Observable<string> {
+  verificarInicioSesion(user: Veterinario): Observable<string> {
     return this.http.post(`${this.ROOT_URL}/login`, user,
       {
         responseType: "text"

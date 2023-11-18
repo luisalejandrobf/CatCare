@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-administrador',
@@ -13,9 +14,15 @@ export class AdministradorComponent implements OnInit {
     vista: 'pacientes' | 'clientes' | 'veterinarios' = 'pacientes';
 
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+
+    // Verificar si hay token de cliente
+    if ( localStorage.getItem('tokenAdministrador') == null){
+      this.router.navigate(['/']); // Volver al landing.
+    }
+
     // Establece la vista basada en la URL actual.
     const currentPath = this.route.snapshot.url[1]?.path;
     if (currentPath === 'clientes') {

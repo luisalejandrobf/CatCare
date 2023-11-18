@@ -26,6 +26,10 @@ export class LandingComponent implements OnInit {
 
 
   ngOnInit() {
+
+    // Borrar todo token
+    localStorage.clear();
+
     //metodo para obtener todos los clientes
     this.clienteService.getAllClientes().subscribe(clienteLista => {
       this.clienteLista = clienteLista; // Asigna los datos a clientesLista
@@ -140,64 +144,71 @@ export class LandingComponent implements OnInit {
 
     btnCliSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#CliCedula').value;
-      const user: User = {cedula: cedula, contrasena: "123"}
+      const user: User = {cedula: cedula, password: "123"}
 
-
+      const clienteEncontrado = this.clienteLista.find(cliente => cliente.cedula === cedula);
       // Verificar si la cédula coincide con alguna cédula en la lista de clientes
-      this.clienteService.verificarInicioSesion(user).subscribe(
+      this.clienteService.verificarInicioSesion(user)
+        .subscribe(
           (data) => {
+
             console.log('Login successful');
-            localStorage.setItem('token', String(data)); // Assuming the response contains a token
-
-            this.clienteService.getAllClientes().subscribe(
-                (clientesData) => {
-                  this.clienteLista = clientesData;
-
-                  if (this.clienteLista.length === 0) {
-                    console.log("Aiudaaaaa");
-                  } else {
-                    const clienteEncontrado = this.clienteLista.find(cliente => cliente.cedula === cedula);
-                    // Navigate to the client's home page
-                    this.router.navigate([`/cliente/` + clienteEncontrado?.id + `/pacientes`]);
-                  }
-                },
-                (error) => {
-                  console.error('Error fetching clientes', error);
-                  // Handle error during fetching clientes
-                }
-            );
+            localStorage.setItem('tokenCliente', String(data)); // Assuming the response contains a token
+            // Navigate to the client's home page
+            this.router.navigate([`/cliente/` + clienteEncontrado?.id + `/pacientes`]);
+            /*} else {
+              // If login fails, alert the user
+              alert('Credenciales de inicio de sesión no válidas');
+            }*/
           },
           (error) => {
             console.error('Error during login', error);
             // If there's an error during the HTTP request, alert the user
             alert('Error de inicio de sesión. Por favor, intente de nuevo.');
           }
-      );
-
+        );
     });
 
     btnVetSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#VetCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#VetPassword').value;
-      const user: User = {
-        cedula:cedula,
-        contrasena:contrasena
+      const user: Veterinario = {
+        cedula: cedula,
+        contrasena: contrasena,
+        especialidad: "",
+        id: 0,
+        estado: "",
+        foto: "",
+        nombre: ""
       }
 
 
       // Verificar si la cédula y la contraseña coinciden con algún veterinario
 
-      this.veterinarioService.verificarInicioSesion(user).subscribe(
+      this.veterinarioService.verificarInicioSesion(user)
+        .subscribe(
           (data) => {
-            localStorage.setItem('token', String(data));
+
+            localStorage.setItem('tokenVeterinario', String(data)); // Assuming the response contains a token
+
+            const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula);
+
+            sessionStorage.setItem('veterinarioID', String(data));
+            // @ts-ignore
+            sessionStorage.setItem('veterinarioIDTratamiento', String(veterinarioEncontrado.id));
+
+            // Si se encuentra el veterinario, navega a su página de perfil o dashboard
             this.router.navigate(['/veterinario/pacientes']);
+            //} else {
+            // Si no se encuentra, muestra un mensaje de error
+            //alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
+            //}
           },
           (error) => {
             console.error(error);
             alert('Cédula o contraseña incorrecta. Por favor, intente de nuevo.');
           }
-      );
-
+        );
 
       /*
       const veterinarioEncontrado = this.veterinarioLista.find(veterinario => veterinario.cedula === cedula && veterinario.contrasena === contrasena);
@@ -218,7 +229,7 @@ export class LandingComponent implements OnInit {
     btnAdmSignin.addEventListener('click', () => {
       const cedula = this.el.nativeElement.querySelector('#AdmCedula').value;
       const contrasena = this.el.nativeElement.querySelector('#AdmPassword').value;
-      const user: User = {cedula: cedula, contrasena: contrasena,}
+      const user: Administrador = {cedula: cedula, contrasena: contrasena, id: 0, usuario: ""}
 
       //console.log('Cédula ingresada:', cedula); // Log para depuración
       //console.log('Contraseña ingresada:', contrasena); // Log para depuración
@@ -228,12 +239,12 @@ export class LandingComponent implements OnInit {
       this.administradorService.verificarInicioSesion(user)
         .subscribe(
           (data) => {
+
+            localStorage.setItem('tokenAdministrador', String(data)); // Assuming the response contains a token
+
             //console.log(response);
-            localStorage.setItem('token', String(data));
             const administradorEncontrado = true;
             console.log('Administrador encontrado:', administradorEncontrado); // Log para depuración
-
-
 
             // Si se encuentra el administrador, navega a su página de perfil o dashboard
             this.router.navigate([`/administrador/pacientes`]);

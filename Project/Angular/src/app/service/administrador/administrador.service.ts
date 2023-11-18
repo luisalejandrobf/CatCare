@@ -42,7 +42,7 @@ export class AdministradorService {
   }
 
   // Verificar inicio de sesión de un administrador
-  verificarInicioSesion(user:User): Observable<string> {
+  verificarInicioSesion(user:Administrador): Observable<string> {
     return this.http.post(`${this.ROOT_URL}/login`, user,
       {
         responseType: "text"

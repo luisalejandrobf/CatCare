@@ -8,8 +8,6 @@ import {Tratamiento} from "../tratamiento/tratamiento";
 import {AdministradorService} from "../service/administrador/administrador.service";
 import {DrogaService} from "../service/droga/droga.service";
 import {TratamientoService} from "../service/tratamiento/tratamiento.service";
-import {VeterinarioService} from "../service/veterinario/veterinario.service";
-import {Veterinario} from "../veterinario/veterinario";
 
 @Component({
   selector: 'app-paciente',
@@ -33,8 +31,7 @@ export class PacienteComponent implements OnInit{
   constructor(private clienteService: ClienteService, private pacienteService: PacienteService, private cdRef: ChangeDetectorRef,
               private administradorService: AdministradorService,
               private drogaService: DrogaService,
-              private tratamientoService: TratamientoService,
-              private veterinarioServicio:VeterinarioService) {}
+              private tratamientoService: TratamientoService) {}
 
   //metodo para obtener todos los pacientes
   ngOnInit(): void {
@@ -42,15 +39,6 @@ export class PacienteComponent implements OnInit{
       this.pacienteLista = pacienteLista; // Asigna los datos a pacienteLista
       console.log('Pacientes:', this.pacienteLista); // Agrega este log para verificar los datos
     });
-
-    this.veterinarioServicio.veterinarioHome().subscribe(
-        (veterinarioData)=> {
-          const veteRinario:Veterinario = veterinarioData
-          sessionStorage.setItem('veterinarioIDTratamiento', String(veteRinario.id));
-
-
-        }
-    )
   }
 
 //metodo para mostrar la informacion de pacientes y esconde los componentes de los pacientes
