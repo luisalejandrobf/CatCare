@@ -16,11 +16,6 @@ export class DrogaService {
     return this.http.get<any[]>(`${this.ROOT_URL}/all`);
   }
 
-  //Obtener todas las drogas
-  getAllDrogas_filtered(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.ROOT_URL}/allFiltered`);
-  }
-
   // Obtener una droga por su ID
   getDrogaById(drogaId: number): Observable<any> {
     return this.http.get<any>(`${this.ROOT_URL}/find?id=${drogaId}`);
@@ -59,6 +54,11 @@ export class DrogaService {
   // Obtener las ganancias totales de la veterinaria
   getGananciasTotales(): Observable<any> {
     return this.http.get<any[]>(`${this.ROOT_URL}/gananciasTotales`);
+  }
+
+  //Obtener todas las drogas
+  getAllDrogas_filtered(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/allFiltered`);
   }
 
 }

@@ -3,6 +3,8 @@ package com.catcare.project.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Remove;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,7 +33,8 @@ public class UserEntity {
     private String password;
 
     /*Siempre que se cargue un usuario se deben cargar los roles */
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Fix delete on cascade errors.
+    // @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     /*No es necesario ponerlo */
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))

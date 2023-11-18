@@ -4,7 +4,6 @@ import {ClienteService} from "../service/cliente/cliente.service";
 import {VeterinarioService} from "../service/veterinario/veterinario.service";
 import {ActivatedRoute} from "@angular/router";
 import {LandbotService} from "../service/landbot/landbot-service.service";
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-veterinario',
@@ -23,17 +22,11 @@ export class VeterinarioComponent implements OnInit {
   vista: 'pacientes' | 'clientes' | 'veterinarios' | 'veterinario' = 'pacientes';
 
   // Inyección de dependencias necesarias para el componente.
-  constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute, private landbotService: LandbotService, private router: Router) {
+  constructor(private clienteService: ClienteService, private veterinarioService: VeterinarioService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute, private landbotService: LandbotService) {
   }
 
 
   ngOnInit(): void {
-
-    // Verificar si hay token de cliente
-    if ( localStorage.getItem('tokenVeterinario') == null){
-      this.router.navigate(['/']); // Volver al landing.
-    }
-
     const currentPath = this.route.snapshot.url[0]?.path;
     const subPathOne = this.route.snapshot.url[1]?.path;
 

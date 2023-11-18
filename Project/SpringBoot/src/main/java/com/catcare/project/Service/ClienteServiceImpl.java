@@ -31,6 +31,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
 
+
     @Override
      public Cliente SearchByCedula(String cedula) {
         // Busca un cliente por su número de cédula utilizando el método personalizado findByCedula de repo.
@@ -41,6 +42,11 @@ public class ClienteServiceImpl implements ClienteService {
 
     }
     
+    @Override
+    public Cliente getByCedula(String cedula) {
+        return repo.findByCedula(cedula);
+    }
+
 
     @Override
     public Collection<Cliente> SearchAll() {

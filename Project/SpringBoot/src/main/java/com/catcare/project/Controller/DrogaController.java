@@ -10,11 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.catcare.project.DTOs.ClienteDTO;
-import com.catcare.project.DTOs.ClienteMapper;
 import com.catcare.project.DTOs.DrogaDTO;
 import com.catcare.project.DTOs.DrogaMapper;
-import com.catcare.project.Entity.Cliente;
 import com.catcare.project.Entity.Droga;
 import com.catcare.project.Service.DrogaService;
 
@@ -36,23 +33,6 @@ public class DrogaController {
     public List<Droga> mostrarDrogas() {
         return (List<Droga>) drogaService.SearchAll();
     }
-
-    @GetMapping("/allFiltered")
-    @Operation(summary = "Devuelve todas las drogas")
-    public ResponseEntity<List<DrogaDTO>> mostrarDrogas_filtered() {
-
-        List<Droga> listaDrogas = new ArrayList<>(drogaService.SearchAll());
-        List<DrogaDTO> listaDrogasDTO = new ArrayList<>();
-    
-        for (Droga droga : listaDrogas) {
-            DrogaDTO drogaDTO = DrogaMapper.INSTANCE.convert(droga);
-            listaDrogasDTO.add(drogaDTO);
-        }
-    
-        return new ResponseEntity<>(listaDrogasDTO, HttpStatus.OK);
-
-    }
-
 
     // http://localhost:8090/catcare/drogas/find?id=1
     @GetMapping("/find")
@@ -108,7 +88,6 @@ public class DrogaController {
     @GetMapping("/medicamentosUltimoMes")
     @Operation(summary = "Devuelve la cantidad de tratamientos por tipo de medicamento administrado en el último mes")
     public List<Object[]> medicamentosUltimoMes() {
-        
     return drogaService.getDrogaCantidadLastMonth();
     }
 
@@ -131,6 +110,22 @@ public class DrogaController {
     @Operation(summary = "Devuelve el top 3 tratamientos con más unidades vendidas")
     public List<Object[]> top3Tratamientos() {
     return drogaService.getTop3MedicamentosUnidadesVendidas();
+    }
+
+    @GetMapping("/allFiltered")
+    @Operation(summary = "Devuelve todas las drogas")
+    public ResponseEntity<List<DrogaDTO>> mostrarDrogas_filtered() {
+
+        List<Droga> listaDrogas = new ArrayList<>(drogaService.SearchAll());
+        List<DrogaDTO> listaDrogasDTO = new ArrayList<>();
+
+        for (Droga droga : listaDrogas) {
+            DrogaDTO drogaDTO = DrogaMapper.INSTANCE.convert(droga);
+            listaDrogasDTO.add(drogaDTO);
+        }
+
+        return new ResponseEntity<>(listaDrogasDTO, HttpStatus.OK);
+
     }
 
 }

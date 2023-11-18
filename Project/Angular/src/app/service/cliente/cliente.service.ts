@@ -23,11 +23,6 @@ export class ClienteService {
     return this.http.get<any[]>(`${this.ROOT_URL}/all`);
   }
 
-  // Obtener todos los clientes filtrados con DTO
-  getAllClientes_filtered(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.ROOT_URL}/allFiltered`);
-  }
-
   // Obtener un paciente por el  ID del cliente
   getPacientesByClienteId(clienteId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.ROOT_URL}/mascotas/${clienteId}`);
@@ -64,5 +59,9 @@ export class ClienteService {
     return this.http.get<Cliente>("http://localhost:8090/catcare/clientes/details");
   }
 
+  // Obtener todos los clientes filtrados con DTO
+  getAllClientes_filtered(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/allFiltered`);
+  }
 
 }

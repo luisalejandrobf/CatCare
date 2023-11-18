@@ -57,12 +57,12 @@ public class VeterinarioController {
     public ResponseEntity<List<VeterinarioDTO>> mostrarVeterinarios() {
         List<Veterinario> listaVeterinarios = new ArrayList<>(veterinarioService.SearchAll());
         List<VeterinarioDTO> listaVeterinarioDTOs = new ArrayList<>();
-    
+
         for (Veterinario veterinario : listaVeterinarios) {
             VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
             listaVeterinarioDTOs.add(veterinarioDTO);
         }
-    
+
         return new ResponseEntity<>(listaVeterinarioDTOs, HttpStatus.OK);
     }
 

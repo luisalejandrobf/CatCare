@@ -9,6 +9,6 @@ import com.catcare.project.Entity.Cliente;
 @Mapper
 public interface ClienteMapper {
     ClienteMapper INSTANCE = Mappers.getMapper(ClienteMapper.class);
-    
+
     ClienteDTO convert(Cliente cliente);
 }

@@ -4,7 +4,6 @@ import { Cliente } from "./cliente";
 import { ClienteService } from "../service/cliente/cliente.service";
 import { PacienteService } from "../service/paciente/paciente.service";
 import { Paciente } from "../paciente/paciente";
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cliente',
@@ -27,16 +26,9 @@ export class ClienteComponent implements OnInit {
   clienteLista: Cliente[] = [];
   pacienteClienteLista: Paciente[] = [];
 
-  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private pacienteService: PacienteService) { }
 
   ngOnInit() {
-
-    // Verificar si hay token de cliente
-    if ( localStorage.getItem('tokenCliente') == null){
-      this.router.navigate(['/']); // Volver al landing.
-    }
-
-
     // Determina la vista basada en la URL actual
     const currentPath = this.route.snapshot.url[0]?.path;
     const idParam = this.route.snapshot.url[1]?.path;
