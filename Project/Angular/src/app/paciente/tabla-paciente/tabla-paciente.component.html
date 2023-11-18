@@ -31,10 +31,23 @@
             <td>{{ paciente.enfermedad }}</td>
             <td>{{ paciente.estado }}</td>
             <td>
-              <button type="button" class="action-link text-success" (click)="informacionCliente(paciente.cliente)"
+
+              <ng-container *ngIf="vista === 'administrador'">
+              <button type="button" class="action-link text-success" (click)="informacionClienteAdministrador(paciente.cliente)"
                 style="width: 250px; border: none; background-color: transparent;">
                 <i class="fas fa-eye"></i><br>{{ paciente.cliente.nombre }}
               </button>
+              </ng-container>
+              <ng-container *ngIf="vista === 'veterinario'">
+              <button type="button" class="action-link text-success" (click)="informacionClienteVeterinario(paciente.cliente)"
+                      style="width: 250px; border: none; background-color: transparent;">
+                <i class="fas fa-eye"></i><br>{{ paciente.cliente.nombre }}
+              </button>
+              </ng-container>
+
+
+
+
             </td>
             <td class="btnHorizontal">
               <div class="button-container">
