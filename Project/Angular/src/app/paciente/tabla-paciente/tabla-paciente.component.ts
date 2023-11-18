@@ -32,9 +32,15 @@ export class TablaPacienteComponent implements OnInit{
     console.log("Valor de vista:", this.vista);
   }
 
-  // Método para navegar a la vista de información del cliente.
-  informacionCliente(cliente: Cliente) {
+  // Método para navegar a la vista de información del cliente desde administrador.
+  informacionClienteAdministrador(cliente: Cliente) {
     this.router.navigate(['/administrador/clientes/info', cliente.id]);
+  }
+
+
+  // Método para navegar a la vista de información del cliente desde vetrinario.
+  informacionClienteVeterinario(cliente: Cliente) {
+    this.router.navigate(['/veterinario/clientes/info', cliente.id]);
   }
 
 // Método para eliminar un paciente.
