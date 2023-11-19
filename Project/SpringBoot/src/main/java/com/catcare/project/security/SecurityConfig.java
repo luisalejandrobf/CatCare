@@ -36,15 +36,15 @@ public class SecurityConfig {
                 */
 
                 .requestMatchers("/catcare/clientes/details").hasAuthority("CLIENTE")
-                
+                .requestMatchers("/catcare/veterinarios/details").hasAuthority("VETERINARIO")
+                .requestMatchers("/catcare/administradores/details").hasAuthority("ADMINISTRADOR")
+
                 .requestMatchers("/catcare/clientes/find/**").hasAnyAuthority("CLIENTE","VETERINARIO","ADMINISTRADOR")
                 .requestMatchers("/catcare/clientes/mascotas/**").hasAnyAuthority("CLIENTE")
-                .requestMatchers("/catcare/veterinarios/details").hasAuthority("VETERINARIO")
                 .requestMatchers("/catcare/pacientes/all").hasAnyAuthority("VETERINARIO","ADMINISTRADOR")
                 .requestMatchers("/catcare/clientes/all").hasAnyAuthority("CLIENTE", "VETERINARIO", "ADMINISTRADOR")
                 .requestMatchers("/catcare/clientes/allFiltered").hasAnyAuthority("VETERINARIO", "ADMINISTRADOR","CLIENTE")
 
-                .requestMatchers("/catcare/administradores/details").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/catcare/veterinarios/delete/**").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/catcare/veterinarios/update/**").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/catcare/veterinarios/add").hasAuthority("ADMINISTRADOR")
