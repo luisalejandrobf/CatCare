@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .requestMatchers("/catcare/clientes/mascotas/**").hasAnyAuthority("CLIENTE")
                 .requestMatchers("/catcare/veterinarios/details").hasAuthority("VETERINARIO")
                 .requestMatchers("/catcare/pacientes/all").hasAnyAuthority("VETERINARIO","ADMINISTRADOR")
-                .requestMatchers("/catcare/clientes/all").hasAnyAuthority("VETERINARIO", "ADMINISTRADOR")
+                .requestMatchers("/catcare/clientes/all").hasAnyAuthority("CLIENTE", "VETERINARIO", "ADMINISTRADOR")
                 .requestMatchers("/catcare/clientes/allFiltered").hasAnyAuthority("VETERINARIO", "ADMINISTRADOR","CLIENTE")
 
                 .requestMatchers("/catcare/administradores/details").hasAuthority("ADMINISTRADOR")
@@ -49,6 +49,16 @@ public class SecurityConfig {
                 .requestMatchers("/catcare/veterinarios/update/**").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/catcare/veterinarios/add").hasAuthority("ADMINISTRADOR")
                 .requestMatchers("/catcare/veterinarios/all").hasAnyAuthority("ADMINISTRADOR")
+
+                .requestMatchers("/catcare/veterinarios/veterinariosActivos").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/veterinarios/veterinariosInactivos").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/tratamientos/tratamientosEnElUltimoMes").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/tratamientos/mascotasActivas").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/pacientes/mascotasTotales").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/drogas/medicamentosUltimoMes").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/drogas/gananciasTotales").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/drogas/ventasTotales").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/catcare/drogas/top3Tratamientos").hasAnyAuthority("ADMINISTRADOR")
 
               /*  .requestMatchers("/catcare/veterinarios/details").hasAuthority("VETERINARIO")
                 .requestMatchers("/catcare/veterinarios/all").hasAuthority("VETERINARIO")
