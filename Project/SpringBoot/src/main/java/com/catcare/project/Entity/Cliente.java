@@ -26,7 +26,6 @@ public class Cliente {
 
     // User role
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
     private UserEntity user;
 
     @Id
