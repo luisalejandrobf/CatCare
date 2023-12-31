@@ -21,8 +21,9 @@ El objetivo de este proyecto es crear un sitio web para una clínica veterinaria
 
 - `HTML5` y `CSS3` para la estructura y el diseño del sitio web.
 - `JavaScript` para agregar interactividad a la página, como formularios y elementos dinámicos.
-- Posiblemente se utilice un marco de trabajo front-end como `Angular` para mejorar la eficiencia y la experiencia del usuario.
-- Se implementará un servidor back-end utilizando tecnologías como `SpringBoot`.
+- Utiliza un marco de trabajo front-end `Angular` para mejorar la eficiencia y la experiencia del usuario (Front-end).
+- Implementa un servidor Back-end utilizando `SpringBoot`.
+- Hace uso de logos e íconos de `Bootstrap`.
 
 ## Una guía rápida 🗺️
 Podrás encontrar el proyecto actualizado en /Project, tanto un servidor backend que usa `SpringBoot`, como frontend `Angular`. En /Backup podrás encontrar el proyecto inicial utilizando `Thymeleaf` y `Spring`.
@@ -49,8 +50,9 @@ The objective of this project is to create a website for a veterinary clinic nam
 
 - `HTML5` and `CSS3` for the structure and design of the website.
 - `JavaScript` to add interactivity to the page, such as forms and dynamic elements.
-- A possible front-end framework like `Angular` to enhance efficiency and user experience.
-- A back-end server will be implemented using technologies like `SpringBoot`.
+- It uses the `Angular` Front-end framework to enhance efficiency and user experience.
+- It Implements a Back-end server using `SpringBoot`.
+- Makes use of `Bootstrap` logos and icons.
 
 ## A quick guide 🗺️
 You can find the updated project in /Project, both a backend server that uses `SpringBoot`, and the frontend `Angular`. In /Backup you can find the initial project using `Thymeleaf` and `Spring`.
