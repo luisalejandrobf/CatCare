@@ -1,6 +1,8 @@
 ![CatCareLogo](https://github.com/luisalejandrobf/CatCare/assets/95001823/c2e27eb9-52b0-4fc0-8b28-b7b63ec6998f)
 # CatCare, Veterinary Clinic Website
 
+![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=luisalejandrobf.CatCare&left_text=Views)
+
 [English](#catcare-veterinary-clinic-website) | [Español](#catcare-sitio-web-de-clínica-veterinaria)
 
 This repository contains the source code and resources related to a website project for a veterinary clinic, developed as part of the web development class at the Pontificia Universidad Javeriana.
@@ -31,8 +33,6 @@ You can find the updated project in /Project, both a backend server that uses `S
 
 
 # CatCare, Sitio Web de Clínica Veterinaria
-
-![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=luisalejandrobf.CatCare&left_text=Views)
 
 [English](#catcare-veterinary-clinic-website) | [Español](#catcare-sitio-web-de-clínica-veterinaria)
 
